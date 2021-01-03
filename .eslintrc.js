@@ -5,7 +5,7 @@ module.exports = {
     es6: true,
   },
   parserOptions: {
-    ecmaVersion: 8
+    ecmaVersion: 8,
   }, // to enable features such as async/await
   ignorePatterns: ['node_modules/*', '.next/*', '.out/*', '!.prettierrc.js'], // We don't want to lint generated files nor node_modules, but we want to lint .prettierrc.js (ignored by default by eslint)
   extends: ['eslint:recommended'],
@@ -16,8 +16,8 @@ module.exports = {
       parser: '@typescript-eslint/parser',
       settings: {
         react: {
-          version: 'detect'
-        }
+          version: 'detect',
+        },
       },
       env: {
         browser: true,
@@ -34,7 +34,7 @@ module.exports = {
         'plugin:prettier/recommended', // Prettier recommended rules
       ],
       rules: {
-        semi: ['always', 'error'],
+        semi: ['error', 'always'],
         'react/prop-types': 'off', // We will use TypeScript's types for component props instead
         'react/react-in-jsx-scope': 'off', // No need to import React when using Next.js
         'jsx-a11y/anchor-is-valid': 'off', // This rule is not compatible with Next.js's <Link /> components
@@ -47,10 +47,14 @@ module.exports = {
             allowConciseArrowFunctionExpressionsStartingWithVoid: true,
           },
         ],
-        'prettier/prettier': ['error', {}, {
-          usePrettierrc: true
-        }], // Includes .prettierrc.js rules
+        'prettier/prettier': [
+          'error',
+          {},
+          {
+            usePrettierrc: true,
+          },
+        ], // Includes .prettierrc.js rules
       },
     },
   ],
-}
+};
