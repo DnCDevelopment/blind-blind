@@ -1,0 +1,39 @@
+@import './fonts/fonts';
+
+@import './variables/variables';
+
+@import './mixins/mixins';
+
+@import '../src/components/Header/Header.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--font-16);
+  font-family: var(--primary-font);
+}
+
+.container {
+  width: 100%;
+  padding: 0 15px;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 60px;
+  }
+}
+
+input {
+  width: 100%;
+  height: auto;
+  padding: 5px 0;
+  line-height: 1.8em;
+  background: var(--transparent);
+  border: none;
+  border-bottom: 1px var(--black) solid;
+  outline: none;
+}
+
+svg {
+  cursor: pointer;
+}
