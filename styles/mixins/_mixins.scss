@@ -1,0 +1,15 @@
+@mixin sliding-menu($start-pos) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: var(--transparent-menu);
+  transform: translate($start-pos);
+  opacity: 0;
+  transition: transform 0.5s, opacity 1s;
+
+  &.open {
+    transform: translate(0);
+    opacity: 1;
+  }
+}

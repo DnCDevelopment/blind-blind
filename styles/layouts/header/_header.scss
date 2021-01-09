@@ -1,0 +1,90 @@
+@import './mobileMenu';
+@import './searchInput';
+@import './logo';
+@import './languageSelector';
+
+.header {
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  .mobile-header {
+    &__container {
+      display: flex;
+      align-items: center;
+    }
+
+    &__droplist-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    &__cart-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    &__mobile-menu {
+      @include sliding-menu(-100%);
+    }
+  }
+
+  .desktop-header {
+    display: none;
+
+    &__container {
+      display: flex;
+      align-items: center;
+    }
+
+    &__options {
+      display: flex;
+      justify-content: space-between;
+      width: 200px;
+
+      a {
+        z-index: 11;
+        width: max-content;
+        cursor: pointer;
+      
+        &:hover {
+          text-decoration: underline
+        }
+      }
+    }
+
+    &__desktop-menu {
+      @include sliding-menu(-100%);
+      z-index: 10;
+      width: 400px;
+      padding: 70px 60px;
+
+      p {
+        margin: 10px 0;
+        cursor: pointer;
+      }
+    }
+
+    &__search-container {
+      @include sliding-menu(100%);
+      right: 0;
+      left: auto;
+      z-index: 10;
+      width: 400px;
+      padding: 70px 60px;
+      transform: translate(100%);
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .header {
+    .mobile-header {
+      display: none;
+    }
+
+    .desktop-header {
+      display: block;
+    }
+  }
+}
