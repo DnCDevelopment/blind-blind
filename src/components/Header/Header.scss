@@ -31,8 +31,8 @@
 
     &__mobile-menu {
       @include sliding-menu($from-left: true);
-      padding-top: 30px;
-      width: 100vw; 
+      width: 100vw;
+      padding-top: 30px; 
     }
   }
 
@@ -97,6 +97,9 @@
 
 @media screen and (min-width: 768px) {
   .header {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
     .mobile-header {
       display: none;
     }

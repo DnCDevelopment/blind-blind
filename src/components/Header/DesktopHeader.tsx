@@ -9,7 +9,7 @@ import { AboutListData, StoreListData } from '../../constants/header';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
-  const [curMenu, setCurMenu] = useState<number>(1);
+  const [curMenu, setCurMenu] = useState<'store' | 'about'>('store');
   const [searchContainerOpen, setSearchContainerOpen] = useState<boolean>(
     false
   );
@@ -17,10 +17,10 @@ const DesktopHeader: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const changeCurMenu = (id: number) => {
+  const changeCurMenu = (menu: 'store' | 'about') => {
     if (!desktopMenuOpen) setDesktopMenuOpen(true);
-    else if (curMenu === id) setDesktopMenuOpen(false);
-    setCurMenu(id);
+    else if (curMenu === menu) setDesktopMenuOpen(false);
+    setCurMenu(menu);
   };
 
   useEffect(() => {
@@ -52,10 +52,10 @@ const DesktopHeader: React.FC = () => {
     <header className="desktop-header">
       <div className="desktop-header__container container">
         <div ref={menuRef} className="desktop-header__options">
-          <a role="presentation" onClick={() => changeCurMenu(1)}>
+          <a role="presentation" onClick={() => changeCurMenu('store')}>
             Магазин
           </a>
-          <a role="presentation" onClick={() => changeCurMenu(2)}>
+          <a role="presentation" onClick={() => changeCurMenu('about')}>
             Про нас
           </a>
           <div
@@ -63,10 +63,14 @@ const DesktopHeader: React.FC = () => {
               desktopMenuOpen ? 'open' : ''
             }`}
           >
-            <div className={`options-sublist ${curMenu === 1 ? 'open' : ''}`}>
+            <div
+              className={`options-sublist ${curMenu === 'about' ? 'open' : ''}`}
+            >
               <Sublist data={AboutListData} />
             </div>
-            <div className={`options-sublist ${curMenu === 2 ? 'open' : ''}`}>
+            <div
+              className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
+            >
               <Sublist data={StoreListData} />
             </div>
           </div>
