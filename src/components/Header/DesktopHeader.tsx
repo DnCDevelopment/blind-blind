@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-import AboutList from './AboutList';
 import LanguageSelector from './LanguageSelector';
 import Logo from './Logo';
 import SearchInput from './SearchInput';
-import StoreList from './StoreList';
+import Sublist from './Sublist';
+
+import { AboutListData, StoreListData } from '../../constants/header';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
@@ -62,12 +63,17 @@ const DesktopHeader: React.FC = () => {
               desktopMenuOpen ? 'open' : ''
             }`}
           >
-            {curMenu === 1 ? <AboutList /> : <StoreList />}
+            <div className={`options-sublist ${curMenu === 1 ? 'open' : ''}`}>
+              <Sublist data={AboutListData} />
+            </div>
+            <div className={`options-sublist ${curMenu === 2 ? 'open' : ''}`}>
+              <Sublist data={StoreListData} />
+            </div>
           </div>
         </div>
         <Logo />
-        <LanguageSelector />
         <div className="desktop-header__options">
+          <LanguageSelector />
           <a>Корзина</a>
           <a
             role="presentation"

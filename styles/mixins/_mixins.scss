@@ -1,15 +1,22 @@
-@mixin sliding-menu($start-pos) {
+@mixin sliding-menu($from-left: true) {
   position: absolute;
   top: 0;
-  left: 0;
+  @if $from-left {
+    right: 100%;
+  } @else {
+    left: 100%;
+  }
   height: 100vh;
   background: var(--transparent-menu);
-  transform: translate($start-pos);
-  opacity: 0;
-  transition: transform 0.5s, opacity 1s;
+  transform: translate(0);
+  transition: transform 0.5s;
 
   &.open {
-    transform: translate(0);
-    opacity: 1;
+    @if $from-left {
+      transform: translateX(100%);
+    } @else {
+      transform: translateX(-100%);
+    }
+    transition: transform 0.5s;
   }
 }
