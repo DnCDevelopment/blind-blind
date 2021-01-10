@@ -1,11 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import LanguageSelector from './LanguageSelector';
 import Logo from './Logo';
 import SearchInput from './SearchInput';
 import Sublist from './Sublist';
 
-import { AboutListData, StoreListData } from '../../constants/header';
+import context from '../../context/context';
+import collectionsContext from '../../context/collectionsContext';
+
+import { ICollectionsContext, IContext } from '../../context/Types';
+
+import { TRANSLATE } from '../../constants/languages';
+import { AboutListData } from '../../constants/header';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
@@ -13,6 +19,13 @@ const DesktopHeader: React.FC = () => {
   const [searchContainerOpen, setSearchContainerOpen] = useState<boolean>(
     false
   );
+
+  const { language } = useContext(context) as IContext;
+  const { collectionsData } = useContext(
+    collectionsContext
+  ) as ICollectionsContext;
+
+  console.log(collectionsData);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -52,11 +65,19 @@ const DesktopHeader: React.FC = () => {
     <header className="desktop-header">
       <div className="desktop-header__container container">
         <div ref={menuRef} className="desktop-header__options">
-          <a role="presentation" onClick={() => changeCurMenu('store')}>
-            Магазин
+          <a
+            className="desktop-header__options-option"
+            role="presentation"
+            onClick={() => changeCurMenu('store')}
+          >
+            {TRANSLATE[language as 'ru' | 'en'].store}
           </a>
-          <a role="presentation" onClick={() => changeCurMenu('about')}>
-            Про нас
+          <a
+            className="desktop-header__options-option"
+            role="presentation"
+            onClick={() => changeCurMenu('about')}
+          >
+            {TRANSLATE[language as 'ru' | 'en'].aboutUs}
           </a>
           <div
             className={`desktop-header__desktop-menu ${
@@ -66,24 +87,27 @@ const DesktopHeader: React.FC = () => {
             <div
               className={`options-sublist ${curMenu === 'about' ? 'open' : ''}`}
             >
-              <Sublist data={AboutListData} />
+              <Sublist data={AboutListData[language as 'ru' | 'en']} />
             </div>
             <div
               className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
             >
-              <Sublist data={StoreListData} />
+              <Sublist data={collectionsData} />
             </div>
           </div>
         </div>
         <Logo />
         <div className="desktop-header__options">
           <LanguageSelector />
-          <a>Корзина</a>
+          <a className="desktop-header__options-option">
+            {TRANSLATE[language as 'ru' | 'en'].cart}
+          </a>
           <a
+            className="desktop-header__options-option"
             role="presentation"
             onClick={() => setSearchContainerOpen(!searchContainerOpen)}
           >
-            Пошук
+            {TRANSLATE[language as 'ru' | 'en'].search}
           </a>
         </div>
         <div

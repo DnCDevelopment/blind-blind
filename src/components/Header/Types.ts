@@ -3,5 +3,8 @@ export interface IMobileMenuProps {
 }
 
 export interface ISublistProps {
-  data: string[];
+  data: {
+    title: string;
+    link?: string;
+  }[];
 }

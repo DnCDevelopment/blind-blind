@@ -1,3 +1,30 @@
-export const AboutListData = ['Наша історія', 'Контакти', '...'];
-
-export const StoreListData = ['Колекція', 'Аксесуари', 'Взуття', '...'];
+export const AboutListData = {
+  ru: [
+    {
+      title: 'Философия',
+      link: '',
+    },
+    {
+      title: 'Контакты',
+      link: '',
+    },
+    {
+      title: '...',
+      link: '',
+    },
+  ],
+  en: [
+    {
+      title: 'Phylosophy',
+      link: '',
+    },
+    {
+      title: 'Contacts',
+      link: '',
+    },
+    {
+      title: '...',
+      link: '',
+    },
+  ],
+};

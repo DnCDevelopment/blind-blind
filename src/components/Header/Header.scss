@@ -2,6 +2,7 @@
 @import './Logo.scss';
 @import './MobileMenu.scss';
 @import './SearchInput.scss';
+@import './Sublist.scss';
 
 .header {
   padding-top: 30px;
@@ -48,7 +49,7 @@
     &__options {
       display: flex;
 
-      a {
+      &-option {
         z-index: 11;
         width: max-content;
         cursor: pointer;
@@ -67,7 +68,7 @@
       @include sliding-menu($from-left: true);
       z-index: 10;
       width: 400px;
-      padding: 70px 60px;
+      padding: 100px 60px;
 
       p {
         margin: 10px 0;
@@ -87,9 +88,10 @@
 
     &__search-container {
       @include sliding-menu($from-left: false);
+      position: fixed;
       z-index: 10;
       width: 400px;
-      padding: 70px 60px;
+      padding: 100px 60px;
     }
   }
 }

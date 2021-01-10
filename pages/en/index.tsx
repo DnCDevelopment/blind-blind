@@ -1,13 +1,13 @@
 import { NextPage, GetServerSideProps } from 'next';
 
-import Header from '../src/components/Header/Header';
+import Header from '../../src/components/Header/Header';
 
-import collectionsContext from '../src/context/collectionsContext';
+import collectionsContext from '../../src/context/collectionsContext';
 
-import { IIndexPageProps } from '../src/pagesTypes';
-import { ICockpitCollectionsRaw } from '../src/cockpitTypes';
+import { IIndexPageProps } from '../../src/pagesTypes';
+import { ICockpitCollectionsRaw } from '../../src/cockpitTypes';
 
-import { getCockpitCollection } from '../src/utils/getCockpitData';
+import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
 const IndexPage: NextPage<IIndexPageProps> = ({ collections }) => {
   return (
@@ -24,8 +24,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const collections = await cockpitData.entries.map(
     (el: ICockpitCollectionsRaw) => {
       return {
-        title: el.title,
-        link: el.link,
+        title: el.title_en,
+        link: el.link_en,
       };
     }
   );
