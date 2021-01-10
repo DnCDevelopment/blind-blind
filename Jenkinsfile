@@ -17,7 +17,8 @@ git pull'''
     stage('build') {
       steps {
         sh '''npm run build
-pm2 restart blind-blind'''
+npm start
+'''
       }
     }
 
