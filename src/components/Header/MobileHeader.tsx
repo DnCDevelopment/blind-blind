@@ -21,10 +21,7 @@ const MobileHeader: React.FC = () => {
         <div
           className="mobile-header__droplist-icon"
           role="presentation"
-          onClick={() => {
-            console.log(1);
-            setMobileMenuOpen(true);
-          }}
+          onClick={() => setMobileMenuOpen(true)}
         >
           <DroplistIconSVG />
         </div>
