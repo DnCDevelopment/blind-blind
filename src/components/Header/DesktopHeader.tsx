@@ -25,8 +25,6 @@ const DesktopHeader: React.FC = () => {
     collectionsContext
   ) as ICollectionsContext;
 
-  console.log(collectionsData);
-
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
