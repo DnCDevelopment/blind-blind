@@ -1,13 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage('pre-install') {
-      steps {
-        sh '''cd ~/projects/blind-blind/
-git pull'''
-      }
-    }
-
     stage('install') {
       steps {
         sh 'npm install'
