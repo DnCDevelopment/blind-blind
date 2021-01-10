@@ -4,7 +4,7 @@ pipeline {
     stage('pre-install') {
       steps {
         sh '''cd ~/projects/blind-blind/
-'''
+git pull'''
       }
     }
 
@@ -17,7 +17,7 @@ pipeline {
     stage('build') {
       steps {
         sh '''npm run build
-npm start'''
+pm2 restart blind-blind'''
       }
     }
 
