@@ -2,27 +2,43 @@ import { NextPage, GetServerSideProps } from 'next';
 
 import Header from '../../src/components/Header/Header';
 
-import collectionsContext from '../../src/context/collectionsContext';
+import { indexContext } from '../../src/context/cockpitContext';
 
 import { IIndexPageProps } from '../../src/pagesTypes';
-import { ICockpitCollectionsRaw } from '../../src/cockpitTypes';
+import {
+  ICockpitCollectionsRaw,
+  ICockpitRunwaysAndLookbooksRaw,
+} from '../../src/cockpitTypes';
 
 import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
-const IndexPage: NextPage<IIndexPageProps> = ({ collections }) => {
+const IndexPage: NextPage<IIndexPageProps> = ({
+  collections,
+  runways,
+  lookbooks,
+}) => {
   return (
-    <collectionsContext.Provider value={{ collectionsData: collections }}>
+    <indexContext.Provider
+      value={{
+        collectionsData: collections,
+        runwaysData: runways,
+        lookbooksData: lookbooks,
+      }}
+    >
       <main>
         <Header />
       </main>
-    </collectionsContext.Provider>
+    </indexContext.Provider>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const cockpitData = await getCockpitCollection('Collections');
-  const collections = await cockpitData.entries.map(
-    (el: ICockpitCollectionsRaw) => {
+  const cockpitDataRunways = await getCockpitCollection('Runways');
+  const cockpitDataLookbooks = await getCockpitCollection('Lookbooks');
+
+  const runways = cockpitDataRunways.entries.map(
+    (el: ICockpitRunwaysAndLookbooksRaw) => {
       return {
         title: el.title_en,
         link: el.link_en,
@@ -30,8 +46,24 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
   );
 
+  const lookbooks = cockpitDataLookbooks.entries.map(
+    (el: ICockpitRunwaysAndLookbooksRaw) => {
+      return {
+        title: el.title_en,
+        link: el.link_en,
+      };
+    }
+  );
+
+  const collections = cockpitData.entries.map((el: ICockpitCollectionsRaw) => {
+    return {
+      title: el.title_en,
+      link: el.link_en,
+    };
+  });
+
   return {
-    props: { collections },
+    props: { collections, runways, lookbooks },
   };
 };
 

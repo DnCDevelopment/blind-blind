@@ -68,12 +68,7 @@
       @include sliding-menu($from-left: true);
       z-index: 10;
       width: 400px;
-      padding: 100px 60px;
-
-      p {
-        margin: 10px 0;
-        cursor: pointer;
-      }
+      padding: 100px 30px;
 
       .options-sublist {
         position: absolute;

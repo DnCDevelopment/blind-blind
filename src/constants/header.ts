@@ -3,28 +3,34 @@ export const AboutListData = {
     {
       title: 'Философия',
       link: '',
+      // subsublist: undefined,
     },
     {
-      title: 'Контакты',
+      title: 'Лукбуки',
       link: '',
+      subsublist: [{ title: '', link: '' }],
     },
     {
-      title: '...',
+      title: 'Показы',
       link: '',
+      subsublist: [{ title: '', link: '' }],
     },
   ],
   en: [
     {
       title: 'Phylosophy',
       link: '',
+      // subsublist: undefined,
     },
     {
-      title: 'Contacts',
+      title: 'Lookbooks',
       link: '',
+      subsublist: [{ title: '', link: '' }],
     },
     {
-      title: '...',
+      title: 'Runways',
       link: '',
+      subsublist: [{ title: '', link: '' }],
     },
   ],
 };

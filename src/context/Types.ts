@@ -1,10 +1,15 @@
-import { ICockpitCollections } from '../cockpitTypes';
+import {
+  ICockpitCollections,
+  ICockpitRunwaysAndLookbooks,
+} from '../cockpitTypes';
 
 export interface IContext {
   language: 'ru' | 'en';
   setLanguage: React.Dispatch<React.SetStateAction<'ru' | 'en'>>;
 }
 
-export interface ICollectionsContext {
+export interface IIndexContext {
   collectionsData: ICockpitCollections[];
+  lookbooksData: ICockpitRunwaysAndLookbooks[];
+  runwaysData: ICockpitRunwaysAndLookbooks[];
 }

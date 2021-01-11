@@ -6,9 +6,9 @@ import SearchInput from './SearchInput';
 import Sublist from './Sublist';
 
 import context from '../../context/context';
-import collectionsContext from '../../context/collectionsContext';
+import { indexContext } from '../../context/cockpitContext';
 
-import { ICollectionsContext, IContext } from '../../context/Types';
+import { IIndexContext, IContext } from '../../context/Types';
 
 import { TRANSLATE } from '../../constants/languages';
 import { AboutListData } from '../../constants/header';
@@ -21,9 +21,7 @@ const DesktopHeader: React.FC = () => {
   );
 
   const { language } = useContext(context) as IContext;
-  const { collectionsData } = useContext(
-    collectionsContext
-  ) as ICollectionsContext;
+  const { collectionsData } = useContext(indexContext) as IIndexContext;
 
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);

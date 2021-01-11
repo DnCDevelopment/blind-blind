@@ -4,9 +4,9 @@ import SearchInput from './SearchInput';
 import Sublist from './Sublist';
 
 import context from '../../context/context';
-import collectionsContext from '../../context/collectionsContext';
+import { indexContext } from '../../context/cockpitContext';
 
-import { ICollectionsContext, IContext } from '../../context/Types';
+import { IIndexContext, IContext } from '../../context/Types';
 import { IMobileMenuProps } from './Types';
 
 import { TRANSLATE } from '../../constants/languages';
@@ -19,9 +19,14 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
   const [aboutListOpen, setAboutListOpen] = useState<boolean>(false);
 
   const { language } = useContext(context) as IContext;
-  const { collectionsData } = useContext(
-    collectionsContext
-  ) as ICollectionsContext;
+  const { collectionsData, runwaysData, lookbooksData } = useContext(
+    indexContext
+  ) as IIndexContext;
+
+  const aboutSublist = AboutListData[language as 'en' | 'ru'];
+
+  aboutSublist[1].subsublist = lookbooksData;
+  aboutSublist[2].subsublist = runwaysData;
 
   return (
     <div className="mobile-menu">
@@ -47,7 +52,7 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
         </p>
         {aboutListOpen && (
           <div className="mobile-menu__sublist mobile-menu__about-list-data-container">
-            <Sublist data={AboutListData[language as 'ru' | 'en']} />
+            <Sublist data={aboutSublist} />
           </div>
         )}
       </div>

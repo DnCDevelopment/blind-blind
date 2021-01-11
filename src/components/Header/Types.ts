@@ -3,8 +3,11 @@ export interface IMobileMenuProps {
 }
 
 export interface ISublistProps {
-  data: {
-    title: string;
-    link?: string;
-  }[];
+  data: ISublist[];
+}
+
+interface ISublist {
+  title: string;
+  link: string;
+  subsublist?: ISublist[];
 }
