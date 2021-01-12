@@ -3,7 +3,6 @@ export const AboutListData = {
     {
       title: 'Философия',
       link: '',
-      // subsublist: undefined,
     },
     {
       title: 'Лукбуки',
@@ -20,7 +19,6 @@ export const AboutListData = {
     {
       title: 'Phylosophy',
       link: '',
-      // subsublist: undefined,
     },
     {
       title: 'Lookbooks',
