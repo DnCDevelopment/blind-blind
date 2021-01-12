@@ -4,15 +4,18 @@
 
 @import './mixins/mixins';
 
-@import './layouts/header/header';
+@import '../src/components/Header/Header.scss';
 
 * {
   box-sizing: border-box;
-  width: 100%;
   margin: 0;
   overflow: hidden;
   font-size: var(--font-16);
   font-family: var(--primary-font);
+}
+
+html, body {
+  overflow-x: hidden;
 }
 
 .container {

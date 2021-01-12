@@ -1,0 +1,12 @@
+.menu-sublist {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+
+  .sublist-item {
+    margin: 10px 0 0 0;
+    color: var(--black);
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

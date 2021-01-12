@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import Link from 'next/link';
 
 import context from '../../context/context';
 
@@ -11,23 +12,32 @@ const LanguageSelector: React.FC = () => {
 
   const languagesItems = Object.keys(LANGUAGES);
 
-  const handleLanguageChange = () => {
-    const languagesIndex = languagesItems.findIndex(
-      (lang) => language === lang
-    );
+  const [droplistOpen, setDroplistOpen] = useState<boolean>(false);
 
-    setLanguage(
-      languagesItems[
-        languagesIndex == languagesItems.length - 1 ? 0 : languagesIndex + 1
-      ]
-    );
+  const handleLanguageChange = (newLang: 'ru' | 'en') => {
+    setLanguage(newLang);
+    setDroplistOpen(false);
   };
 
   return (
     <div className="language-selector">
-      <p role="presentation" onClick={handleLanguageChange}>
-        {LANGUAGES[language as 'uk' | 'ru'].name}
+      <p role="presentation" onClick={() => setDroplistOpen(!droplistOpen)}>
+        {LANGUAGES[language as 'ru' | 'en'].name}
       </p>
+      {droplistOpen && (
+        <div className="droplist-languages">
+          {languagesItems.map((el) => (
+            <Link key={el} href={LANGUAGES[el as 'ru' | 'en'].path}>
+              <p
+                role="presentation"
+                onClick={() => handleLanguageChange(el as 'ru' | 'en')}
+              >
+                {LANGUAGES[el as 'ru' | 'en'].name}
+              </p>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

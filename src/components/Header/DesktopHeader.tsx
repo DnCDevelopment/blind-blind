@@ -1,25 +1,35 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
-import AboutList from './AboutList';
 import LanguageSelector from './LanguageSelector';
 import Logo from './Logo';
 import SearchInput from './SearchInput';
-import StoreList from './StoreList';
+import Sublist from './Sublist';
+
+import context from '../../context/context';
+import { indexContext } from '../../context/cockpitContext';
+
+import { IIndexContext, IContext } from '../../context/Types';
+
+import { TRANSLATE } from '../../constants/languages';
+import { AboutListData } from '../../constants/header';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
-  const [curMenu, setCurMenu] = useState<number>(1);
+  const [curMenu, setCurMenu] = useState<'store' | 'about'>('store');
   const [searchContainerOpen, setSearchContainerOpen] = useState<boolean>(
     false
   );
 
+  const { language } = useContext(context) as IContext;
+  const { collectionsData } = useContext(indexContext) as IIndexContext;
+
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const changeCurMenu = (id: number) => {
+  const changeCurMenu = (menu: 'store' | 'about') => {
     if (!desktopMenuOpen) setDesktopMenuOpen(true);
-    else if (curMenu === id) setDesktopMenuOpen(false);
-    setCurMenu(id);
+    else if (curMenu === menu) setDesktopMenuOpen(false);
+    setCurMenu(menu);
   };
 
   useEffect(() => {
@@ -51,29 +61,49 @@ const DesktopHeader: React.FC = () => {
     <header className="desktop-header">
       <div className="desktop-header__container container">
         <div ref={menuRef} className="desktop-header__options">
-          <a role="presentation" onClick={() => changeCurMenu(1)}>
-            Магазин
+          <a
+            className="desktop-header__options-option"
+            role="presentation"
+            onClick={() => changeCurMenu('store')}
+          >
+            {TRANSLATE[language as 'ru' | 'en'].store}
           </a>
-          <a role="presentation" onClick={() => changeCurMenu(2)}>
-            Про нас
+          <a
+            className="desktop-header__options-option"
+            role="presentation"
+            onClick={() => changeCurMenu('about')}
+          >
+            {TRANSLATE[language as 'ru' | 'en'].aboutUs}
           </a>
           <div
             className={`desktop-header__desktop-menu ${
               desktopMenuOpen ? 'open' : ''
             }`}
           >
-            {curMenu === 1 ? <AboutList /> : <StoreList />}
+            <div
+              className={`options-sublist ${curMenu === 'about' ? 'open' : ''}`}
+            >
+              <Sublist data={AboutListData[language as 'ru' | 'en']} />
+            </div>
+            <div
+              className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
+            >
+              <Sublist data={collectionsData} />
+            </div>
           </div>
         </div>
         <Logo />
-        <LanguageSelector />
         <div className="desktop-header__options">
-          <a>Корзина</a>
+          <LanguageSelector />
+          <a className="desktop-header__options-option">
+            {TRANSLATE[language as 'ru' | 'en'].cart}
+          </a>
           <a
+            className="desktop-header__options-option"
             role="presentation"
             onClick={() => setSearchContainerOpen(!searchContainerOpen)}
           >
-            Пошук
+            {TRANSLATE[language as 'ru' | 'en'].search}
           </a>
         </div>
         <div

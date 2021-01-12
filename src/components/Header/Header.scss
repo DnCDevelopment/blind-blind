@@ -1,7 +1,8 @@
-@import './mobileMenu';
-@import './searchInput';
-@import './logo';
-@import './languageSelector';
+@import './LanguageSelector.scss';
+@import './Logo.scss';
+@import './MobileMenu.scss';
+@import './SearchInput.scss';
+@import './Sublist.scss';
 
 .header {
   padding-top: 30px;
@@ -11,11 +12,17 @@
     &__container {
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
 
     &__droplist-icon {
       width: 18px;
       height: 18px;
+    }
+
+    &__lang-and-cart {
+      display: flex;
+      align-items: center;
     }
 
     &__cart-icon {
@@ -24,7 +31,9 @@
     }
 
     &__mobile-menu {
-      @include sliding-menu(-100%);
+      @include sliding-menu($from-left: true);
+      width: 100vw;
+      padding-top: 30px; 
     }
   }
 
@@ -34,18 +43,21 @@
     &__container {
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
 
     &__options {
       display: flex;
-      justify-content: space-between;
-      width: 200px;
 
-      a {
+      &-option {
         z-index: 11;
         width: max-content;
         cursor: pointer;
       
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+
         &:hover {
           text-decoration: underline
         }
@@ -53,25 +65,28 @@
     }
 
     &__desktop-menu {
-      @include sliding-menu(-100%);
+      @include sliding-menu($from-left: true);
       z-index: 10;
       width: 400px;
-      padding: 70px 60px;
+      padding: 100px 30px;
 
-      p {
-        margin: 10px 0;
-        cursor: pointer;
+      .options-sublist {
+        position: absolute;
+        transform: translateX(-200%);
+        transition: transform 0.3s;
+
+        &.open {
+          transform: translateX(0);
+        }
       }
     }
 
     &__search-container {
-      @include sliding-menu(100%);
-      right: 0;
-      left: auto;
+      @include sliding-menu($from-left: false);
+      position: fixed;
       z-index: 10;
       width: 400px;
-      padding: 70px 60px;
-      transform: translate(100%);
+      padding: 100px 60px;
     }
   }
 }
@@ -79,6 +94,9 @@
 
 @media screen and (min-width: 768px) {
   .header {
+    padding-top: 70px;
+    padding-bottom: 70px;
+
     .mobile-header {
       display: none;
     }
