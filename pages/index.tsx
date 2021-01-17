@@ -20,8 +20,6 @@ const IndexPage: NextPage<IIndexPageProps> = ({
   runways,
   carousel,
 }) => {
-  console.log(carousel);
-
   return (
     <indexContext.Provider
       value={{

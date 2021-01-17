@@ -1,4 +1,4 @@
-export interface ICarousel {
+export interface ICarouselProps {
   children: React.ReactNode[];
   infinity?: boolean;
   buttonPrev?: React.ReactNode;
