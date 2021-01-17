@@ -5,6 +5,8 @@
 @import './Sublist.scss';
 
 .header {
+  position: absolute;
+  width: 100%;
   padding-top: 30px;
   padding-bottom: 30px;
 
@@ -33,7 +35,7 @@
     &__mobile-menu {
       @include sliding-menu($from-left: true);
       width: 100vw;
-      padding-top: 30px; 
+      padding-top: 30px;
     }
   }
 
@@ -53,13 +55,13 @@
         z-index: 11;
         width: max-content;
         cursor: pointer;
-      
+
         &:not(:last-child) {
           margin-right: 20px;
         }
 
         &:hover {
-          text-decoration: underline
+          text-decoration: underline;
         }
       }
     }
@@ -90,7 +92,6 @@
     }
   }
 }
-
 
 @media screen and (min-width: 768px) {
   .header {

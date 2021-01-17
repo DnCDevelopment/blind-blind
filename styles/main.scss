@@ -5,16 +5,18 @@
 @import './mixins/mixins';
 
 @import '../src/components/Header/Header.scss';
+@import '../src/components/Carousel/Carousel.scss';
+@import '../src/components/MainCarousel/MainCarousel.scss';
 
 * {
   box-sizing: border-box;
   margin: 0;
-  overflow: hidden;
   font-size: var(--font-16);
   font-family: var(--primary-font);
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 

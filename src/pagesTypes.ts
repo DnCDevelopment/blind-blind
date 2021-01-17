@@ -1,3 +1,4 @@
+import { ICockpitCarousel } from './cockpitTypes';
 import {
   ICockpitCollections,
   ICockpitRunwaysAndLookbooks,
@@ -7,4 +8,5 @@ export interface IIndexPageProps {
   collections: ICockpitCollections[];
   runways: ICockpitRunwaysAndLookbooks[];
   lookbooks: ICockpitRunwaysAndLookbooks[];
+  carousel: ICockpitCarousel[];
 }

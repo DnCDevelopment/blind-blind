@@ -1,0 +1,12 @@
+.carousel {
+  position: relative;
+  overflow: hidden;
+  &-list {
+    display: flex;
+    transition: ease-in-out transform 0.2s;
+    &-item {
+      display: inline-flex;
+      min-width: 100%;
+    }
+  }
+}

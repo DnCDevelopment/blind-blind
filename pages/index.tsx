@@ -10,12 +10,15 @@ import {
   ICockpitRunwaysAndLookbooksRaw,
 } from '../src/cockpitTypes';
 
-import { getCockpitCollection } from '../src/utils/getCockpitData';
+import { getCockpitCollections } from '../src/utils/getCockpitData';
+import MainCarousel from '../src/components/MainCarousel/MainCarousel';
+import { ICockpitCarousel } from '../src/cockpitTypes';
 
 const IndexPage: NextPage<IIndexPageProps> = ({
   collections,
   lookbooks,
   runways,
+  carousel,
 }) => {
   return (
     <indexContext.Provider
@@ -25,17 +28,27 @@ const IndexPage: NextPage<IIndexPageProps> = ({
         lookbooksData: lookbooks,
       }}
     >
-      <main>
+      <main className="main-page">
         <Header />
+        <MainCarousel carousel={carousel}></MainCarousel>
       </main>
     </indexContext.Provider>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const cockpitDataCollections = await getCockpitCollection('Collections');
-  const cockpitDataRunways = await getCockpitCollection('Runways');
-  const cockpitDataLookbooks = await getCockpitCollection('Lookbooks');
+  const collectionNames = [
+    'Collections',
+    'Runways',
+    'Lookbooks',
+    'mainCarousel',
+  ];
+  const [
+    cockpitDataCollections,
+    cockpitDataRunways,
+    cockpitDataLookbooks,
+    cockpitDataCarousel,
+  ] = await getCockpitCollections(collectionNames);
 
   const runways = cockpitDataRunways.entries.map(
     (el: ICockpitRunwaysAndLookbooksRaw) => {
@@ -64,8 +77,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
   );
 
+  const carousel = cockpitDataCarousel.entries.map((el: ICockpitCarousel) => {
+    return {
+      title: el.title,
+      link: el.link,
+      image: el.image,
+    };
+  });
+
   return {
-    props: { collections, runways, lookbooks },
+    props: { collections, runways, lookbooks, carousel },
   };
 };
 
