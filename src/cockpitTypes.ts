@@ -8,6 +8,13 @@ export interface ICockpitRunwaysAndLookbooks {
   link: string;
 }
 
+export interface ICockpitCarousel extends ICockpitCollections {
+  _id?: string;
+  image: {
+    path: string;
+  };
+}
+
 export interface ICockpitCollectionsRaw extends ICockpitCollections {
   title_en: string;
   link_en: string;
@@ -15,7 +22,6 @@ export interface ICockpitCollectionsRaw extends ICockpitCollections {
   _by: string;
   _modified: number;
   _created: number;
-  _id: string;
   inMenu: true;
 }
 
