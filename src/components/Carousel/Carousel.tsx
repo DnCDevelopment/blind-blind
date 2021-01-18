@@ -101,8 +101,6 @@ const Carousel: React.FC<ICarouselProps> = ({
   };
 
   useEffect(() => {
-    console.log(slide);
-
     if (carousel.current)
       carousel.current.style.transform = `translateX(${-100 * slide}%)`;
     const touchcleanUp = handleTouch();
