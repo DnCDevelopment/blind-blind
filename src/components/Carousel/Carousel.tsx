@@ -65,7 +65,7 @@ const Carousel: React.FC<ICarouselProps> = ({
       )
         if (carousel.current)
           carousel.current.style.transform = `translateX(${
-            -offsetWidth * (slide + +infinity * children.length) + delta
+            -offsetWidth * slide + delta
           }px)`;
     };
 
@@ -77,9 +77,7 @@ const Carousel: React.FC<ICarouselProps> = ({
       if (delta < -40) handleNextSlide();
       else if (delta > 40) handlePrevSlide();
       else if (carousel.current)
-        carousel.current.style.transform = `translateX(-${
-          100 * (slide + +infinity * children.length)
-        }%)`;
+        carousel.current.style.transform = `translateX(-${100 * slide}%)`;
     };
     if (carousel.current) {
       carousel.current.addEventListener('touchstart', handleTouchStart, {
@@ -103,10 +101,10 @@ const Carousel: React.FC<ICarouselProps> = ({
   };
 
   useEffect(() => {
+    console.log(slide);
+
     if (carousel.current)
-      carousel.current.style.transform = `translateX(-${
-        100 * (slide + +infinity * children.length)
-      }%)`;
+      carousel.current.style.transform = `translateX(${-100 * slide}%)`;
     const touchcleanUp = handleTouch();
     if (callback) callback(slide);
     return () => {
@@ -120,6 +118,7 @@ const Carousel: React.FC<ICarouselProps> = ({
         className="carousel-list"
         ref={carousel as RefObject<HTMLDivElement>}
         style={{
+          marginLeft: `-${children.length * 100 * +infinity}%`,
           transition: `transform ${TRANSITION}ms`,
         }}
       >

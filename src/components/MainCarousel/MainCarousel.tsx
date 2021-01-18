@@ -16,7 +16,7 @@ const MainCarousel: React.FC<IMainCarousel> = ({ carousel }): JSX.Element => {
             key={_id}
             title={title}
             image={image}
-            link={language + link}
+            link={language === 'en' ? language : '' + link}
           />
         ))}
       </Carousel>
