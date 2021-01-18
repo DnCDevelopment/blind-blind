@@ -8,5 +8,9 @@ module.exports = withReactSvg({
 	include: path.resolve(__dirname, 'src/assets/svg'),
 	webpack(config) {
 		return config;
+	},
+	i18n: {
+    locales: ['ru', 'en'],
+		defaultLocale: 'ru',
 	}
 });

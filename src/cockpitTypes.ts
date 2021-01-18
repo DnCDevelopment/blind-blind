@@ -1,15 +1,25 @@
 export interface ICockpitCollections {
   title: string;
   link: string;
+  _id?: string;
 }
 
-export interface ICockpitRunwaysAndLookbooks {
-  title: string;
-  link: string;
+//eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ICockpitRunwaysAndLookbooks extends ICockpitCollections {}
+
+export interface ICockpitGood extends ICockpitCollections {
+  description: string;
+  previewImage: {
+    path: string;
+  };
+  secondImage: {
+    path: string;
+  };
+  collectionId: string;
+  _modified: number;
 }
 
 export interface ICockpitCarousel extends ICockpitCollections {
-  _id?: string;
   image: {
     path: string;
   };
@@ -38,4 +48,31 @@ export interface ICockpitRunwaysAndLookbooksRaw
   _by: string;
   _mby: string;
   _modified: number;
+}
+
+export interface ICockpitGoodRaw extends ICockpitGood {
+  title_en: string;
+  link_en: string;
+  description_en: string;
+  otherImages: string;
+  consist: string[];
+  consist_en: string[];
+  sizes: {
+    _id: string;
+    link: string;
+    display: string;
+  }[];
+  collection: {
+    _id: string;
+    link: string;
+    display: string;
+  };
+  subCollection: {
+    _id: string;
+    link: string;
+    display: string;
+  };
+  _mby: string;
+  _by: string;
+  _created: number;
 }

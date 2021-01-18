@@ -1,19 +1,15 @@
-import { useContext } from 'react';
-
-import context from '../../context/context';
-
-import { IContext } from '../../context/Types';
+import { useRouter } from 'next/router';
 
 import { TRANSLATE } from '../../constants/languages';
 
 const SearchInput: React.FC = () => {
-  const { language } = useContext(context) as IContext;
+  const { locale } = useRouter();
 
   return (
     <input
       type="text"
       className="search-input"
-      placeholder={TRANSLATE[language as 'ru' | 'en'].search}
+      placeholder={TRANSLATE[locale as 'ru' | 'en'].search}
     />
   );
 };

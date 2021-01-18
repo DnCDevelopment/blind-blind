@@ -3,10 +3,8 @@ import {
   ICockpitRunwaysAndLookbooks,
 } from '../cockpitTypes';
 
-export interface IContext {
-  language: 'ru' | 'en';
-  setLanguage: React.Dispatch<React.SetStateAction<'ru' | 'en'>>;
-}
+//eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface IContext {}
 
 export interface IIndexContext {
   collectionsData: ICockpitCollections[];

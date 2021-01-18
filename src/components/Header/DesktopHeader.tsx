@@ -5,13 +5,13 @@ import Logo from './Logo';
 import SearchInput from './SearchInput';
 import Sublist from './Sublist';
 
-import context from '../../context/context';
 import { indexContext } from '../../context/cockpitContext';
 
-import { IIndexContext, IContext } from '../../context/Types';
+import { IIndexContext } from '../../context/Types';
 
 import { TRANSLATE } from '../../constants/languages';
 import { AboutListData } from '../../constants/header';
+import { useRouter } from 'next/router';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
@@ -20,7 +20,7 @@ const DesktopHeader: React.FC = () => {
     false
   );
 
-  const { language } = useContext(context) as IContext;
+  const { locale } = useRouter();
   const { collectionsData } = useContext(indexContext) as IIndexContext;
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -66,14 +66,14 @@ const DesktopHeader: React.FC = () => {
             role="presentation"
             onClick={() => changeCurMenu('store')}
           >
-            {TRANSLATE[language as 'ru' | 'en'].store}
+            {TRANSLATE[locale as 'ru' | 'en'].store}
           </a>
           <a
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => changeCurMenu('about')}
           >
-            {TRANSLATE[language as 'ru' | 'en'].aboutUs}
+            {TRANSLATE[locale as 'ru' | 'en'].aboutUs}
           </a>
           <div
             className={`desktop-header__desktop-menu ${
@@ -83,7 +83,7 @@ const DesktopHeader: React.FC = () => {
             <div
               className={`options-sublist ${curMenu === 'about' ? 'open' : ''}`}
             >
-              <Sublist data={AboutListData[language as 'ru' | 'en']} />
+              <Sublist data={AboutListData[locale as 'ru' | 'en']} />
             </div>
             <div
               className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
@@ -96,14 +96,14 @@ const DesktopHeader: React.FC = () => {
         <div className="desktop-header__options">
           <LanguageSelector />
           <a className="desktop-header__options-option">
-            {TRANSLATE[language as 'ru' | 'en'].cart}
+            {TRANSLATE[locale as 'ru' | 'en'].cart}
           </a>
           <a
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => setSearchContainerOpen(!searchContainerOpen)}
           >
-            {TRANSLATE[language as 'ru' | 'en'].search}
+            {TRANSLATE[locale as 'ru' | 'en'].search}
           </a>
         </div>
         <div

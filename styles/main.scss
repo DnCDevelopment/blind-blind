@@ -4,10 +4,6 @@
 
 @import './mixins/mixins';
 
-@import '../src/components/Header/Header.scss';
-@import '../src/components/Carousel/Carousel.scss';
-@import '../src/components/MainCarousel/MainCarousel.scss';
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,9 +11,13 @@
   font-family: var(--primary-font);
 }
 
-html,
-body {
+html, body {
   overflow-x: hidden;
+}
+
+a {
+  color: var(--black);
+  text-decoration: none;
 }
 
 .container {
@@ -43,3 +43,8 @@ input {
 svg {
   cursor: pointer;
 }
+
+@import '../src/components/Header/Header.scss';
+@import '../src/components/Carousel/Carousel.scss';
+@import '../src/components/MainCarousel/MainCarousel.scss';
+@import '../src/components/MainCollectionsSamples/CollectionSamples.scss';

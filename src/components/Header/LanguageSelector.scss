@@ -1,4 +1,5 @@
 .language-selector {
+  z-index: 11;
   text-transform: uppercase;
   cursor: pointer;
   
@@ -16,7 +17,7 @@
   }
 
   .droplist-languages {
-    position: fixed;
+    position: absolute;
 
     p {
       margin-top: 5px;
