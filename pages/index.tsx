@@ -1,6 +1,7 @@
 import { NextPage, GetServerSideProps } from 'next';
 
 import Header from '../src/components/Header/Header';
+import MainCarousel from '../src/components/MainCarousel/MainCarousel';
 
 import { indexContext } from '../src/context/cockpitContext';
 
@@ -8,17 +9,19 @@ import { IIndexPageProps } from '../src/pagesTypes';
 import {
   ICockpitCollectionsRaw,
   ICockpitRunwaysAndLookbooksRaw,
+  ICockpitCarousel,
+  ICockpitGoodRaw,
 } from '../src/cockpitTypes';
 
 import { getCockpitCollections } from '../src/utils/getCockpitData';
-import MainCarousel from '../src/components/MainCarousel/MainCarousel';
-import { ICockpitCarousel } from '../src/cockpitTypes';
+import MainCollectionsSamples from '../src/components/MainCollectionsSamples/MainCollectionsSamples';
 
 const IndexPage: NextPage<IIndexPageProps> = ({
   collections,
   lookbooks,
   runways,
   carousel,
+  goods,
 }) => {
   return (
     <indexContext.Provider
@@ -31,30 +34,36 @@ const IndexPage: NextPage<IIndexPageProps> = ({
       <main className="main-page">
         <Header />
         <MainCarousel carousel={carousel}></MainCarousel>
+        <MainCollectionsSamples goods={goods} />
       </main>
     </indexContext.Provider>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({
+  locale,
+  defaultLocale,
+}) => {
   const collectionNames = [
     'Collections',
     'Runways',
     'Lookbooks',
     'mainCarousel',
+    'Goods',
   ];
   const [
     cockpitDataCollections,
     cockpitDataRunways,
     cockpitDataLookbooks,
     cockpitDataCarousel,
+    cockpitDataGoods,
   ] = await getCockpitCollections(collectionNames);
 
   const runways = cockpitDataRunways.entries.map(
     (el: ICockpitRunwaysAndLookbooksRaw) => {
       return {
-        title: el.title,
-        link: el.link,
+        title: locale === defaultLocale ? el.title : el.title_en,
+        link: locale === defaultLocale ? el.link : el.link_en,
       };
     }
   );
@@ -62,8 +71,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const lookbooks = cockpitDataLookbooks.entries.map(
     (el: ICockpitRunwaysAndLookbooksRaw) => {
       return {
-        title: el.title,
-        link: el.link,
+        title: locale === defaultLocale ? el.title : el.title_en,
+        link: locale === defaultLocale ? el.link : el.link_en,
       };
     }
   );
@@ -71,8 +80,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const collections = cockpitDataCollections.entries.map(
     (el: ICockpitCollectionsRaw) => {
       return {
-        title: el.title,
-        link: el.link,
+        title: locale === defaultLocale ? el.title : el.title_en,
+        link: locale === defaultLocale ? el.link : el.link_en,
+        _id: el._id,
       };
     }
   );
@@ -85,8 +95,22 @@ export const getServerSideProps: GetServerSideProps = async () => {
     };
   });
 
+  const goods = cockpitDataGoods.entries.map((el: ICockpitGoodRaw) => {
+    return {
+      title: locale === defaultLocale ? el.title : el.title_en,
+      link: locale === defaultLocale ? el.link : el.link_en,
+      description:
+        locale === defaultLocale ? el.description : el.description_en,
+      previewImage: el.previewImage,
+      secondImage: el.secondImage,
+      collectionId: el.collection._id,
+      _modified: el._modified,
+      _id: el._id,
+    };
+  });
+
   return {
-    props: { collections, runways, lookbooks, carousel },
+    props: { collections, runways, lookbooks, carousel, goods },
   };
 };
 

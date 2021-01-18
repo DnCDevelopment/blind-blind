@@ -1,13 +1,11 @@
-import { useContext } from 'react';
-import context from '../../context/context';
 import Carousel from '../Carousel/Carousel';
 import MainCarouselItem from './MainCarouselItem';
 import { IMainCarousel } from './Types';
-import { IContext } from '../../context/Types';
 import ArrowSVG from '../../assets/svg/arrow.svg';
+import { useRouter } from 'next/router';
 
 const MainCarousel: React.FC<IMainCarousel> = ({ carousel }): JSX.Element => {
-  const { language } = useContext(context) as IContext;
+  const { locale } = useRouter();
   return (
     <div className="main-page-carousel">
       <Carousel buttonNext={<ArrowSVG />} buttonPrev={<ArrowSVG />}>
@@ -16,7 +14,7 @@ const MainCarousel: React.FC<IMainCarousel> = ({ carousel }): JSX.Element => {
             key={_id}
             title={title}
             image={image}
-            link={language + link}
+            link={locale + link}
           />
         ))}
       </Carousel>
