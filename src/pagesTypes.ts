@@ -12,3 +12,7 @@ export interface IIndexPageProps {
   carousel: ICockpitCarousel[];
   goods: ICockpitGood[];
 }
+
+export interface ICollectionPageProps {
+  collection_id: string | null;
+}

@@ -1,6 +1,5 @@
 import { NextPage, GetServerSideProps } from 'next';
 
-import Header from '../src/components/Header/Header';
 import MainCarousel from '../src/components/MainCarousel/MainCarousel';
 
 import { indexContext } from '../src/context/cockpitContext';
@@ -15,6 +14,7 @@ import {
 
 import { getCockpitCollections } from '../src/utils/getCockpitData';
 import MainCollectionsSamples from '../src/components/MainCollectionsSamples/MainCollectionsSamples';
+import Header from '../src/components/Header/Header';
 
 const IndexPage: NextPage<IIndexPageProps> = ({
   collections,
@@ -23,6 +23,7 @@ const IndexPage: NextPage<IIndexPageProps> = ({
   carousel,
   goods,
 }) => {
+  console.log(1);
   return (
     <indexContext.Provider
       value={{
@@ -81,7 +82,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     (el: ICockpitCollectionsRaw) => {
       return {
         title: locale === defaultLocale ? el.title : el.title_en,
-        link: locale === defaultLocale ? el.link : el.link_en,
+        link: `collections${el.link}`,
         _id: el._id,
       };
     }

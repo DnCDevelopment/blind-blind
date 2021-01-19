@@ -76,3 +76,7 @@ export interface ICockpitGoodRaw extends ICockpitGood {
   _by: string;
   _created: number;
 }
+
+export interface ICockpitGoodsEntries {
+  entries: ICockpitGoodRaw[];
+}
