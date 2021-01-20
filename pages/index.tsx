@@ -2,42 +2,18 @@ import { NextPage, GetServerSideProps } from 'next';
 
 import MainCarousel from '../src/components/MainCarousel/MainCarousel';
 
-import { indexContext } from '../src/context/cockpitContext';
-
 import { IIndexPageProps } from '../src/pagesTypes';
-import {
-  ICockpitCollectionsRaw,
-  ICockpitRunwaysAndLookbooksRaw,
-  ICockpitCarousel,
-  ICockpitGoodRaw,
-} from '../src/cockpitTypes';
+import { ICockpitCarousel, ICockpitGoodsRaw } from '../src/cockpitTypes';
 
 import { getCockpitCollections } from '../src/utils/getCockpitData';
 import MainCollectionsSamples from '../src/components/MainCollectionsSamples/MainCollectionsSamples';
-import Header from '../src/components/Header/Header';
 
-const IndexPage: NextPage<IIndexPageProps> = ({
-  collections,
-  lookbooks,
-  runways,
-  carousel,
-  goods,
-}) => {
-  console.log(1);
+const IndexPage: NextPage<IIndexPageProps> = ({ carousel, goods }) => {
   return (
-    <indexContext.Provider
-      value={{
-        collectionsData: collections,
-        runwaysData: runways,
-        lookbooksData: lookbooks,
-      }}
-    >
-      <main className="main-page">
-        <Header />
-        <MainCarousel carousel={carousel}></MainCarousel>
-        <MainCollectionsSamples goods={goods} />
-      </main>
-    </indexContext.Provider>
+    <main className="main-page">
+      <MainCarousel carousel={carousel}></MainCarousel>
+      <MainCollectionsSamples goods={goods} />
+    </main>
   );
 };
 
@@ -45,47 +21,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
   defaultLocale,
 }) => {
-  const collectionNames = [
-    'Collections',
-    'Runways',
-    'Lookbooks',
-    'mainCarousel',
-    'Goods',
-  ];
-  const [
-    cockpitDataCollections,
-    cockpitDataRunways,
-    cockpitDataLookbooks,
-    cockpitDataCarousel,
-    cockpitDataGoods,
-  ] = await getCockpitCollections(collectionNames);
-
-  const runways = cockpitDataRunways.entries.map(
-    (el: ICockpitRunwaysAndLookbooksRaw) => {
-      return {
-        title: locale === defaultLocale ? el.title : el.title_en,
-        link: locale === defaultLocale ? el.link : el.link_en,
-      };
-    }
-  );
-
-  const lookbooks = cockpitDataLookbooks.entries.map(
-    (el: ICockpitRunwaysAndLookbooksRaw) => {
-      return {
-        title: locale === defaultLocale ? el.title : el.title_en,
-        link: locale === defaultLocale ? el.link : el.link_en,
-      };
-    }
-  );
-
-  const collections = cockpitDataCollections.entries.map(
-    (el: ICockpitCollectionsRaw) => {
-      return {
-        title: locale === defaultLocale ? el.title : el.title_en,
-        link: `collections${el.link}`,
-        _id: el._id,
-      };
-    }
+  const collectionNames = ['mainCarousel', 'Goods'];
+  const [cockpitDataCarousel, cockpitDataGoods] = await getCockpitCollections(
+    collectionNames
   );
 
   const carousel = cockpitDataCarousel.entries.map((el: ICockpitCarousel) => {
@@ -96,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   });
 
-  const goods = cockpitDataGoods.entries.map((el: ICockpitGoodRaw) => {
+  const goods = cockpitDataGoods.entries.map((el: ICockpitGoodsRaw) => {
     return {
       title: locale === defaultLocale ? el.title : el.title_en,
       link: locale === defaultLocale ? el.link : el.link_en,
@@ -111,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   });
 
   return {
-    props: { collections, runways, lookbooks, carousel, goods },
+    props: { carousel, goods },
   };
 };
 

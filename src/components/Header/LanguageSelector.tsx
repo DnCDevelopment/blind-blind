@@ -10,11 +10,6 @@ const LanguageSelector: React.FC = () => {
 
   const [droplistOpen, setDroplistOpen] = useState<boolean>(false);
 
-  const handleLanguageChange = (newLang: 'ru' | 'en') => {
-    router.push(newLang);
-    setDroplistOpen(false);
-  };
-
   return (
     <div className="language-selector">
       <p role="presentation" onClick={() => setDroplistOpen(!droplistOpen)}>
@@ -23,11 +18,13 @@ const LanguageSelector: React.FC = () => {
       {droplistOpen && (
         <div className="droplist-languages">
           {(locales as string[]).map((el) => (
-            <Link key={el} href={LANGUAGES[el as 'ru' | 'en'].path}>
-              <p
-                role="presentation"
-                onClick={() => handleLanguageChange(el as 'ru' | 'en')}
-              >
+            <Link
+              key={el}
+              href={router.pathname}
+              as={router.asPath}
+              locale={el}
+            >
+              <p role="presentation" onClick={() => setDroplistOpen(false)}>
                 {LANGUAGES[el as 'ru' | 'en'].name}
               </p>
             </Link>

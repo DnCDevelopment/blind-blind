@@ -11,7 +11,8 @@
   font-family: var(--primary-font);
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
@@ -48,3 +49,4 @@ svg {
 @import '../src/components/Carousel/Carousel.scss';
 @import '../src/components/MainCarousel/MainCarousel.scss';
 @import '../src/components/MainCollectionsSamples/CollectionSamples.scss';
+@import '../src/components/Goods/Goods.scss';

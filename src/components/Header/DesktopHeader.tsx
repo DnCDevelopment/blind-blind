@@ -20,7 +20,9 @@ const DesktopHeader: React.FC = () => {
     false
   );
 
-  const { locale } = useRouter();
+  const router = useRouter();
+  const { locale } = router;
+
   const { collectionsData } = useContext(indexContext) as IIndexContext;
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -36,7 +38,8 @@ const DesktopHeader: React.FC = () => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (
         menuRef.current &&
-        !menuRef.current.contains(e.target as Node) &&
+        (!menuRef.current.contains(e.target as Node) ||
+          (e.target as HTMLTextAreaElement).tagName.toLowerCase() === 'a') &&
         desktopMenuOpen
       ) {
         setDesktopMenuOpen(false);
@@ -61,20 +64,20 @@ const DesktopHeader: React.FC = () => {
     <header className="desktop-header">
       <div className="desktop-header__container container">
         <div ref={menuRef} className="desktop-header__options">
-          <a
+          <p
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => changeCurMenu('store')}
           >
             {TRANSLATE[locale as 'ru' | 'en'].store}
-          </a>
-          <a
+          </p>
+          <p
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => changeCurMenu('about')}
           >
             {TRANSLATE[locale as 'ru' | 'en'].aboutUs}
-          </a>
+          </p>
           <div
             className={`desktop-header__desktop-menu ${
               desktopMenuOpen ? 'open' : ''
