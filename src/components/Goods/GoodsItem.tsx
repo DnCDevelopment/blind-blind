@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { IGoodsItemProps } from './Types';
 
 const GoodsItem: React.FC<IGoodsItemProps> = ({ title, link, photo }) => {
-  console.log(link);
-
   return (
     <div className="goods-item">
       <Link href={link}>
