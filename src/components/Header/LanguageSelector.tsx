@@ -19,7 +19,9 @@ const LanguageSelector: React.FC = () => {
         <div className="droplist-languages">
           {(locales as string[]).map((el) => (
             <Link key={el} href={pathname} locale={el}>
-              <p role="presentation">{LANGUAGES[el as 'ru' | 'en'].name}</p>
+              <p role="presentation" onClick={() => setDroplistOpen(false)}>
+                {LANGUAGES[el as 'ru' | 'en'].name}
+              </p>
             </Link>
           ))}
         </div>
