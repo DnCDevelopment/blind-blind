@@ -24,9 +24,9 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({ title, link, photo }) => {
 
 export const GoodsItemFallback = () => {
   return (
-    <div className="goods-fallback">
-      <div className="goods-fallback__photo" />
-      <div className="goods-fallback__title" />
+    <div className="goods-item-fallback">
+      <div className="goods-item-fallback__image" />
+      <div className="goods-item-fallback__title" />
     </div>
   );
 };

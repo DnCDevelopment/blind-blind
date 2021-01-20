@@ -36,9 +36,11 @@ const GoodsList: React.FC<IGoodsListProps> = ({
 export const GoodsListFallback = () => {
   return (
     <div className="goods-list-fallback">
-      {Array.from({ length: 9 }, (_, index) => (
-        <GoodsItemFallback key={index} />
-      ))}
+      <div className="goods-list-fallback__goods-container">
+        {Array.from({ length: 9 }, (_, index) => (
+          <GoodsItemFallback key={index} />
+        ))}
+      </div>
     </div>
   );
 };
