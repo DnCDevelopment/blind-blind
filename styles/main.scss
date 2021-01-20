@@ -1,7 +1,5 @@
-@import './fonts/fonts';
-
 @import './variables/variables';
-
+@import './fonts/fonts';
 @import './mixins/mixins';
 
 * {
@@ -11,7 +9,8 @@
   font-family: var(--primary-font);
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 

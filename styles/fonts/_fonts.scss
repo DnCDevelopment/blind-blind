@@ -1,11 +1,25 @@
+// stylelint-disable
+
 @font-face {
-  /* stylelint-disable-next-line sh-waqar/declaration-use-variable */
-  font-family: "Futura";
-  src: url("/fonts/FuturaPT-Book.woff") format("woff");
+  font-weight: 400;
+  font-family: 'Futura';
+  font-style: normal;
+
+  src: local('Futura-Light'), url('/fonts/FuturaPT-Light.woff') format('woff');
 }
 
 @font-face {
-  /* stylelint-disable-next-line sh-waqar/declaration-use-variable */
-  font-family: "FuturaBold";
-  src: url("/fonts/FuturaPT-Bold.woff") format("woff");
+  font-weight: 500;
+  font-family: 'Futura';
+  font-style: normal;
+
+  src: local('Futura-Normal'), url('/fonts/FuturaPT-Book.woff') format('woff');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: 'Futura';
+  font-style: normal;
+
+  src: local('Futura-Bold'), url('/fonts/FuturaPT-Bold.woff') format('woff');
 }
