@@ -4,6 +4,7 @@ import {
   ICockpitCarousel,
   ICockpitGoods,
   ICockpitCollectionsRaw,
+  ICockpitSubCollectionRaw,
 } from './cockpitTypes';
 
 export interface IAppProps {
@@ -21,4 +22,10 @@ export interface IIndexPageProps {
 
 export interface ICollectionPageProps {
   collection: ICockpitCollectionsRaw | null;
+  subCollections: ICockpitSubCollectionRaw[] | null;
+}
+
+export interface ISubCollectionPageProps {
+  collectionId: string;
+  subCollectionId: string;
 }

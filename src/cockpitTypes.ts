@@ -80,3 +80,23 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
 export interface ICockpitGoodsEntries {
   entries: ICockpitGoodsRaw[];
 }
+
+export interface ICockpitSubCollectionRaw {
+  title: string;
+  title_en: string;
+  link: string;
+  link_en: string;
+  image: {
+    path: string;
+  };
+  collection: {
+    _id: string;
+    link: string;
+    display: string;
+  };
+  _mby: string;
+  _by: string;
+  _modified: number;
+  _created: number;
+  _id: string;
+}

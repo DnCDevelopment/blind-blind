@@ -7,11 +7,16 @@ import { IGoodsListProps } from './Types';
 const GoodsList: React.FC<IGoodsListProps> = ({
   collectionName,
   collectionId,
+  subCollectionId,
 }) => {
   const { data: goods } = useCockpit<ICockpitGoodsEntries>(
     'collections',
     'Goods',
-    'filter[collection._id]=' + collectionId
+    collectionId
+      ? `filter[collection._id]=${collectionId}`
+      : subCollectionId
+      ? `filter[subCollection._id]=${subCollectionId}`
+      : ''
   );
 
   const filteredGoods = goods?.entries;

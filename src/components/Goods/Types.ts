@@ -5,6 +5,7 @@ export interface IGoodsItemProps {
 }
 
 export interface IGoodsListProps {
-  collectionId: string;
   collectionName: string;
+  collectionId?: string;
+  subCollectionId?: string;
 }

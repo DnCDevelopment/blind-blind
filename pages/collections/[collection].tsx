@@ -10,16 +10,29 @@ import GoodsList, {
   GoodsListFallback,
 } from '../../src/components/Goods/GoodsList';
 import { useRouter } from 'next/router';
+import SubCollections from '../../src/components/SubCollections/SubCollections';
 
-const CollectionPage: NextPage<ICollectionPageProps> = ({ collection }) => {
+const CollectionPage: NextPage<ICollectionPageProps> = ({
+  collection,
+  subCollections,
+}) => {
   const { locale, defaultLocale } = useRouter();
 
   if (!collection) return <Error />;
 
-  const isServer = typeof window === 'undefined';
-  const { _id: collectionId } = collection;
   const collectionName =
     locale === defaultLocale ? collection.title : collection.title_en;
+
+  if (subCollections)
+    return (
+      <SubCollections
+        collectionName={collectionName}
+        subCollections={subCollections}
+      />
+    );
+
+  const isServer = typeof window === 'undefined';
+  const { _id: collectionId } = collection;
 
   return (
     <div className="collection-page">
@@ -49,13 +62,21 @@ export const getServerSideProps: GetServerSideProps = async ({
     'Collections',
     'filter[link]=/' + collection
   );
+  const curCollection = collections.total > 0 ? collections.entries[0] : null;
 
-  const cur_collection =
-    collections.entries.length > 0 ? collections.entries[0] : null;
+  const subCollections = curCollection
+    ? await getCockpitCollection(
+        'SubCollections',
+        'filter[collection._id]=' + curCollection._id
+      )
+    : null;
+  const curSubCollections =
+    subCollections.total > 0 ? subCollections.entries : null;
 
   return {
     props: {
-      collection: cur_collection,
+      collection: curCollection,
+      subCollections: curSubCollections,
     },
   };
 };

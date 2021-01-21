@@ -1,4 +1,4 @@
-.goods-list {
+.subcollections-list {
   position: relative;
   padding: 60px 10% 100px 10%;
 
@@ -8,28 +8,31 @@
     text-align: center;
   }
 
-  &__goods-container {
+  &__subcollection-container {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
-  }
 
-  &-fallback {
-    &__goods-container {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 160px 10% 100px 10%;
+    .subcollections-item {
+      &__image {
+        position: relative;
+        height: 400px;
+        width: 100%;
+      }
+
+      &__title {
+        padding-top: 5px;
+        text-align: center;
+      }
     }
   }
 }
 
 @media screen and (min-width: 768px) {
-  .goods-list {
+  .subcollections-list {
     padding-top: 100px;
 
-    &__goods-container,
-    &-fallback__goods-container {
+    &__subcollection-container {
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
