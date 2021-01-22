@@ -1,9 +1,86 @@
-import { AppProps } from 'next/app';
+import App, { AppContext } from 'next/app';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
+import { AppInitialProps } from 'next/dist/next-server/lib/utils';
+
+import {
+  ICockpitCollectionsRaw,
+  ICockpitRunwaysAndLookbooksRaw,
+} from '../src/cockpitTypes';
+import Header from '../src/components/Header/Header';
+import { indexContext } from '../src/context/cockpitContext';
+import { IAppProps } from '../src/pagesTypes';
+
+import { getCockpitCollections } from '../src/utils/getCockpitData';
 
 import '../styles/main.scss';
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }): JSX.Element => {
-  return <Component {...pageProps} />;
+const MyApp = ({
+  Component,
+  pageProps,
+  props: { collections, lookbooks, runways },
+}: AppProps & IAppProps): JSX.Element => {
+  return (
+    <indexContext.Provider
+      value={{
+        collectionsData: collections,
+        lookbooksData: lookbooks,
+        runwaysData: runways,
+      }}
+    >
+      <Header />
+      <main>
+        <Component {...pageProps} />
+      </main>
+    </indexContext.Provider>
+  );
+};
+
+MyApp.getInitialProps = async (
+  appContext: AppContext
+): Promise<AppInitialProps & IAppProps> => {
+  const appProps = await App.getInitialProps(appContext);
+
+  const { locale, defaultLocale } = appContext.router;
+
+  const collectionNames = ['Collections', 'Runways', 'Lookbooks'];
+  const [
+    cockpitDataCollections,
+    cockpitDataRunways,
+    cockpitDataLookbooks,
+  ] = await getCockpitCollections(collectionNames);
+
+  const runways = cockpitDataRunways.entries.map(
+    (el: ICockpitRunwaysAndLookbooksRaw) => {
+      return {
+        title: locale === defaultLocale ? el.title : el.title_en,
+        link: locale === defaultLocale ? el.link : el.link_en,
+      };
+    }
+  );
+
+  const lookbooks = cockpitDataLookbooks.entries.map(
+    (el: ICockpitRunwaysAndLookbooksRaw) => {
+      return {
+        title: locale === defaultLocale ? el.title : el.title_en,
+        link: locale === defaultLocale ? el.link : el.link_en,
+      };
+    }
+  );
+
+  const collections = cockpitDataCollections.entries.map(
+    (el: ICockpitCollectionsRaw) => {
+      return {
+        title: locale === defaultLocale ? el.title : el.title_en,
+        link: `/collections${el.link}`,
+        _id: el._id,
+      };
+    }
+  );
+
+  return {
+    ...appProps,
+    props: { collections, runways, lookbooks },
+  };
 };
 
 export default MyApp;

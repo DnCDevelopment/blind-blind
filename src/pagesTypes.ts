@@ -2,13 +2,30 @@ import {
   ICockpitCollections,
   ICockpitRunwaysAndLookbooks,
   ICockpitCarousel,
-  ICockpitGood,
+  ICockpitGoods,
+  ICockpitCollectionsRaw,
+  ICockpitSubCollectionRaw,
 } from './cockpitTypes';
 
+export interface IAppProps {
+  props: {
+    collections: ICockpitCollections[];
+    runways: ICockpitRunwaysAndLookbooks[];
+    lookbooks: ICockpitRunwaysAndLookbooks[];
+  };
+}
+
 export interface IIndexPageProps {
-  collections: ICockpitCollections[];
-  runways: ICockpitRunwaysAndLookbooks[];
-  lookbooks: ICockpitRunwaysAndLookbooks[];
   carousel: ICockpitCarousel[];
-  goods: ICockpitGood[];
+  goods: ICockpitGoods[];
+}
+
+export interface ICollectionPageProps {
+  collection: ICockpitCollectionsRaw | null;
+  subCollections: ICockpitSubCollectionRaw[] | null;
+}
+
+export interface ISubCollectionPageProps {
+  collectionId: string;
+  subCollectionId: string;
 }

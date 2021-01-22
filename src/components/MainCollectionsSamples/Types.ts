@@ -1,9 +1,9 @@
-import { ICockpitCollections, ICockpitGood } from '../../cockpitTypes';
+import { ICockpitCollections, ICockpitGoods } from '../../cockpitTypes';
 
 export interface IMainCollectionsSamplesProps {
-  goods: ICockpitGood[];
+  goods: ICockpitGoods[];
 }
 
 export interface ICollectionSamplesProps extends ICockpitCollections {
-  samples: ICockpitGood[];
+  samples: ICockpitGoods[];
 }

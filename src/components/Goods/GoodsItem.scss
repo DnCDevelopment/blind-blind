@@ -1,0 +1,28 @@
+.goods-item {
+  &__image {
+    position: relative;
+    width: 100%;
+    height: 400px;
+  }
+
+  &__title {
+    padding-top: 5px;
+    text-align: center;
+  }
+
+  &-fallback {
+    &__image {
+      width: 100%;
+      height: 400px;
+      background: var(--grey-color);
+    }
+
+    &__title {
+      width: 80%;
+      height: 20px;
+      margin: 5px auto 0 auto;
+      padding-top: 5px;
+      background: var(--grey-color);
+    }
+  }
+}

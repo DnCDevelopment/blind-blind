@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 const LanguageSelector: React.FC = () => {
   const router = useRouter();
-  const { locale, locales, pathname } = router;
+  const { locale, locales, pathname, asPath } = router;
 
   const [droplistOpen, setDroplistOpen] = useState<boolean>(false);
 
@@ -18,7 +18,7 @@ const LanguageSelector: React.FC = () => {
       {droplistOpen && (
         <div className="droplist-languages">
           {(locales as string[]).map((el) => (
-            <Link key={el} href={pathname} locale={el}>
+            <Link key={el} href={pathname} as={asPath} locale={el}>
               <p role="presentation" onClick={() => setDroplistOpen(false)}>
                 {LANGUAGES[el as 'ru' | 'en'].name}
               </p>

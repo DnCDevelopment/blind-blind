@@ -2,32 +2,32 @@ export const AboutListData = {
   ru: [
     {
       title: 'Философия',
-      link: '',
+      link: '/',
     },
     {
       title: 'Лукбуки',
-      link: '',
+      link: '/',
       subsublist: [{ title: '', link: '' }],
     },
     {
       title: 'Показы',
-      link: '',
+      link: '/',
       subsublist: [{ title: '', link: '' }],
     },
   ],
   en: [
     {
       title: 'Phylosophy',
-      link: '',
+      link: '/',
     },
     {
       title: 'Lookbooks',
-      link: '',
+      link: '/',
       subsublist: [{ title: '', link: '' }],
     },
     {
       title: 'Runways',
-      link: '',
+      link: '/',
       subsublist: [{ title: '', link: '' }],
     },
   ],

@@ -7,7 +7,7 @@ export interface ICockpitCollections {
 //eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ICockpitRunwaysAndLookbooks extends ICockpitCollections {}
 
-export interface ICockpitGood extends ICockpitCollections {
+export interface ICockpitGoods extends ICockpitCollections {
   description: string;
   previewImage: {
     path: string;
@@ -50,7 +50,7 @@ export interface ICockpitRunwaysAndLookbooksRaw
   _modified: number;
 }
 
-export interface ICockpitGoodRaw extends ICockpitGood {
+export interface ICockpitGoodsRaw extends ICockpitGoods {
   title_en: string;
   link_en: string;
   description_en: string;
@@ -75,4 +75,28 @@ export interface ICockpitGoodRaw extends ICockpitGood {
   _mby: string;
   _by: string;
   _created: number;
+}
+
+export interface ICockpitGoodsEntries {
+  entries: ICockpitGoodsRaw[];
+}
+
+export interface ICockpitSubCollectionRaw {
+  title: string;
+  title_en: string;
+  link: string;
+  link_en: string;
+  image: {
+    path: string;
+  };
+  collection: {
+    _id: string;
+    link: string;
+    display: string;
+  };
+  _mby: string;
+  _by: string;
+  _modified: number;
+  _created: number;
+  _id: string;
 }

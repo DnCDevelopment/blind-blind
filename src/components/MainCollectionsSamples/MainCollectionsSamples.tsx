@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ICockpitGood } from '../../cockpitTypes';
+import { ICockpitGoods } from '../../cockpitTypes';
 import { indexContext } from '../../context/cockpitContext';
 import { IIndexContext } from '../../context/Types';
 import CollectionSamples from './CollectionSamples';
@@ -11,7 +11,7 @@ const MainCollectionsSamples: React.FC<IMainCollectionsSamplesProps> = ({
   const { collectionsData } = useContext(indexContext) as IIndexContext;
 
   const samples = goods.reduce(
-    (samples: { [key: string]: ICockpitGood[] }, x: ICockpitGood) => {
+    (samples: { [key: string]: ICockpitGoods[] }, x: ICockpitGoods) => {
       (samples[x.collectionId] = samples[x.collectionId] || []).push(x);
       return samples;
     },
