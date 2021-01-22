@@ -4,19 +4,11 @@ import GoodsItem, { GoodsItemFallback } from './GoodsItem';
 
 import { IGoodsListProps } from './Types';
 
-const GoodsList: React.FC<IGoodsListProps> = ({
-  collectionName,
-  collectionId,
-  subCollectionId,
-}) => {
+const GoodsList: React.FC<IGoodsListProps> = ({ collectionName, filter }) => {
   const { data: goods } = useCockpit<ICockpitGoodsEntries>(
     'collections',
     'Goods',
-    collectionId
-      ? `filter[collection._id]=${collectionId}`
-      : subCollectionId
-      ? `filter[subCollection._id]=${subCollectionId}`
-      : ''
+    filter
   );
 
   const filteredGoods = goods?.entries;

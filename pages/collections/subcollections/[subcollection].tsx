@@ -19,13 +19,13 @@ const SubCollectionPage: NextPage<ICollectionPageProps> = () => {
         {isServer ? (
           <GoodsList
             collectionName={subCollectionTitle as string}
-            subCollectionId={query.id as string}
+            filter={`filter[subCollection._id]=${query.id as string}`}
           />
         ) : (
           <Suspense fallback={<GoodsListFallback />}>
             <GoodsList
               collectionName={subCollectionTitle as string}
-              subCollectionId={query.id as string}
+              filter={`filter[subCollection._id]=${query.id as string}`}
             />
           </Suspense>
         )}

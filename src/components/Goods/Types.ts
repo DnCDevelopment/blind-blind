@@ -6,6 +6,5 @@ export interface IGoodsItemProps {
 
 export interface IGoodsListProps {
   collectionName: string;
-  collectionId?: string;
-  subCollectionId?: string;
+  filter?: string;
 }
