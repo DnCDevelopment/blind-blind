@@ -6,10 +6,10 @@
 
 .header {
   position: absolute;
+  z-index: 1000;
   width: 100%;
   padding-top: 30px;
   padding-bottom: 30px;
-  z-index: 1000;
 
   .mobile-header {
     &__container {
