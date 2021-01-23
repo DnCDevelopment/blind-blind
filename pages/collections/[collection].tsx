@@ -11,6 +11,7 @@ import GoodsList, {
 } from '../../src/components/Goods/GoodsList';
 import { useRouter } from 'next/router';
 import SubCollections from '../../src/components/SubCollections/SubCollections';
+import GoodsListTitle from '../../src/components/Goods/GoodsListTitle';
 
 const CollectionPage: NextPage<ICollectionPageProps> = ({
   collection,
@@ -25,10 +26,10 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
 
   if (subCollections)
     return (
-      <SubCollections
-        collectionName={collectionName}
-        subCollections={subCollections}
-      />
+      <>
+        <GoodsListTitle title={collectionName} />
+        <SubCollections subCollections={subCollections} />
+      </>
     );
 
   const isServer = typeof window === 'undefined';
@@ -36,16 +37,15 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
 
   return (
     <div className="collection-page">
+      <GoodsListTitle title={collectionName} />
       <div className="goods-container">
         {isServer ? (
           <GoodsList
-            collectionName={collectionName}
             filter={`filter[collection._id]=${collectionId as string}`}
           />
         ) : (
           <Suspense fallback={<GoodsListFallback />}>
             <GoodsList
-              collectionName={collectionName}
               filter={`filter[collection._id]=${collectionId as string}`}
             />
           </Suspense>

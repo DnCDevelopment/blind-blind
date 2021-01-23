@@ -9,7 +9,7 @@ import { IIndexContext } from '../../context/Types';
 import { IMobileMenuProps } from './Types';
 
 import { TRANSLATE } from '../../constants/languages';
-import { AboutListData } from '../../constants/header';
+import { AboutListData, StoreListData } from '../../constants/header';
 
 import CrossSVG from '../../assets/svg/cross.svg';
 import { useRouter } from 'next/router';
@@ -24,6 +24,8 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
     indexContext
   ) as IIndexContext;
 
+  const constantCollections = StoreListData[locale as 'ru' | 'en'];
+  const collections = collectionsData.concat(constantCollections);
   const aboutSublist = AboutListData[locale as 'en' | 'ru'];
 
   aboutSublist[1].subsublist = lookbooksData;
@@ -45,7 +47,7 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
         </p>
         {storeListOpen && (
           <div className="mobile-menu__sublist mobile-menu__store-list-data-container">
-            <Sublist data={collectionsData} />
+            <Sublist data={collections} />
           </div>
         )}
         <p role="presentation" onClick={() => setAboutListOpen(!aboutListOpen)}>

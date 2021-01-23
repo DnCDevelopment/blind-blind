@@ -3,11 +3,40 @@
     position: relative;
     width: 100%;
     height: 400px;
+
+    .second {
+      opacity: 0;
+
+      &:hover {
+        opacity: 1;
+        transition: opacity 0.5s;
+      }
+    }
   }
 
   &__title {
     padding-top: 5px;
     text-align: center;
+  }
+
+  &__price-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+    text-align: center;
+
+    & > * {
+      font-size: var(--font-14);
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      margin-right: 5px;
+    }
+
+    .stock-price {
+      color: var(--red-color);
+    }
   }
 
   &-fallback {
@@ -19,6 +48,14 @@
 
     &__title {
       width: 80%;
+      height: 20px;
+      margin: 5px auto 0 auto;
+      padding-top: 5px;
+      background: var(--grey-color);
+    }
+
+    &__price {
+      width: 40%;
       height: 20px;
       margin: 5px auto 0 auto;
       padding-top: 5px;

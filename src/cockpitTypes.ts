@@ -75,6 +75,8 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   _mby: string;
   _by: string;
   _created: number;
+  price: string;
+  stockPrice: string | null;
 }
 
 export interface ICockpitGoodsEntries {

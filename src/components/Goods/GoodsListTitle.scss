@@ -1,0 +1,14 @@
+.goods-list-title {
+  padding-top: 60px;
+
+  h2 {
+    padding-top: 30px;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .goods-list-title {
+    padding-top: 100px;
+  }
+}
