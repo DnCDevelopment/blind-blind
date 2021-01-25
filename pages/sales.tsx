@@ -24,10 +24,3 @@ const SalesPage: NextPage = () => {
 };
 
 export default SalesPage;
-// export const getServerSideProps: GetServerSideProps = async ({
-//   query: { collection },
-// }) => {
-//   return {
-//     props: {}
-//   }
-// }
