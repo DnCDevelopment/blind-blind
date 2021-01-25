@@ -10,7 +10,7 @@ import { indexContext } from '../../context/cockpitContext';
 import { IIndexContext } from '../../context/Types';
 
 import { TRANSLATE } from '../../constants/languages';
-import { AboutListData } from '../../constants/header';
+import { AboutListData, StoreListData } from '../../constants/header';
 import { useRouter } from 'next/router';
 
 const DesktopHeader: React.FC = () => {
@@ -24,6 +24,8 @@ const DesktopHeader: React.FC = () => {
   const { locale } = router;
 
   const { collectionsData } = useContext(indexContext) as IIndexContext;
+  const constantCollections = StoreListData[locale as 'ru' | 'en'];
+  const collections = collectionsData.concat(constantCollections);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -91,7 +93,7 @@ const DesktopHeader: React.FC = () => {
             <div
               className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
             >
-              <Sublist data={collectionsData} />
+              <Sublist data={collections} />
             </div>
           </div>
         </div>

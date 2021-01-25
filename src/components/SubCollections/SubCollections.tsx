@@ -3,10 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ISubCollectionProps } from './Types';
 
-const SubCollections: React.FC<ISubCollectionProps> = ({
-  collectionName,
-  subCollections,
-}) => {
+const SubCollections: React.FC<ISubCollectionProps> = ({ subCollections }) => {
   const { locale, defaultLocale } = useRouter();
 
   const subCollectionsItems = subCollections.map((el) => {
@@ -20,7 +17,6 @@ const SubCollections: React.FC<ISubCollectionProps> = ({
 
   return (
     <div className="subcollections-list">
-      <h2 className="subcollections-list__collection-name">{collectionName}</h2>
       <div className="subcollections-list__subcollection-container">
         {subCollectionsItems.map(({ id, title, link, image }) => (
           <Link

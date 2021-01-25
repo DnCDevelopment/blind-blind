@@ -32,3 +32,20 @@ export const AboutListData = {
     },
   ],
 };
+
+export const StoreListData = {
+  ru: [
+    {
+      title: 'Скидки',
+      link: '/sales',
+      _id: '1',
+    },
+  ],
+  en: [
+    {
+      title: 'Stocks',
+      link: '/sales',
+      _id: '1',
+    },
+  ],
+};

@@ -4,6 +4,8 @@ import { Suspense } from 'react';
 import GoodsList, {
   GoodsListFallback,
 } from '../../../src/components/Goods/GoodsList';
+import GoodsListTitle from '../../../src/components/Goods/GoodsListTitle';
+
 import { ICollectionPageProps } from '../../../src/pagesTypes';
 
 const SubCollectionPage: NextPage<ICollectionPageProps> = () => {
@@ -16,9 +18,9 @@ const SubCollectionPage: NextPage<ICollectionPageProps> = () => {
   return (
     <div className="subcollection-page">
       <div className="goods-container">
+        <GoodsListTitle title={subCollectionTitle as string} />
         {isServer ? (
           <GoodsList
-            collectionName={subCollectionTitle as string}
             filter={`filter[subCollection._id]=${query.id as string}`}
           />
         ) : (

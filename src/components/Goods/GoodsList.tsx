@@ -4,7 +4,7 @@ import GoodsItem, { GoodsItemFallback } from './GoodsItem';
 
 import { IGoodsListProps } from './Types';
 
-const GoodsList: React.FC<IGoodsListProps> = ({ collectionName, filter }) => {
+const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
   const { data: goods } = useCockpit<ICockpitGoodsEntries>(
     'collections',
     'Goods',
@@ -15,16 +15,28 @@ const GoodsList: React.FC<IGoodsListProps> = ({ collectionName, filter }) => {
 
   return (
     <div className="goods-list">
-      <h2 className="goods-list__collection-name">{collectionName}</h2>
       <div className="goods-list__goods-container">
-        {filteredGoods?.map(({ _id, title, link, previewImage }) => (
-          <GoodsItem
-            key={_id}
-            title={title}
-            link={link}
-            photo={previewImage.path}
-          />
-        ))}
+        {filteredGoods?.map(
+          ({
+            _id,
+            title,
+            price,
+            stockPrice,
+            link,
+            previewImage,
+            secondImage,
+          }) => (
+            <GoodsItem
+              key={_id}
+              title={title}
+              link={link}
+              photo={previewImage.path}
+              secondPhoto={secondImage.path}
+              price={price}
+              stockPrice={stockPrice}
+            />
+          )
+        )}
       </div>
     </div>
   );
