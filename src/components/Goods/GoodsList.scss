@@ -20,6 +20,7 @@
 
 @media screen and (min-width: 768px) {
   .goods-list {
+    
     &__goods-container,
     &-fallback__goods-container {
       grid-template-columns: 1fr 1fr 1fr;
