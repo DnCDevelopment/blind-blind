@@ -22,7 +22,6 @@ const SubCollections: React.FC<ISubCollectionProps> = ({ subCollections }) => {
           <Link
             key={title}
             href={`subcollections${link}?id=${id}&name=${title}`}
-            as={`subcollections${link}`}
           >
             <div className="subcollections-item">
               <div className="subcollections-item__image">

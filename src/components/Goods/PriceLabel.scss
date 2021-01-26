@@ -1,0 +1,19 @@
+.price-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  text-align: center;
+
+  & > * {
+    font-size: var(--font-14);
+  }
+
+  .old-price {
+    margin-right: 5px;
+    text-decoration: line-through;
+  }
+
+  .stock-price {
+    color: var(--red-color);
+  }
+}

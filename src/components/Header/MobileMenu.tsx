@@ -47,7 +47,7 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
         </p>
         {storeListOpen && (
           <div className="mobile-menu__sublist mobile-menu__store-list-data-container">
-            <Sublist data={collections} />
+            <Sublist data={collections} closeMenu={close} />
           </div>
         )}
         <p role="presentation" onClick={() => setAboutListOpen(!aboutListOpen)}>
@@ -55,7 +55,7 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
         </p>
         {aboutListOpen && (
           <div className="mobile-menu__sublist mobile-menu__about-list-data-container">
-            <Sublist data={aboutSublist} />
+            <Sublist data={aboutSublist} closeMenu={close} />
           </div>
         )}
       </div>

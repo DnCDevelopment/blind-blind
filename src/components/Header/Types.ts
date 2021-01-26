@@ -4,6 +4,7 @@ export interface IMobileMenuProps {
 
 export interface ISublistProps {
   data: ISublist[];
+  closeMenu: () => void;
 }
 
 interface ISublist {

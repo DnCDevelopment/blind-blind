@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import LanguageSelector from './LanguageSelector';
 import Logo from './Logo';
@@ -11,7 +12,6 @@ import { IIndexContext } from '../../context/Types';
 
 import { TRANSLATE } from '../../constants/languages';
 import { AboutListData, StoreListData } from '../../constants/header';
-import { useRouter } from 'next/router';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
@@ -40,8 +40,7 @@ const DesktopHeader: React.FC = () => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (
         menuRef.current &&
-        (!menuRef.current.contains(e.target as Node) ||
-          (e.target as HTMLTextAreaElement).tagName.toLowerCase() === 'a') &&
+        !menuRef.current.contains(e.target as Node) &&
         desktopMenuOpen
       ) {
         setDesktopMenuOpen(false);
@@ -88,12 +87,18 @@ const DesktopHeader: React.FC = () => {
             <div
               className={`options-sublist ${curMenu === 'about' ? 'open' : ''}`}
             >
-              <Sublist data={AboutListData[locale as 'ru' | 'en']} />
+              <Sublist
+                data={AboutListData[locale as 'ru' | 'en']}
+                closeMenu={() => setDesktopMenuOpen(false)}
+              />
             </div>
             <div
               className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
             >
-              <Sublist data={collections} />
+              <Sublist
+                data={collections}
+                closeMenu={() => setDesktopMenuOpen(false)}
+              />
             </div>
           </div>
         </div>

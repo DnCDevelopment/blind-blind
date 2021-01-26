@@ -16,20 +16,16 @@ const SubCollectionPage: NextPage<ICollectionPageProps> = () => {
 
   return (
     <div className="subcollection-page">
-      <div className="goods-container">
-        <GoodsListTitle title={subCollectionTitle as string} />
-        {isServer ? (
+      <GoodsListTitle title={subCollectionTitle as string} />
+      {isServer ? (
+        <GoodsList filter={`filter[subCollection._id]=${query.id as string}`} />
+      ) : (
+        <Suspense fallback={<GoodsListFallback />}>
           <GoodsList
             filter={`filter[subCollection._id]=${query.id as string}`}
           />
-        ) : (
-          <Suspense fallback={<GoodsListFallback />}>
-            <GoodsList
-              filter={`filter[subCollection._id]=${query.id as string}`}
-            />
-          </Suspense>
-        )}
-      </div>
+        </Suspense>
+      )}
     </div>
   );
 };

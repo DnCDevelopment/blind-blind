@@ -1,0 +1,15 @@
+.button {
+  width: 150px;
+  padding: 10px;
+  border: 1px solid var(--black-color);
+  background: var(--white-color);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--grey-color);
+  }
+
+  .title {
+    text-align: center;
+  }
+}

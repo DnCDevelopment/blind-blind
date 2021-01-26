@@ -1,0 +1,14 @@
+form {
+  margin-top: 10px;
+
+  input {
+    border: 1px solid var(--black-color);
+    padding: 2px 10px;
+    margin-top: 10px;
+
+    &::placeholder {
+      color: var(--black-color);
+      opacity: 1;
+    }
+  }
+}

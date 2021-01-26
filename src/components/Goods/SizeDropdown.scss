@@ -1,0 +1,48 @@
+.size-dropdown {
+  position: relative;
+
+  &__cur-size-label {
+    width: 100%;
+    border-bottom: 1px solid var(--black-color);
+    margin-top: 20px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+
+    .size {
+      width: 90%;
+      text-align: center;
+    }
+
+    .dropdown-button {
+      position: relative;
+      top: 10px;
+      border-left: 7px solid var(--transparent);
+      border-right: 7px solid var(--transparent);
+      border-top: 7px solid var(--black-color);
+    }
+  }
+
+  &__sizes-list {
+    position: absolute;
+    width: 100%;
+    background: var(--white-color);
+    visibility: hidden;
+    border: 1px solid var(--black-color);
+
+    & > * {
+      padding-bottom: 5px;
+      padding-right: 10%;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        background: var(--grey-color);
+      }
+    }
+
+    &.open {
+      visibility: visible;
+    }
+  }
+}

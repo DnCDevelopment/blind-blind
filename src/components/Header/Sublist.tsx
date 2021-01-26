@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { ISublistProps } from './Types';
 
-const Sublist: React.FC<ISublistProps> = ({ data }) => {
+const Sublist: React.FC<ISublistProps> = ({ data, closeMenu }) => {
   const [subsublistOpen, setSubsublistOpen] = useState<string>('');
 
   return (
@@ -11,7 +11,13 @@ const Sublist: React.FC<ISublistProps> = ({ data }) => {
       {data.map(({ title, link, subsublist }) =>
         !subsublist ? (
           <Link href={link} key={title}>
-            <a className="sublist-item">{title}</a>
+            <a
+              className="sublist-item"
+              role="presentation"
+              onClick={() => closeMenu()}
+            >
+              {title}
+            </a>
           </Link>
         ) : (
           <React.Fragment key={title}>
@@ -26,7 +32,7 @@ const Sublist: React.FC<ISublistProps> = ({ data }) => {
             </p>
             {subsublistOpen === title && (
               <div className={title}>
-                <Sublist data={subsublist} />
+                <Sublist data={subsublist} closeMenu={closeMenu} />
               </div>
             )}
           </React.Fragment>

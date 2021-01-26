@@ -6,6 +6,7 @@ import {
   ICockpitCollectionsRaw,
   ICockpitSubCollectionRaw,
 } from './cockpitTypes';
+import { IGoodsSingleProps } from './components/Goods/Types';
 
 export interface IAppProps {
   props: {
@@ -28,4 +29,8 @@ export interface ICollectionPageProps {
 export interface ISubCollectionPageProps {
   collectionId: string;
   subCollectionId: string;
+}
+
+export interface IGoodsPageProps {
+  goodsProps: IGoodsSingleProps;
 }

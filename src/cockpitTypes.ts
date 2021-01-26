@@ -54,7 +54,7 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   title_en: string;
   link_en: string;
   description_en: string;
-  otherImages: string;
+  otherImages: string | { path: string }[];
   consist: string[];
   consist_en: string[];
   sizes: {
@@ -77,10 +77,12 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   _created: number;
   price: string;
   stockPrice: string | null;
+  isExclusive: boolean;
 }
 
 export interface ICockpitGoodsEntries {
   entries: ICockpitGoodsRaw[];
+  total: number;
 }
 
 export interface ICockpitSubCollectionRaw {

@@ -70,8 +70,11 @@ export const getServerSideProps: GetServerSideProps = async ({
         'filter[collection._id]=' + curCollection._id
       )
     : null;
-  const curSubCollections =
-    subCollections.total > 0 ? subCollections.entries : null;
+  const curSubCollections = subCollections
+    ? subCollections.total > 0
+      ? subCollections.entries
+      : null
+    : null;
 
   return {
     props: {
