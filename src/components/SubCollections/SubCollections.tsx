@@ -19,10 +19,7 @@ const SubCollections: React.FC<ISubCollectionProps> = ({ subCollections }) => {
     <div className="subcollections-list">
       <div className="subcollections-list__subcollection-container">
         {subCollectionsItems.map(({ id, title, link, image }) => (
-          <Link
-            key={title}
-            href={`subcollections${link}?id=${id}&name=${title}`}
-          >
+          <Link key={id} href={`subcollections${link}`}>
             <div className="subcollections-item">
               <div className="subcollections-item__image">
                 <Image

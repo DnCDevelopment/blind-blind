@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   defaultLocale,
   query,
 }) => {
-  const filter = `filter[link]=/${query.goods}`;
+  const filter = `filter[link]=/${query.goods}&populate=1`;
   const goodsData = await getCockpitCollection('Goods', filter);
   const curGoods: ICockpitGoodsRaw =
     goodsData.total > 0 ? goodsData.entries[0] : null;
@@ -38,11 +38,12 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes: curGoods.sizes.map((size) => size.display),
+        sizes: (curGoods.sizes as { size: string }[]).map((size) => size.size),
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods.secondImage.path,
         otherPhotos: curGoods.otherImages,
         isExclusive: curGoods.isExclusive,
+        collectionLink: curGoods.collection.link,
       }
     : null;
 

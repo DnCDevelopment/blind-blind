@@ -57,16 +57,24 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   otherImages: string | { path: string }[];
   consist: string[];
   consist_en: string[];
-  sizes: {
-    _id: string;
-    link: string;
-    display: string;
-  }[];
-  collection: {
-    _id: string;
-    link: string;
-    display: string;
-  };
+  sizes:
+    | {
+        _id: string;
+        link: string;
+        display: string;
+      }[]
+    | {
+        size: string;
+      }[];
+  collection:
+    | {
+        _id: string;
+        link: string;
+        display: string;
+      }
+    | {
+        link: string;
+      };
   subCollection: {
     _id: string;
     link: string;

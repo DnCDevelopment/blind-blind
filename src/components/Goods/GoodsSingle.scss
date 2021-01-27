@@ -1,8 +1,8 @@
 .goods-single {
-  padding: 30px 0 100px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 30px 0 100px 0;
 
   * {
     text-align: center;
@@ -13,8 +13,8 @@
 
     & > * {
       position: relative;
-      height: 200vw;
       width: 100%;
+      height: 200vw;
     }
   }
 
@@ -24,23 +24,23 @@
 
     .title {
       font-weight: var(--font-weight-500);
-      font-size: var(--font-20);
       text-align: center;
     }
 
     .price-container {
       margin-top: 10px;
+      font-weight: var(--font-weight-500);
 
-      * {
-        font-size: var(--font-20);
+      .stock-price {
+        color: var(--black-color);
       }
     }
 
     .individual-tailoring {
       .title {
-        text-transform: uppercase;
-        text-align: center;
         margin-top: 20px;
+        text-align: center;
+        text-transform: uppercase;
       }
     }
 
@@ -59,13 +59,31 @@
     .description {
       margin-top: 30px;
     }
+
+    .back-to-collection {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      margin: auto;
+      margin-top: 40px;
+      cursor: pointer;
+
+      .arrow {
+        width: 7px;
+        height: 7px;
+        margin-right: 10px;
+        border: solid var(--black-color);
+        border-width: 1px 0 0 1px;
+        transform: rotate(-45deg);
+      }
+    }
   }
 }
 
 @media screen and (min-width: 768px) {
   .goods-single {
-    padding: 30px 15% 100px 15%;
     flex-direction: row;
+    padding: 30px 15% 100px 15%;
 
     * {
       text-align: unset;
@@ -93,6 +111,10 @@
       }
 
       .button {
+        margin-left: 0;
+      }
+
+      .back-to-collection {
         margin-left: 0;
       }
     }

@@ -27,8 +27,10 @@ export interface ICollectionPageProps {
 }
 
 export interface ISubCollectionPageProps {
-  collectionId: string;
-  subCollectionId: string;
+  subCollectionProps: {
+    id: string;
+    title: string;
+  } | null;
 }
 
 export interface IGoodsPageProps {

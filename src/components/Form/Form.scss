@@ -2,9 +2,9 @@ form {
   margin-top: 10px;
 
   input {
-    border: 1px solid var(--black-color);
-    padding: 2px 10px;
     margin-top: 10px;
+    padding: 2px 10px;
+    border: 1px solid var(--black-color);
 
     &::placeholder {
       color: var(--black-color);

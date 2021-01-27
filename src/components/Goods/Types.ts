@@ -30,4 +30,5 @@ export interface IGoodsSingleProps extends IGoodsItemProps {
   materials: string[];
   description: string;
   isExclusive: boolean;
+  collectionLink: string;
 }

@@ -2,12 +2,12 @@
   position: relative;
 
   &__cur-size-label {
+    display: flex;
     width: 100%;
-    border-bottom: 1px solid var(--black-color);
     margin-top: 20px;
     padding: 5px;
+    border-bottom: 1px solid var(--black-color);
     cursor: pointer;
-    display: flex;
 
     .size {
       width: 90%;
@@ -17,22 +17,23 @@
     .dropdown-button {
       position: relative;
       top: 10px;
-      border-left: 7px solid var(--transparent);
-      border-right: 7px solid var(--transparent);
-      border-top: 7px solid var(--black-color);
+      border-top: 5px solid var(--black-color);
+      border-right: 5px solid var(--transparent);
+      border-left: 5px solid var(--transparent);
     }
   }
 
   &__sizes-list {
     position: absolute;
     width: 100%;
+    margin-top: 5px;
     background: var(--white-color);
-    visibility: hidden;
     border: 1px solid var(--black-color);
+    visibility: hidden;
 
     & > * {
-      padding-bottom: 5px;
       padding-right: 10%;
+      padding-bottom: 5px;
       text-align: center;
       cursor: pointer;
 

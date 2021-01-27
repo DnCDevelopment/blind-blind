@@ -10,6 +10,7 @@ import Button from '../Button/Button';
 import { TRANSLATE } from '../../constants/languages';
 
 import { IGoodsSingleProps } from './Types';
+import Link from 'next/link';
 
 const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   title,
@@ -22,6 +23,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   description,
   materials,
   isExclusive,
+  collectionLink,
 }) => {
   const { locale } = useRouter();
 
@@ -99,6 +101,12 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
           ))}
         </div>
         <p className="description">{description}</p>
+        <Link href={'/collections' + collectionLink}>
+          <div className="back-to-collection">
+            <div className="arrow" />
+            <p>{TRANSLATE[locale as 'ru' | 'en'].back_to_collection}</p>
+          </div>
+        </Link>
       </div>
     </div>
   );

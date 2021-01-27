@@ -26,6 +26,7 @@ export const TRANSLATE = {
     waist_volume: 'Объем талии',
     hips_volume: 'Объем бедер',
     add_to_cart: 'В корзину',
+    back_to_collection: 'Назад к коллекции',
   },
   en: {
     store: 'Store',
@@ -38,5 +39,6 @@ export const TRANSLATE = {
     waist_volume: 'Waist',
     hips_volume: 'Hips',
     add_to_cart: 'Add to cart',
+    back_to_collection: 'Back to collection',
   },
 };
