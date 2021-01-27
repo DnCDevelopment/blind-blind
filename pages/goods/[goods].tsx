@@ -24,8 +24,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const filter = `filter[link]=/${query.goods}&populate=1`;
   const goodsData = await getCockpitCollection('Goods', filter);
-  const curGoods: ICockpitGoodsRaw =
-    goodsData.total > 0 ? goodsData.entries[0] : null;
+  const curGoods: ICockpitGoodsRaw = goodsData.total
+    ? goodsData.entries[0]
+    : null;
 
   const goodsProps = curGoods
     ? {

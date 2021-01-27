@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     'Collections',
     'filter[link]=/' + collection
   );
-  const curCollection = collections.total > 0 ? collections.entries[0] : null;
+  const curCollection = collections.total ? collections.entries[0] : null;
 
   const subCollections = curCollection
     ? await getCockpitCollection(
@@ -70,10 +70,8 @@ export const getServerSideProps: GetServerSideProps = async ({
         'filter[collection._id]=' + curCollection._id
       )
     : null;
-  const curSubCollections = subCollections
-    ? subCollections.total > 0
-      ? subCollections.entries
-      : null
+  const curSubCollections = subCollections?.total
+    ? subCollections.entries
     : null;
 
   return {

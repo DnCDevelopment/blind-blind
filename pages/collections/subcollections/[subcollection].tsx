@@ -40,8 +40,9 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const filter = 'filter[link]=/' + subcollection;
   const subCollections = await getCockpitCollection('SubCollections', filter);
-  const curSubCollection: ICockpitSubCollectionRaw =
-    subCollections.total > 0 ? subCollections.entries[0] : null;
+  const curSubCollection: ICockpitSubCollectionRaw = subCollections.total
+    ? subCollections.entries[0]
+    : null;
 
   const subCollectionProps = curSubCollection
     ? {
