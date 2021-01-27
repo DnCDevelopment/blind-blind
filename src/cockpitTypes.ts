@@ -63,18 +63,14 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
         link: string;
         display: string;
       }[]
-    | {
-        size: string;
-      }[];
+    | ICockpitSize[];
   collection:
     | {
         _id: string;
         link: string;
         display: string;
       }
-    | {
-        link: string;
-      };
+    | ICockpitCollections;
   subCollection: {
     _id: string;
     link: string;
@@ -111,4 +107,10 @@ export interface ICockpitSubCollectionRaw {
   _modified: number;
   _created: number;
   _id: string;
+}
+
+export interface ICockpitSize {
+  size: {
+    size: string;
+  };
 }

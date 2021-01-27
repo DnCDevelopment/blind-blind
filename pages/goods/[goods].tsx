@@ -1,5 +1,5 @@
 import { NextPage, GetServerSideProps } from 'next';
-import { ICockpitGoodsRaw } from '../../src/cockpitTypes';
+import { ICockpitGoodsRaw, ICockpitSize } from '../../src/cockpitTypes';
 import GoodsListTitle from '../../src/components/Goods/GoodsListTitle';
 import GoodsSingle from '../../src/components/Goods/GoodsSingle';
 import { IGoodsPageProps } from '../../src/pagesTypes';
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes: (curGoods.sizes as { size: string }[]).map((size) => size.size),
+        sizes: (curGoods.sizes as ICockpitSize[]).map((size) => size.size),
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods.secondImage.path,
         otherPhotos: curGoods.otherImages,
