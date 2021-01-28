@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import * as Yup from 'yup';
 
 import Form from '../Form/Form';
 import PriceLabel from './PriceLabel';
@@ -8,6 +9,7 @@ import SizeDropdown from './SizeDropdown';
 import Button from '../Button/Button';
 
 import { TRANSLATE } from '../../constants/languages';
+import { FormErrors } from '../../constants/formErrors';
 
 import { IGoodsSingleProps } from './Types';
 import Link from 'next/link';
@@ -76,13 +78,32 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
               {TRANSLATE[locale as 'ru' | 'en'].tailoring}
             </p>
             <Form
-              names={['growth', 'bust', 'waist', 'hips']}
-              placeholders={[
-                TRANSLATE[locale as 'ru' | 'en'].growth,
-                TRANSLATE[locale as 'ru' | 'en'].bust_volume,
-                TRANSLATE[locale as 'ru' | 'en'].waist_volume,
-                TRANSLATE[locale as 'ru' | 'en'].hips_volume,
-              ]}
+              formikConfig={{
+                initialValues: {
+                  growth: '',
+                  bust: '',
+                  waist: '',
+                  hips: '',
+                },
+                validationSchema: Yup.object({
+                  growth: Yup.number()
+                    .min(100, FormErrors[locale as 'ru' | 'en'].tooSmall)
+                    .max(300, FormErrors[locale as 'ru' | 'en'].tooLarge)
+                    .required('Required!'),
+                }),
+                onSubmit: () => {
+                  return;
+                },
+              }}
+              masks={{
+                growth: ['_', ' ', 'см'],
+              }}
+              placeholders={{
+                growth: TRANSLATE[locale as 'ru' | 'en'].growth,
+                bust: TRANSLATE[locale as 'ru' | 'en'].bustVolume,
+                waist: TRANSLATE[locale as 'ru' | 'en'].waistVolume,
+                hips: TRANSLATE[locale as 'ru' | 'en'].hipsVolume,
+              }}
             />
           </div>
         ) : (
@@ -92,7 +113,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             changeCurSize={(size) => changeCurSize(size)}
           />
         )}
-        <Button title={TRANSLATE[locale as 'ru' | 'en'].add_to_cart} />
+        <Button title={TRANSLATE[locale as 'ru' | 'en'].addToCart} />
         <div className="materials-container">
           {materials.map((material) => (
             <p key={material} className="material">
@@ -104,7 +125,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
         <Link href={'/collections' + collectionLink}>
           <div className="back-to-collection">
             <div className="arrow" />
-            <p>{TRANSLATE[locale as 'ru' | 'en'].back_to_collection}</p>
+            <p>{TRANSLATE[locale as 'ru' | 'en'].backToCollection}</p>
           </div>
         </Link>
       </div>

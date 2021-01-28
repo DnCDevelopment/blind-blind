@@ -1,4 +1,7 @@
+import { FormikConfig, FormikValues } from 'formik';
+
 export interface IFormProps {
-  names: string[];
-  placeholders: string[];
+  formikConfig: FormikConfig<FormikValues>;
+  placeholders: { [key: string]: string };
+  masks: { [key: string]: string[] };
 }
