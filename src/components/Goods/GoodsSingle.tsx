@@ -9,7 +9,7 @@ import SizeDropdown from './SizeDropdown';
 import Button from '../Button/Button';
 
 import { TRANSLATE } from '../../constants/languages';
-import { FormErrors } from '../../constants/formErrors';
+import { FORM } from '../../constants/form';
 
 import { IGoodsSingleProps } from './Types';
 import Link from 'next/link';
@@ -87,16 +87,31 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
                 },
                 validationSchema: Yup.object({
                   growth: Yup.number()
-                    .min(100, FormErrors[locale as 'ru' | 'en'].tooSmall)
-                    .max(300, FormErrors[locale as 'ru' | 'en'].tooLarge)
-                    .required('Required!'),
+                    .min(100, FORM[locale as 'ru' | 'en'].tooSmall)
+                    .max(300, FORM[locale as 'ru' | 'en'].tooLarge)
+                    .required(FORM[locale as 'ru' | 'en'].required),
+                  bust: Yup.number()
+                    .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
+                    .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
+                    .required(FORM[locale as 'ru' | 'en'].required),
+                  waist: Yup.number()
+                    .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
+                    .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
+                    .required(FORM[locale as 'ru' | 'en'].required),
+                  hips: Yup.number()
+                    .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
+                    .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
+                    .required(FORM[locale as 'ru' | 'en'].required),
                 }),
                 onSubmit: () => {
                   return;
                 },
               }}
-              masks={{
-                growth: ['_', ' ', 'см'],
+              suffixes={{
+                growth: TRANSLATE[locale as 'ru' | 'en'].growth,
+                bust: TRANSLATE[locale as 'ru' | 'en'].bustVolume,
+                waist: TRANSLATE[locale as 'ru' | 'en'].waistVolume,
+                hips: TRANSLATE[locale as 'ru' | 'en'].hipsVolume,
               }}
               placeholders={{
                 growth: TRANSLATE[locale as 'ru' | 'en'].growth,
