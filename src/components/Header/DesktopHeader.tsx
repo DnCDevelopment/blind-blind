@@ -40,7 +40,8 @@ const DesktopHeader: React.FC = () => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (
         menuRef.current &&
-        !menuRef.current.contains(e.target as Node) &&
+        (!menuRef.current.contains(e.target as Node) ||
+          (e.target as HTMLTextAreaElement).tagName.toLowerCase() === 'a') &&
         desktopMenuOpen
       ) {
         setDesktopMenuOpen(false);

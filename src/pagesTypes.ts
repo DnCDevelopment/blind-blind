@@ -16,6 +16,14 @@ export interface IAppProps {
   };
 }
 
+export interface IAppProps {
+  props: {
+    collections: ICockpitCollections[];
+    runways: ICockpitRunwaysAndLookbooks[];
+    lookbooks: ICockpitRunwaysAndLookbooks[];
+  };
+}
+
 export interface IIndexPageProps {
   carousel: ICockpitCarousel[];
   goods: ICockpitGoods[];
