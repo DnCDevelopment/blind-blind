@@ -28,11 +28,6 @@
       align-items: center;
     }
 
-    &__cart-icon {
-      width: 18px;
-      height: 18px;
-    }
-
     &__mobile-menu {
       @include sliding-menu($from-left: true);
       width: 100vw;

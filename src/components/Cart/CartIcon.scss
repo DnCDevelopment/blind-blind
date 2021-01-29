@@ -1,0 +1,36 @@
+.cart-icon {
+  margin-right: 20px;
+  cursor: pointer;
+
+  &__text-button {
+    display: none;
+    &:hover {
+      text-decoration: underline;
+    }
+
+    span {
+      margin-left: 5px;
+    }
+  }
+
+  &__icon-button {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-right: 5px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cart-icon {
+    &__text-button {
+      display: unset;
+    }
+
+    &__icon-button {
+      display: none;
+    }
+  }
+}

@@ -11,3 +11,8 @@ export interface IIndexContext {
   lookbooksData: ICockpitRunwaysAndLookbooks[];
   runwaysData: ICockpitRunwaysAndLookbooks[];
 }
+
+export interface ICartContext {
+  cart: string[];
+  addItem: (id: string) => void;
+}

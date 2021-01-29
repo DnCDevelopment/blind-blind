@@ -25,6 +25,7 @@ export interface IGoodsListTitleProps {
 }
 
 export interface IGoodsSingleProps extends IGoodsItemProps {
+  id: string;
   otherPhotos: string | { path: string }[];
   sizes: string[];
   materials: string[];

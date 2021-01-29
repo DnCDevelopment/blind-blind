@@ -27,6 +27,7 @@ export const TRANSLATE = {
     hipsVolume: 'Объем бедер',
     addToCart: 'В корзину',
     backToCollection: 'Назад к коллекции',
+    cm: 'см',
   },
   en: {
     store: 'Store',
@@ -40,5 +41,6 @@ export const TRANSLATE = {
     hipsVolume: 'Hips',
     addToCart: 'Add to cart',
     backToCollection: 'Back to collection',
+    cm: 'cm',
   },
 };

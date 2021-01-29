@@ -18,6 +18,10 @@ form {
     }
   }
 
+  .submit-button {
+    display: none;
+  }
+
   .error {
     color: var(--red-color);
   }

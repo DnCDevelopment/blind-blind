@@ -1,10 +1,17 @@
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { IButtonProps } from './Types';
 
-const Button: React.FC<IButtonProps> = ({ title, callback }) => {
+const Button: React.FC<
+  IButtonProps &
+    DetailedHTMLProps<
+      ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >
+> = ({ title, callback, ...buttonProps }) => {
   return (
-    <div role="presentation" className="button" onClick={callback}>
-      <p className="title">{title}</p>
-    </div>
+    <button className="button" onClick={callback} {...buttonProps}>
+      <p className="button__title">{title}</p>
+    </button>
   );
 };
 
