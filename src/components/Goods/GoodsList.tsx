@@ -1,8 +1,9 @@
-import { ICockpitGoodsEntries } from '../../cockpitTypes';
-import useCockpit from '../../hooks/useCockpit';
 import GoodsItem, { GoodsItemFallback } from './GoodsItem';
 
+import { ICockpitGoodsEntries } from '../../cockpitTypes';
 import { IGoodsListProps } from './Types';
+
+import useCockpit from '../../hooks/useCockpit';
 
 const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
   const { data: goods } = useCockpit<ICockpitGoodsEntries>(

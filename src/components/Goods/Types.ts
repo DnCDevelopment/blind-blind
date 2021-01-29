@@ -1,10 +1,19 @@
-export interface IGoodsItemProps {
-  title: string;
-  link: string;
-  photo: string;
-  secondPhoto: string;
+export interface IPriceLabelProps {
   price: string;
   stockPrice: string | null;
+}
+
+export interface ISizeDropdownProps {
+  curSize: string;
+  sizes: string[];
+  changeCurSize: (size: string) => void;
+}
+
+export interface IGoodsItemProps extends IPriceLabelProps {
+  title: string;
+  link?: string;
+  photo: string;
+  secondPhoto: string;
 }
 
 export interface IGoodsListProps {
@@ -13,4 +22,13 @@ export interface IGoodsListProps {
 
 export interface IGoodsListTitleProps {
   title?: string;
+}
+
+export interface IGoodsSingleProps extends IGoodsItemProps {
+  otherPhotos: string | { path: string }[];
+  sizes: string[];
+  materials: string[];
+  description: string;
+  isExclusive: boolean;
+  collectionLink: string;
 }

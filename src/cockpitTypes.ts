@@ -54,19 +54,23 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   title_en: string;
   link_en: string;
   description_en: string;
-  otherImages: string;
+  otherImages: string | { path: string }[];
   consist: string[];
   consist_en: string[];
-  sizes: {
-    _id: string;
-    link: string;
-    display: string;
-  }[];
-  collection: {
-    _id: string;
-    link: string;
-    display: string;
-  };
+  sizes:
+    | {
+        _id: string;
+        link: string;
+        display: string;
+      }[]
+    | ICockpitSize[];
+  collection:
+    | {
+        _id: string;
+        link: string;
+        display: string;
+      }
+    | ICockpitCollections;
   subCollection: {
     _id: string;
     link: string;
@@ -77,10 +81,12 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   _created: number;
   price: string;
   stockPrice: string | null;
+  isExclusive: boolean;
 }
 
 export interface ICockpitGoodsEntries {
   entries: ICockpitGoodsRaw[];
+  total: number;
 }
 
 export interface ICockpitSubCollectionRaw {
@@ -103,26 +109,8 @@ export interface ICockpitSubCollectionRaw {
   _id: string;
 }
 
-export interface ICockpitGoodsEntries {
-  entries: ICockpitGoodsRaw[];
-}
-
-export interface ICockpitSubCollectionRaw {
-  title: string;
-  title_en: string;
-  link: string;
-  link_en: string;
-  image: {
-    path: string;
+export interface ICockpitSize {
+  size: {
+    size: string;
   };
-  collection: {
-    _id: string;
-    link: string;
-    display: string;
-  };
-  _mby: string;
-  _by: string;
-  _modified: number;
-  _created: number;
-  _id: string;
 }

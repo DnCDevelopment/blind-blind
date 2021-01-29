@@ -1,9 +1,10 @@
 .goods-item {
+  cursor: pointer;
+
   &__image {
     position: relative;
     width: 100%;
     height: 400px;
-    
     .second {
       opacity: 0;
 
@@ -17,26 +18,6 @@
   &__title {
     padding-top: 5px;
     text-align: center;
-  }
-
-  &__price-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 5px;
-    text-align: center;
-
-    & > * {
-      font-size: var(--font-14);
-    }
-
-    .old-price {
-      margin-right: 5px;
-      text-decoration: line-through;
-    }
-
-    .stock-price {
-      color: var(--red-color);
-    }
   }
 
   &-fallback {
@@ -53,7 +34,7 @@
       padding-top: 5px;
       background: var(--grey-color);
     }
-    
+
     &__price {
       width: 40%;
       height: 20px;
