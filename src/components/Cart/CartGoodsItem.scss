@@ -1,8 +1,8 @@
 .cart-goods-item {
   td {
-    margin-bottom: 10px;
-    width: 100%;
     float: left;
+    width: 100%;
+    margin-bottom: 10px;
 
     &.image-cell {
       margin-top: 20px;
@@ -31,10 +31,10 @@
 @media screen and (min-width: 768px) {
   .cart-goods-item {
     td {
-      width: unset;
       float: unset;
-      vertical-align: top;
+      width: unset;
       padding: 20px;
+      vertical-align: top;
 
       &.about-cell {
         text-align: left;
