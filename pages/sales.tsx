@@ -8,7 +8,7 @@ import GoodsListTitle from '../src/components/Goods/GoodsListTitle';
 const SalesPage: NextPage = () => {
   const isServer = typeof window === 'undefined';
   return (
-    <div className="sales-apge">
+    <div className="sales-page">
       <GoodsListTitle />
       <div className="goods-container">
         {isServer ? (

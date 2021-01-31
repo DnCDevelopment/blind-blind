@@ -32,6 +32,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     ? {
         id: curGoods._id,
         title: locale === defaultLocale ? curGoods.title : curGoods.title_en,
+        link: curGoods.link,
         description:
           locale === defaultLocale
             ? curGoods.description

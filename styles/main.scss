@@ -17,6 +17,11 @@ body {
 a {
   color: var(--black);
   text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .container {

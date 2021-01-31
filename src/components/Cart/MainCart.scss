@@ -1,0 +1,51 @@
+.main-cart {
+  &__title {
+    padding-top: 140px;
+    text-align: center;
+  }
+
+  &__continue-browsing {
+    text-align: center;
+    margin-top: 30px;
+
+    a {
+      text-decoration: underline;
+      margin-left: 3px;
+
+      &:hover {
+        text-decoration: unset;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0 10%;
+    text-align: center;
+    border-spacing: 0 20px;
+
+    td {
+      &.image-col {
+        width: 40%;
+      }
+
+      &.about-col {
+        width: 30%;
+      }
+
+      // &.price-col,
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main-cart {
+    table {
+      td {
+        float: unset;
+        width: unset;
+      }
+    }
+  }
+}

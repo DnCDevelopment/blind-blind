@@ -2,6 +2,7 @@ import {
   ICockpitCollections,
   ICockpitRunwaysAndLookbooks,
 } from '../cockpitTypes';
+import { ICartGoodsItemProps } from '../components/Cart/Types';
 
 //eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IContext {}
@@ -13,6 +14,7 @@ export interface IIndexContext {
 }
 
 export interface ICartContext {
-  cart: string[];
-  addItem: (id: string) => void;
+  cart: ICartGoodsItemProps[];
+  addItem: (item: ICartGoodsItemProps) => void;
+  removeItem: (item: ICartGoodsItemProps) => void;
 }

@@ -11,7 +11,7 @@ export interface ISizeDropdownProps {
 
 export interface IGoodsItemProps extends IPriceLabelProps {
   title: string;
-  link?: string;
+  link: string;
   photo: string;
   secondPhoto: string;
 }
@@ -32,4 +32,11 @@ export interface IGoodsSingleProps extends IGoodsItemProps {
   description: string;
   isExclusive: boolean;
   collectionLink: string;
+}
+
+export interface IFormValues {
+  growth: string;
+  bust: string;
+  waist: string;
+  hips: string;
 }

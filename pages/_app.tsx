@@ -38,8 +38,17 @@ const MyApp = ({
       <cartContext.Provider
         value={{
           cart: cartState,
-          addItem: (id) => {
-            setCartState([...cartState, id]);
+          addItem: (item) => {
+            setCartState([...cartState, item]);
+          },
+          removeItem: (item) => {
+            setCartState([
+              ...cartState.filter(
+                (el) =>
+                  el.id !== item.id &&
+                  JSON.stringify(el.details) !== JSON.stringify(item.details)
+              ),
+            ]);
           },
         }}
       >

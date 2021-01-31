@@ -16,10 +16,12 @@ import { FORM } from '../../constants/form';
 
 import { IGoodsSingleProps } from './Types';
 import { ICartContext } from '../../context/Types';
+import { FormikValues } from 'formik';
 
 const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   id,
   title,
+  link,
   price,
   stockPrice,
   photo,
@@ -43,8 +45,16 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
     setCurSize(size);
   };
 
-  const addToCart = () => {
-    curCartContext.addItem(id);
+  const addToCart = (details: string | FormikValues) => {
+    curCartContext.addItem({
+      id,
+      title,
+      link: link as string,
+      price: stockPrice ? stockPrice : price,
+      photo,
+      details: details,
+      amount: 1,
+    });
   };
 
   return (
@@ -124,7 +134,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
                 }),
                 onSubmit: (values) => {
                   localStorage.setItem(id, JSON.stringify(values));
-                  addToCart();
+                  addToCart(values);
                 },
               }}
               suffixes={{
@@ -151,7 +161,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             />
             <Button
               title={TRANSLATE[locale as 'ru' | 'en'].addToCart}
-              callback={addToCart}
+              callback={() => addToCart(curSize)}
             />
           </>
         )}

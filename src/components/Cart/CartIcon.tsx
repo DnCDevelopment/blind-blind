@@ -7,6 +7,7 @@ import { TRANSLATE } from '../../constants/languages';
 import { ICartContext } from '../../context/Types';
 
 import CartSVG from '../../assets/svg/cart.svg';
+import Link from 'next/link';
 
 const CartIcon: React.FC = () => {
   const { locale } = useRouter();
@@ -14,16 +15,18 @@ const CartIcon: React.FC = () => {
   const { cart } = useContext(cartContext) as ICartContext;
 
   return (
-    <a className="cart-icon">
-      <p className="cart-icon__text-button">
-        {TRANSLATE[locale as 'ru' | 'en'].cart}
-        {cart.length > 0 && <span>({cart.length})</span>}
-      </p>
-      <p className="cart-icon__icon-button">
-        {cart.length > 0 && <span>{cart.length}</span>}
-        <CartSVG />
-      </p>
-    </a>
+    <Link href="/cart">
+      <a className="cart-icon">
+        <p className="cart-icon__text-button">
+          {TRANSLATE[locale as 'ru' | 'en'].cart}
+          {cart.length > 0 && <span>({cart.length})</span>}
+        </p>
+        <p className="cart-icon__icon-button">
+          {cart.length > 0 && <span>{cart.length}</span>}
+          <CartSVG />
+        </p>
+      </a>
+    </Link>
   );
 };
 

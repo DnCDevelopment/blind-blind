@@ -1,6 +1,9 @@
 .logo {
   z-index: 100;
   margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-weight: var(--font-weight-500);
   font-size: var(--font-24);
   text-align: center;
