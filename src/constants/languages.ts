@@ -34,6 +34,9 @@ export const TRANSLATE = {
     price: 'Цена',
     total: 'В сумме',
     remove: 'Убрать',
+    subTotal: 'К оплате',
+    agreement: 'Согласиться',
+    checkOut: 'Оплатить',
   },
   en: {
     store: 'Store',
@@ -54,5 +57,8 @@ export const TRANSLATE = {
     price: 'Price',
     total: 'Total',
     remove: 'Remove',
+    subTotal: 'Subtotal',
+    agreement: 'Agree',
+    checkOut: 'Check out',
   },
 };

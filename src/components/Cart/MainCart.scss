@@ -1,6 +1,6 @@
 .main-cart {
   &__title {
-    padding-top: 140px;
+    padding-top: 100px;
     text-align: center;
   }
 
@@ -23,27 +23,95 @@
     margin-top: 20px;
     padding: 0 10%;
     text-align: center;
-    border-spacing: 0 20px;
 
-    td {
+    thead {
+      display: none;
+    }
+
+    th {
+      font-weight: var(--font-weight-500);
+
       &.image-col {
-        width: 40%;
+        width: 30%;
       }
 
-      // &.price-col,
+      &.about-col {
+        width: 40%;
+      }
+    }
+
+    .sub-total-row {
+      display: initial;
+    }
+
+    .sub-total {
+      padding: 20px;
+      text-align: center;
+
+      .sum {
+        margin-left: 5px;
+      }
+
+      .agreement {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        justify-content: center;
+
+        .checkbox {
+          width: fit-content;
+          margin-right: 10px;
+
+          &:checked {
+            position: relative;
+
+            &:before {
+              content: '';
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              background: var(--dark-grey-color);
+              border-radius: 2px;
+            }
+
+            &:after {
+              content: '';
+              position: absolute;
+              width: 60%;
+              height: 20%;
+              border: solid var(--white-color);
+              border-width: 0 0 2px 2px;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -80%) rotate(-45deg);
+            }
+          }
+        }
+      }
     }
   }
 }
 
 @media screen and (min-width: 768px) {
   .main-cart {
-    table {
-      td {
-        float: unset;
-        width: unset;
+    &__title {
+      padding-top: 140px;
+    }
 
-        &.about-col {
-          width: 30%;
+    table {
+      thead {
+        display: table-header-group;
+      }
+
+      .sub-total-row {
+        display: revert;
+
+        .agreement {
+          justify-content: start;
+        }
+
+        * {
+          text-align: left;
         }
       }
     }

@@ -39,7 +39,25 @@ const MyApp = ({
         value={{
           cart: cartState,
           addItem: (item) => {
-            setCartState([...cartState, item]);
+            const existingItem = cartState.filter(
+              (el) =>
+                el.id === item.id &&
+                JSON.stringify(el.details) === JSON.stringify(item.details)
+            );
+
+            if (existingItem.length) {
+              const newItem = existingItem[0];
+              cartState.forEach((el) => {
+                if (
+                  el.id === newItem.id &&
+                  JSON.stringify(el.details) === JSON.stringify(newItem.details)
+                )
+                  el.amount += 1;
+              });
+              setCartState([...cartState]);
+            } else {
+              setCartState([...cartState, item]);
+            }
           },
           removeItem: (item) => {
             setCartState([

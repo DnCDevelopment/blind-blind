@@ -1,16 +1,23 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
+import Button from '../Button/Button';
 import CartGoodsItem from './CartGoodsItem';
 
 const MainCart: React.FC = () => {
+  const agreementRef = useRef<HTMLInputElement>(null);
+
   const { locale } = useRouter();
 
   const { cart, removeItem } = useContext(cartContext) as ICartContext;
-  console.log(cart);
+
+  const subTotal = cart.reduce(
+    (a, b) => a + (b.amount * Number.parseFloat(b.price) || 0),
+    0
+  );
 
   return (
     <div className="main-cart">
@@ -29,19 +36,50 @@ const MainCart: React.FC = () => {
       ) : (
         <table>
           <thead>
-            <td className="image-col"></td>
-            <td className="about-col"></td>
-            <td>{TRANSLATE[locale as 'ru' | 'en'].price}</td>
-            <td>{TRANSLATE[locale as 'ru' | 'en'].total}</td>
+            <tr>
+              <th className="image-col"></th>
+              <th className="about-col"></th>
+              <th>{TRANSLATE[locale as 'ru' | 'en'].price}</th>
+              <th>{TRANSLATE[locale as 'ru' | 'en'].total}</th>
+            </tr>
           </thead>
           <tbody>
-            {cart.map((item) => (
+            {cart.map((item, idx) => (
               <CartGoodsItem
-                key={item.title}
+                key={idx}
                 {...item}
                 removeSelf={() => removeItem(item)}
               />
             ))}
+            <tr className="sub-total-row">
+              <td></td>
+              <td></td>
+              <td className="sub-total" colSpan={2}>
+                <p>
+                  {TRANSLATE[locale as 'ru' | 'en'].subTotal}
+                  <span className="sum">{subTotal} UAH</span>
+                </p>
+                <form className="agreement-form">
+                  <div className="agreement">
+                    <input
+                      className="checkbox"
+                      name="agree"
+                      id="agree"
+                      type="checkbox"
+                      ref={agreementRef}
+                    />
+                    <label htmlFor="agree">
+                      {TRANSLATE[locale as 'ru' | 'en'].agreement}
+                    </label>
+                  </div>
+                  <Button
+                    type="button"
+                    title={TRANSLATE[locale as 'ru' | 'en'].checkOut}
+                    onClick={() => console.log(agreementRef.current?.checked)}
+                  />
+                </form>
+              </td>
+            </tr>
           </tbody>
         </table>
       )}
