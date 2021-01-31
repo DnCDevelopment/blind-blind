@@ -67,20 +67,20 @@ const DesktopHeader: React.FC = () => {
     <header className="desktop-header">
       <div className="desktop-header__container container">
         <div ref={menuRef} className="desktop-header__options">
-          <p
+          <a
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => changeCurMenu('store')}
           >
             {TRANSLATE[locale as 'ru' | 'en'].store}
-          </p>
-          <p
+          </a>
+          <a
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => changeCurMenu('about')}
           >
             {TRANSLATE[locale as 'ru' | 'en'].aboutUs}
-          </p>
+          </a>
           <div
             className={`desktop-header__desktop-menu ${
               desktopMenuOpen ? 'open' : ''

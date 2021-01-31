@@ -30,10 +30,6 @@
         width: 40%;
       }
 
-      &.about-col {
-        width: 30%;
-      }
-
       // &.price-col,
     }
   }
@@ -45,6 +41,10 @@
       td {
         float: unset;
         width: unset;
+
+        &.about-col {
+          width: 30%;
+        }
       }
     }
   }
