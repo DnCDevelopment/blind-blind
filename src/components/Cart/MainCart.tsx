@@ -15,7 +15,8 @@ const MainCart: React.FC = () => {
   const { cart, removeItem } = useContext(cartContext) as ICartContext;
 
   const subTotal = cart.reduce(
-    (a, b) => a + (b.amount * Number.parseFloat(b.price) || 0),
+    (counter, cartItem) =>
+      counter + (cartItem.amount * Number.parseFloat(cartItem.price) || 0),
     0
   );
 

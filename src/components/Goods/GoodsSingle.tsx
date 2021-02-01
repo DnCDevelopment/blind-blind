@@ -35,9 +35,13 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
 }) => {
   const { locale } = useRouter();
 
-  const [curSize, setCurSize] = useState(sizes[0]);
-
   const isServer = typeof window === 'undefined';
+
+  const [curSize, setCurSize] = useState(
+    !isServer && localStorage.getItem(id) !== null
+      ? JSON.parse(localStorage.getItem(id) as string)
+      : sizes[0]
+  );
 
   const curCartContext = useContext(cartContext) as ICartContext;
 
@@ -76,7 +80,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
           />
         </div>
-        {typeof otherPhotos !== 'string' ? (
+        {typeof otherPhotos !== 'string' &&
           otherPhotos.map(({ path }) => (
             <div key={path} className="other-photo">
               <Image
@@ -86,10 +90,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
                 src={process.env.NEXT_PUBLIC_COCKPIT_URL + path}
               />
             </div>
-          ))
-        ) : (
-          <></>
-        )}
+          ))}
       </div>
       <div className="goods-single__info">
         <p className="title">{title}</p>
@@ -157,7 +158,10 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             <SizeDropdown
               curSize={curSize}
               sizes={sizes}
-              changeCurSize={(size) => changeCurSize(size)}
+              changeCurSize={(size) => {
+                changeCurSize(size);
+                localStorage.setItem(id, JSON.stringify(size));
+              }}
             />
             <Button
               title={TRANSLATE[locale as 'ru' | 'en'].addToCart}

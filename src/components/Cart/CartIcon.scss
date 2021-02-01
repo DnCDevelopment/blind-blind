@@ -1,9 +1,10 @@
 .cart-icon {
-  margin-right: 20px;
   cursor: pointer;
 
   &__text-button {
     display: none;
+    margin-right: 20px;
+
     &:hover {
       text-decoration: underline;
     }

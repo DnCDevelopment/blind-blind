@@ -1,4 +1,6 @@
 .cart-goods-item {
+  display: block;
+
   td {
     float: left;
     width: 100%;
@@ -30,6 +32,8 @@
 
 @media screen and (min-width: 768px) {
   .cart-goods-item {
+    display: table-row;
+
     td {
       float: unset;
       width: unset;

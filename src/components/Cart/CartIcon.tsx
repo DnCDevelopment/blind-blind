@@ -14,7 +14,10 @@ const CartIcon: React.FC = () => {
 
   const { cart } = useContext(cartContext) as ICartContext;
 
-  const cartItemsCounter = cart.reduce((a, b) => a + (b.amount || 0), 0);
+  const cartItemsCounter = cart.reduce(
+    (counter, cartItem) => counter + (cartItem.amount || 0),
+    0
+  );
 
   return (
     <Link href="/cart">
