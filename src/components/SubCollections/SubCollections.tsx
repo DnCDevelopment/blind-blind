@@ -21,6 +21,7 @@ const SubCollections: React.FC<ISubCollectionProps> = ({ subCollections }) => {
         {subCollectionsItems.map(({ id, title, link, image }) => (
           <Link key={id} href={`subcollections${link}`}>
             <div className="subcollections-item">
+              s{' '}
               <div className="subcollections-item__image">
                 <Image
                   layout="fill"

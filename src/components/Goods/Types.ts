@@ -11,7 +11,7 @@ export interface ISizeDropdownProps {
 
 export interface IGoodsItemProps extends IPriceLabelProps {
   title: string;
-  link: string;
+  link?: string;
   photo: string;
   secondPhoto: string;
 }
