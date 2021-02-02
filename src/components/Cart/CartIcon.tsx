@@ -24,10 +24,10 @@ const CartIcon: React.FC = () => {
       <a className="cart-icon">
         <p className="cart-icon__text-button">
           {TRANSLATE[locale as 'ru' | 'en'].cart}
-          {cart.length > 0 && <span>({cartItemsCounter})</span>}
+          {!!cart.length && <span>({cartItemsCounter})</span>}
         </p>
         <p className="cart-icon__icon-button">
-          {cart.length > 0 && <span>{cartItemsCounter}</span>}
+          {!!cart.length && <span>{cartItemsCounter}</span>}
           <CartSVG />
         </p>
       </a>

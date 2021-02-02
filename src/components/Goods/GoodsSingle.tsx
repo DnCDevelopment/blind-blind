@@ -33,12 +33,13 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   isExclusive,
   collectionLink,
 }) => {
-  const { locale } = useRouter();
+  const router = useRouter();
+  const { locale } = router;
 
   const isServer = typeof window === 'undefined';
 
   const [curSize, setCurSize] = useState(
-    !isServer && localStorage.getItem(id) !== null
+    !isServer && localStorage.getItem(id)
       ? JSON.parse(localStorage.getItem(id) as string)
       : sizes[0]
   );
@@ -59,6 +60,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
       details: details,
       amount: 1,
     });
+    router.push('/cart');
   };
 
   return (
@@ -103,7 +105,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             <Form
               formikConfig={{
                 initialValues:
-                  !isServer && localStorage.getItem(id) !== null
+                  !isServer && localStorage.getItem(id)
                     ? { ...JSON.parse(localStorage.getItem(id) as string) }
                     : {
                         growth: '',
