@@ -24,7 +24,7 @@ const MainCart: React.FC = () => {
     <div className="main-cart">
       <p className="main-cart__title">
         {TRANSLATE[locale as 'ru' | 'en'].cartTitle}{' '}
-        {!!cart.length && TRANSLATE[locale as 'ru' | 'en'].emptyCartTitle}
+        {!cart.length && TRANSLATE[locale as 'ru' | 'en'].emptyCartTitle}
       </p>
       {!cart.length ? (
         <p className="main-cart__continue-browsing">
