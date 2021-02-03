@@ -14,7 +14,7 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
       </Link>
       <div className="collection-samples__goods container">
         {samples.map(({ _id, previewImage, title, secondImage, link }) => (
-          <Link key={_id} href={link}>
+          <Link key={_id} href={`/goods${link}`}>
             <div className="collection-samples__goods-item">
               <div className="collection-samples__goods-photos">
                 <Image

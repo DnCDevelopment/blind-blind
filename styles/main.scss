@@ -17,6 +17,11 @@ body {
 a {
   color: var(--black);
   text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .container {
@@ -33,6 +38,7 @@ input {
   height: auto;
   padding: 5px 0;
   line-height: 1.8em;
+  text-align: left;
   background: var(--transparent);
   border: none;
   border-bottom: 1px var(--black) solid;
@@ -51,3 +57,4 @@ svg {
 @import '../src/components/SubCollections/SubCollections.scss';
 @import '../src/components/Form/Form.scss';
 @import '../src/components/Button/Button.scss';
+@import '../src/components/Cart/Cart.scss';

@@ -25,10 +25,18 @@ export interface IGoodsListTitleProps {
 }
 
 export interface IGoodsSingleProps extends IGoodsItemProps {
+  id: string;
   otherPhotos: string | { path: string }[];
   sizes: string[];
   materials: string[];
   description: string;
   isExclusive: boolean;
   collectionLink: string;
+}
+
+export interface IFormValues {
+  growth: string;
+  bust: string;
+  waist: string;
+  hips: string;
 }

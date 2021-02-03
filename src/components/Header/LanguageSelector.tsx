@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { LANGUAGES } from '../../constants/languages';
-import { useRouter } from 'next/router';
 
 const LanguageSelector: React.FC = () => {
   const router = useRouter();

@@ -12,6 +12,7 @@ import { IIndexContext } from '../../context/Types';
 
 import { TRANSLATE } from '../../constants/languages';
 import { AboutListData, StoreListData } from '../../constants/header';
+import CartIcon from '../Cart/CartIcon';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
@@ -66,20 +67,20 @@ const DesktopHeader: React.FC = () => {
     <header className="desktop-header">
       <div className="desktop-header__container container">
         <div ref={menuRef} className="desktop-header__options">
-          <p
+          <a
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => changeCurMenu('store')}
           >
             {TRANSLATE[locale as 'ru' | 'en'].store}
-          </p>
-          <p
+          </a>
+          <a
             className="desktop-header__options-option"
             role="presentation"
             onClick={() => changeCurMenu('about')}
           >
             {TRANSLATE[locale as 'ru' | 'en'].aboutUs}
-          </p>
+          </a>
           <div
             className={`desktop-header__desktop-menu ${
               desktopMenuOpen ? 'open' : ''
@@ -106,9 +107,7 @@ const DesktopHeader: React.FC = () => {
         <Logo />
         <div className="desktop-header__options">
           <LanguageSelector />
-          <a className="desktop-header__options-option">
-            {TRANSLATE[locale as 'ru' | 'en'].cart}
-          </a>
+          <CartIcon />
           <a
             className="desktop-header__options-option"
             role="presentation"

@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const goods = cockpitDataGoods.entries.map((el: ICockpitGoodsRaw) => {
     return {
       title: locale === defaultLocale ? el.title : el.title_en,
-      link: locale === defaultLocale ? el.link : el.link_en,
+      link: el.link,
       description:
         locale === defaultLocale ? el.description : el.description_en,
       previewImage: el.previewImage,

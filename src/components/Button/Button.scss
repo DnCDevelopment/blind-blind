@@ -3,13 +3,15 @@
   padding: 10px;
   background: var(--white-color);
   border: 1px solid var(--black-color);
+  outline: none;
   cursor: pointer;
 
   &:hover {
     background: var(--grey-color);
+    border-color: var(--grey-color);
   }
 
-  .title {
+  &__title {
     font-weight: var(--font-weight-400);
     text-align: center;
   }
