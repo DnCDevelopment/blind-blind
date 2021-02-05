@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 const Logo: React.FC = () => {
   const { locale } = useRouter();
   return (
-    <Link href={locale === 'ru' ? '/' : '/ua'}>
+    <Link href={locale === 'ru' ? '/' : '/en'}>
       <h1 className="logo">Blind-Blind</h1>
     </Link>
   );
