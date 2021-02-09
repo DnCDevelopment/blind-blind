@@ -37,6 +37,13 @@ export const TRANSLATE = {
     subTotal: 'К оплате',
     agreement: 'Согласиться',
     checkOut: 'Оплатить',
+    checkOutAlert: 'Вы должны согласиться с условиями, чтобы оформить заказ.',
+    shipping: 'Доставка',
+    continue: 'Продолжить',
+    saveInfo: 'Сохранить эту информацию',
+    returnToCart: 'Вернуться к корзине',
+    showOrderSummary: 'Показать детали заказа',
+    hideOrderSummary: 'Скрыть детали заказа',
   },
   en: {
     store: 'Store',
@@ -60,5 +67,13 @@ export const TRANSLATE = {
     subTotal: 'Subtotal',
     agreement: 'Agree',
     checkOut: 'Check out',
+    checkOutAlert:
+      'You must agree with the terms and conditions of sales to check out.',
+    shipping: 'Shipping',
+    continue: 'Continue',
+    saveInfo: 'Save this information',
+    returnToCart: 'Return to cart',
+    showOrderSummary: 'Show order summary',
+    hideOrderSummary: 'Hide order summary',
   },
 };

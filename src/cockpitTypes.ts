@@ -114,3 +114,9 @@ export interface ICockpitSize {
     size: string;
   };
 }
+
+export interface ICockpitPromocode {
+  code: string;
+  discount: string;
+  inPercent: boolean;
+}

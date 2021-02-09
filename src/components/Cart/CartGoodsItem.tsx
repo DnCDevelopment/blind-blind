@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { ICartGoodsItemProps } from './Types';
 
 import { TRANSLATE } from '../../constants/languages';
+import CartGoodsItemDetails from './CartGoodsItemDetails';
 
 const CartGoodsItem: React.FC<ICartGoodsItemProps> = ({
   title,
@@ -36,25 +37,7 @@ const CartGoodsItem: React.FC<ICartGoodsItemProps> = ({
         <Link href={`/goods${link}`}>
           <a className="title">{title}</a>
         </Link>
-        <div className="details">
-          {typeof details == 'string' ? (
-            <p>{details}</p>
-          ) : (
-            Object.keys(details).map((key, idx) => (
-              <p key={idx}>
-                {
-                  [
-                    TRANSLATE[locale as 'ru' | 'en'].growth,
-                    TRANSLATE[locale as 'ru' | 'en'].bustVolume,
-                    TRANSLATE[locale as 'ru' | 'en'].waistVolume,
-                    TRANSLATE[locale as 'ru' | 'en'].hipsVolume,
-                  ][idx]
-                }
-                : {details[key]} {TRANSLATE[locale as 'ru' | 'en'].cm}
-              </p>
-            ))
-          )}
-        </div>
+        <CartGoodsItemDetails details={details} />
         <a role="presentation" className="remove-item" onClick={removeSelf}>
           {TRANSLATE[locale as 'ru' | 'en'].remove}
         </a>

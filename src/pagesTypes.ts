@@ -5,6 +5,7 @@ import {
   ICockpitGoods,
   ICockpitCollectionsRaw,
   ICockpitSubCollectionRaw,
+  ICockpitPromocode,
 } from './cockpitTypes';
 import { IGoodsSingleProps } from './components/Goods/Types';
 
@@ -43,4 +44,8 @@ export interface ISubCollectionPageProps {
 
 export interface IGoodsPageProps {
   goodsProps: IGoodsSingleProps;
+}
+
+export interface ICheckoutPageProps {
+  promocodes: ICockpitPromocode[];
 }

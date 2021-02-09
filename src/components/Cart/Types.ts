@@ -1,12 +1,15 @@
 import { FormikValues } from 'formik';
 
-export interface ICartGoodsItemProps {
+export interface ICartGoodsItemDetailsProps {
+  details: string | FormikValues;
+}
+
+export interface ICartGoodsItemProps extends ICartGoodsItemDetailsProps {
   id: string;
   title: string;
   link: string;
   photo: string;
   price: string;
-  details: string | FormikValues;
   amount: number;
   removeSelf?: () => void;
 }

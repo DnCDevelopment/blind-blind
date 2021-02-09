@@ -48,7 +48,7 @@
       }
     }
 
-    .button {
+    .button-container {
       margin: 40px auto;
     }
 
@@ -81,6 +81,11 @@
         transform: rotate(-45deg);
       }
     }
+  }
+
+  .button-container {
+    margin: 40px auto;
+    height: fit-content;
   }
 }
 

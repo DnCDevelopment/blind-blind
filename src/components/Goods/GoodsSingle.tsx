@@ -1,14 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import * as Yup from 'yup';
 
 import Form from '../Form/Form';
 import PriceLabel from './PriceLabel';
-import SizeDropdown from './SizeDropdown';
-import Button from '../Button/Button';
-
 import { cartContext } from '../../context/cartContext';
 
 import { TRANSLATE } from '../../constants/languages';
@@ -38,17 +35,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
 
   const isServer = typeof window === 'undefined';
 
-  const [curSize, setCurSize] = useState(
-    !isServer && localStorage.getItem(id)
-      ? JSON.parse(localStorage.getItem(id) as string)
-      : sizes[0]
-  );
-
   const curCartContext = useContext(cartContext) as ICartContext;
-
-  const changeCurSize = (size: string) => {
-    setCurSize(size);
-  };
 
   const addToCart = (details: string | FormikValues) => {
     curCartContext.addItem({
@@ -118,27 +105,33 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
                     .min(100, FORM[locale as 'ru' | 'en'].tooSmall)
                     .max(300, FORM[locale as 'ru' | 'en'].tooLarge)
                     .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
+                    .typeError(FORM[locale as 'ru' | 'en'].wrongInput),
                   bust: Yup.number()
                     .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
                     .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
                     .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
+                    .typeError(FORM[locale as 'ru' | 'en'].wrongInput),
                   waist: Yup.number()
                     .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
                     .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
                     .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
+                    .typeError(FORM[locale as 'ru' | 'en'].wrongInput),
                   hips: Yup.number()
                     .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
                     .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
                     .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
+                    .typeError(FORM[locale as 'ru' | 'en'].wrongInput),
                 }),
                 onSubmit: (values) => {
                   localStorage.setItem(id, JSON.stringify(values));
                   addToCart(values);
                 },
+              }}
+              types={{
+                growth: 'text',
+                bust: 'text',
+                waist: 'text',
+                hips: 'text',
               }}
               suffixes={{
                 growth: TRANSLATE[locale as 'ru' | 'en'].cm,
@@ -156,20 +149,25 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             />
           </div>
         ) : (
-          <>
-            <SizeDropdown
-              curSize={curSize}
-              sizes={sizes}
-              changeCurSize={(size) => {
-                changeCurSize(size);
-                localStorage.setItem(id, JSON.stringify(size));
-              }}
-            />
-            <Button
-              title={TRANSLATE[locale as 'ru' | 'en'].addToCart}
-              callback={() => addToCart(curSize)}
-            />
-          </>
+          <Form
+            formikConfig={{
+              initialValues: {
+                size: sizes[0],
+              },
+              onSubmit: (values) => {
+                localStorage.setItem(id, JSON.stringify(values.size));
+                addToCart(values.size);
+              },
+            }}
+            types={{
+              size: 'select',
+            }}
+            placeholders={{}}
+            selectOptions={{
+              size: sizes,
+            }}
+            buttonTitle={TRANSLATE[locale as 'ru' | 'en'].addToCart}
+          />
         )}
         <div className="materials-container">
           {materials.map((material) => (
