@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import * as Yup from 'yup';
 
 import ShoppingCart from '../../assets/svg/shoppingCart.svg';
 
-import { FORM } from '../../constants/form';
+import { FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
@@ -18,17 +17,11 @@ const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
 
   const isServer = typeof window === 'undefined';
 
-  const [orderSummaryListHeight, setOrderSummaryListHeight] = useState('0');
+  const [orderSummaryListHeight, setOrderSummaryListHeight] = useState(false);
 
   const orderListRef = useRef<HTMLDivElement>(null);
 
   const { cart } = useContext(cartContext) as ICartContext;
-
-  const toggleOrderList = (mode: boolean) => {
-    setOrderSummaryListHeight(
-      mode ? `${orderListRef.current?.scrollHeight}px` : '0'
-    );
-  };
 
   const checkDiscountCode = (enteredCode: string) => {
     const activeCodes = promocodes.filter((item) => item.code === enteredCode);
@@ -40,7 +33,6 @@ const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
               (1 - Number.parseFloat(activeCode.discount) / 100)
           : calcTotalCheckout() - Number.parseFloat(activeCode.discount)
       );
-      console.log(activeCodes.length);
     } else {
       setTotalCheckout(calcTotalCheckout());
     }
@@ -59,17 +51,6 @@ const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
   const [totalCheckout, setTotalCheckout] = useState(calcTotalCheckout());
 
   useEffect(() => {
-    const handleResize = () => {
-      setOrderSummaryListHeight(window.innerWidth < 1024 ? '0' : '100%');
-    };
-
-    setOrderSummaryListHeight(window.innerWidth < 1024 ? '0' : '100%');
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
     setTotalCheckout(calcTotalCheckout());
   }, [calcTotalCheckout]);
 
@@ -80,29 +61,28 @@ const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
           className="order-summary-toggle container"
           role="presentation"
           onClick={() => {
-            toggleOrderList(orderSummaryListHeight === '0');
+            setOrderSummaryListHeight(!orderSummaryListHeight);
           }}
         >
           <ShoppingCart />
-          {orderSummaryListHeight === '0' ? (
-            <>
-              <p>{TRANSLATE[locale as 'ru' | 'en'].showOrderSummary}</p>
-              <div className="chevron-down"></div>
-            </>
-          ) : (
+          {orderSummaryListHeight ? (
             <>
               <p>{TRANSLATE[locale as 'ru' | 'en'].hideOrderSummary}</p>
               <div className="chevron-up"></div>
+            </>
+          ) : (
+            <>
+              <p>{TRANSLATE[locale as 'ru' | 'en'].showOrderSummary}</p>
+              <div className="chevron-down"></div>
             </>
           )}
           <div className="total-sum">{totalCheckout.toFixed(2)}₴</div>
         </div>
         <div
           ref={orderListRef}
-          style={{
-            height: orderSummaryListHeight,
-          }}
-          className="order-summary-list container"
+          className={`order-summary-list container ${
+            orderSummaryListHeight && 'open'
+          }`}
         >
           {cart.map((props) => (
             <OrderSummaryListItem key={props.id} {...props} />
@@ -111,7 +91,7 @@ const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
           <div className="discount">
             <Form
               formikConfig={{
-                initialValues: { code: '' },
+                initialValues: FORMIK.shippingDiscount.values,
                 onSubmit: (values) => {
                   checkDiscountCode(values.code);
                 },
@@ -139,66 +119,23 @@ const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
                   ? {
                       ...JSON.parse(localStorage.getItem('shipping') as string),
                     }
-                  : {
-                      firstName: '',
-                      lastName: '',
-                      email: '',
-                      phone: '',
-                      service: '',
-                      paymentMethod: '',
-                      checkbox: false,
-                    },
-              validationSchema: Yup.object({
-                firstName: Yup.string()
-                  .matches(
-                    /^[a-zA-Zа-яА-Я]+$/,
-                    FORM[locale as 'ru' | 'en'].lettersRequired
-                  )
-                  .required(FORM[locale as 'ru' | 'en'].required),
-                lastName: Yup.string()
-                  .matches(
-                    /^[a-zA-Zа-яА-Я]+$/,
-                    FORM[locale as 'ru' | 'en'].lettersRequired
-                  )
-                  .required(FORM[locale as 'ru' | 'en'].required),
-                email: Yup.string().email(),
-                phone: Yup.number()
-                  .required(FORM[locale as 'ru' | 'en'].required)
-                  .typeError(FORM[locale as 'ru' | 'en'].wrongInput),
-                service: Yup.string().required(
-                  FORM[locale as 'ru' | 'en'].required
-                ),
-                paymentMethod: Yup.string().required(
-                  FORM[locale as 'ru' | 'en'].required
-                ),
-              }),
+                  : FORMIK.shippingMain.values,
+              validationSchema: FORMIK.shippingMain.validationSchema(
+                locale as 'ru' | 'en'
+              ),
               onSubmit: (values) => {
                 if (values.checkbox)
                   localStorage.setItem('shipping', JSON.stringify(values));
                 else localStorage.removeItem('shipping');
               },
             }}
-            types={{
-              firstName: 'text',
-              lastName: 'text',
-              email: 'text',
-              phone: 'text',
-              checkbox: 'checkbox',
-              service: 'select',
-              paymentMethod: 'select',
-            }}
-            selectOptions={{
-              service: FORM[locale as 'ru' | 'en'].deliveryServices,
-              paymentMethod: FORM[locale as 'ru' | 'en'].paymentMethods,
-            }}
-            placeholders={{
-              firstName: FORM[locale as 'ru' | 'en'].firstName,
-              lastName: FORM[locale as 'ru' | 'en'].lastName,
-              email: FORM[locale as 'ru' | 'en'].email,
-              phone: FORM[locale as 'ru' | 'en'].phone,
-              service: FORM[locale as 'ru' | 'en'].deliveryService,
-              paymentMethod: FORM[locale as 'ru' | 'en'].paymentMethod,
-            }}
+            types={FORMIK.shippingMain.types}
+            selectOptions={FORMIK.shippingMain.selectOptions(
+              locale as 'ru' | 'en'
+            )}
+            placeholders={FORMIK.shippingMain.placeholders(
+              locale as 'ru' | 'en'
+            )}
             masks={{
               phone: '999 999 99 99',
             }}

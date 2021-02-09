@@ -54,10 +54,15 @@
     }
 
     .order-summary-list {
+      max-height: 0;
       overflow: hidden;
       background: var(--light-yellow-color);
       border: 2px solid var(--grey-color);
-      transition: height 0.3s;
+      transition: max-height 0.5s;
+
+      &.open {
+        max-height: 100vh;
+      }
 
       .divider {
         height: 2px;
@@ -133,6 +138,7 @@
 
       .order-summary-list {
         width: 50vw;
+        max-height: 100vh;
         padding: 0 60px;
       }
     }

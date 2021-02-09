@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import { FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
@@ -60,17 +61,14 @@ const MainCart: React.FC = () => {
                 </p>
                 <Form
                   formikConfig={{
-                    initialValues: {
-                      checkbox: false,
-                    },
+                    initialValues: FORMIK.mainCart.values,
                     onSubmit: (values) => {
-                      console.log(values.checkbox);
                       values.checkbox
                         ? push('/checkout')
                         : alert(TRANSLATE[locale as 'ru' | 'en'].checkOutAlert);
                     },
                   }}
-                  types={{ checkbox: 'checkbox' }}
+                  types={FORMIK.mainCart.types}
                   placeholders={{}}
                   buttonTitle={TRANSLATE[locale as 'ru' | 'en'].checkOut}
                   checkboxText={TRANSLATE[locale as 'ru' | 'en'].agreement}
