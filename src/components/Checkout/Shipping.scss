@@ -1,21 +1,28 @@
 .shipping {
-  padding-top: 80px;
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-top: 80px;
+
+  &__info {
+    .title {
+      font-weight: var(--font-weight-500);
+      font-size: var(--font-24);
+    }
+  }
 
   &__order-summary {
     width: calc(100vw);
+    margin-bottom: 20px;
     margin-left: calc((100% - 100vw) / 2);
     background: var(--light-yellow-color);
-    margin-bottom: 20px;
 
     .order-summary-toggle {
+      display: flex;
+      align-items: center;
       padding-top: 20px;
       padding-bottom: 20px;
-      display: flex;
       border: 2px solid var(--grey-color);
-      align-items: center;
       cursor: pointer;
 
       svg {
@@ -27,10 +34,10 @@
         &-up {
           width: 10px;
           height: 10px;
-          border: solid var(--black-color);
-          border-width: 0 2px 2px 0;
           margin-right: auto;
           margin-left: 10px;
+          border: solid var(--black-color);
+          border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }
 
@@ -48,49 +55,42 @@
 
     .order-summary-list {
       overflow: hidden;
-      transition: height 0.3s;
       background: var(--light-yellow-color);
       border: 2px solid var(--grey-color);
+      transition: height 0.3s;
 
       .divider {
-        background: var(--grey-color);
-        margin: 20px 0;
         height: 2px;
+        margin: 20px 0;
+        background: var(--grey-color);
       }
 
       .total-checkout {
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
 
         .title {
           font-size: var(--font-24);
         }
 
         .price {
-          font-size: var(--font-28);
           font-weight: var(--font-weight-700);
+          font-size: var(--font-28);
         }
       }
     }
   }
 
-  &__info {
-    .title {
-      font-weight: var(--font-weight-500);
-      font-size: var(--font-24);
-    }
-  }
-
   .back-to-cart {
-    height: 45px;
     display: flex;
-    width: fit-content;
     align-items: center;
+    width: fit-content;
+    height: 45px;
     margin: auto;
-    cursor: pointer;
     margin-top: 20px;
     margin-bottom: 50px;
+    cursor: pointer;
 
     .arrow {
       width: 7px;
@@ -109,8 +109,8 @@
 
     &__info {
       .back-to-cart {
-        margin-left: 0;
         margin-top: -45px;
+        margin-left: 0;
       }
     }
   }
@@ -122,18 +122,18 @@
     justify-content: space-between;
 
     &__order-summary {
-      height: 100%;
       width: 50%;
-      margin-left: 0;
+      height: 100%;
       margin-bottom: 0;
+      margin-left: 0;
 
       .order-summary-toggle {
         display: none;
       }
 
       .order-summary-list {
-        padding: 0 60px;
         width: 50vw;
+        padding: 0 60px;
       }
     }
 
