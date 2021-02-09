@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import InputMask from 'react-input-mask';
 
 import Button from '../Button/Button';
@@ -19,8 +19,8 @@ const Form: React.FC<IFormProps> = ({
 }) => {
   const formik = useFormik(formikConfig);
 
-  const inputText = useCallback(
-    (key: string) => (
+  const inputText = useMemo(() => {
+    const InputField = (key: string) => (
       <div className="input-box">
         <input
           type="text"
@@ -36,12 +36,12 @@ const Form: React.FC<IFormProps> = ({
           <span className="input-suffix">{suffixes[key]}</span>
         )}
       </div>
-    ),
-    [formik, placeholders, suffixes]
-  );
+    );
+    return InputField;
+  }, [formik, placeholders, suffixes]);
 
-  const inputTextWithMask = useCallback(
-    (key: string) => (
+  const inputTextWithMask = useMemo(() => {
+    const InputField = (key: string) => (
       <div className="input-box">
         <InputMask
           type="text"
@@ -58,12 +58,12 @@ const Form: React.FC<IFormProps> = ({
           <span className="input-suffix">{suffixes[key]}</span>
         )}
       </div>
-    ),
-    [formik, masks, placeholders, suffixes]
-  );
+    );
+    return InputField;
+  }, [formik, masks, placeholders, suffixes]);
 
-  const inputCheckbox = useCallback(
-    (key: string) => (
+  const inputCheckbox = useMemo(() => {
+    const InputField = (key: string) => (
       <div className="input-checkbox">
         <input
           className="checkbox"
@@ -79,12 +79,12 @@ const Form: React.FC<IFormProps> = ({
           {checkboxText}
         </label>
       </div>
-    ),
-    [formik, checkboxText]
-  );
+    );
+    return InputField;
+  }, [formik, checkboxText]);
 
-  const inputSelect = useCallback(
-    (key: string) => (
+  const inputSelect = useMemo(() => {
+    const InputField = (key: string) => (
       <div className="input-select">
         <Dropdown
           value={formik.values[key]}
@@ -93,9 +93,9 @@ const Form: React.FC<IFormProps> = ({
           setValue={(item) => formik.setFieldValue(key, item)}
         />
       </div>
-    ),
-    [formik, placeholders, selectOptions]
-  );
+    );
+    return InputField;
+  }, [formik, placeholders, selectOptions]);
 
   const InputTypes: { [key: string]: (key: string) => void } = {
     text: inputText,
