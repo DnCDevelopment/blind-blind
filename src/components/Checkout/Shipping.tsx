@@ -31,7 +31,6 @@ const Shipping: React.FC = () => {
       .then((json) => {
         const { discount } = json;
         if (discount) {
-          console.log(discount.inPercent);
           setTotalCheckout(
             discount.inPercent
               ? calcTotalCheckout() *
