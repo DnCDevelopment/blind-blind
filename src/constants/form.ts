@@ -27,8 +27,8 @@ export const FORM = {
     lettersRequired: 'letters required',
     firstName: 'First name',
     lastName: 'Last name',
-    email: 'adress',
-    phone: 'phone',
+    email: 'Email',
+    phone: 'Phone',
     deliveryService: 'Delivery service',
     deliveryServices: ['Нова пошта', 'УкрПошта'],
     paymentMethod: 'Payment method',
@@ -60,7 +60,7 @@ export const FORMIK = {
         lastName: Yup.string()
           .matches(/^[a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
           .required(FORM[locale].required),
-        email: Yup.string().email(),
+        email: Yup.string().email().required(FORM[locale].required),
         phone: Yup.number()
           .required(FORM[locale].required)
           .typeError(FORM[locale].wrongInput),

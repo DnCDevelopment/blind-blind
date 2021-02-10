@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import fetch from 'node-fetch';
 
 import ShoppingCart from '../../assets/svg/shoppingCart.svg';
 
@@ -10,9 +11,8 @@ import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
 import Form from '../Form/Form';
 import OrderSummaryListItem from './OrderSummaryListItem';
-import { IShippingProps } from './Types';
 
-const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
+const Shipping: React.FC = () => {
   const { locale } = useRouter();
 
   const isServer = typeof window === 'undefined';
@@ -24,18 +24,23 @@ const Shipping: React.FC<IShippingProps> = ({ promocodes }) => {
   const { cart } = useContext(cartContext) as ICartContext;
 
   const checkDiscountCode = (enteredCode: string) => {
-    const activeCodes = promocodes.filter((item) => item.code === enteredCode);
-    if (activeCodes.length) {
-      const activeCode = activeCodes[0];
-      setTotalCheckout(
-        activeCode.inPercent
-          ? calcTotalCheckout() *
-              (1 - Number.parseFloat(activeCode.discount) / 100)
-          : calcTotalCheckout() - Number.parseFloat(activeCode.discount)
-      );
-    } else {
-      setTotalCheckout(calcTotalCheckout());
-    }
+    fetch('api/getPromocode', {
+      method: 'POST',
+      body: enteredCode,
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        const { discount } = json;
+        if (discount) {
+          console.log(discount.inPercent);
+          setTotalCheckout(
+            discount.inPercent
+              ? calcTotalCheckout() *
+                  (1 - Number.parseFloat(discount.discount) / 100)
+              : calcTotalCheckout() - Number.parseFloat(discount.discount)
+          );
+        } else setTotalCheckout(calcTotalCheckout());
+      });
   };
 
   const calcTotalCheckout = useCallback(
