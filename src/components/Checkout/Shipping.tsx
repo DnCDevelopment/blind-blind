@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import fetch from 'node-fetch';
 
 import ShoppingCart from '../../assets/svg/shoppingCart.svg';
 
@@ -24,7 +23,7 @@ const Shipping: React.FC = () => {
   const { cart } = useContext(cartContext) as ICartContext;
 
   const checkDiscountCode = (enteredCode: string) => {
-    fetch('api/getPromocode', {
+    fetch('/api/getPromocode', {
       method: 'POST',
       body: enteredCode,
     })
@@ -32,7 +31,6 @@ const Shipping: React.FC = () => {
       .then((json) => {
         const { discount } = json;
         if (discount) {
-          console.log(discount.inPercent);
           setTotalCheckout(
             discount.inPercent
               ? calcTotalCheckout() *
