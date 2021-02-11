@@ -1,18 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
-import * as Yup from 'yup';
+import { useContext } from 'react';
 
 import Form from '../Form/Form';
 import PriceLabel from './PriceLabel';
-import SizeDropdown from './SizeDropdown';
-import Button from '../Button/Button';
-
 import { cartContext } from '../../context/cartContext';
 
 import { TRANSLATE } from '../../constants/languages';
-import { FORM } from '../../constants/form';
+import { FORMIK } from '../../constants/form';
 
 import { IGoodsSingleProps } from './Types';
 import { ICartContext } from '../../context/Types';
@@ -38,17 +34,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
 
   const isServer = typeof window === 'undefined';
 
-  const [curSize, setCurSize] = useState(
-    !isServer && localStorage.getItem(id)
-      ? JSON.parse(localStorage.getItem(id) as string)
-      : sizes[0]
-  );
-
   const curCartContext = useContext(cartContext) as ICartContext;
-
-  const changeCurSize = (size: string) => {
-    setCurSize(size);
-  };
 
   const addToCart = (details: string | FormikValues) => {
     curCartContext.addItem({
@@ -107,69 +93,43 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
                 initialValues:
                   !isServer && localStorage.getItem(id)
                     ? { ...JSON.parse(localStorage.getItem(id) as string) }
-                    : {
-                        growth: '',
-                        bust: '',
-                        waist: '',
-                        hips: '',
-                      },
-                validationSchema: Yup.object({
-                  growth: Yup.number()
-                    .min(100, FORM[locale as 'ru' | 'en'].tooSmall)
-                    .max(300, FORM[locale as 'ru' | 'en'].tooLarge)
-                    .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
-                  bust: Yup.number()
-                    .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
-                    .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
-                    .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
-                  waist: Yup.number()
-                    .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
-                    .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
-                    .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
-                  hips: Yup.number()
-                    .min(20, FORM[locale as 'ru' | 'en'].tooSmall)
-                    .max(200, FORM[locale as 'ru' | 'en'].tooLarge)
-                    .required(FORM[locale as 'ru' | 'en'].required)
-                    .typeError(FORM[locale as 'ru' | 'en'].numberRequired),
-                }),
+                    : FORMIK.goodsExclusive.values,
+                validationSchema: FORMIK.goodsExclusive.validationSchema(
+                  locale as 'ru' | 'en'
+                ),
                 onSubmit: (values) => {
                   localStorage.setItem(id, JSON.stringify(values));
                   addToCart(values);
                 },
               }}
-              suffixes={{
-                growth: TRANSLATE[locale as 'ru' | 'en'].cm,
-                bust: TRANSLATE[locale as 'ru' | 'en'].cm,
-                waist: TRANSLATE[locale as 'ru' | 'en'].cm,
-                hips: TRANSLATE[locale as 'ru' | 'en'].cm,
-              }}
-              placeholders={{
-                growth: TRANSLATE[locale as 'ru' | 'en'].growth,
-                bust: TRANSLATE[locale as 'ru' | 'en'].bustVolume,
-                waist: TRANSLATE[locale as 'ru' | 'en'].waistVolume,
-                hips: TRANSLATE[locale as 'ru' | 'en'].hipsVolume,
-              }}
+              types={FORMIK.goodsExclusive.types}
+              suffixes={FORMIK.goodsExclusive.suffixes(locale as 'ru' | 'en')}
+              placeholders={FORMIK.goodsExclusive.placeholders(
+                locale as 'ru' | 'en'
+              )}
               buttonTitle={TRANSLATE[locale as 'ru' | 'en'].addToCart}
             />
           </div>
         ) : (
-          <>
-            <SizeDropdown
-              curSize={curSize}
-              sizes={sizes}
-              changeCurSize={(size) => {
-                changeCurSize(size);
-                localStorage.setItem(id, JSON.stringify(size));
-              }}
-            />
-            <Button
-              title={TRANSLATE[locale as 'ru' | 'en'].addToCart}
-              callback={() => addToCart(curSize)}
-            />
-          </>
+          <Form
+            formikConfig={{
+              initialValues: {
+                size: sizes[0],
+              },
+              onSubmit: (values) => {
+                localStorage.setItem(id, JSON.stringify(values.size));
+                addToCart(values.size);
+              },
+            }}
+            types={{
+              size: 'select',
+            }}
+            placeholders={{}}
+            selectOptions={{
+              size: sizes,
+            }}
+            buttonTitle={TRANSLATE[locale as 'ru' | 'en'].addToCart}
+          />
         )}
         <div className="materials-container">
           {materials.map((material) => (

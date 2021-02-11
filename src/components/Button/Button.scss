@@ -1,5 +1,6 @@
 .button {
-  width: 150px;
+  width: 100%;
+  height: 100%;
   padding: 10px;
   background: var(--white-color);
   border: 1px solid var(--black-color);
@@ -14,5 +15,12 @@
   &__title {
     font-weight: var(--font-weight-400);
     text-align: center;
+  }
+}
+
+.discount {
+  .button {
+    color: var(--white-color);
+    background: var(--dark-grey-color);
   }
 }

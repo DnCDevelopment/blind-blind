@@ -1,16 +1,15 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
+import { FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
-import Button from '../Button/Button';
+import Form from '../Form/Form';
 import CartGoodsItem from './CartGoodsItem';
 
 const MainCart: React.FC = () => {
-  const agreementRef = useRef<HTMLInputElement>(null);
-
-  const { locale } = useRouter();
+  const { locale, push } = useRouter();
 
   const { cart, removeItem } = useContext(cartContext) as ICartContext;
 
@@ -60,25 +59,20 @@ const MainCart: React.FC = () => {
                   {TRANSLATE[locale as 'ru' | 'en'].subTotal}
                   <span className="sum">{subTotal} UAH</span>
                 </p>
-                <form className="agreement-form">
-                  <div className="agreement">
-                    <input
-                      className="checkbox"
-                      name="agree"
-                      id="agree"
-                      type="checkbox"
-                      ref={agreementRef}
-                    />
-                    <label htmlFor="agree">
-                      {TRANSLATE[locale as 'ru' | 'en'].agreement}
-                    </label>
-                  </div>
-                  <Button
-                    type="button"
-                    title={TRANSLATE[locale as 'ru' | 'en'].checkOut}
-                    onClick={() => console.log(agreementRef.current?.checked)}
-                  />
-                </form>
+                <Form
+                  formikConfig={{
+                    initialValues: FORMIK.mainCart.values,
+                    onSubmit: (values) => {
+                      values.checkbox
+                        ? push('/checkout')
+                        : alert(TRANSLATE[locale as 'ru' | 'en'].checkOutAlert);
+                    },
+                  }}
+                  types={FORMIK.mainCart.types}
+                  placeholders={{}}
+                  buttonTitle={TRANSLATE[locale as 'ru' | 'en'].checkOut}
+                  checkboxText={TRANSLATE[locale as 'ru' | 'en'].agreement}
+                />
               </td>
             </tr>
           </tbody>

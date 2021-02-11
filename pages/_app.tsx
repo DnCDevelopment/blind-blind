@@ -65,7 +65,6 @@ const MyApp = ({
   useEffect(() => {
     if (window !== undefined) {
       const storageCart = localStorage.getItem('cart');
-      console.log('mount');
       if (storageCart) {
         setCartState(JSON.parse(storageCart));
       }
