@@ -1,3 +1,37 @@
 .search-input {
   margin: 15px 0;
+
+  &-container {
+    padding: 0;
+    height: 100%;
+  }
+}
+
+.search-result-container {
+  position: relative;
+  overflow-y: scroll;
+  height: 80%;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--grey-color);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--dark-grey-color);
+    border-radius: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search-input {
+    &-container {
+      padding: 100px 60px;
+      padding-bottom: 20px;
+    }
+  }
 }

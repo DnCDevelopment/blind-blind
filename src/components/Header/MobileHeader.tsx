@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import MobileMenu from './MobileMenu';
 import Logo from './Logo';
@@ -9,7 +9,9 @@ import CartIcon from '../Cart/CartIcon';
 
 const MobileHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-
+  useEffect(() => {
+    document.body.className = mobileMenuOpen ? 'hide-overflow' : '';
+  }, [mobileMenuOpen]);
   return (
     <header className="mobile-header">
       <div

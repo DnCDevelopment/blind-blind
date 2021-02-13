@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import MainCart from '../src/components/Cart/MainCart';
 
-const SalesPage: NextPage = () => {
+const CartPage: NextPage = () => {
   return (
     <div className="cart-page">
       <MainCart />
@@ -9,4 +9,4 @@ const SalesPage: NextPage = () => {
   );
 };
 
-export default SalesPage;
+export default CartPage;

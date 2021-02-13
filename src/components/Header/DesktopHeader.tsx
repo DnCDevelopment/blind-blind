@@ -41,15 +41,15 @@ const DesktopHeader: React.FC = () => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (
         menuRef.current &&
-        (!menuRef.current.contains(e.target as Node) ||
-          (e.target as HTMLTextAreaElement).tagName.toLowerCase() === 'a') &&
+        !menuRef.current.contains(e.target as Node) &&
         desktopMenuOpen
       ) {
         setDesktopMenuOpen(false);
       }
       if (
         searchRef.current &&
-        !searchRef.current.contains(e.target as Node) &&
+        (!searchRef.current.contains(e.target as Node) ||
+          (e.target as HTMLDivElement).tagName.toLowerCase() === 'a') &&
         searchContainerOpen
       ) {
         setSearchContainerOpen(false);
@@ -61,6 +61,11 @@ const DesktopHeader: React.FC = () => {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
+  }, [desktopMenuOpen, searchContainerOpen]);
+
+  useEffect(() => {
+    document.body.className =
+      desktopMenuOpen || searchContainerOpen ? 'hide-overflow' : '';
   }, [desktopMenuOpen, searchContainerOpen]);
 
   return (
@@ -122,7 +127,7 @@ const DesktopHeader: React.FC = () => {
             searchContainerOpen ? 'open' : ''
           }`}
         >
-          <SearchInput />
+          <SearchInput close={() => setSearchContainerOpen(false)} />
         </div>
       </div>
     </header>

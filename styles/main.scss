@@ -14,8 +14,14 @@
 html,
 body {
   overflow-x: hidden;
+  &.hide-overflow {
+    overflow-y: hidden;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+  }
 }
-
 a {
   color: var(--black);
   text-decoration: none;
