@@ -26,7 +26,7 @@ export const useCockpit = <T>(withSuspense: boolean, params?: string) => {
     return { data, error };
   }
 
-  return { data: null, error: null };
+  return { data: null, error };
 };
 
 export default useCockpit;
