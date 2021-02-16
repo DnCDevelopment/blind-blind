@@ -15,10 +15,9 @@ html,
 body {
   overflow-x: hidden;
   &.hide-overflow {
-    position: absolute;
     top: 0;
     bottom: 0;
-    height: 100%;
+    height: 100vh;
     overflow-y: hidden;
   }
 }

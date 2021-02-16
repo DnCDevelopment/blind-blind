@@ -61,7 +61,7 @@
 
     &__desktop-menu {
       @include sliding-menu($from-left: true);
-      z-index: 10;
+      z-index: 101;
       width: 400px;
       padding: 100px 30px;
 
@@ -79,7 +79,7 @@
     &__search-container {
       @include sliding-menu($from-left: false);
       position: fixed;
-      z-index: 10;
+      z-index: 101;
       width: 400px;
     }
   }
