@@ -16,6 +16,13 @@ export interface IGoodsItemProps extends IPriceLabelProps {
   secondPhoto: string;
 }
 
+export interface IGoodsSearchItemProps {
+  title: string;
+  link: string;
+  photo: string;
+  price: string;
+}
+
 export interface IGoodsListProps {
   filter?: string;
 }

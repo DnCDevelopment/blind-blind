@@ -10,19 +10,16 @@ const absoluteUrl = (url: string): string => {
   return server + '/' + url;
 };
 
-export const useCockpit = <T>(type: string, name: string, params?: string) => {
-  if (!type || !name) {
-    throw new Error('type/name is required');
-  }
-
+export const useCockpit = <T>(withSuspense: boolean, params?: string) => {
   const fetcher = (url: string): Promise<T> => {
     return fetch(url).then((res) => res.json());
   };
 
   const url = 'api/getGoods';
   const urlWithParams = params ? url + '?' + params : url;
+
   const { data, error } = useSWR(absoluteUrl(urlWithParams), fetcher, {
-    suspense: true,
+    suspense: withSuspense,
   });
 
   if (!error) {

@@ -12,3 +12,7 @@ interface ISublist {
   link: string;
   subsublist?: ISublist[];
 }
+
+export interface ISearchInputProps {
+  close?: () => void;
+}

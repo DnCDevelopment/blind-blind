@@ -6,12 +6,7 @@ import { IGoodsListProps } from './Types';
 import useCockpit from '../../hooks/useCockpit';
 
 const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
-  const { data: goods } = useCockpit<ICockpitGoodsEntries>(
-    'collections',
-    'Goods',
-    filter
-  );
-
+  const { data: goods } = useCockpit<ICockpitGoodsEntries>(true, filter);
   const filteredGoods = goods?.entries;
 
   return (
