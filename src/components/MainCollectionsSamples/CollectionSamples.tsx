@@ -21,6 +21,7 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
                   className="collection-samples__goods-photos__preview"
                   layout="fill"
                   objectFit="cover"
+                  alt={title}
                   loading="eager"
                   src={process.env.NEXT_PUBLIC_COCKPIT_URL + previewImage.path}
                 />
@@ -28,6 +29,7 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
                   className="collection-samples__goods-photos__second"
                   layout="fill"
                   objectFit="cover"
+                  alt={title}
                   loading="eager"
                   src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondImage.path}
                 />

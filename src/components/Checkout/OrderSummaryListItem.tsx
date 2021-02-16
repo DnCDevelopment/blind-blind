@@ -16,6 +16,7 @@ const OrderSummaryListItem: React.FC<ICartGoodsItemProps> = ({
         <Image
           layout="fill"
           objectFit="contain"
+          alt={title}
           loading="eager"
           src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
         />

@@ -56,6 +56,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
           <Image
             layout="fill"
             objectFit="cover"
+            alt={title}
             loading="eager"
             src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
           />
@@ -64,6 +65,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
           <Image
             layout="fill"
             objectFit="cover"
+            alt={title}
             loading="eager"
             src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
           />
@@ -74,6 +76,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
               <Image
                 layout="fill"
                 objectFit="cover"
+                alt={title}
                 loading="eager"
                 src={process.env.NEXT_PUBLIC_COCKPIT_URL + path}
               />

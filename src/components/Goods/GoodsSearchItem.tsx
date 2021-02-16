@@ -15,6 +15,7 @@ const GoodsSearchItem: React.FC<IGoodsSearchItemProps> = ({
           <Image
             layout="fill"
             objectFit="contain"
+            alt={title}
             objectPosition="left"
             loading="eager"
             src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
