@@ -1,0 +1,26 @@
+.social-icons {
+  display: flex;
+  width: fit-content;
+  margin: 20px auto;
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      background: var(--white-color);
+      border: 0.5px solid var(--white-color);
+      border-radius: 50%;
+      filter: invert(1);
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .social-icons {
+    margin-left: 0;
+  }
+}

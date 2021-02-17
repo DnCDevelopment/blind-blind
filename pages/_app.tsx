@@ -9,6 +9,7 @@ import {
 } from '../src/cockpitTypes';
 import { ICartGoodsItemProps } from '../src/components/Cart/Types';
 import Header from '../src/components/Header/Header';
+import Footer from '../src/components/Footer/Footer';
 import { cartContext } from '../src/context/cartContext';
 import { indexContext } from '../src/context/cockpitContext';
 
@@ -95,6 +96,7 @@ const MyApp = ({
         <main>
           <Component {...pageProps} />
         </main>
+        <Footer />
       </cartContext.Provider>
     </indexContext.Provider>
   );

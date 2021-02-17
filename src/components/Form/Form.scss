@@ -130,10 +130,28 @@ form {
   }
 }
 
+.footer {
+  form {
+    .button-container {
+      width: fit-content;
+      margin: 10px auto;
+      border: none;
+    }
+  }
+}
+
 @media screen and (min-width: 768px) {
   form {
     .input-checkbox {
       margin-left: 0;
+    }
+  }
+
+  .footer {
+    form {
+      .button-container {
+        margin: 10px 0;
+      }
     }
   }
 }
