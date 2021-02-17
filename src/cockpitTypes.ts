@@ -1,7 +1,7 @@
 export interface ICockpitCollections {
   title: string;
   link: string;
-  description: string;
+  description?: string;
   _id?: string;
 }
 
