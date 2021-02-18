@@ -61,6 +61,23 @@ svg {
   cursor: pointer;
 }
 
+.inform-page-container {
+  padding: 100px 15px 25px 15px;
+
+  p {
+    margin: 20px 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .inform-page-container {
+    padding: 150px 50px 25px 50px;
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
+
 @import '../src/components/Header/Header.scss';
 @import '../src/components/Footer/Footer.scss';
 @import '../src/components/Carousel/Carousel.scss';

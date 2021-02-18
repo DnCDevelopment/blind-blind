@@ -2,7 +2,7 @@ import { TRANSLATE } from '../constants/languages';
 
 export const footerMenu = (locale: 'ru' | 'en') => [
   {
-    link: '/',
+    link: '/page/about',
     title: TRANSLATE[locale].aboutUs,
   },
   {
@@ -10,11 +10,11 @@ export const footerMenu = (locale: 'ru' | 'en') => [
     title: TRANSLATE[locale].sizeTable,
   },
   {
-    link: '/',
+    link: '/page/delivery',
     title: TRANSLATE[locale].deliveryInfo,
   },
   {
-    link: '/',
+    link: '/page/return-policy',
     title: TRANSLATE[locale].returnAndExchange,
   },
   {

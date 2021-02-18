@@ -52,6 +52,13 @@ export interface ICockpitRunwaysAndLookbooksRaw
   _modified: number;
 }
 
+export interface ICockpitPages {
+  link: string;
+  link_en: string;
+  content: string;
+  content_en: string;
+}
+
 export interface ICockpitGoodsRaw extends ICockpitGoods {
   title_en: string;
   link_en: string;

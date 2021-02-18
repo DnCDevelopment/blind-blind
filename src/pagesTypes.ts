@@ -66,3 +66,10 @@ export interface IGoodsPageProps {
     title: string;
   };
 }
+
+export interface IInfomationPageProps {
+  pageProps: {
+    link: string;
+    content: string;
+  };
+}
