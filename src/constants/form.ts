@@ -142,4 +142,15 @@ export const FORMIK = {
       hips: TRANSLATE[locale].hipsVolume,
     }),
   },
+  footerForm: {
+    values: { phone: '' },
+    validationSchema: (locale: 'ru' | 'en') =>
+      Yup.object({
+        phone: Yup.number().typeError(FORM[locale].wrongInput),
+      }),
+    types: { phone: 'text' },
+    placeholders: (locale: 'ru' | 'en') => ({
+      phone: FORM[locale].phone,
+    }),
+  },
 };

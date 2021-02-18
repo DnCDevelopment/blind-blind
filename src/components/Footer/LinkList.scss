@@ -1,0 +1,16 @@
+.link-list {
+  ul {
+    margin-top: 10px;
+    padding-left: 0;
+    text-align: center;
+    list-style: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .link-list {
+    ul {
+      text-align: left;
+    }
+  }
+}
