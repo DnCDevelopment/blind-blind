@@ -1,27 +1,15 @@
-import Link from 'next/link';
-
-import InstagramSVG from '../../assets/svg/instagram.svg';
-import FacebookSVG from '../../assets/svg/facebook.svg';
-import TwitterSVG from '../../assets/svg/twitter.svg';
+import { SOCIAL_ICONS } from '../../constants/socialIcons';
 
 const SocialIcons: React.FC = () => {
   return (
     <div className="social-icons">
-      <div className="icon">
-        <Link href="https://www.instagram.com/">
-          <InstagramSVG />
-        </Link>
-      </div>
-      <div className="icon">
-        <Link href="https://www.facebook.com/">
-          <FacebookSVG />
-        </Link>
-      </div>
-      <div className="icon">
-        <Link href="https://www.twitter.com/">
-          <TwitterSVG />
-        </Link>
-      </div>
+      {SOCIAL_ICONS.map(({ link, Icon }) => (
+        <div key={link} className="icon">
+          <a href={link} target="_blanc">
+            <Icon />
+          </a>
+        </div>
+      ))}
     </div>
   );
 };
