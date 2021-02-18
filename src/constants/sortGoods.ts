@@ -38,3 +38,26 @@ export const SORT_GOODS = {
   },
   default: (goods: ICockpitGoodsRaw[]) => goods,
 };
+
+export const SORT_TRANSLATE = {
+  default: {
+    ru: 'По умолчанию',
+    en: 'Default',
+  },
+  nameAbs: {
+    ru: 'Наименования А -> Я',
+    en: 'Name A -> Z',
+  },
+  nameDesc: {
+    ru: 'Наименования Я -> А',
+    en: 'Name Z -> A',
+  },
+  priceAbs: {
+    ru: 'Цена (по возрастанию)',
+    en: 'Price Low -> High',
+  },
+  priceDesc: {
+    ru: 'Цена (по убыванию)',
+    en: 'Price High -> Low',
+  },
+};

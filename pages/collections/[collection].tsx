@@ -1,6 +1,6 @@
+import { Suspense } from 'react';
 import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { Suspense } from 'react';
 
 import Error from '../_error';
 import GoodsList, {
