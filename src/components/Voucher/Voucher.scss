@@ -12,8 +12,8 @@
   }
 
   &__form-container {
-    margin: auto;
     max-width: 500px;
+    margin: auto;
   }
 }
 
@@ -24,8 +24,8 @@
     &__title,
     &__description,
     &__form-container {
-      text-align: left;
       margin: unset;
+      text-align: left;
     }
   }
 }
