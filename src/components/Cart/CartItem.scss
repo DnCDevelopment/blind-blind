@@ -1,4 +1,4 @@
-.cart-goods-item {
+.cart-item {
   display: block;
 
   td {
@@ -31,7 +31,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .cart-goods-item {
+  .cart-item {
     display: table-row;
 
     td {

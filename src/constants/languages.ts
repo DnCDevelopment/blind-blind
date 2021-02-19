@@ -44,11 +44,15 @@ export const TRANSLATE = {
     returnToCart: 'Вернуться к корзине',
     showOrderSummary: 'Показать детали заказа',
     hideOrderSummary: 'Скрыть детали заказа',
-    sizeTable: 'Таблиці размеров',
+    sizeTable: 'Таблицы размеров',
     deliveryInfo: 'Информация о доставке',
     returnAndExchange: 'Возврат и обмен',
     contacts: 'Контакты',
     giftCertificates: 'Подарочные сертификаты',
+    giftCertificateTitle: 'Подарочный сертификат',
+    giftCertificateDescription:
+      'Этот подарочный сертификат будет отправлен получателю по E-Mail после оплаты заказа.',
+    giftCertificateCartAbout: 'Сертификат на имя ',
     pressInformationPage: 'Информационная страница для прессы',
     requestCallBackTitle:
       'Оставьте заявку и менеджер свяжется с Вами в ближайшее время',
@@ -92,6 +96,10 @@ export const TRANSLATE = {
     returnAndExchange: 'Return and exchange',
     contacts: 'Сontacts',
     giftCertificates: 'Gift certificates',
+    giftCertificateTitle: 'Gift certificate',
+    giftCertificateDescription:
+      'This gift certificate will be sent to the recipient by E-Mail after the order has been paid.',
+    giftCertificateCartAbout: 'Certificate for ',
     pressInformationPage: 'Press information page',
     requestCallBackTitle:
       'Leave a request and the manager will contact you shortly',

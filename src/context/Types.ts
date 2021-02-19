@@ -2,7 +2,10 @@ import {
   ICockpitCollections,
   ICockpitRunwaysAndLookbooks,
 } from '../cockpitTypes';
-import { ICartGoodsItemProps } from '../components/Cart/Types';
+import {
+  ICartGoodsItemProps,
+  ICartVoucherItemProps,
+} from '../components/Cart/Types';
 
 //eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IContext {}
@@ -14,7 +17,7 @@ export interface IIndexContext {
 }
 
 export interface ICartContext {
-  cart: ICartGoodsItemProps[];
-  addItem: (item: ICartGoodsItemProps) => void;
-  removeItem: (item: ICartGoodsItemProps) => void;
+  cart: (ICartGoodsItemProps | ICartVoucherItemProps)[];
+  addItem: (item: ICartGoodsItemProps | ICartVoucherItemProps) => void;
+  removeItem: (item: ICartGoodsItemProps | ICartVoucherItemProps) => void;
 }

@@ -18,7 +18,7 @@ const CartGoodsItem: React.FC<ICartGoodsItemProps> = ({
   const { locale } = useRouter();
 
   return (
-    <tr className="cart-goods-item">
+    <tr className="cart-item">
       <td className="image-cell">
         <Link href={`/goods${link}`}>
           <div className="image-wrapper">

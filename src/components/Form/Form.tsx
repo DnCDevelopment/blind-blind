@@ -62,6 +62,26 @@ const Form: React.FC<IFormProps> = ({
     return InputField;
   }, [formik, masks, placeholders, suffixes]);
 
+  const inputTextArea = useMemo(() => {
+    const InputField = (key: string) => (
+      <div className="input-area">
+        <textarea
+          id={key}
+          name={key}
+          value={formik.values[key]}
+          placeholder={placeholders[key]}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          onFocus={() => (formik.touched[key] = undefined)}
+        />
+        {!!suffixes && suffixes[key] && (
+          <span className="input-suffix">{suffixes[key]}</span>
+        )}
+      </div>
+    );
+    return InputField;
+  }, [formik, placeholders, suffixes]);
+
   const inputCheckbox = useMemo(() => {
     const InputField = (key: string) => (
       <div className="input-checkbox">
@@ -102,6 +122,7 @@ const Form: React.FC<IFormProps> = ({
     select: inputSelect,
     checkbox: inputCheckbox,
     maskedText: inputTextWithMask,
+    textArea: inputTextArea,
   };
 
   return (

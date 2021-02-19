@@ -26,7 +26,7 @@ const LinkList: React.FC = () => {
           <Link href="/">{TRANSLATE[locale as 'ru' | 'en'].contacts}</Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/voucher">
             {TRANSLATE[locale as 'ru' | 'en'].giftCertificates}
           </Link>
         </li>

@@ -10,6 +10,7 @@
     margin-right: 10px;
     border: 3px solid var(--grey-color);
     border-radius: 10px;
+    display: flex;
 
     .amount {
       position: absolute;
@@ -22,6 +23,12 @@
       text-align: center;
       background: var(--dark-grey-color);
       border-radius: 50%;
+    }
+
+    svg {
+      width: 70%;
+      height: 70%;
+      margin: auto;
     }
   }
 
