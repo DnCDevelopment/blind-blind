@@ -41,7 +41,6 @@ const Footer: React.FC = () => {
               <Image
                 layout="fill"
                 objectFit="contain"
-                // objectPosition="right"
                 loading="eager"
                 src="/png/payments.png"
               />

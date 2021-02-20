@@ -1,17 +1,20 @@
-import { NextPage, GetServerSideProps } from 'next';
 import { Suspense } from 'react';
+import { NextPage, GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 
 import Error from '../_error';
+import GoodsList, {
+  GoodsListFallback,
+} from '../../src/components/Goods/GoodsList';
+import GoodsListTitle from '../../src/components/Goods/GoodsListTitle';
+import Seo from '../../src/components/Seo/Seo';
+import SubCollections from '../../src/components/SubCollections/SubCollections';
 
 import { ICollectionPageProps } from '../../src/pagesTypes';
 
 import { getCockpitCollection } from '../../src/utils/getCockpitData';
-import GoodsList, {
-  GoodsListFallback,
-} from '../../src/components/Goods/GoodsList';
-import { useRouter } from 'next/router';
-import SubCollections from '../../src/components/SubCollections/SubCollections';
-import GoodsListTitle from '../../src/components/Goods/GoodsListTitle';
+
+import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
 
 const CollectionPage: NextPage<ICollectionPageProps> = ({
   collection,
@@ -21,12 +24,36 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
 
   if (!collection) return <Error />;
 
+  const collectionDescription =
+    locale === defaultLocale
+      ? collection.description
+      : collection.description_en;
+  const collectionLink =
+    locale === defaultLocale ? collection.link : collection.link_en;
   const collectionName =
     locale === defaultLocale ? collection.title : collection.title_en;
 
   if (subCollections)
     return (
       <>
+        <Seo
+          title={collectionName}
+          description={
+            collectionDescription || DEFAULT_DESCRIPTION[locale as 'ru' | 'en']
+          }
+          breadcrumbs={[
+            {
+              title: SEO_ITEMS[locale as 'ru' | 'en'].indexPage.breadcrumbName,
+              link: SEO_ITEMS[locale as 'ru' | 'en'].indexPage.link,
+            },
+            {
+              title: collectionName,
+              link: collectionLink,
+            },
+          ]}
+          lang={locale as 'ru' | 'en'}
+          path={collectionLink}
+        />
         <GoodsListTitle title={collectionName} />
         <SubCollections subCollections={subCollections} />
       </>
@@ -37,6 +64,24 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
 
   return (
     <div className="collection-page">
+      <Seo
+        title={collectionName}
+        description={
+          collectionDescription || DEFAULT_DESCRIPTION[locale as 'ru' | 'en']
+        }
+        breadcrumbs={[
+          {
+            title: SEO_ITEMS[locale as 'ru' | 'en'].indexPage.breadcrumbName,
+            link: SEO_ITEMS[locale as 'ru' | 'en'].indexPage.link,
+          },
+          {
+            title: collectionName,
+            link: collectionLink,
+          },
+        ]}
+        lang={locale as 'ru' | 'en'}
+        path={collectionLink}
+      />
       <GoodsListTitle title={collectionName} />
       <div className="goods-container">
         {isServer ? (

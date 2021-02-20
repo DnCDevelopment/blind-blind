@@ -11,6 +11,7 @@ export const getCockpitCollection = async (
       headers: { Authorization: `Bearer ${token}` },
     }
   );
+
   const cockpitData = await requestResult.json();
 
   return cockpitData;
