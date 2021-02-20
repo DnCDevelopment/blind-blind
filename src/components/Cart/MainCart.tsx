@@ -7,15 +7,19 @@ import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
 import Form from '../Form/Form';
 import CartGoodsItem from './CartGoodsItem';
+import CartVoucherItem from './CartVoucherItem';
 
 const MainCart: React.FC = () => {
   const { locale, push } = useRouter();
 
   const { cart, removeItem } = useContext(cartContext) as ICartContext;
 
+  console.log(cart);
+
   const subTotal = cart.reduce(
     (counter, cartItem) =>
-      counter + (cartItem.amount * Number.parseFloat(cartItem.price) || 0),
+      counter +
+      (cartItem.amount * Number.parseFloat(cartItem.price as string) || 0),
     0
   );
 
@@ -44,13 +48,21 @@ const MainCart: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {cart.map((item, idx) => (
-              <CartGoodsItem
-                key={idx}
-                {...item}
-                removeSelf={() => removeItem(item)}
-              />
-            ))}
+            {cart.map((item, idx) =>
+              'details' in item ? (
+                <CartGoodsItem
+                  key={idx}
+                  {...item}
+                  removeSelf={() => removeItem(item)}
+                />
+              ) : (
+                <CartVoucherItem
+                  key={idx}
+                  {...item}
+                  removeSelf={() => removeItem(item)}
+                />
+              )
+            )}
             <tr className="sub-total-row">
               <td></td>
               <td></td>

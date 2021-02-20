@@ -7,7 +7,10 @@ import {
   ICockpitCollectionsRaw,
   ICockpitRunwaysAndLookbooksRaw,
 } from '../src/cockpitTypes';
-import { ICartGoodsItemProps } from '../src/components/Cart/Types';
+import {
+  ICartGoodsItemProps,
+  ICartVoucherItemProps,
+} from '../src/components/Cart/Types';
 import Header from '../src/components/Header/Header';
 import Footer from '../src/components/Footer/Footer';
 import { cartContext } from '../src/context/cartContext';
@@ -29,38 +32,47 @@ const MyApp = ({
     curCartContext ? curCartContext.cart : []
   );
 
-  const addItemToCart = (item: ICartGoodsItemProps) => {
-    const existingItem = cartState.filter(
-      (el) =>
-        el.id === item.id &&
-        JSON.stringify(el.details) === JSON.stringify(item.details)
-    );
+  const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
+    if ('details' in item) {
+      const existingItem = cartState.filter(
+        (el) =>
+          el.id === item.id &&
+          'details' in el &&
+          JSON.stringify(el.details) === JSON.stringify(item.details)
+      );
 
-    if (existingItem.length) {
-      const newItem = existingItem[0];
-      cartState.forEach((el) => {
-        if (
-          el.id === newItem.id &&
-          JSON.stringify(el.details) === JSON.stringify(newItem.details)
-        )
-          el.amount += 1;
-      });
-      setCartState([...cartState]);
-    } else {
-      setCartState([...cartState, item]);
+      if (existingItem.length) {
+        const newItem = existingItem[0] as ICartGoodsItemProps;
+        cartState.forEach((el) => {
+          if (
+            el.id === newItem.id &&
+            JSON.stringify((el as ICartGoodsItemProps).details) ===
+              JSON.stringify(newItem.details)
+          )
+            el.amount += 1;
+        });
+        setCartState([...cartState]);
+        return;
+      }
     }
+    setCartState([...cartState, item]);
   };
 
-  const removeItemFromCart = (item: ICartGoodsItemProps) => {
-    setCartState([
-      ...cartState.filter(
-        (el) =>
-          !(
-            el.id === item.id &&
-            JSON.stringify(el.details) === JSON.stringify(item.details)
-          )
-      ),
-    ]);
+  const removeItemFromCart = (
+    item: ICartGoodsItemProps | ICartVoucherItemProps
+  ) => {
+    if ('details' in item)
+      setCartState([
+        ...cartState.filter(
+          (el) =>
+            !(
+              el.id === item.id &&
+              JSON.stringify((el as ICartGoodsItemProps).details) ===
+                JSON.stringify(item.details)
+            )
+        ),
+      ]);
+    else setCartState([...cartState.filter((el) => el.id !== item.id)]);
   };
 
   useEffect(() => {

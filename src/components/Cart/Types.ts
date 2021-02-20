@@ -13,3 +13,16 @@ export interface ICartGoodsItemProps extends ICartGoodsItemDetailsProps {
   amount: number;
   removeSelf?: () => void;
 }
+
+export interface ICartVoucherItemProps {
+  id?: string;
+  receiverName: string;
+  receiverEmail: string;
+  yourName: string;
+  yourEmail: string;
+  message?: string;
+  amount: number;
+  price: string;
+  theme: string;
+  removeSelf?: () => void;
+}

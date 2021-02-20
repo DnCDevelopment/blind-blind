@@ -1,0 +1,31 @@
+.voucher {
+  margin: auto;
+
+  &__title {
+    @include pageTitle;
+    font-size: var(--font-24);
+    text-align: center;
+  }
+
+  &__description {
+    text-align: center;
+  }
+
+  &__form-container {
+    max-width: 500px;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .voucher {
+    margin: unset;
+
+    &__title,
+    &__description,
+    &__form-container {
+      margin: unset;
+      text-align: left;
+    }
+  }
+}

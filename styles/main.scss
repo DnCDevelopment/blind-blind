@@ -21,6 +21,17 @@ body {
     overflow-y: hidden;
   }
 }
+
+body > div {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+  }
+}
+
 a {
   color: var(--black);
   text-decoration: none;
@@ -89,3 +100,4 @@ svg {
 @import '../src/components/Button/Button.scss';
 @import '../src/components/Cart/Cart.scss';
 @import '../src/components/Checkout/Checkout.scss';
+@import '../src/components/Voucher/Voucher.scss';

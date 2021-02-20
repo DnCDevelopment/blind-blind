@@ -5,6 +5,7 @@
 
   .photo-box {
     position: relative;
+    display: flex;
     width: 80px;
     height: 80px;
     margin-right: 10px;
@@ -22,6 +23,12 @@
       text-align: center;
       background: var(--dark-grey-color);
       border-radius: 50%;
+    }
+
+    svg {
+      width: 70%;
+      height: 70%;
+      margin: auto;
     }
   }
 

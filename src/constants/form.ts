@@ -17,6 +17,14 @@ export const FORM = {
     deliveryService: 'Служба доставки',
     paymentMethod: 'Способ оплаты',
     paymentMethods: ['Оплата через менеджера', 'Оплата онлайн'],
+    receiverName: 'Имя получателя',
+    receiverEmail: 'Почта получателя',
+    yourName: 'Ваше имя',
+    yourEmail: 'Ваша почта',
+    giftTheme: 'Тема подарочного сертификата',
+    giftThemes: ['День рождения', 'Общий', 'Рождество'],
+    giftMessage: 'Сообщение (необязательно)',
+    giftAmount: 'Сумма (от 1 грн до 1000 грн)',
   },
   en: {
     cm: 'cm',
@@ -33,6 +41,14 @@ export const FORM = {
     deliveryServices: ['Нова пошта', 'УкрПошта'],
     paymentMethod: 'Payment method',
     paymentMethods: ['Payment with manager', 'Online payment'],
+    receiverName: 'Receiver name',
+    receiverEmail: 'Receiver email',
+    yourName: 'Your name',
+    yourEmail: 'Your email',
+    giftTheme: 'Gift certificate theme',
+    giftThemes: ['Birthday', 'General', 'Christmas'],
+    giftMessage: 'Message (optional)',
+    giftAmount: 'Amount (between 1 UAH and 1000 UAH)',
   },
 };
 
@@ -151,6 +167,60 @@ export const FORMIK = {
     types: { phone: 'text' },
     placeholders: (locale: 'ru' | 'en') => ({
       phone: FORM[locale].phone,
+    }),
+  },
+  voucher: {
+    values: {
+      receiverName: '',
+      receiverEmail: '',
+      yourName: '',
+      yourEmail: '',
+      theme: '',
+      message: '',
+      price: '',
+    },
+    validationSchema: (locale: 'ru' | 'en') =>
+      Yup.object({
+        receiverName: Yup.string()
+          .matches(/^[ a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
+          .typeError(FORM[locale].wrongInput)
+          .required(FORM[locale].required),
+        receiverEmail: Yup.string().email().required(FORM[locale].required),
+        yourName: Yup.string()
+          .matches(/^[ a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
+          .typeError(FORM[locale].wrongInput)
+          .required(FORM[locale].required),
+        yourEmail: Yup.string().email().required(FORM[locale].required),
+        price: Yup.number()
+          .min(1, FORM[locale].tooSmall)
+          .max(1000, FORM[locale].tooLarge)
+          .required(FORM[locale].required)
+          .typeError(FORM[locale].wrongInput),
+        theme: Yup.string().required(FORM[locale].required),
+      }),
+    types: {
+      receiverName: 'text',
+      receiverEmail: 'text',
+      yourName: 'text',
+      yourEmail: 'text',
+      theme: 'select',
+      message: 'textArea',
+      price: 'text',
+    },
+    selectOptions: (locale: 'ru' | 'en') => ({
+      theme: FORM[locale].giftThemes,
+    }),
+    suffixes: {
+      price: 'UAH',
+    },
+    placeholders: (locale: 'ru' | 'en') => ({
+      receiverName: FORM[locale].receiverName,
+      receiverEmail: FORM[locale].receiverEmail,
+      yourName: FORM[locale].yourName,
+      yourEmail: FORM[locale].yourEmail,
+      theme: FORM[locale].giftTheme,
+      message: FORM[locale].giftMessage,
+      price: FORM[locale].giftAmount,
     }),
   },
 };

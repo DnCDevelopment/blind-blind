@@ -87,9 +87,25 @@ const Shipping: React.FC = () => {
             orderSummaryListHeight && 'open'
           }`}
         >
-          {cart.map((props) => (
-            <OrderSummaryListItem key={props.id} {...props} />
-          ))}
+          {cart.map((props, idx) =>
+            'title' in props ? (
+              <OrderSummaryListItem
+                key={idx}
+                price={props.price}
+                amount={props.amount}
+                title={props.title}
+                photo={props.photo}
+                details={props.details}
+              />
+            ) : (
+              <OrderSummaryListItem
+                key={idx}
+                price={props.price}
+                amount={props.amount}
+                receiverName={props.receiverName}
+              />
+            )
+          )}
           <div className="divider container" />
           <div className="discount">
             <Form
