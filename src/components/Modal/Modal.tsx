@@ -1,7 +1,6 @@
 import { IModalProps } from './Types';
 
 const Modal: React.FC<IModalProps> = ({ children, close }) => {
-  console.log('modal');
   return (
     <div className="modal">
       <div className="modal__wrapper">
