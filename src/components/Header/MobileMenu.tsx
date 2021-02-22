@@ -20,7 +20,7 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
 
   const { locale } = useRouter();
 
-  const { collectionsData, runwaysData, lookbooksData } = useContext(
+  const { collectionsData, runwaysData } = useContext(
     indexContext
   ) as IIndexContext;
 
@@ -28,7 +28,6 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
   const collections = collectionsData.concat(constantCollections);
   const aboutSublist = AboutListData[locale as 'en' | 'ru'];
 
-  aboutSublist[1].subsublist = lookbooksData;
   aboutSublist[2].subsublist = runwaysData;
 
   return (

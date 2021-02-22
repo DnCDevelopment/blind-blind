@@ -1,0 +1,50 @@
+.celebrities {
+  &__title {
+    @include pageTitle;
+    font-size: var(--font-24);
+    text-align: center;
+  }
+
+  &__celebrities-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+
+    .celebrity-item {
+      width: 100%;
+      margin-bottom: 20px;
+
+      .photo-container {
+        position: relative;
+        max-width: 250px;
+        height: 400px;
+        margin: 0 auto;
+        cursor: pointer;
+      }
+
+      .name,
+      .proffesion {
+        text-align: center;
+      }
+
+      .name {
+        font-size: var(--font-20);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .celebrities {
+    &__celebrities-container {
+      .celebrity-item {
+        width: 30%;
+        margin-right: 5%;
+
+        &:nth-child(3n + 3) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
