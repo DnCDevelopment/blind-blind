@@ -11,26 +11,24 @@ import { SEO_ITEMS } from '../src/constants/seoItems';
 import { getCockpitCollections } from '../src/utils/getCockpitData';
 import MainCollectionsSamples from '../src/components/MainCollectionsSamples/MainCollectionsSamples';
 
-const IndexPage: NextPage<IIndexPageProps> = ({ carousel, goods, locale }) => {
-  return (
-    <main className="main-page">
-      <Seo
-        title={SEO_ITEMS[locale].indexPage.title}
-        description={SEO_ITEMS[locale].indexPage.title}
-        breadcrumbs={[
-          {
-            title: SEO_ITEMS[locale].indexPage.breadcrumbName,
-            link: SEO_ITEMS[locale].indexPage.link,
-          },
-        ]}
-        lang={locale}
-        path={SEO_ITEMS[locale].indexPage.link}
-      />
-      <MainCarousel carousel={carousel}></MainCarousel>
-      <MainCollectionsSamples goods={goods} />
-    </main>
-  );
-};
+const IndexPage: NextPage<IIndexPageProps> = ({ carousel, goods, locale }) => (
+  <main className="main-page">
+    <Seo
+      title={SEO_ITEMS[locale].indexPage.title}
+      description={SEO_ITEMS[locale].indexPage.title}
+      breadcrumbs={[
+        {
+          title: SEO_ITEMS[locale].indexPage.breadcrumbName,
+          link: SEO_ITEMS[locale].indexPage.link,
+        },
+      ]}
+      lang={locale}
+      path={SEO_ITEMS[locale].indexPage.link}
+    />
+    <MainCarousel carousel={carousel}></MainCarousel>
+    <MainCollectionsSamples goods={goods} />
+  </main>
+);
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale,

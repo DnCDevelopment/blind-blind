@@ -2,7 +2,7 @@ export const AboutListData = {
   ru: [
     {
       title: 'Философия',
-      link: '/',
+      link: '/page/about',
     },
     {
       title: 'Знаменитости',
@@ -17,7 +17,7 @@ export const AboutListData = {
   en: [
     {
       title: 'Phylosophy',
-      link: '/',
+      link: '/en/page/about',
     },
     {
       title: 'Celebrities',

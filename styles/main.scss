@@ -78,6 +78,12 @@ svg {
   cursor: pointer;
 }
 
+.contacts-page-container {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 100px 15px 25px 15px;
+}
+
 .inform-page-container {
   padding: 100px 15px 25px 15px;
 
@@ -87,10 +93,16 @@ svg {
 }
 
 @media screen and (min-width: 768px) {
-  .inform-page-container {
+  .inform-page-container, .contacts-page-container {
     max-width: 768px;
     margin: 0 auto;
     padding: 150px 50px 25px 50px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .contacts-page-container {
+    max-width: 1024px;
   }
 }
 
@@ -109,3 +121,5 @@ svg {
 @import '../src/components/Runway/Runway.scss';
 @import '../src/components/Modal/Modal.scss';
 @import '../src/components/Celebrities/Celebrities.scss';
+@import '../src/components/Contacts/Contacts.scss';
+@import '../src/components/Contacts/SalesPlaces.scss';
