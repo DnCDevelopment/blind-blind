@@ -1,0 +1,12 @@
+.contacts-page-container {
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  a, p {
+    display: block;
+    margin: 5px 0;
+    font-size: var(--font-15);
+    text-decoration: none;
+  }
+}

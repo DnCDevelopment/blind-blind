@@ -18,11 +18,11 @@ export const footerMenu = (locale: 'ru' | 'en') => [
     title: TRANSLATE[locale].returnAndExchange,
   },
   {
-    link: '/',
+    link: '/contacts',
     title: TRANSLATE[locale].contacts,
   },
   {
-    link: '/',
+    link: '/voucher',
     title: TRANSLATE[locale].giftCertificates,
   },
 ];
