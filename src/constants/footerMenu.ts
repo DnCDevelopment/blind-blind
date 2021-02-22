@@ -6,7 +6,7 @@ export const footerMenu = (locale: 'ru' | 'en') => [
     title: TRANSLATE[locale].aboutUs,
   },
   {
-    link: '/',
+    link: '/sizes-table',
     title: TRANSLATE[locale].sizeTable,
   },
   {
