@@ -5,12 +5,11 @@ export const AboutListData = {
       link: '/',
     },
     {
-      title: 'Лукбуки',
-      link: '/',
-      subsublist: [{ title: '', link: '' }],
+      title: 'Знаменитости',
+      link: '/celebrities',
     },
     {
-      title: 'Показы',
+      title: 'Blind Style',
       link: '/',
       subsublist: [{ title: '', link: '' }],
     },
@@ -21,12 +20,11 @@ export const AboutListData = {
       link: '/',
     },
     {
-      title: 'Lookbooks',
-      link: '/',
-      subsublist: [{ title: '', link: '' }],
+      title: 'Celebrities',
+      link: '/celebrities',
     },
     {
-      title: 'Runways',
+      title: 'Blind Style',
       link: '/',
       subsublist: [{ title: '', link: '' }],
     },

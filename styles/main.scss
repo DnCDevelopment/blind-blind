@@ -42,13 +42,19 @@ a {
   }
 }
 
-.container {
+.container,
+.narrow-container {
   width: 100%;
+  margin: 0 auto;
   padding: 0 15px;
 
   @media screen and (min-width: 768px) {
     padding: 0 60px;
   }
+}
+
+.narrow-container {
+  max-width: 900px;
 }
 
 input,
@@ -88,7 +94,6 @@ svg {
   }
 }
 
-
 @import '../src/components/Header/Header.scss';
 @import '../src/components/Footer/Footer.scss';
 @import '../src/components/Carousel/Carousel.scss';
@@ -101,3 +106,6 @@ svg {
 @import '../src/components/Cart/Cart.scss';
 @import '../src/components/Checkout/Checkout.scss';
 @import '../src/components/Voucher/Voucher.scss';
+@import '../src/components/Runway/Runway.scss';
+@import '../src/components/Modal/Modal.scss';
+@import '../src/components/Celebrities/Celebrities.scss';

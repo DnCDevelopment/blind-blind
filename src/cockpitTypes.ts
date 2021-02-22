@@ -5,8 +5,15 @@ export interface ICockpitCollections {
   _id?: string;
 }
 
-//eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ICockpitRunwaysAndLookbooks extends ICockpitCollections {}
+interface IPhoto {
+  meta: { title: string; asset: string };
+  path: string;
+}
+
+export interface ICockpitRunwaysAndLookbooks extends ICockpitCollections {
+  photos: IPhoto[];
+  videoLink?: string;
+}
 
 export interface ICockpitGoods extends ICockpitCollections {
   description: string;
@@ -34,7 +41,7 @@ export interface ICockpitCollectionsRaw extends ICockpitCollections {
   _by: string;
   _modified: number;
   _created: number;
-  inMenu: true;
+  inMenu: boolean;
 }
 
 export interface ICockpitRunwaysAndLookbooksRaw
@@ -42,10 +49,7 @@ export interface ICockpitRunwaysAndLookbooksRaw
   _id: string;
   title_en: string;
   link_en: string;
-  photos: {
-    meta: { title: string; asset: string };
-    path: string;
-  }[];
+  photos: IPhoto[];
   inMenu: boolean;
   _by: string;
   _mby: string;
@@ -134,4 +138,15 @@ export interface ICockpitPromocode {
   code: string;
   discount: string;
   inPercent: boolean;
+}
+
+export interface ICockpitCelebrity {
+  proffesion: string;
+  name: string;
+  photo: IPhoto;
+}
+
+export interface ICockpitCelebrityRaw extends ICockpitCelebrity {
+  name_en: string;
+  proffesion_en: string;
 }

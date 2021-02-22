@@ -31,6 +31,12 @@ export const SEO_ITEMS = {
       breadcrumbName: 'Скидки',
       link: '/sales',
     },
+    blindStylePage: {
+      title: 'Blind Style',
+      description: DEFAULT_DESCRIPTION.ru,
+      breadcrumbName: 'Blind Style',
+      link: '/blind-style',
+    },
   },
   en: {
     cartPage: {
@@ -56,6 +62,12 @@ export const SEO_ITEMS = {
       description: DEFAULT_DESCRIPTION.en,
       breadcrumbName: 'Stocks',
       link: '/en/sales',
+    },
+    blindStylePage: {
+      title: 'Blind Style',
+      description: DEFAULT_DESCRIPTION.en,
+      breadcrumbName: 'Blind Style',
+      link: '/en/blind-style',
     },
   },
 };

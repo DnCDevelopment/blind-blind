@@ -22,8 +22,8 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
 
   const breadcrumbs = [
     {
-      title: SEO_ITEMS[locale as 'ru' | 'en'].indexPage.breadcrumbName,
-      link: SEO_ITEMS[locale as 'ru' | 'en'].indexPage.link,
+      title: SEO_ITEMS[locale].indexPage.breadcrumbName,
+      link: SEO_ITEMS[locale].indexPage.link,
     },
     {
       title: collection.title,

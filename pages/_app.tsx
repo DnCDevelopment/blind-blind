@@ -25,7 +25,7 @@ import '../styles/main.scss';
 const MyApp = ({
   Component,
   pageProps,
-  props: { collections, lookbooks, runways },
+  props: { collections, runways },
 }: AppProps & IAppProps): JSX.Element => {
   const curCartContext = useContext(cartContext);
   const [cartState, setCartState] = useState(
@@ -93,7 +93,6 @@ const MyApp = ({
     <indexContext.Provider
       value={{
         collectionsData: collections,
-        lookbooksData: lookbooks,
         runwaysData: runways,
       }}
     >
@@ -121,27 +120,17 @@ MyApp.getInitialProps = async (
 
   const { locale, defaultLocale } = appContext.router;
 
-  const collectionNames = ['Collections', 'Runways', 'Lookbooks'];
+  const collectionNames = ['Collections', 'Runways'];
   const [
     cockpitDataCollections,
     cockpitDataRunways,
-    cockpitDataLookbooks,
   ] = await getCockpitCollections(collectionNames);
 
   const runways = cockpitDataRunways.entries.map(
     (el: ICockpitRunwaysAndLookbooksRaw) => {
       return {
         title: locale === defaultLocale ? el.title : el.title_en,
-        link: locale === defaultLocale ? el.link : el.link_en,
-      };
-    }
-  );
-
-  const lookbooks = cockpitDataLookbooks.entries.map(
-    (el: ICockpitRunwaysAndLookbooksRaw) => {
-      return {
-        title: locale === defaultLocale ? el.title : el.title_en,
-        link: locale === defaultLocale ? el.link : el.link_en,
+        link: '/blind-style' + el.link,
       };
     }
   );
@@ -158,7 +147,7 @@ MyApp.getInitialProps = async (
 
   return {
     ...appProps,
-    props: { collections, runways, lookbooks },
+    props: { collections, runways },
   };
 };
 

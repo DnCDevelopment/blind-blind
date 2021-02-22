@@ -12,7 +12,6 @@ export interface IContext {}
 
 export interface IIndexContext {
   collectionsData: ICockpitCollections[];
-  lookbooksData: ICockpitRunwaysAndLookbooks[];
   runwaysData: ICockpitRunwaysAndLookbooks[];
 }
 

@@ -5,6 +5,7 @@ import {
   ICockpitGoods,
   ICockpitCollectionsRaw,
   ICockpitSubCollectionRaw,
+  ICockpitCelebrity,
 } from './cockpitTypes';
 import { IGoodsSingleProps } from './components/Goods/Types';
 
@@ -16,15 +17,6 @@ export interface IAppProps {
   props: {
     collections: ICockpitCollections[];
     runways: ICockpitRunwaysAndLookbooks[];
-    lookbooks: ICockpitRunwaysAndLookbooks[];
-  };
-}
-
-export interface IAppProps {
-  props: {
-    collections: ICockpitCollections[];
-    runways: ICockpitRunwaysAndLookbooks[];
-    lookbooks: ICockpitRunwaysAndLookbooks[];
   };
 }
 
@@ -72,4 +64,12 @@ export interface IInfomationPageProps {
     link: string;
     content: string;
   };
+}
+
+export interface IBlindStylePageProps {
+  runwayProps: ICockpitRunwaysAndLookbooks;
+}
+
+export interface ICelebritiesPageProps {
+  celebrities: ICockpitCelebrity[];
 }

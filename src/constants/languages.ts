@@ -60,6 +60,7 @@ export const TRANSLATE = {
     copyright: 'Copyright © Blind-Blind 2021 Все права защищены',
     privacyPolicy: 'Политика конфиденциальности',
     publicContract: 'Публичный договор',
+    celebrities: 'Знаменитости',
   },
   en: {
     store: 'Store',
@@ -107,5 +108,6 @@ export const TRANSLATE = {
     copyright: 'Copyright © Blind-Blind 2021 All rights reserved',
     privacyPolicy: 'Privacy policy',
     publicContract: 'Public contract',
+    celebrities: 'Сelebrities',
   },
 };
