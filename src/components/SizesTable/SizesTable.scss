@@ -1,0 +1,24 @@
+.sizes-table {
+  text-align: center;
+
+  &__title {
+    @include pageTitle;
+    margin-bottom: 20px;
+    font-size: var(--font-24);
+  }
+
+  &__table {
+    margin: 0 auto;
+    border-spacing: 10px;
+
+    th {
+      font-weight: var(--font-weight-500);
+    }
+  }
+
+  &__additional-info {
+    margin-top: 30px;
+    font-weight: var(--font-weight-500);
+    font-size: var(--font-20);
+  }
+}
