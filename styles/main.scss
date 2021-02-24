@@ -93,7 +93,8 @@ svg {
 }
 
 @media screen and (min-width: 768px) {
-  .inform-page-container, .contacts-page-container {
+  .inform-page-container,
+  .contacts-page-container {
     max-width: 768px;
     margin: 0 auto;
     padding: 150px 50px 25px 50px;
