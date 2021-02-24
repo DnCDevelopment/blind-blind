@@ -1,6 +1,12 @@
 import { NextPage } from 'next';
-const ThanksPage: NextPage = () => {
-  return <div>Spasibo chto zhivoy</div>;
+import ThankYou from '../src/components/ThankYou/ThankYou';
+
+const ThankYouPage: NextPage = () => {
+  return (
+    <div className="thank-you-page">
+      <ThankYou />
+    </div>
+  );
 };
 
-export default ThanksPage;
+export default ThankYouPage;

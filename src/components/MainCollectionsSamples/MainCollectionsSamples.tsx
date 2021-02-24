@@ -10,7 +10,7 @@ const MainCollectionsSamples: React.FC<IMainCollectionsSamplesProps> = ({
 }) => {
   const { collectionsData } = useContext(indexContext) as IIndexContext;
 
-  const samples = goods.reduce(
+  const allSamples = goods.reduce(
     (samples: { [key: string]: ICockpitGoods[] }, x: ICockpitGoods) => {
       (samples[x.collectionId] = samples[x.collectionId] || []).push(x);
       return samples;
@@ -22,7 +22,7 @@ const MainCollectionsSamples: React.FC<IMainCollectionsSamplesProps> = ({
     return {
       title,
       link,
-      samples: samples[_id as string],
+      samples: allSamples[_id as string],
     };
   });
 
