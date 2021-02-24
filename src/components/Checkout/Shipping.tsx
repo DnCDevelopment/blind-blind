@@ -20,7 +20,6 @@ const Shipping: React.FC = () => {
   const [orderSummaryListHeight, setOrderSummaryListHeight] = useState(false);
 
   const orderListRef = useRef<HTMLDivElement>(null);
-
   const couponRef = useRef<string>();
 
   const { cart } = useContext(cartContext) as ICartContext;
@@ -68,12 +67,9 @@ const Shipping: React.FC = () => {
     } = values;
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
-
+    const currentLocale = locale;
     const items = cart.map(({ id }) => id);
-    const url = '/api/addCheckout';
-    const paymentTypeCode = FORM[locale as 'ru' | 'en'].paymentMethods.indexOf(
-      paymentMethod
-    );
+    const url = '/api/checkout';
     fetch(url, {
       method: 'POST',
       headers: {
@@ -85,16 +81,19 @@ const Shipping: React.FC = () => {
         address: email,
         deliveryService: service,
         paymentType: paymentMethod,
-        paymentTypeCode,
         totalSum: totalCheckout,
         coupon: couponRef.current,
+        locale: currentLocale,
         phone,
         items,
       }),
     })
       .then((data) => data.json())
       .then(({ signature, data }) => {
-        if (typeof window !== 'undefined' && paymentTypeCode == 1)
+        if (
+          typeof window !== 'undefined' &&
+          paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
+        )
           window.open(
             `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`,
             '__blank'

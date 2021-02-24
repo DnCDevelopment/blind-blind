@@ -16,7 +16,8 @@ export const FORM = {
     deliveryServices: ['Нова пошта', 'УкрПошта'],
     deliveryService: 'Служба доставки',
     paymentMethod: 'Способ оплаты',
-    paymentMethods: ['Оплата через менеджера', 'Оплата онлайн'],
+    paymentOnline: 'Оплата онлайн',
+    paymentManager: 'Оплата через менеджера',
     receiverName: 'Имя получателя',
     receiverEmail: 'Почта получателя',
     yourName: 'Ваше имя',
@@ -40,7 +41,8 @@ export const FORM = {
     deliveryService: 'Delivery service',
     deliveryServices: ['Нова пошта', 'УкрПошта'],
     paymentMethod: 'Payment method',
-    paymentMethods: ['Payment with manager', 'Online payment'],
+    paymentOnline: 'Online payment',
+    paymentManager: 'Payment with manager',
     receiverName: 'Receiver name',
     receiverEmail: 'Receiver email',
     yourName: 'Your name',
@@ -94,7 +96,7 @@ export const FORMIK = {
     },
     selectOptions: (locale: 'ru' | 'en') => ({
       service: FORM[locale].deliveryServices,
-      paymentMethod: FORM[locale].paymentMethods,
+      paymentMethod: [FORM[locale].paymentOnline, FORM[locale].paymentManager],
     }),
     placeholders: (locale: 'ru' | 'en') => ({
       firstName: FORM[locale].firstName,
