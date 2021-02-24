@@ -51,7 +51,7 @@ const checkout: NextApiHandler = async (req, res) => {
       currency: 'UAH',
       order_id: _id,
       description: 'Покупка в магазине BLIND-BLIND',
-      result_url: `${process.env.NEXT_PUBLIC_HOME_URL}thanks`,
+      result_url: `${process.env.NEXT_PUBLIC_HOME_URL}thank-you`,
       server_url: `${process.env.NEXT_PUBLIC_HOME_URL}api/confirmPayment`,
     };
 

@@ -98,7 +98,7 @@ const Shipping: React.FC = () => {
             `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`,
             '__blank'
           );
-        push('/thanks');
+        push('/thank-you');
       });
   };
 
