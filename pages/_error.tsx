@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
+import NotFound from '../src/components/NotFound/NotFound';
 
 const Error: NextPage = () => {
-  return <h1>Not Found</h1>;
+  return <NotFound />;
 };
 
 export default Error;

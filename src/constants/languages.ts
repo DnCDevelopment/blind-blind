@@ -61,6 +61,10 @@ export const TRANSLATE = {
     privacyPolicy: 'Политика конфиденциальности',
     publicContract: 'Публичный договор',
     celebrities: 'Знаменитости',
+    notFoundTitle: '404 Страница не найдена',
+    notFoundDescription: 'Запрошенная вами страница не существует.',
+    continueShopping: ['Нажите', 'здесь', 'чтобы продолжить покупки.'],
+    thanksForOrderTitle: 'Спасибо за ваш заказ',
   },
   en: {
     store: 'Store',
@@ -109,5 +113,9 @@ export const TRANSLATE = {
     privacyPolicy: 'Privacy policy',
     publicContract: 'Public contract',
     celebrities: 'Сelebrities',
+    notFoundTitle: '404 Page not found',
+    notFoundDescription: 'The page you requested does not exist.',
+    continueShopping: ['Click', 'here', 'to continue shopping.'],
+    thanksForOrderTitle: 'Thank you for your order.',
   },
 };
