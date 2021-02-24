@@ -4,21 +4,24 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import ShoppingCart from '../../assets/svg/shoppingCart.svg';
 
-import { FORMIK } from '../../constants/form';
+import { FORM, FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
 import Form from '../Form/Form';
 import OrderSummaryListItem from './OrderSummaryListItem';
+import { FormikValues } from 'formik';
 
 const Shipping: React.FC = () => {
-  const { locale } = useRouter();
+  const { locale, push } = useRouter();
 
   const isServer = typeof window === 'undefined';
 
   const [orderSummaryListHeight, setOrderSummaryListHeight] = useState(false);
 
   const orderListRef = useRef<HTMLDivElement>(null);
+
+  const couponRef = useRef<string>();
 
   const { cart } = useContext(cartContext) as ICartContext;
 
@@ -30,6 +33,8 @@ const Shipping: React.FC = () => {
       .then((res) => res.json())
       .then((json) => {
         const { discount } = json;
+
+        couponRef.current = enteredCode;
         if (discount) {
           setTotalCheckout(
             discount.inPercent
@@ -50,6 +55,53 @@ const Shipping: React.FC = () => {
       ),
     [cart]
   );
+
+  const confirmCheckout = (values: FormikValues) => {
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      paymentMethod,
+      service,
+      checkbox,
+    } = values;
+    if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
+    else localStorage.removeItem('shipping');
+
+    const items = cart.map(({ id }) => id);
+    const url = '/api/addCheckout';
+    const paymentTypeCode = FORM[locale as 'ru' | 'en'].paymentMethods.indexOf(
+      paymentMethod
+    );
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: firstName,
+        surname: lastName,
+        address: email,
+        deliveryService: service,
+        paymentType: paymentMethod,
+        paymentTypeCode,
+        totalSum: totalCheckout,
+        coupon: couponRef.current,
+        phone,
+        items,
+      }),
+    })
+      .then((data) => data.json())
+      .then(({ signature, data }) => {
+        if (typeof window !== 'undefined' && paymentTypeCode == 1)
+          window.open(
+            `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`,
+            '__blank'
+          );
+        push('/thanks');
+      });
+  };
 
   const [totalCheckout, setTotalCheckout] = useState(calcTotalCheckout());
 
@@ -142,11 +194,7 @@ const Shipping: React.FC = () => {
               validationSchema: FORMIK.shippingMain.validationSchema(
                 locale as 'ru' | 'en'
               ),
-              onSubmit: (values) => {
-                if (values.checkbox)
-                  localStorage.setItem('shipping', JSON.stringify(values));
-                else localStorage.removeItem('shipping');
-              },
+              onSubmit: confirmCheckout,
             }}
             types={FORMIK.shippingMain.types}
             selectOptions={FORMIK.shippingMain.selectOptions(

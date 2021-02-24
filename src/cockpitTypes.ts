@@ -135,6 +135,7 @@ export interface ICockpitSize {
 }
 
 export interface ICockpitPromocode {
+  id?: string;
   code: string;
   discount: string;
   inPercent: boolean;
