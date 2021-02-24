@@ -6,6 +6,8 @@ import {
   ICockpitCollectionsRaw,
   ICockpitSubCollectionRaw,
   ICockpitCelebrity,
+  ICockpitContacts,
+  ICockpitSalesPlace,
 } from './cockpitTypes';
 import { IGoodsSingleProps } from './components/Goods/Types';
 
@@ -73,4 +75,9 @@ export interface IBlindStylePageProps {
 
 export interface ICelebritiesPageProps {
   celebrities: ICockpitCelebrity[];
+}
+
+export interface IContactsPageProps {
+  contacts: ICockpitContacts;
+  salesPlaces: ICockpitSalesPlace[];
 }

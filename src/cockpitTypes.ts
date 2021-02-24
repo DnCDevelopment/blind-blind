@@ -150,3 +150,21 @@ export interface ICockpitCelebrityRaw extends ICockpitCelebrity {
   name_en: string;
   proffesion_en: string;
 }
+
+export interface ICockpitContacts {
+  email: string;
+  phone: string;
+}
+
+export interface ICockpitSalesPlace {
+  city: string;
+  address: string;
+  email: string;
+  phone: string;
+  picture: IPhoto;
+}
+
+export interface ICockpitSalesPlaceRow extends ICockpitSalesPlace {
+  city_en: string;
+  address_en: string;
+}

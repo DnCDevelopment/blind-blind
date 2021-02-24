@@ -52,12 +52,12 @@ const Footer: React.FC = () => {
             {TRANSLATE[locale as 'ru' | 'en'].copyright}
           </p>
           <p className="privacy-policy">
-            <Link href="/">
+            <Link href="/page/privacy-policy">
               {TRANSLATE[locale as 'ru' | 'en'].privacyPolicy}
             </Link>
           </p>
           <p className="public-contract">
-            <Link href="/">
+            <Link href="/page/public-contract">
               {TRANSLATE[locale as 'ru' | 'en'].publicContract}
             </Link>
           </p>

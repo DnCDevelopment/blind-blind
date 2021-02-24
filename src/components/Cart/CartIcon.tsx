@@ -11,7 +11,6 @@ import CartSVG from '../../assets/svg/cart.svg';
 
 const CartIcon: React.FC = () => {
   const { locale } = useRouter();
-
   const { cart } = useContext(cartContext) as ICartContext;
 
   const cartItemsCounter = cart.reduce(

@@ -14,6 +14,8 @@ const MainCart: React.FC = () => {
 
   const { cart, removeItem } = useContext(cartContext) as ICartContext;
 
+  console.log(cart);
+
   const subTotal = cart.reduce(
     (counter, cartItem) =>
       counter +
