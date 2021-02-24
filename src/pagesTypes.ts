@@ -23,6 +23,7 @@ export interface IAppProps {
 export interface IIndexPageProps {
   carousel: ICockpitCarousel[];
   goods: ICockpitGoods[];
+  celebrities: ICockpitCelebrity[];
   locale: 'ru' | 'en';
 }
 

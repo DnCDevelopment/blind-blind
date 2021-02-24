@@ -17,7 +17,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   defaultLocale,
 }) => {
   const cockpitDataCelebrities = await getCockpitCollection('Celebrities');
-  console.log(cockpitDataCelebrities);
 
   const celebrities = cockpitDataCelebrities.entries.map(
     (el: ICockpitCelebrityRaw) => {
