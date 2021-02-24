@@ -1,0 +1,22 @@
+.not-found {
+  h1 {
+    @include pageTitle;
+    font-weight: var(--font-weight-500);
+    font-size: var(--font-20);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 40px;
+    text-align: center;
+
+    a {
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

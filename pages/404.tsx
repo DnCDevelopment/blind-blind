@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
+import NotFound from '../src/components/NotFound/NotFound';
 
-const NotFound: NextPage = () => {
-  return <h1>404 page</h1>;
+const Page404: NextPage = () => {
+  return <NotFound />;
 };
 
-export default NotFound;
+export default Page404;
