@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
   const handleShowModal = (success = false) => {
     setShowModal(!showModal);
     setSuccess(success);
-    document.body.classList.toggle('fixed');
+    document.body.classList.toggle('hide-overflow');
   };
 
   return (
