@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "export": "next export",
     "format": "prettier --write \"./**/*.{ts,tsx}\"",
@@ -16,6 +17,7 @@
     "next": "^10.0.2",
     "next-fonts": "^1.5.1",
     "next-react-svg": "1.1.2",
+    "next-sitemap": "^1.5.8",
     "node-fetch": "^2.6.1",
     "normalize.css": "^8.0.1",
     "react": "^17.0.1",

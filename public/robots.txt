@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://blind-blind.com
+
+# Sitemaps
+Sitemap: https://blind-blind.com/sitemap.xml

@@ -11,12 +11,13 @@ export const FORM = {
     lettersRequired: 'некорректный ввод',
     firstName: 'Имя',
     lastName: 'Фамилия',
-    email: 'Адрес',
+    email: 'Почта',
     phone: 'Телефон',
     deliveryServices: ['Нова пошта', 'УкрПошта'],
     deliveryService: 'Служба доставки',
     paymentMethod: 'Способ оплаты',
-    paymentMethods: ['Оплата через менеджера', 'Оплата онлайн'],
+    paymentOnline: 'Оплата онлайн',
+    paymentManager: 'Оплата через менеджера',
     receiverName: 'Имя получателя',
     receiverEmail: 'Почта получателя',
     yourName: 'Ваше имя',
@@ -40,7 +41,8 @@ export const FORM = {
     deliveryService: 'Delivery service',
     deliveryServices: ['Нова пошта', 'УкрПошта'],
     paymentMethod: 'Payment method',
-    paymentMethods: ['Payment with manager', 'Online payment'],
+    paymentOnline: 'Online payment',
+    paymentManager: 'Payment with manager',
     receiverName: 'Receiver name',
     receiverEmail: 'Receiver email',
     yourName: 'Your name',
@@ -76,7 +78,9 @@ export const FORMIK = {
         lastName: Yup.string()
           .matches(/^[a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
           .required(FORM[locale].required),
-        email: Yup.string().email().required(FORM[locale].required),
+        email: Yup.string()
+          .email(FORM[locale].wrongInput)
+          .required(FORM[locale].required),
         phone: Yup.number()
           .required(FORM[locale].required)
           .typeError(FORM[locale].wrongInput),
@@ -94,7 +98,7 @@ export const FORMIK = {
     },
     selectOptions: (locale: 'ru' | 'en') => ({
       service: FORM[locale].deliveryServices,
-      paymentMethod: FORM[locale].paymentMethods,
+      paymentMethod: [FORM[locale].paymentOnline, FORM[locale].paymentManager],
     }),
     placeholders: (locale: 'ru' | 'en') => ({
       firstName: FORM[locale].firstName,

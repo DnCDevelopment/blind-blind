@@ -2,17 +2,33 @@ import { GetServerSideProps, NextPage } from 'next';
 
 import Contacts from '../src/components/Contacts/Contacts';
 import SalesPlaces from '../src/components/Contacts/SalesPlaces';
+import Seo from '../src/components/Seo/Seo';
 
 import { getCockpitCollection } from '../src/utils/getCockpitData';
 
 import { ICockpitContacts, ICockpitSalesPlaceRow } from '../src/cockpitTypes';
 import { IContactsPageProps } from '../src/pagesTypes';
 
+import { SEO_ITEMS } from '../src/constants/seoItems';
+
 const ContactsPage: NextPage<IContactsPageProps> = ({
   contacts,
   salesPlaces,
+  locale,
 }) => (
   <div className="contacts-page-container">
+    <Seo
+      title={SEO_ITEMS[locale].contactsPage.title}
+      description={SEO_ITEMS[locale].contactsPage.title}
+      breadcrumbs={[
+        {
+          title: SEO_ITEMS[locale].contactsPage.breadcrumbName,
+          link: SEO_ITEMS[locale].contactsPage.link,
+        },
+      ]}
+      lang={locale}
+      path={SEO_ITEMS[locale].contactsPage.link}
+    />
     <Contacts email={contacts.email} phone={contacts.phone} />
     <SalesPlaces places={salesPlaces} />
   </div>
@@ -46,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       contacts,
       salesPlaces,
+      locale,
     },
   };
 };
