@@ -11,7 +11,7 @@ export const FORM = {
     lettersRequired: 'некорректный ввод',
     firstName: 'Имя',
     lastName: 'Фамилия',
-    email: 'Адрес',
+    email: 'Почта',
     phone: 'Телефон',
     deliveryServices: ['Нова пошта', 'УкрПошта'],
     deliveryService: 'Служба доставки',
@@ -78,7 +78,9 @@ export const FORMIK = {
         lastName: Yup.string()
           .matches(/^[a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
           .required(FORM[locale].required),
-        email: Yup.string().email().required(FORM[locale].required),
+        email: Yup.string()
+          .email(FORM[locale].wrongInput)
+          .required(FORM[locale].required),
         phone: Yup.number()
           .required(FORM[locale].required)
           .typeError(FORM[locale].wrongInput),

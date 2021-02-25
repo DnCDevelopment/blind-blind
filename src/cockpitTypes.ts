@@ -57,10 +57,14 @@ export interface ICockpitRunwaysAndLookbooksRaw
 }
 
 export interface ICockpitPages {
+  title: string;
+  title_en: string;
   link: string;
   link_en: string;
   content: string;
   content_en: string;
+  seoDescription: string;
+  seoDescription_en: string;
 }
 
 export interface ICockpitGoodsRaw extends ICockpitGoods {
