@@ -52,7 +52,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
     else
       setVisiblePages(
         [...Array(maxPageNumber).keys()].splice(
-          currentPage - Math.ceil(AVAILABLE_PAGES / 2),
+          currentPage - Math.floor(AVAILABLE_PAGES / 2),
           currentPage + Math.ceil(AVAILABLE_PAGES / 2) - 1
         )
       );
