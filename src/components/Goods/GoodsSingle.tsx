@@ -59,6 +59,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             alt={title}
             loading="eager"
             src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
+            onClick={() => console.log(Math.random())}
           />
         </div>
         <div className="second-photo">
