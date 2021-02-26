@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
-import { FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
 import { ICartContext } from '../../context/Types';
@@ -14,12 +13,9 @@ const MainCart: React.FC = () => {
 
   const { cart, removeItem } = useContext(cartContext) as ICartContext;
 
-  console.log(cart);
-
   const subTotal = cart.reduce(
     (counter, cartItem) =>
-      counter +
-      (cartItem.amount * Number.parseFloat(cartItem.price as string) || 0),
+      counter + (cartItem.amount * Number.parseFloat(cartItem.price) || 0),
     0
   );
 
@@ -73,17 +69,12 @@ const MainCart: React.FC = () => {
                 </p>
                 <Form
                   formikConfig={{
-                    initialValues: FORMIK.mainCart.values,
-                    onSubmit: (values) => {
-                      values.checkbox
-                        ? push('/checkout')
-                        : alert(TRANSLATE[locale as 'ru' | 'en'].checkOutAlert);
-                    },
+                    initialValues: {},
+                    onSubmit: () => push('/checkout'),
                   }}
-                  types={FORMIK.mainCart.types}
+                  types={{}}
                   placeholders={{}}
                   buttonTitle={TRANSLATE[locale as 'ru' | 'en'].checkOut}
-                  checkboxText={TRANSLATE[locale as 'ru' | 'en'].agreement}
                 />
               </td>
             </tr>
