@@ -1,0 +1,38 @@
+.thanks {
+  font-size: var(--font-16);
+  text-align: center;
+
+  &-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px auto;
+
+    svg {
+      width: inherit;
+      height: inherit;
+    }
+  }
+
+  &-modal {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    max-width: 400px;
+    padding: 30px;
+    color: var(--black-color);
+    background: var(--white-color);
+    transform: translate(-50%,-50%);
+
+    .close {
+      height: 20px;
+      margin-bottom: 10px;
+      cursor: pointer;
+
+      & svg {
+        float: right;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}

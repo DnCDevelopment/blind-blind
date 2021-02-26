@@ -3,17 +3,38 @@ import { ICockpitPages } from '../../src/cockpitTypes';
 import { IInfomationPageProps } from '../../src/pagesTypes';
 
 import Error from '../_error';
+import Seo from '../../src/components/Seo/Seo';
 
 import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
-const SinglePage: NextPage<IInfomationPageProps> = ({ pageProps }) => {
+import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
+
+const SinglePage: NextPage<IInfomationPageProps> = ({ pageProps, locale }) => {
   if (!pageProps) return <Error />;
 
   return (
-    <div
-      className="inform-page-container"
-      dangerouslySetInnerHTML={{ __html: pageProps.content }}
-    />
+    <>
+      <Seo
+        title={pageProps.title}
+        description={pageProps.seoDescription || DEFAULT_DESCRIPTION[locale]}
+        breadcrumbs={[
+          {
+            title: SEO_ITEMS[locale].indexPage.breadcrumbName,
+            link: SEO_ITEMS[locale].indexPage.link,
+          },
+          {
+            title: pageProps.title as string,
+            link: pageProps.link as string,
+          },
+        ]}
+        lang={locale as 'ru' | 'en'}
+        path={pageProps.link as string}
+      />
+      <div
+        className="inform-page-container"
+        dangerouslySetInnerHTML={{ __html: pageProps.content }}
+      />
+    </>
   );
 };
 
@@ -28,15 +49,21 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const pageProps = curPage
     ? {
+        title: locale === defaultLocale ? curPage.title : curPage.title_en,
         link: curPage.link,
         content:
           locale === defaultLocale ? curPage.content : curPage.content_en,
+        seoDescription:
+          locale === defaultLocale
+            ? curPage.seoDescription
+            : curPage.seoDescription_en,
       }
     : null;
 
   return {
     props: {
       pageProps,
+      locale,
     },
   };
 };

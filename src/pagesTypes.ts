@@ -66,7 +66,10 @@ export interface IInfomationPageProps {
   pageProps: {
     link: string;
     content: string;
+    seoDescription: string;
+    title: string;
   };
+  locale: 'ru' | 'en';
 }
 
 export interface IBlindStylePageProps {
@@ -75,9 +78,11 @@ export interface IBlindStylePageProps {
 
 export interface ICelebritiesPageProps {
   celebrities: ICockpitCelebrity[];
+  locale: 'ru' | 'en';
 }
 
 export interface IContactsPageProps {
   contacts: ICockpitContacts;
   salesPlaces: ICockpitSalesPlace[];
+  locale: 'ru' | 'en';
 }

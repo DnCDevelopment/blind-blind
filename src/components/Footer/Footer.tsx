@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,9 +7,19 @@ import { TRANSLATE } from '../../constants/languages';
 import Form from '../Form/Form';
 import LinkList from './LinkList';
 import SocialIcons from './SocialIcons';
+import ThanksModal from './ThanksModal';
 
 const Footer: React.FC = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(true);
+
   const { locale } = useRouter();
+
+  const handleShowModal = (success = false) => {
+    setShowModal(!showModal);
+    setSuccess(success);
+    document.body.classList.toggle('hide-overflow');
+  };
 
   return (
     <div className="container">
@@ -28,7 +39,25 @@ const Footer: React.FC = () => {
                 validationSchema: FORMIK.footerForm.validationSchema(
                   locale as 'ru' | 'en'
                 ),
-                onSubmit: (values) => console.log(values),
+                onSubmit: ({ phone }, { resetForm }) => {
+                  fetch('/api/request', {
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    method: 'POST',
+                    body: JSON.stringify({
+                      phone,
+                    }),
+                  })
+                    .then((res) => {
+                      if (!res.ok) {
+                        throw Error(res.statusText);
+                      }
+                      handleShowModal(true);
+                      resetForm();
+                    })
+                    .catch(() => handleShowModal(false));
+                },
               }}
               types={FORMIK.footerForm.types}
               placeholders={FORMIK.footerForm.placeholders(
@@ -63,6 +92,11 @@ const Footer: React.FC = () => {
           </p>
         </div>
       </footer>
+      <ThanksModal
+        showModal={showModal}
+        handleShowModal={handleShowModal}
+        isSuccess={success}
+      />
     </div>
   );
 };
