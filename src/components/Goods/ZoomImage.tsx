@@ -4,7 +4,6 @@ import { IZoomImageProps } from './Types';
 
 const ZoomImage: React.FC<IZoomImageProps> = ({ image, alt, zoom }) => {
   const [zoomed, setZoomed] = useState(false);
-  // const [imageContainer, imageContainer]
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
