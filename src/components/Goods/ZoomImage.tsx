@@ -4,7 +4,6 @@ import { IZoomImageProps } from './Types';
 
 const ZoomImage: React.FC<IZoomImageProps> = ({ image, alt, zoom }) => {
   const [zoomed, setZoomed] = useState(false);
-  // const [imageContainer, imageContainer]
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,17 +34,24 @@ const ZoomImage: React.FC<IZoomImageProps> = ({ image, alt, zoom }) => {
     };
 
     const handleMouseClick = (e: MouseEvent): void => {
+      const imageElement = imageContainerRef.current?.getElementsByClassName(
+        'image'
+      )[0] as HTMLImageElement;
+      imageElement.style.transition = 'transform 0.1s ease-in';
+      imageElement.style.transform = '';
+
       if (zoomed) {
         setZoomed(false);
-        const imageElement = imageContainerRef.current?.getElementsByClassName(
-          'image'
-        )[0] as HTMLImageElement;
-        imageElement.style.transform = '';
       } else {
         if (
           imageContainerRef.current &&
           imageContainerRef.current.contains(e.target as Node)
         ) {
+          imageElement.style.transition = 'transform 0.1s ease-in';
+          setTimeout(() => {
+            imageElement.style.transition = '';
+          }, 100);
+
           setZoomed(true);
           changeImageTransformation(e);
         }
