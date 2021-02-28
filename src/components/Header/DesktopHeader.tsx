@@ -13,6 +13,7 @@ import { IIndexContext } from '../../context/Types';
 import { TRANSLATE } from '../../constants/languages';
 import { AboutListData, StoreListData } from '../../constants/header';
 import CartIcon from '../Cart/CartIcon';
+import CurrencySelector from './CurrencySelector';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
@@ -111,6 +112,7 @@ const DesktopHeader: React.FC = () => {
         </div>
         <Logo />
         <div className="desktop-header__options">
+          <CurrencySelector />
           <LanguageSelector />
           <CartIcon />
           <a

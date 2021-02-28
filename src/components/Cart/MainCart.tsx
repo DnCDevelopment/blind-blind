@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
-import { ICartContext } from '../../context/Types';
+import { currencyContext } from '../../context/currencyContext';
+import { ICartContext, ICurrencyContext } from '../../context/Types';
 import Form from '../Form/Form';
 import CartGoodsItem from './CartGoodsItem';
 import CartVoucherItem from './CartVoucherItem';
@@ -12,12 +13,17 @@ const MainCart: React.FC = () => {
   const { locale, push } = useRouter();
 
   const { cart, removeItem } = useContext(cartContext) as ICartContext;
+  const { currency, currencyRate } = useContext(
+    currencyContext
+  ) as ICurrencyContext;
 
   const subTotal = cart.reduce(
     (counter, cartItem) =>
       counter + (cartItem.amount * Number.parseFloat(cartItem.price) || 0),
     0
   );
+
+  const currencySubTotal = (subTotal / currencyRate).toFixed(2);
 
   return (
     <div className="main-cart">
@@ -65,7 +71,9 @@ const MainCart: React.FC = () => {
               <td className="sub-total" colSpan={2}>
                 <p>
                   {TRANSLATE[locale as 'ru' | 'en'].subTotal}
-                  <span className="sum">{subTotal} UAH</span>
+                  <span className="sum">
+                    {currencySubTotal} {currency}
+                  </span>
                 </p>
                 <Form
                   formikConfig={{

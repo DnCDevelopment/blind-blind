@@ -21,6 +21,8 @@ import { IAppProps } from '../src/pagesTypes';
 import { getCockpitCollections } from '../src/utils/getCockpitData';
 
 import '../styles/main.scss';
+import { currencyContext } from '../src/context/currencyContext';
+import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 
 const MyApp = ({
   Component,
@@ -28,9 +30,15 @@ const MyApp = ({
   props: { collections, runways },
 }: AppProps & IAppProps): JSX.Element => {
   const curCartContext = useContext(cartContext);
+
   const [cartState, setCartState] = useState(
     curCartContext ? curCartContext.cart : []
   );
+
+  const [currency, setCurrency] = useState<'UAH' | 'RUB' | 'EUR' | 'USD'>(
+    'UAH'
+  );
+  const [currencyRate, setCurrencyRate] = useState(0);
 
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
     if ('details' in item) {
@@ -83,13 +91,27 @@ const MyApp = ({
       if (storageCart) {
         setCartState(JSON.parse(storageCart));
       }
+      const storageCurrency = localStorage.getItem('currency');
+      if (storageCurrency) {
+        setCurrency(
+          JSON.parse(storageCurrency as 'UAH' | 'RUB' | 'EUR' | 'USD')
+        );
+      }
     }
   }, []);
 
   useEffect(() => {
-    if (window !== undefined)
+    if (window !== undefined) {
       localStorage.setItem('cart', JSON.stringify(cartState));
-  }, [cartState]);
+      localStorage.setItem('currency', JSON.stringify(currency));
+    }
+  }, [cartState, currency]);
+
+  useEffect(() => {
+    (async () => {
+      setCurrencyRate(await getCurrencyRate(currency));
+    })();
+  }, [currency]);
 
   return (
     <indexContext.Provider
@@ -98,20 +120,28 @@ const MyApp = ({
         runwaysData: runways,
       }}
     >
-      <cartContext.Provider
+      <currencyContext.Provider
         value={{
-          cart: cartState,
-          addItem: addItemToCart,
-          removeItem: removeItemFromCart,
-          clearCart: clearCart,
+          currency: currency,
+          currencyRate: currencyRate,
+          setCurrency: setCurrency,
         }}
       >
-        <Header />
-        <main>
-          <Component {...pageProps} />
-        </main>
-        <Footer />
-      </cartContext.Provider>
+        <cartContext.Provider
+          value={{
+            cart: cartState,
+            addItem: addItemToCart,
+            removeItem: removeItemFromCart,
+            clearCart: clearCart,
+          }}
+        >
+          <Header />
+          <main>
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </cartContext.Provider>
+      </currencyContext.Provider>
     </indexContext.Provider>
   );
 };

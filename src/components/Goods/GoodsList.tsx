@@ -21,6 +21,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
   const { data: goods } = useCockpit<ICockpitGoodsEntries>(true, filter);
   const router = useRouter();
   const { locale, query } = router;
+
   const [currentPage, setCurrentPage] = useState(0);
   const [visiblePages, setVisiblePages] = useState<Array<number>>([]);
   const [firstGoodsOnPageIndex, setFirstGoodsOnPageIndex] = useState(0);

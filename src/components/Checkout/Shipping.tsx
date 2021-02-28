@@ -7,10 +7,11 @@ import ShoppingCart from '../../assets/svg/shoppingCart.svg';
 import { FORM, FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
 import { cartContext } from '../../context/cartContext';
-import { ICartContext } from '../../context/Types';
+import { ICartContext, ICurrencyContext } from '../../context/Types';
 import Form from '../Form/Form';
 import OrderSummaryListItem from './OrderSummaryListItem';
 import { FormikValues } from 'formik';
+import { currencyContext } from '../../context/currencyContext';
 
 const Shipping: React.FC = () => {
   const { locale, push } = useRouter();
@@ -23,6 +24,9 @@ const Shipping: React.FC = () => {
   const couponRef = useRef<string>();
 
   const { cart, clearCart } = useContext(cartContext) as ICartContext;
+  const { currency, currencyRate } = useContext(
+    currencyContext
+  ) as ICurrencyContext;
 
   const checkDiscountCode = (enteredCode: string) => {
     fetch('/api/getPromocode', {
@@ -104,10 +108,15 @@ const Shipping: React.FC = () => {
   };
 
   const [totalCheckout, setTotalCheckout] = useState(calcTotalCheckout());
+  const [currencyTotalCheckout, setCurrencyTotalCheckout] = useState('0');
 
   useEffect(() => {
     setTotalCheckout(calcTotalCheckout());
   }, [calcTotalCheckout]);
+
+  useEffect(() => {
+    setCurrencyTotalCheckout((totalCheckout / currencyRate).toFixed(2));
+  }, [totalCheckout, currencyRate]);
 
   return (
     <div className="shipping container">
@@ -131,7 +140,9 @@ const Shipping: React.FC = () => {
               <div className="chevron-down"></div>
             </>
           )}
-          <div className="total-sum">{totalCheckout.toFixed(2)}₴</div>
+          <div className="total-sum">
+            {currencyTotalCheckout} {currency}
+          </div>
         </div>
         <div
           ref={orderListRef}
@@ -175,7 +186,9 @@ const Shipping: React.FC = () => {
           <div className="divider container" />
           <div className="total-checkout">
             <p className="title">Total</p>
-            <p className="price">{totalCheckout.toFixed(2)}₴</p>
+            <p className="price">
+              {currencyTotalCheckout} {currency}
+            </p>
           </div>
           <div className="divider container" />
         </div>

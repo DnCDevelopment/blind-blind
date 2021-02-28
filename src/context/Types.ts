@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 import {
   ICockpitCollections,
   ICockpitRunwaysAndLookbooks,
@@ -6,9 +8,6 @@ import {
   ICartGoodsItemProps,
   ICartVoucherItemProps,
 } from '../components/Cart/Types';
-
-//eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface IContext {}
 
 export interface IIndexContext {
   collectionsData: ICockpitCollections[];
@@ -20,4 +19,10 @@ export interface ICartContext {
   addItem: (item: ICartGoodsItemProps | ICartVoucherItemProps) => void;
   removeItem: (item: ICartGoodsItemProps | ICartVoucherItemProps) => void;
   clearCart: () => void;
+}
+
+export interface ICurrencyContext {
+  currency: 'UAH' | 'RUB' | 'EUR' | 'USD';
+  currencyRate: number;
+  setCurrency: Dispatch<SetStateAction<'UAH' | 'RUB' | 'EUR' | 'USD'>>;
 }

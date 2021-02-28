@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-
 import PriceLabel from './PriceLabel';
 
 import { IGoodsItemProps } from './Types';
@@ -12,33 +11,31 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
   secondPhoto,
   price,
   stockPrice,
-}) => {
-  return (
-    <Link href={`/goods${link}`}>
-      <div className="goods-item">
-        <div className="goods-item__image">
-          <Image
-            layout="fill"
-            objectFit="cover"
-            alt={title}
-            loading="eager"
-            src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
-          />
-          <Image
-            className="second"
-            layout="fill"
-            objectFit="cover"
-            alt={title}
-            loading="eager"
-            src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
-          />
-        </div>
-        <div className="goods-item__title">{title}</div>
-        <PriceLabel price={price} stockPrice={stockPrice} />
+}) => (
+  <Link href={`/goods${link}`}>
+    <div className="goods-item">
+      <div className="goods-item__image">
+        <Image
+          layout="fill"
+          objectFit="cover"
+          alt={title}
+          loading="eager"
+          src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
+        />
+        <Image
+          className="second"
+          layout="fill"
+          objectFit="cover"
+          alt={title}
+          loading="eager"
+          src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
+        />
       </div>
-    </Link>
-  );
-};
+      <div className="goods-item__title">{title}</div>
+      <PriceLabel price={price} stockPrice={stockPrice} />
+    </div>
+  </Link>
+);
 
 export const GoodsItemFallback = () => {
   return (

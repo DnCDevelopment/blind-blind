@@ -4,6 +4,9 @@ import GiftSVG from '../../assets/svg/gift.svg';
 import { TRANSLATE } from '../../constants/languages';
 import { useRouter } from 'next/router';
 import { IOrderSummaryListItemProps } from './Types';
+import { ICurrencyContext } from '../../context/Types';
+import { currencyContext } from '../../context/currencyContext';
+import { useContext } from 'react';
 
 const OrderSummaryListItem: React.FC<IOrderSummaryListItemProps> = ({
   price,
@@ -14,6 +17,10 @@ const OrderSummaryListItem: React.FC<IOrderSummaryListItemProps> = ({
   receiverName,
 }) => {
   const { locale } = useRouter();
+
+  const { currency, currencyRate } = useContext(
+    currencyContext
+  ) as ICurrencyContext;
 
   return (
     <div className="order-summary-list-item">
@@ -46,7 +53,9 @@ const OrderSummaryListItem: React.FC<IOrderSummaryListItemProps> = ({
           </>
         )}
       </div>
-      <p className="price">{price}₴</p>
+      <p className="price">
+        {(Number.parseFloat(price) / currencyRate).toFixed(2)} {currency}
+      </p>
     </div>
   );
 };
