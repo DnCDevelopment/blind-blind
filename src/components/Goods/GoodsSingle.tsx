@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
@@ -13,6 +12,7 @@ import { FORMIK } from '../../constants/form';
 import { IGoodsSingleProps } from './Types';
 import { ICartContext } from '../../context/Types';
 import { FormikValues } from 'formik';
+import ZoomImage from './ZoomImage';
 
 const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   id,
@@ -53,33 +53,15 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
     <div className="goods-single">
       <div className="goods-single__gallery">
         <div className="first-photo">
-          <Image
-            layout="fill"
-            objectFit="cover"
-            alt={title}
-            loading="eager"
-            src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
-          />
+          <ZoomImage image={photo} alt={title} zoom={2} />
         </div>
         <div className="second-photo">
-          <Image
-            layout="fill"
-            objectFit="cover"
-            alt={title}
-            loading="eager"
-            src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
-          />
+          <ZoomImage image={secondPhoto} alt={title} zoom={2} />
         </div>
         {typeof otherPhotos !== 'string' &&
           otherPhotos.map(({ path }) => (
             <div key={path} className="other-photo">
-              <Image
-                layout="fill"
-                objectFit="cover"
-                alt={title}
-                loading="eager"
-                src={process.env.NEXT_PUBLIC_COCKPIT_URL + path}
-              />
+              <ZoomImage image={path} alt={title} zoom={2} />
             </div>
           ))}
       </div>

@@ -47,3 +47,9 @@ export interface IFormValues {
   waist: string;
   hips: string;
 }
+
+export interface IZoomImageProps {
+  image: string;
+  alt: string;
+  zoom: number;
+}

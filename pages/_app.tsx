@@ -75,6 +75,8 @@ const MyApp = ({
     else setCartState([...cartState.filter((el) => el.id !== item.id)]);
   };
 
+  const clearCart = () => setCartState([]);
+
   useEffect(() => {
     if (window !== undefined) {
       const storageCart = localStorage.getItem('cart');
@@ -101,6 +103,7 @@ const MyApp = ({
           cart: cartState,
           addItem: addItemToCart,
           removeItem: removeItemFromCart,
+          clearCart: clearCart,
         }}
       >
         <Header />

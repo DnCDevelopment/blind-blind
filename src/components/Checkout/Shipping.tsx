@@ -22,7 +22,7 @@ const Shipping: React.FC = () => {
   const orderListRef = useRef<HTMLDivElement>(null);
   const couponRef = useRef<string>();
 
-  const { cart } = useContext(cartContext) as ICartContext;
+  const { cart, clearCart } = useContext(cartContext) as ICartContext;
 
   const checkDiscountCode = (enteredCode: string) => {
     fetch('/api/getPromocode', {
@@ -98,6 +98,7 @@ const Shipping: React.FC = () => {
             `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`,
             '__blank'
           );
+        clearCart();
         push('/thank-you');
       });
   };

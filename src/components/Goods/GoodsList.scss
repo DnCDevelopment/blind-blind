@@ -1,6 +1,6 @@
 .goods-list {
   position: relative;
-  padding: 30px 10% 100px 10%;
+  padding: 30px 10% 30px 10%;
 
   .input-select {
     display: flex;
@@ -14,7 +14,6 @@
     }
   }
 
-
   &__goods-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -26,7 +25,46 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: 20px;
-      padding: 30px 10% 100px 10%;
+      padding: 30px 10% 30px 10%;
+    }
+  }
+
+  &__pages-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+
+    .page-number {
+      margin: 0 10px;
+      cursor: pointer;
+
+      p {
+        font-size: var(--font-20);
+
+        &.selected {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .chevron {
+      &-left,
+      &-right {
+        width: 10px;
+        height: 10px;
+        margin: 0 10px;
+        border: solid var(--black-color);
+        border-width: 0 2px 2px 0;
+        transform: rotate(-45deg);
+        cursor: pointer;
+      }
+
+      &-left {
+        transform: rotate(135deg);
+      }
     }
   }
 }

@@ -19,4 +19,5 @@ export interface ICartContext {
   cart: (ICartGoodsItemProps | ICartVoucherItemProps)[];
   addItem: (item: ICartGoodsItemProps | ICartVoucherItemProps) => void;
   removeItem: (item: ICartGoodsItemProps | ICartVoucherItemProps) => void;
+  clearCart: () => void;
 }

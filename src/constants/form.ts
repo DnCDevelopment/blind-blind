@@ -109,10 +109,6 @@ export const FORMIK = {
       paymentMethod: FORM[locale].paymentMethod,
     }),
   },
-  mainCart: {
-    values: { checkbox: false },
-    types: { checkbox: 'checkbox' },
-  },
   goodsExclusive: {
     values: {
       growth: '',
