@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
 import { ISubCollectionProps } from './Types';
 
 const SubCollections: React.FC<ISubCollectionProps> = ({ subCollections }) => {

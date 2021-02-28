@@ -1,9 +1,13 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { ICockpitRunwaysAndLookbooksRaw } from '../../src/cockpitTypes';
-import Runway from '../../src/components/Runway/Runway';
-import { IBlindStylePageProps } from '../../src/pagesTypes';
-import { getCockpitCollection } from '../../src/utils/getCockpitData';
+
 import Error from '../_error';
+
+import Runway from '../../src/components/Runway/Runway';
+
+import { ICockpitRunwaysAndLookbooksRaw } from '../../src/cockpitTypes';
+import { IBlindStylePageProps } from '../../src/pagesTypes';
+
+import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
 const BlindStylePage: NextPage<IBlindStylePageProps> = ({ runwayProps }) => {
   if (!runwayProps) return <Error />;

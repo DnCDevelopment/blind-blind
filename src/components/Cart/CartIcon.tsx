@@ -4,8 +4,9 @@ import { useContext } from 'react';
 
 import { cartContext } from '../../context/cartContext';
 
-import { TRANSLATE } from '../../constants/languages';
 import { ICartContext } from '../../context/Types';
+
+import { TRANSLATE } from '../../constants/languages';
 
 import CartSVG from '../../assets/svg/cart.svg';
 

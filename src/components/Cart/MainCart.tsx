@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
-import { TRANSLATE } from '../../constants/languages';
-import { cartContext } from '../../context/cartContext';
-import { currencyContext } from '../../context/currencyContext';
-import { ICartContext, ICurrencyContext } from '../../context/Types';
+
 import Form from '../Form/Form';
 import CartGoodsItem from './CartGoodsItem';
 import CartVoucherItem from './CartVoucherItem';
+
+import { cartContext } from '../../context/cartContext';
+import { currencyContext } from '../../context/currencyContext';
+
+import { ICartContext, ICurrencyContext } from '../../context/Types';
+
+import { TRANSLATE } from '../../constants/languages';
 
 const MainCart: React.FC = () => {
   const { locale, push } = useRouter();

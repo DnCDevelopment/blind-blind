@@ -4,25 +4,26 @@ import { AppInitialProps } from 'next/dist/next-server/lib/utils';
 import { useContext, useEffect, useState } from 'react';
 
 import {
-  ICockpitCollectionsRaw,
-  ICockpitRunwaysAndLookbooksRaw,
-} from '../src/cockpitTypes';
-import {
   ICartGoodsItemProps,
   ICartVoucherItemProps,
 } from '../src/components/Cart/Types';
 import Header from '../src/components/Header/Header';
 import Footer from '../src/components/Footer/Footer';
+
 import { cartContext } from '../src/context/cartContext';
 import { indexContext } from '../src/context/cockpitContext';
+import { currencyContext } from '../src/context/currencyContext';
 
+import {
+  ICockpitCollectionsRaw,
+  ICockpitRunwaysAndLookbooksRaw,
+} from '../src/cockpitTypes';
 import { IAppProps } from '../src/pagesTypes';
 
 import { getCockpitCollections } from '../src/utils/getCockpitData';
+import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 
 import '../styles/main.scss';
-import { currencyContext } from '../src/context/currencyContext';
-import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 
 const MyApp = ({
   Component,

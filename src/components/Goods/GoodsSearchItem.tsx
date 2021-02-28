@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
+
 import { currencyContext } from '../../context/currencyContext';
+
 import { ICurrencyContext } from '../../context/Types';
 import { IGoodsSearchItemProps } from './Types';
 

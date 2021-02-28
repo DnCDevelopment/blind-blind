@@ -3,6 +3,7 @@ import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import Error from '../_error';
+
 import GoodsList, {
   GoodsListFallback,
 } from '../../src/components/Goods/GoodsList';

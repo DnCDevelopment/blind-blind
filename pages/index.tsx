@@ -2,6 +2,8 @@ import { NextPage, GetServerSideProps } from 'next';
 
 import MainCarousel from '../src/components/MainCarousel/MainCarousel';
 import Seo from '../src/components/Seo/Seo';
+import MainCollectionsSamples from '../src/components/MainCollectionsSamples/MainCollectionsSamples';
+import Celebrities from '../src/components/Celebrities/Celebrities';
 
 import { IIndexPageProps } from '../src/pagesTypes';
 import {
@@ -10,11 +12,9 @@ import {
   ICockpitGoodsRaw,
 } from '../src/cockpitTypes';
 
-import { SEO_ITEMS } from '../src/constants/seoItems';
-
 import { getCockpitCollections } from '../src/utils/getCockpitData';
-import MainCollectionsSamples from '../src/components/MainCollectionsSamples/MainCollectionsSamples';
-import Celebrities from '../src/components/Celebrities/Celebrities';
+
+import { SEO_ITEMS } from '../src/constants/seoItems';
 
 const IndexPage: NextPage<IIndexPageProps> = ({
   carousel,

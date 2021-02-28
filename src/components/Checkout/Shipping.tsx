@@ -1,17 +1,20 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { FormikValues } from 'formik';
 
-import ShoppingCart from '../../assets/svg/shoppingCart.svg';
+import Form from '../Form/Form';
+import OrderSummaryListItem from './OrderSummaryListItem';
+
+import { cartContext } from '../../context/cartContext';
+import { currencyContext } from '../../context/currencyContext';
+
+import { ICartContext, ICurrencyContext } from '../../context/Types';
 
 import { FORM, FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
-import { cartContext } from '../../context/cartContext';
-import { ICartContext, ICurrencyContext } from '../../context/Types';
-import Form from '../Form/Form';
-import OrderSummaryListItem from './OrderSummaryListItem';
-import { FormikValues } from 'formik';
-import { currencyContext } from '../../context/currencyContext';
+
+import ShoppingCart from '../../assets/svg/shoppingCart.svg';
 
 const Shipping: React.FC = () => {
   const { locale, push } = useRouter();

@@ -1,12 +1,15 @@
 import { useRouter } from 'next/router';
-
-import { TRANSLATE } from '../../constants/languages';
-import useCockpit from '../../hooks/useCockpit';
-import { ICockpitGoodsEntries, ICockpitGoodsRaw } from '../../cockpitTypes';
 import { useEffect, useState } from 'react';
 import Fuse from 'fuse.js';
+
+import useCockpit from '../../hooks/useCockpit';
+
 import GoodsSearchItem from '../Goods/GoodsSearchItem';
+
+import { ICockpitGoodsEntries, ICockpitGoodsRaw } from '../../cockpitTypes';
 import { ISearchInputProps } from './Types';
+
+import { TRANSLATE } from '../../constants/languages';
 
 const SearchInput: React.FC<ISearchInputProps> = ({ close }) => {
   const { locale, defaultLocale } = useRouter();

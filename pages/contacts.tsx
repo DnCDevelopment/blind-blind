@@ -4,10 +4,10 @@ import Contacts from '../src/components/Contacts/Contacts';
 import SalesPlaces from '../src/components/Contacts/SalesPlaces';
 import Seo from '../src/components/Seo/Seo';
 
-import { getCockpitCollection } from '../src/utils/getCockpitData';
-
 import { ICockpitContacts, ICockpitSalesPlaceRow } from '../src/cockpitTypes';
 import { IContactsPageProps } from '../src/pagesTypes';
+
+import { getCockpitCollection } from '../src/utils/getCockpitData';
 
 import { SEO_ITEMS } from '../src/constants/seoItems';
 

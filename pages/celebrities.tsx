@@ -3,10 +3,10 @@ import { GetServerSideProps, NextPage } from 'next';
 import Celebrities from '../src/components/Celebrities/Celebrities';
 import Seo from '../src/components/Seo/Seo';
 
-import { getCockpitCollection } from '../src/utils/getCockpitData';
-
 import { ICelebritiesPageProps } from '../src/pagesTypes';
 import { ICockpitCelebrityRaw } from '../src/cockpitTypes';
+
+import { getCockpitCollection } from '../src/utils/getCockpitData';
 
 import { SEO_ITEMS } from '../src/constants/seoItems';
 

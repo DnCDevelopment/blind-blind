@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { ICockpitCarousel } from '../../cockpitTypes';
 import Link from 'next/link';
+
+import { ICockpitCarousel } from '../../cockpitTypes';
 
 const MainCarouselItem: React.FC<ICockpitCarousel> = ({
   title,

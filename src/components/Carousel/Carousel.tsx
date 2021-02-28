@@ -1,6 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect, useRef, RefObject } from 'react';
+
 import { ICarouselProps } from './Types';
+
 const TRANSITION = 500;
 
 const Carousel: React.FC<ICarouselProps> = ({

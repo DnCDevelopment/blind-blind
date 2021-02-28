@@ -1,8 +1,9 @@
 import { NextPage, GetServerSideProps } from 'next';
 
+import Error from '../_error';
+
 import GoodsListTitle from '../../src/components/Goods/GoodsListTitle';
 import GoodsSingle from '../../src/components/Goods/GoodsSingle';
-import Error from '../_error';
 import Seo from '../../src/components/Seo/Seo';
 
 import { IGoodsPageProps } from '../../src/pagesTypes';

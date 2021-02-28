@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
+
 import Carousel from '../Carousel/Carousel';
 import MainCarouselItem from './MainCarouselItem';
+
 import { IMainCarousel } from './Types';
+
 import ArrowSVG from '../../assets/svg/arrow.svg';
-import { useRouter } from 'next/router';
 
 const MainCarousel: React.FC<IMainCarousel> = ({ carousel }): JSX.Element => {
   const { locale } = useRouter();

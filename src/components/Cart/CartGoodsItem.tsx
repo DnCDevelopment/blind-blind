@@ -1,13 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+
+import CartGoodsItemDetails from './CartGoodsItemDetails';
+
+import { currencyContext } from '../../context/currencyContext';
+
+import { ICurrencyContext } from '../../context/Types';
 import { ICartGoodsItemProps } from './Types';
 
 import { TRANSLATE } from '../../constants/languages';
-import CartGoodsItemDetails from './CartGoodsItemDetails';
-import { useContext } from 'react';
-import { ICurrencyContext } from '../../context/Types';
-import { currencyContext } from '../../context/currencyContext';
 
 const CartGoodsItem: React.FC<ICartGoodsItemProps> = ({
   title,

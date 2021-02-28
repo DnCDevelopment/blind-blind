@@ -6,13 +6,13 @@ import { createPortal } from 'react-dom';
 
 import Modal from '../Modal/Modal';
 
-import Success from '../../assets/svg/success.svg';
-import Failed from '../../assets/svg/failed.svg';
-import Close from '../../assets/svg/close.svg';
+import { IThanksModalProps } from './Types';
 
 import { TRANSLATE } from '../../constants/languages';
 
-import { IThanksModalProps } from './Types';
+import Success from '../../assets/svg/success.svg';
+import Failed from '../../assets/svg/failed.svg';
+import Close from '../../assets/svg/close.svg';
 
 const ThanksModal: React.FC<IThanksModalProps> = ({
   isSuccess,

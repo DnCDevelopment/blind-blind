@@ -1,10 +1,13 @@
-import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
-import Modal from '../Modal/Modal';
-import { ICelebritiesProps } from './Types';
-import { TRANSLATE } from '../../constants/languages';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+
+import Modal from '../Modal/Modal';
+
+import { ICelebritiesProps } from './Types';
+
+import { TRANSLATE } from '../../constants/languages';
 
 const Celebrities: React.FC<ICelebritiesProps> = ({ celebrities }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);

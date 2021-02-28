@@ -1,7 +1,8 @@
-import { IPriceLabelProps } from './Types';
-
 import { useContext } from 'react';
+
 import { currencyContext } from '../../context/currencyContext';
+
+import { IPriceLabelProps } from './Types';
 import { ICurrencyContext } from '../../context/Types';
 
 const PriceLabel: React.FC<IPriceLabelProps> = ({ price, stockPrice }) => {

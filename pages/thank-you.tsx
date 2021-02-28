@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+
 import ThankYou from '../src/components/ThankYou/ThankYou';
 
 const ThankYouPage: NextPage = () => {

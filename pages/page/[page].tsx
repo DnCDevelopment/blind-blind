@@ -1,9 +1,11 @@
 import { NextPage, GetServerSideProps } from 'next';
-import { ICockpitPages } from '../../src/cockpitTypes';
-import { IInfomationPageProps } from '../../src/pagesTypes';
 
 import Error from '../_error';
+
 import Seo from '../../src/components/Seo/Seo';
+
+import { ICockpitPages } from '../../src/cockpitTypes';
+import { IInfomationPageProps } from '../../src/pagesTypes';
 
 import { getCockpitCollection } from '../../src/utils/getCockpitData';
 

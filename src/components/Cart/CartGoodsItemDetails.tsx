@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
-import { TRANSLATE } from '../../constants/languages';
+
 import { ICartGoodsItemDetailsProps } from './Types';
+
+import { TRANSLATE } from '../../constants/languages';
 
 const CartGoodsItemDetails: React.FC<ICartGoodsItemDetailsProps> = ({
   details,

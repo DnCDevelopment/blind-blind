@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import MobileMenu from './MobileMenu';
 import Logo from './Logo';
 import LanguageSelector from './LanguageSelector';
+import CartIcon from '../Cart/CartIcon';
 
 import DroplistIconSVG from '../../assets/svg/droplist-icon.svg';
-import CartIcon from '../Cart/CartIcon';
 
 const MobileHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);

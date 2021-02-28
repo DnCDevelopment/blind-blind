@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
 import { TRANSLATE } from '../../constants/languages';
 
 const NotFound: React.FC = () => {

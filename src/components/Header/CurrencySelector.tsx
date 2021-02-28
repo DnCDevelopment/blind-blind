@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 
 import { currencyContext } from '../../context/currencyContext';
+
 import { ICurrencyContext } from '../../context/Types';
 
 const CurrencySelector: React.FC = () => {

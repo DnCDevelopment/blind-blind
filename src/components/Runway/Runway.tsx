@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
+
 import Modal from '../Modal/Modal';
+
 import { IRunwayProps } from './Types';
 
 const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLink }) => {
