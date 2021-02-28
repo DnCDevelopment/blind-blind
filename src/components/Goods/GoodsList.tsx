@@ -65,7 +65,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
 
   const changePage = (pageNum: number) => {
     const newQuery = router.query;
-    if (pageNum === 0) {
+    if (!pageNum) {
       delete newQuery.page;
     } else {
       newQuery['page'] = pageNum.toString();

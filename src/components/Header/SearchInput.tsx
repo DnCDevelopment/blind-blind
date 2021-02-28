@@ -46,6 +46,13 @@ const SearchInput: React.FC<ISearchInputProps> = ({ close }) => {
         }}
         className="search-result-container"
       >
+        {searchValue && !foundGoods.length && (
+          <p className="not-found">
+            {TRANSLATE[locale as 'ru' | 'en'].goodsNotFound[0]}
+            {` "${searchValue}" `}
+            {TRANSLATE[locale as 'ru' | 'en'].goodsNotFound[1]}
+          </p>
+        )}
         {foundGoods.map(
           ({ _id, previewImage, title, title_en, link, stockPrice, price }) => (
             <GoodsSearchItem

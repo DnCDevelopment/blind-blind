@@ -67,6 +67,7 @@ export const TRANSLATE = {
     notFoundDescription: 'Запрошенная вами страница не существует.',
     continueShopping: ['Нажите', 'здесь', 'чтобы продолжить покупки.'],
     thanksForOrderTitle: 'Спасибо за ваш заказ',
+    goodsNotFound: ['Ваш поиск', 'не дал никаких результатов.'],
   },
   en: {
     store: 'Store',
@@ -121,5 +122,6 @@ export const TRANSLATE = {
     notFoundDescription: 'The page you requested does not exist.',
     continueShopping: ['Click', 'here', 'to continue shopping.'],
     thanksForOrderTitle: 'Thank you for your order.',
+    goodsNotFound: ['Your search for', 'did not yield any results.'],
   },
 };
