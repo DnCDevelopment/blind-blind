@@ -6,6 +6,7 @@ import LanguageSelector from './LanguageSelector';
 import CartIcon from '../Cart/CartIcon';
 
 import DroplistIconSVG from '../../assets/svg/droplist-icon.svg';
+import CurrencySelector from './CurrencySelector';
 
 const MobileHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -29,6 +30,7 @@ const MobileHeader: React.FC = () => {
         </div>
         <Logo />
         <div className="mobile-header__lang-and-cart">
+          <CurrencySelector />
           <LanguageSelector />
           <CartIcon />
         </div>
