@@ -87,6 +87,7 @@ const DesktopHeader: React.FC = () => {
           >
             {TRANSLATE[locale as 'ru' | 'en'].aboutUs}
           </a>
+          <CurrencySelector />
           <div
             className={`desktop-header__desktop-menu ${
               desktopMenuOpen ? 'open' : ''
@@ -112,7 +113,6 @@ const DesktopHeader: React.FC = () => {
         </div>
         <Logo />
         <div className="desktop-header__options">
-          <CurrencySelector />
           <LanguageSelector />
           <CartIcon />
           <a

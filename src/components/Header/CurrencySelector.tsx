@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 
 import { currencyContext } from '../../context/currencyContext';
 
-import { ICurrencyContext } from '../../context/Types';
+import { ECurrency, ICurrencyContext } from '../../context/Types';
 
 const CurrencySelector: React.FC = () => {
   const { currency, setCurrency } = useContext(
@@ -18,18 +18,20 @@ const CurrencySelector: React.FC = () => {
       </p>
       {droplistOpen && (
         <div className="droplist">
-          {['UAH', 'RUB', 'USD', 'EUR'].map((curr) => (
-            <p
-              role="presentation"
-              key={curr}
-              onClick={() => {
-                setDroplistOpen(false);
-                setCurrency(curr as 'UAH' | 'RUB' | 'EUR' | 'USD');
-              }}
-            >
-              {curr}
-            </p>
-          ))}
+          {Object.values(ECurrency)
+            .slice(0, 4)
+            .map((curr) => (
+              <p
+                role="presentation"
+                key={curr}
+                onClick={() => {
+                  setDroplistOpen(false);
+                  setCurrency(curr as ECurrency);
+                }}
+              >
+                {curr}
+              </p>
+            ))}
         </div>
       )}
     </div>

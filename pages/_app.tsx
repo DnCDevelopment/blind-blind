@@ -24,6 +24,7 @@ import { getCockpitCollections } from '../src/utils/getCockpitData';
 import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 
 import '../styles/main.scss';
+import { ECurrency } from '../src/context/Types';
 
 const MyApp = ({
   Component,
@@ -36,9 +37,7 @@ const MyApp = ({
     curCartContext ? curCartContext.cart : []
   );
 
-  const [currency, setCurrency] = useState<'UAH' | 'RUB' | 'EUR' | 'USD'>(
-    'UAH'
-  );
+  const [currency, setCurrency] = useState<ECurrency>(ECurrency.UAH);
   const [currencyRate, setCurrencyRate] = useState(0);
 
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
@@ -87,22 +86,20 @@ const MyApp = ({
   const clearCart = () => setCartState([]);
 
   useEffect(() => {
-    if (window !== undefined) {
+    if (typeof window !== 'undefined') {
       const storageCart = localStorage.getItem('cart');
       if (storageCart) {
         setCartState(JSON.parse(storageCart));
       }
       const storageCurrency = localStorage.getItem('currency');
       if (storageCurrency) {
-        setCurrency(
-          JSON.parse(storageCurrency as 'UAH' | 'RUB' | 'EUR' | 'USD')
-        );
+        setCurrency(JSON.parse(storageCurrency as keyof ECurrency));
       }
     }
   }, []);
 
   useEffect(() => {
-    if (window !== undefined) {
+    if (typeof window !== 'undefined') {
       localStorage.setItem('cart', JSON.stringify(cartState));
       localStorage.setItem('currency', JSON.stringify(currency));
     }
@@ -110,7 +107,7 @@ const MyApp = ({
 
   useEffect(() => {
     (async () => {
-      setCurrencyRate(await getCurrencyRate(currency));
+      setCurrencyRate(await getCurrencyRate(currency.toString()));
     })();
   }, [currency]);
 

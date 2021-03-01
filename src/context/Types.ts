@@ -21,8 +21,15 @@ export interface ICartContext {
   clearCart: () => void;
 }
 
+export enum ECurrency {
+  UAH,
+  RUB,
+  EUR,
+  USD,
+}
+
 export interface ICurrencyContext {
-  currency: 'UAH' | 'RUB' | 'EUR' | 'USD';
+  currency: ECurrency;
   currencyRate: number;
-  setCurrency: Dispatch<SetStateAction<'UAH' | 'RUB' | 'EUR' | 'USD'>>;
+  setCurrency: Dispatch<SetStateAction<ECurrency>>;
 }
