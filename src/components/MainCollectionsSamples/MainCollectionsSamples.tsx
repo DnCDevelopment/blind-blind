@@ -1,8 +1,11 @@
 import { useContext } from 'react';
-import { ICockpitGoods } from '../../cockpitTypes';
-import { indexContext } from '../../context/cockpitContext';
-import { IIndexContext } from '../../context/Types';
+
 import CollectionSamples from './CollectionSamples';
+
+import { indexContext } from '../../context/cockpitContext';
+
+import { ICockpitGoods } from '../../cockpitTypes';
+import { IIndexContext } from '../../context/Types';
 import { IMainCollectionsSamplesProps } from './Types';
 
 const MainCollectionsSamples: React.FC<IMainCollectionsSamplesProps> = ({

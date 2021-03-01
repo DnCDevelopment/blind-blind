@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+
 import { SIZES_TABLE } from '../../constants/sizesTable';
 
 const SizesTable: React.FC = () => {

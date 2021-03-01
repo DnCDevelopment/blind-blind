@@ -4,23 +4,27 @@ import { AppInitialProps } from 'next/dist/next-server/lib/utils';
 import { useContext, useEffect, useState } from 'react';
 
 import {
-  ICockpitCollectionsRaw,
-  ICockpitRunwaysAndLookbooksRaw,
-} from '../src/cockpitTypes';
-import {
   ICartGoodsItemProps,
   ICartVoucherItemProps,
 } from '../src/components/Cart/Types';
 import Header from '../src/components/Header/Header';
 import Footer from '../src/components/Footer/Footer';
+
 import { cartContext } from '../src/context/cartContext';
 import { indexContext } from '../src/context/cockpitContext';
+import { currencyContext } from '../src/context/currencyContext';
 
+import {
+  ICockpitCollectionsRaw,
+  ICockpitRunwaysAndLookbooksRaw,
+} from '../src/cockpitTypes';
 import { IAppProps } from '../src/pagesTypes';
 
 import { getCockpitCollections } from '../src/utils/getCockpitData';
+import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 
 import '../styles/main.scss';
+import { ECurrency } from '../src/context/Types';
 
 const MyApp = ({
   Component,
@@ -28,9 +32,15 @@ const MyApp = ({
   props: { collections, runways },
 }: AppProps & IAppProps): JSX.Element => {
   const curCartContext = useContext(cartContext);
+
   const [cartState, setCartState] = useState(
     curCartContext ? curCartContext.cart : []
   );
+
+  const [currency, setCurrency] = useState<ECurrency>(
+    ('UAH' as unknown) as ECurrency
+  );
+  const [currencyRate, setCurrencyRate] = useState(0);
 
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
     if ('details' in item) {
@@ -78,18 +88,30 @@ const MyApp = ({
   const clearCart = () => setCartState([]);
 
   useEffect(() => {
-    if (window !== undefined) {
+    if (typeof window !== 'undefined') {
       const storageCart = localStorage.getItem('cart');
       if (storageCart) {
         setCartState(JSON.parse(storageCart));
+      }
+      const storageCurrency = localStorage.getItem('currency');
+      if (storageCurrency) {
+        setCurrency(JSON.parse(storageCurrency as keyof ECurrency));
       }
     }
   }, []);
 
   useEffect(() => {
-    if (window !== undefined)
+    if (typeof window !== 'undefined') {
       localStorage.setItem('cart', JSON.stringify(cartState));
-  }, [cartState]);
+      localStorage.setItem('currency', JSON.stringify(currency));
+    }
+  }, [cartState, currency]);
+
+  useEffect(() => {
+    (async () => {
+      setCurrencyRate(await getCurrencyRate(currency.toString()));
+    })();
+  }, [currency]);
 
   return (
     <indexContext.Provider
@@ -98,20 +120,28 @@ const MyApp = ({
         runwaysData: runways,
       }}
     >
-      <cartContext.Provider
+      <currencyContext.Provider
         value={{
-          cart: cartState,
-          addItem: addItemToCart,
-          removeItem: removeItemFromCart,
-          clearCart: clearCart,
+          currency: currency,
+          currencyRate: currencyRate,
+          setCurrency: setCurrency,
         }}
       >
-        <Header />
-        <main>
-          <Component {...pageProps} />
-        </main>
-        <Footer />
-      </cartContext.Provider>
+        <cartContext.Provider
+          value={{
+            cart: cartState,
+            addItem: addItemToCart,
+            removeItem: removeItemFromCart,
+            clearCart: clearCart,
+          }}
+        >
+          <Header />
+          <main>
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </cartContext.Provider>
+      </currencyContext.Provider>
     </indexContext.Provider>
   );
 };

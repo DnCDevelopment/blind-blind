@@ -11,12 +11,12 @@ const LanguageSelector: React.FC = () => {
   const [droplistOpen, setDroplistOpen] = useState<boolean>(false);
 
   return (
-    <div className="language-selector">
+    <div className="dropdown-selector">
       <p role="presentation" onClick={() => setDroplistOpen(!droplistOpen)}>
         {LANGUAGES[locale as 'ru' | 'en'].name}
       </p>
       {droplistOpen && (
-        <div className="droplist-languages">
+        <div className="droplist">
           {(locales as string[]).map((el) => (
             <Link key={el} href={pathname} as={asPath} locale={el}>
               <p role="presentation" onClick={() => setDroplistOpen(false)}>

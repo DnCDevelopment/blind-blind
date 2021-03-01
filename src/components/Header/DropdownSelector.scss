@@ -1,8 +1,8 @@
-.language-selector {
+.dropdown-selector {
   z-index: 10;
   text-transform: uppercase;
   cursor: pointer;
-  
+
   p {
     margin-right: 10px;
     font-family: var(--primary-font);
@@ -16,7 +16,7 @@
     text-decoration: underline;
   }
 
-  .droplist-languages {
+  .droplist {
     position: absolute;
 
     p {

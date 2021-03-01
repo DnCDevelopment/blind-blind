@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+
 import { IButtonProps } from './Types';
 
 const Button: React.FC<

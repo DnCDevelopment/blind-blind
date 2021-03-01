@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
+import useCockpit from '../../hooks/useCockpit';
+
 import GoodsItem, { GoodsItemFallback } from './GoodsItem';
 import Dropdown from '../Form/Dropdown';
-
-import useCockpit from '../../hooks/useCockpit';
 
 import { ICockpitGoodsEntries, ICockpitGoodsRaw } from '../../cockpitTypes';
 import { IGoodsListProps } from './Types';
@@ -21,6 +21,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
   const { data: goods } = useCockpit<ICockpitGoodsEntries>(true, filter);
   const router = useRouter();
   const { locale, query } = router;
+
   const [currentPage, setCurrentPage] = useState(0);
   const [visiblePages, setVisiblePages] = useState<Array<number>>([]);
   const [firstGoodsOnPageIndex, setFirstGoodsOnPageIndex] = useState(0);

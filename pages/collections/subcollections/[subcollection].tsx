@@ -1,11 +1,12 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { Suspense } from 'react';
 
+import Error from '../../_error';
+
 import GoodsList, {
   GoodsListFallback,
 } from '../../../src/components/Goods/GoodsList';
 import GoodsListTitle from '../../../src/components/Goods/GoodsListTitle';
-import Error from '../../_error';
 import Seo from '../../../src/components/Seo/Seo';
 
 import { ICockpitSubCollectionRaw } from '../../../src/cockpitTypes';

@@ -3,9 +3,10 @@ import { useEffect, useState } from 'react';
 import MobileMenu from './MobileMenu';
 import Logo from './Logo';
 import LanguageSelector from './LanguageSelector';
+import CartIcon from '../Cart/CartIcon';
 
 import DroplistIconSVG from '../../assets/svg/droplist-icon.svg';
-import CartIcon from '../Cart/CartIcon';
+import CurrencySelector from './CurrencySelector';
 
 const MobileHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -20,12 +21,15 @@ const MobileHeader: React.FC = () => {
         <MobileMenu close={() => setMobileMenuOpen(false)} />
       </div>
       <div className="mobile-header__container container">
-        <div
-          className="mobile-header__droplist-icon"
-          role="presentation"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <DroplistIconSVG />
+        <div className="mobile-header__droplists">
+          <div
+            className="mobile-header__droplist-icon"
+            role="presentation"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <DroplistIconSVG />
+          </div>
+          <CurrencySelector />
         </div>
         <Logo />
         <div className="mobile-header__lang-and-cart">

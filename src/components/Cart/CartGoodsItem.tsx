@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
+
+import CartGoodsItemDetails from './CartGoodsItemDetails';
+
+import { currencyContext } from '../../context/currencyContext';
+
+import { ICurrencyContext } from '../../context/Types';
 import { ICartGoodsItemProps } from './Types';
 
 import { TRANSLATE } from '../../constants/languages';
-import CartGoodsItemDetails from './CartGoodsItemDetails';
 
 const CartGoodsItem: React.FC<ICartGoodsItemProps> = ({
   title,
@@ -16,6 +22,11 @@ const CartGoodsItem: React.FC<ICartGoodsItemProps> = ({
   removeSelf,
 }) => {
   const { locale } = useRouter();
+  const { currency, currencyRate } = useContext(
+    currencyContext
+  ) as ICurrencyContext;
+
+  const currencyPrice = (Number.parseFloat(price) / currencyRate).toFixed(2);
 
   return (
     <tr className="cart-item">
@@ -44,10 +55,10 @@ const CartGoodsItem: React.FC<ICartGoodsItemProps> = ({
         </a>
       </td>
       <td className="price-cell">
-        {amount} x {price} UAH
+        {amount} x {currencyPrice} {currency}
       </td>
       <td className="total-price-cell">
-        {amount * Number.parseFloat(price)} UAH
+        {amount * Number.parseFloat(currencyPrice)} {currency}
       </td>
     </tr>
   );

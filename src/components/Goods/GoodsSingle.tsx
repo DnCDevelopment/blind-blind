@@ -1,18 +1,19 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import { FormikValues } from 'formik';
 
 import Form from '../Form/Form';
 import PriceLabel from './PriceLabel';
-import { cartContext } from '../../context/cartContext';
+import ZoomImage from './ZoomImage';
 
-import { TRANSLATE } from '../../constants/languages';
-import { FORMIK } from '../../constants/form';
+import { cartContext } from '../../context/cartContext';
 
 import { IGoodsSingleProps } from './Types';
 import { ICartContext } from '../../context/Types';
-import { FormikValues } from 'formik';
-import ZoomImage from './ZoomImage';
+
+import { TRANSLATE } from '../../constants/languages';
+import { FORMIK } from '../../constants/form';
 
 const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   id,

@@ -5,6 +5,8 @@ import LanguageSelector from './LanguageSelector';
 import Logo from './Logo';
 import SearchInput from './SearchInput';
 import Sublist from './Sublist';
+import CartIcon from '../Cart/CartIcon';
+import CurrencySelector from './CurrencySelector';
 
 import { indexContext } from '../../context/cockpitContext';
 
@@ -12,7 +14,6 @@ import { IIndexContext } from '../../context/Types';
 
 import { TRANSLATE } from '../../constants/languages';
 import { AboutListData, StoreListData } from '../../constants/header';
-import CartIcon from '../Cart/CartIcon';
 
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
@@ -86,6 +87,7 @@ const DesktopHeader: React.FC = () => {
           >
             {TRANSLATE[locale as 'ru' | 'en'].aboutUs}
           </a>
+          <CurrencySelector />
           <div
             className={`desktop-header__desktop-menu ${
               desktopMenuOpen ? 'open' : ''

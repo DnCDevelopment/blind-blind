@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import SearchInput from './SearchInput';
 import Sublist from './Sublist';
@@ -12,7 +13,6 @@ import { TRANSLATE } from '../../constants/languages';
 import { AboutListData, StoreListData } from '../../constants/header';
 
 import CrossSVG from '../../assets/svg/cross.svg';
-import { useRouter } from 'next/router';
 
 const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
   const [storeListOpen, setStoreListOpen] = useState<boolean>(false);

@@ -2,12 +2,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FORMIK } from '../../constants/form';
-import { TRANSLATE } from '../../constants/languages';
+
 import Form from '../Form/Form';
 import LinkList from './LinkList';
 import SocialIcons from './SocialIcons';
 import ThanksModal from './ThanksModal';
+
+import { FORMIK } from '../../constants/form';
+import { TRANSLATE } from '../../constants/languages';
 
 const Footer: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
