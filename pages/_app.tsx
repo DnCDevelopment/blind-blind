@@ -37,7 +37,9 @@ const MyApp = ({
     curCartContext ? curCartContext.cart : []
   );
 
-  const [currency, setCurrency] = useState<ECurrency>(ECurrency.UAH);
+  const [currency, setCurrency] = useState<ECurrency>(
+    ('UAH' as unknown) as ECurrency
+  );
   const [currencyRate, setCurrencyRate] = useState(0);
 
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
