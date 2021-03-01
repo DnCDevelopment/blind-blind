@@ -18,9 +18,14 @@
       justify-content: space-between;
     }
 
+    &__droplists {
+      display: flex;
+    }
+
     &__droplist-icon {
       width: 18px;
       height: 18px;
+      margin-right: 15px;
     }
 
     &__lang-and-cart {

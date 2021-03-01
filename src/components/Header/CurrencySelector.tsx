@@ -18,15 +18,15 @@ const CurrencySelector: React.FC = () => {
       </p>
       {droplistOpen && (
         <div className="droplist">
-          {Object.values(ECurrency)
-            .slice(0, 4)
+          {Object.keys(ECurrency)
+            .filter((curr) => isNaN(Number(curr)))
             .map((curr) => (
               <p
                 role="presentation"
                 key={curr}
                 onClick={() => {
                   setDroplistOpen(false);
-                  setCurrency(curr as ECurrency);
+                  setCurrency((curr as unknown) as ECurrency);
                 }}
               >
                 {curr}

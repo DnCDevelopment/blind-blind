@@ -21,16 +21,18 @@ const MobileHeader: React.FC = () => {
         <MobileMenu close={() => setMobileMenuOpen(false)} />
       </div>
       <div className="mobile-header__container container">
-        <div
-          className="mobile-header__droplist-icon"
-          role="presentation"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <DroplistIconSVG />
+        <div className="mobile-header__droplists">
+          <div
+            className="mobile-header__droplist-icon"
+            role="presentation"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <DroplistIconSVG />
+          </div>
+          <CurrencySelector />
         </div>
         <Logo />
         <div className="mobile-header__lang-and-cart">
-          <CurrencySelector />
           <LanguageSelector />
           <CartIcon />
         </div>
