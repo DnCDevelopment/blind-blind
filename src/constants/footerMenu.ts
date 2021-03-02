@@ -2,19 +2,19 @@ import { TRANSLATE } from '../constants/languages';
 
 export const footerMenu = (locale: 'ru' | 'en') => [
   {
-    link: '/page/about',
+    link: '/o-nas',
     title: TRANSLATE[locale].aboutUs,
   },
   {
-    link: '/sizes-table',
+    link: '/table-razmer',
     title: TRANSLATE[locale].sizeTable,
   },
   {
-    link: '/page/delivery',
+    link: '/informaciya-o-dostavke',
     title: TRANSLATE[locale].deliveryInfo,
   },
   {
-    link: '/page/return-policy',
+    link: '/usloviya-soglasheniya',
     title: TRANSLATE[locale].returnAndExchange,
   },
   {

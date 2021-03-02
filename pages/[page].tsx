@@ -1,15 +1,15 @@
 import { NextPage, GetServerSideProps } from 'next';
 
-import Error from '../_error';
+import Error from './_error';
 
-import Seo from '../../src/components/Seo/Seo';
+import Seo from '../src/components/Seo/Seo';
 
-import { ICockpitPages } from '../../src/cockpitTypes';
-import { IInfomationPageProps } from '../../src/pagesTypes';
+import { ICockpitPages } from '../src/cockpitTypes';
+import { IInfomationPageProps } from '../src/pagesTypes';
 
-import { getCockpitCollection } from '../../src/utils/getCockpitData';
+import { getCockpitCollection } from '../src/utils/getCockpitData';
 
-import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
+import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../src/constants/seoItems';
 
 const SinglePage: NextPage<IInfomationPageProps> = ({ pageProps, locale }) => {
   if (!pageProps) return <Error />;

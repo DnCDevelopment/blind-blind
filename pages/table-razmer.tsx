@@ -12,7 +12,7 @@ const SizesTablePage: NextPage<ILocaleProps> = ({ locale }) => {
     <div className="voucher-page">
       <Seo
         title={SEO_ITEMS[locale].sizeTablePage.title}
-        description={SEO_ITEMS[locale].sizeTablePage.title}
+        description={SEO_ITEMS[locale].sizeTablePage.description}
         breadcrumbs={[
           {
             title: SEO_ITEMS[locale].sizeTablePage.breadcrumbName,
