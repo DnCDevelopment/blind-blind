@@ -6,11 +6,12 @@ const checkout: NextApiHandler = async (req, res) => {
   const {
     name,
     surname,
-    address,
+    country,
+    city,
     phone,
-    deliveryService,
     paymentType,
     locale,
+    currency,
     items = [],
     totalSum,
   } = req.body;
@@ -18,13 +19,14 @@ const checkout: NextApiHandler = async (req, res) => {
     locale &&
     name &&
     surname &&
-    address &&
+    country &&
+    city &&
     phone &&
-    deliveryService &&
     paymentType &&
     items.length &&
+    currency &&
     totalSum;
-  if (!check) res.status(400).send({ message: 'Bad Request' });
+  if (!check) return res.status(400).send({ message: 'Bad Request' });
 
   const url = `${process.env.NEXT_PUBLIC_COCKPIT_URL}api/collections/save/checkouts`;
   const response = await fetch(url, {
@@ -48,7 +50,7 @@ const checkout: NextApiHandler = async (req, res) => {
       public_key: process.env.NEXT_PUBLIC_LIQPAY_KEY,
       action: 'pay',
       amount: totalSum,
-      currency: 'UAH',
+      currency: currency,
       order_id: _id,
       description: 'Покупка в магазине BLIND-BLIND',
       result_url: `${process.env.NEXT_PUBLIC_HOME_URL}thank-you`,

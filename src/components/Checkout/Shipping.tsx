@@ -66,6 +66,8 @@ const Shipping: React.FC = () => {
     const {
       firstName,
       lastName,
+      country,
+      city,
       email,
       phone,
       paymentMethod,
@@ -85,14 +87,17 @@ const Shipping: React.FC = () => {
       body: JSON.stringify({
         name: firstName,
         surname: lastName,
-        address: email,
         deliveryService: service,
         paymentType: paymentMethod,
-        totalSum: totalCheckout,
+        totalSum: +currencyTotalCheckout,
         coupon: couponRef.current,
         locale: currentLocale,
+        email,
+        country,
+        city,
         phone,
         items,
+        currency,
       }),
     })
       .then((data) => data.json())
