@@ -14,20 +14,25 @@ const MainCollectionsSamples: React.FC<IMainCollectionsSamplesProps> = ({
   const { collectionsData } = useContext(indexContext) as IIndexContext;
 
   const allSamples = goods.reduce(
-    (samples: { [key: string]: ICockpitGoods[] }, x: ICockpitGoods) => {
-      (samples[x.collectionId] = samples[x.collectionId] || []).push(x);
+    (samples: { [key: string]: ICockpitGoods[] }, good: ICockpitGoods) => {
+      (samples[good.collectionId] = samples[good.collectionId] || []).push(
+        good
+      );
       return samples;
     },
     {}
   );
 
-  const collectionsSamples = collectionsData.map(({ title, link, _id }) => {
-    return {
-      title,
-      link,
-      samples: allSamples[_id as string],
-    };
-  });
+  const collectionsSamples = collectionsData
+    .map(({ title, link, _id }) => {
+      return {
+        title,
+        link,
+        samples: allSamples[_id as string],
+      };
+    })
+    .reverse()
+    .slice(0, 3);
 
   return (
     <div className="main-page-collections-samples">

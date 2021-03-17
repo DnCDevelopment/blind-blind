@@ -14,31 +14,35 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
         <h3 className="collection-samples__title">{title}</h3>
       </Link>
       <div className="collection-samples__goods container">
-        {samples.map(({ _id, previewImage, title, secondImage, link }) => (
-          <Link key={_id} href={`/goods${link}`}>
-            <div className="collection-samples__goods-item">
-              <div className="collection-samples__goods-photos">
-                <Image
-                  className="collection-samples__goods-photos__preview"
-                  layout="fill"
-                  objectFit="cover"
-                  alt={title}
-                  loading="eager"
-                  src={process.env.NEXT_PUBLIC_COCKPIT_URL + previewImage.path}
-                />
-                <Image
-                  className="collection-samples__goods-photos__second"
-                  layout="fill"
-                  objectFit="cover"
-                  alt={title}
-                  loading="eager"
-                  src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondImage.path}
-                />
+        {samples
+          .slice(0, 3)
+          .map(({ _id, previewImage, title, secondImage, link }) => (
+            <Link key={_id} href={`/goods${link}`}>
+              <div className="collection-samples__goods-item">
+                <div className="collection-samples__goods-photos">
+                  <Image
+                    className="collection-samples__goods-photos__preview"
+                    layout="fill"
+                    objectFit="cover"
+                    alt={title}
+                    loading="eager"
+                    src={
+                      process.env.NEXT_PUBLIC_COCKPIT_URL + previewImage.path
+                    }
+                  />
+                  <Image
+                    className="collection-samples__goods-photos__second"
+                    layout="fill"
+                    objectFit="cover"
+                    alt={title}
+                    loading="eager"
+                    src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondImage.path}
+                  />
+                </div>
+                <p className="collection-samples__goods-title">{title}</p>
               </div>
-              <p className="collection-samples__goods-title">{title}</p>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
       </div>
     </div>
   );
