@@ -83,6 +83,8 @@ const ZoomImage: React.FC<IZoomImageProps> = ({ image, alt, zoom }) => {
         layout="fill"
         objectFit="cover"
         alt={alt}
+        quality={10}
+        priority={true}
         loading="eager"
         src={process.env.NEXT_PUBLIC_COCKPIT_URL + image}
         className="image"

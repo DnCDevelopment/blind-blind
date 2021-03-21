@@ -20,7 +20,8 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
           layout="fill"
           objectFit="cover"
           alt={title}
-          loading="eager"
+          quality={5}
+          priority={true}
           src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
         />
         <Image
@@ -28,7 +29,8 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
           layout="fill"
           objectFit="cover"
           alt={title}
-          loading="eager"
+          quality={5}
+          priority={true}
           src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
         />
       </div>

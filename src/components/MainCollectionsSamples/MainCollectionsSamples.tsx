@@ -31,6 +31,7 @@ const MainCollectionsSamples: React.FC<IMainCollectionsSamplesProps> = ({
         samples: allSamples[_id as string],
       };
     })
+    .filter(({ samples }) => samples)
     .reverse()
     .slice(0, 3);
 
