@@ -1,6 +1,10 @@
 .goods-item {
   cursor: pointer;
 
+  .not-load {
+    display: none;
+  }
+
   &__image {
     position: relative;
     width: 100%;

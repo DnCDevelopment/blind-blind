@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,33 +13,42 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
   secondPhoto,
   price,
   stockPrice,
-}) => (
-  <Link href={`/goods${link}`}>
-    <div className="goods-item">
-      <div className="goods-item__image">
-        <Image
-          layout="fill"
-          objectFit="cover"
-          alt={title}
-          quality={5}
-          priority={true}
-          src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
+}) => {
+  const [isLoad, setLoad] = useState<boolean>(false);
+  return (
+    <Link href={`/goods${link}`}>
+      <div className="goods-item">
+        <div
+          className={`goods-item-fallback__image ${
+            isLoad ? 'not-load' : 'load'
+          }`}
         />
-        <Image
-          className="second"
-          layout="fill"
-          objectFit="cover"
-          alt={title}
-          quality={5}
-          priority={true}
-          src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
-        />
+        <div className={`goods-item__image ${isLoad ? 'load' : 'not-load'}`}>
+          <Image
+            layout="fill"
+            objectFit="contain"
+            alt={title}
+            quality={50}
+            priority={true}
+            src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
+            onLoad={() => setLoad(true)}
+          />
+          <Image
+            className="second"
+            layout="fill"
+            objectFit="contain"
+            alt={title}
+            quality={50}
+            priority={true}
+            src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
+          />
+        </div>
+        <div className="goods-item__title">{title}</div>
+        <PriceLabel price={price} stockPrice={stockPrice} />
       </div>
-      <div className="goods-item__title">{title}</div>
-      <PriceLabel price={price} stockPrice={stockPrice} />
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 export const GoodsItemFallback = () => {
   return (

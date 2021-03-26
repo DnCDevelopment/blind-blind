@@ -42,7 +42,7 @@ const MainCollectionsSamples: React.FC<IMainCollectionsSamplesProps> = ({
           key={title}
           title={title}
           link={link}
-          samples={samples}
+          samples={samples.slice(0, 3)}
         />
       ))}
     </div>
