@@ -4,10 +4,10 @@ const absoluteUrl = (url: string): string => {
   const isServer = typeof window !== 'undefined';
 
   const server = isServer
-    ? window.location.origin
-    : process.env.NEXT_PUBLIC_HOST_NAME;
+    ? window.location.origin + '/'
+    : process.env.NEXT_PUBLIC_COCKPIT_URL;
 
-  return server + '/' + url;
+  return server + url;
 };
 
 export const useCockpit = <T>(withSuspense: boolean, params?: string) => {
@@ -17,7 +17,6 @@ export const useCockpit = <T>(withSuspense: boolean, params?: string) => {
 
   const url = 'api/getGoods';
   const urlWithParams = params ? url + '?' + params : url;
-
   const { data, error } = useSWR(absoluteUrl(urlWithParams), fetcher, {
     suspense: withSuspense,
   });
