@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import PriceLabel from './PriceLabel';
@@ -27,18 +26,14 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
         <div className={`goods-item__image ${isLoad ? 'load' : 'not-load'}`}>
           <img
             ref={img}
-            src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${photo}&q=50`}
+            src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${photo}&w=1800&q=50`}
             alt={title}
             onLoad={onLoad}
           />
-          <Image
+          <img
             className="second"
-            layout="fill"
-            objectFit="contain"
+            src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondPhoto}&w=1800&q=50`}
             alt={title}
-            quality={50}
-            priority={true}
-            src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
           />
         </div>
         <div className="goods-item__title">{title}</div>
