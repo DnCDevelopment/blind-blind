@@ -1,12 +1,9 @@
-import { Suspense } from 'react';
 import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 
 import Error from '../_error';
 
-import GoodsList, {
-  GoodsListFallback,
-} from '../../src/components/Goods/GoodsList';
+import GoodsList from '../../src/components/Goods/GoodsList';
 import GoodsListTitle from '../../src/components/Goods/GoodsListTitle';
 import Seo from '../../src/components/Seo/Seo';
 import SubCollections from '../../src/components/SubCollections/SubCollections';
@@ -19,6 +16,7 @@ import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
 
 const CollectionPage: NextPage<ICollectionPageProps> = ({
   collection,
+  goods,
   subCollections,
 }) => {
   const { locale, defaultLocale } = useRouter();
@@ -60,9 +58,6 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
       </>
     );
 
-  const isServer = typeof window === 'undefined';
-  const { _id: collectionId } = collection;
-
   return (
     <div className="collection-page">
       <Seo
@@ -85,17 +80,7 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
       />
       <GoodsListTitle title={collectionName} />
       <div className="goods-container">
-        {isServer ? (
-          <GoodsList
-            filter={`filter[collection._id]=${collectionId as string}`}
-          />
-        ) : (
-          <Suspense fallback={<GoodsListFallback />}>
-            <GoodsList
-              filter={`filter[collection._id]=${collectionId as string}`}
-            />
-          </Suspense>
-        )}
+        <GoodsList goods={goods} />
       </div>
     </div>
   );
@@ -116,6 +101,12 @@ export const getServerSideProps: GetServerSideProps = async ({
         'filter[collection._id]=' + curCollection._id
       )
     : null;
+
+  const goods = await getCockpitCollection(
+    'Goods',
+    `filter[collection._id]=${curCollection._id}`
+  );
+
   const curSubCollections = subCollections?.total
     ? subCollections.entries
     : null;
@@ -124,6 +115,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       collection: curCollection,
       subCollections: curSubCollections,
+      goods,
     },
   };
 };

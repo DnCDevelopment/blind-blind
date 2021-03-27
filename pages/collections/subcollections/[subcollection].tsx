@@ -1,11 +1,8 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { Suspense } from 'react';
 
 import Error from '../../_error';
 
-import GoodsList, {
-  GoodsListFallback,
-} from '../../../src/components/Goods/GoodsList';
+import GoodsList from '../../../src/components/Goods/GoodsList';
 import GoodsListTitle from '../../../src/components/Goods/GoodsListTitle';
 import Seo from '../../../src/components/Seo/Seo';
 
@@ -22,13 +19,13 @@ import {
 const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
   subCollectionProps,
   locale,
+  goods,
 }) => {
   if (!subCollectionProps) {
     return <Error />;
   }
 
-  const { title, id, description, link } = subCollectionProps;
-  const isServer = typeof window === 'undefined';
+  const { title, description, link } = subCollectionProps;
 
   return (
     <div className="subcollection-page">
@@ -53,13 +50,7 @@ const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
         path={link}
       />
       <GoodsListTitle title={title} />
-      {isServer ? (
-        <GoodsList filter={`filter[subCollection._id]=${id as string}`} />
-      ) : (
-        <Suspense fallback={<GoodsListFallback />}>
-          <GoodsList filter={`filter[subCollection._id]=${id as string}`} />
-        </Suspense>
-      )}
+      <GoodsList goods={goods} />
     </div>
   );
 };
@@ -102,11 +93,16 @@ export const getServerSideProps: GetServerSideProps = async ({
         },
       }
     : null;
+  const goods = await getCockpitCollection(
+    'Goods',
+    `filter[subCollection._id]=${curSubCollection._id}`
+  );
 
   return {
     props: {
       subCollectionProps,
       locale,
+      goods,
     },
   };
 };

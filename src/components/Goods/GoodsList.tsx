@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import useCockpit from '../../hooks/useCockpit';
-
 import GoodsItem, { GoodsItemFallback } from './GoodsItem';
 import Dropdown from '../Form/Dropdown';
 
-import { ICockpitGoodsEntries, ICockpitGoodsRaw } from '../../cockpitTypes';
+import { ICockpitGoodsRaw } from '../../cockpitTypes';
 import { IGoodsListProps } from './Types';
 
 import { SORT_GOODS, SORT_TRANSLATE } from '../../constants/sortGoods';
@@ -14,11 +12,10 @@ import { SORT_GOODS, SORT_TRANSLATE } from '../../constants/sortGoods';
 const GOODS_ON_PAGE = 12;
 const AVAILABLE_PAGES = 3;
 
-const GoodsList: React.FC<IGoodsListProps> = ({ filter }) => {
+const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
   const [sortSelect, setSortSelect] = useState<keyof typeof SORT_TRANSLATE>(
     'default'
   );
-  const { data: goods } = useCockpit<ICockpitGoodsEntries>(true, filter);
   const router = useRouter();
   const { locale, query } = router;
 

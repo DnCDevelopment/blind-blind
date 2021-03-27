@@ -8,6 +8,7 @@ import {
   ICockpitCelebrity,
   ICockpitContacts,
   ICockpitSalesPlace,
+  ICockpitGoodsEntries,
 } from './cockpitTypes';
 import { IGoodsSingleProps } from './components/Goods/Types';
 
@@ -31,6 +32,7 @@ export interface IIndexPageProps {
 
 export interface ICollectionPageProps {
   collection: ICockpitCollectionsRaw | null;
+  goods: ICockpitGoodsEntries;
   subCollections: ICockpitSubCollectionRaw[] | null;
 }
 
@@ -46,7 +48,7 @@ export interface ISubCollectionPageProps {
     };
   } | null;
   locale: 'ru' | 'en';
-  collection: ICockpitCollectionsRaw;
+  goods: ICockpitGoodsEntries;
 }
 
 export interface IGoodsPageProps {
