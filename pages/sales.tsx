@@ -1,18 +1,15 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { Suspense } from 'react';
 
-import GoodsList, {
-  GoodsListFallback,
-} from '../src/components/Goods/GoodsList';
+import GoodsList from '../src/components/Goods/GoodsList';
 import GoodsListTitle from '../src/components/Goods/GoodsListTitle';
 import Seo from '../src/components/Seo/Seo';
 
-import { ILocaleProps } from '../src/pagesTypes';
+import { ISalesPageProps } from '../src/pagesTypes';
 
 import { SEO_ITEMS } from '../src/constants/seoItems';
+import { getCockpitCollection } from '../src/utils/getCockpitData';
 
-const SalesPage: NextPage<ILocaleProps> = ({ locale }) => {
-  const isServer = typeof window === 'undefined';
+const SalesPage: NextPage<ISalesPageProps> = ({ locale, goods }) => {
   return (
     <div className="sales-page">
       <Seo
@@ -33,20 +30,21 @@ const SalesPage: NextPage<ILocaleProps> = ({ locale }) => {
       />
       <GoodsListTitle />
       <div className="goods-container">
-        {isServer ? (
-          <GoodsList filter={`filter[stockPrice][$exists]=true`} />
-        ) : (
-          <Suspense fallback={<GoodsListFallback />}>
-            <GoodsList filter={`filter[stockPrice][$exists]=true`} />
-          </Suspense>
-        )}
+        <GoodsList goods={goods} />
       </div>
     </div>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => ({
-  props: { locale },
-});
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  const goods = await getCockpitCollection(
+    'Goods',
+    'filter[stockPrice][$exists]=true'
+  );
+  return {
+    props: { locale },
+    goods,
+  };
+};
 
 export default SalesPage;

@@ -16,6 +16,10 @@ export interface ILocaleProps {
   locale: 'ru' | 'en';
 }
 
+export interface ISalesPageProps extends ILocaleProps {
+  goods: ICockpitGoodsEntries;
+}
+
 export interface IAppProps {
   props: {
     collections: ICockpitCollections[];
