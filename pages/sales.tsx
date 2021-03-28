@@ -42,8 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
     'filter[stockPrice][$exists]=true'
   );
   return {
-    props: { locale },
-    goods,
+    props: { locale, goods },
   };
 };
 
