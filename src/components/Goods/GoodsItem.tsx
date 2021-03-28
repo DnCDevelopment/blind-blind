@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import PriceLabel from './PriceLabel';
 
 import { IGoodsItemProps } from './Types';
+import useImage from '../../hooks/useImage';
 
 const GoodsItem: React.FC<IGoodsItemProps> = ({
   title,
@@ -14,7 +13,8 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
   price,
   stockPrice,
 }) => {
-  const [isLoad, setLoad] = useState<boolean>(false);
+  const { img, isLoad, onLoad } = useImage();
+
   return (
     <Link href={`/goods${link}`}>
       <div className="goods-item">
@@ -24,23 +24,16 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
           }`}
         />
         <div className={`goods-item__image ${isLoad ? 'load' : 'not-load'}`}>
-          <Image
-            layout="fill"
-            objectFit="contain"
+          <img
+            ref={img}
+            src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${photo}&w=1800&q=50`}
             alt={title}
-            quality={50}
-            priority={true}
-            src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
-            onLoad={() => setLoad(true)}
+            onLoad={onLoad}
           />
-          <Image
+          <img
             className="second"
-            layout="fill"
-            objectFit="contain"
+            src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondPhoto}&w=1800&q=50`}
             alt={title}
-            quality={50}
-            priority={true}
-            src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondPhoto}
           />
         </div>
         <div className="goods-item__title">{title}</div>

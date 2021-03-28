@@ -1,15 +1,14 @@
-import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { ICollectionSamplesProps } from './Types';
+import useImage from '../../hooks/useImage';
 
 const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
   title,
   link,
   samples,
 }) => {
-  const [isLoad, setLoad] = useState<boolean>(false);
+  const { img, isLoad, onLoad } = useImage();
   return (
     <div className="collection-samples">
       <Link href={link}>
@@ -29,25 +28,17 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
                   isLoad ? 'load' : 'not-load'
                 }`}
               >
-                <Image
+                <img
+                  ref={img}
                   className="collection-samples__goods-photos__preview"
-                  layout="fill"
-                  objectFit="contain"
                   alt={title}
-                  quality={50}
-                  priority={true}
-                  src={process.env.NEXT_PUBLIC_COCKPIT_URL + previewImage.path}
-                  onLoad={() => setLoad(true)}
+                  src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImage.path}&w=1800&q=50`}
+                  onLoad={onLoad}
                 />
-                <Image
+                <img
                   className="collection-samples__goods-photos__second"
-                  layout="fill"
-                  objectFit="contain"
+                  src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImage.path}&w=1800&q=50`}
                   alt={title}
-                  quality={50}
-                  priority={true}
-                  src={process.env.NEXT_PUBLIC_COCKPIT_URL + secondImage.path}
-                  onLoad={() => setLoad(true)}
                 />
               </div>
               <p className="collection-samples__goods-title">{title}</p>
