@@ -8,6 +8,7 @@ import { ISalesPageProps } from '../src/pagesTypes';
 
 import { SEO_ITEMS } from '../src/constants/seoItems';
 import { getCockpitCollection } from '../src/utils/getCockpitData';
+import { ICockpitGoodsRaw } from '../src/cockpitTypes';
 
 const SalesPage: NextPage<ISalesPageProps> = ({ locale, goods }) => {
   return (
@@ -42,7 +43,14 @@ export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
     'filter[stockPrice][$exists]=true'
   );
   return {
-    props: { locale, goods },
+    props: {
+      locale,
+      goods: {
+        entries: goods.entries.filter(
+          ({ stockPrice }: ICockpitGoodsRaw) => stockPrice
+        ),
+      },
+    },
   };
 };
 

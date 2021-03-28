@@ -17,6 +17,7 @@ const MainCarouselItem: React.FC<ICockpitCarousel> = ({
         alt={title}
         objectPosition="left"
         loading="eager"
+        quality={100}
         src={process.env.NEXT_PUBLIC_COCKPIT_URL + image.path}
       />
       <Link href={link}>

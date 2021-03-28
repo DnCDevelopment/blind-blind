@@ -43,11 +43,11 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
       );
     else if (currentPage + 1 - AVAILABLE_PAGES <= 0)
       setVisiblePages(
-        [...Array(maxPageNumber).keys()].splice(0, AVAILABLE_PAGES)
+        [...Array(maxPageNumber + 1).keys()].splice(1, AVAILABLE_PAGES)
       );
     else
       setVisiblePages(
-        [...Array(maxPageNumber).keys()].splice(
+        [...Array(maxPageNumber + 1).keys()].splice(
           currentPage - Math.floor(AVAILABLE_PAGES / 2),
           currentPage + Math.ceil(AVAILABLE_PAGES / 2) - 1
         )
@@ -126,7 +126,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
           )}
       </div>
       <div className="goods-list__pages-buttons">
-        {currentPage > 0 && (
+        {currentPage > 1 && (
           <div
             role="presentation"
             onClick={() => changePage(currentPage - 1)}
