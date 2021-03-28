@@ -19,9 +19,9 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
   const router = useRouter();
   const { locale, query } = router;
 
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [visiblePages, setVisiblePages] = useState<Array<number>>([]);
-  const [firstGoodsOnPageIndex, setFirstGoodsOnPageIndex] = useState(0);
+  const [firstGoodsOnPageIndex, setFirstGoodsOnPageIndex] = useState(1);
 
   const filteredGoods = goods?.entries;
 
@@ -32,14 +32,12 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
   const maxPageNumber = Math.ceil(sortedGoods?.length / GOODS_ON_PAGE);
 
   useEffect(() => {
-    setFirstGoodsOnPageIndex(currentPage * GOODS_ON_PAGE);
+    setFirstGoodsOnPageIndex((currentPage - 1) * GOODS_ON_PAGE);
     if (maxPageNumber <= 1) setVisiblePages([]);
     else if (currentPage + 1 + AVAILABLE_PAGES >= maxPageNumber)
       setVisiblePages(
-        [...Array(maxPageNumber).keys()].splice(
-          maxPageNumber >= AVAILABLE_PAGES
-            ? maxPageNumber - AVAILABLE_PAGES
-            : 0,
+        [...Array(maxPageNumber + 1).keys()].splice(
+          maxPageNumber > AVAILABLE_PAGES ? maxPageNumber - AVAILABLE_PAGES : 1,
           maxPageNumber
         )
       );
@@ -58,7 +56,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
 
   useEffect(() => {
     const page = query.page ? Number.parseInt(query.page as string) : 0;
-    setCurrentPage(page && page < maxPageNumber ? page : 0);
+    setCurrentPage(page && page < maxPageNumber + 1 ? page : 1);
   }, [query.page, maxPageNumber]);
 
   const changePage = (pageNum: number) => {
@@ -142,7 +140,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
               onClick={() => changePage(pageNum)}
               className={pageNum === currentPage ? 'selected' : ''}
             >
-              {pageNum + 1}
+              {pageNum}
             </p>
           </div>
         ))}
