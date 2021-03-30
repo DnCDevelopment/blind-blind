@@ -24,6 +24,7 @@ export interface IAppProps {
   props: {
     collections: ICockpitCollections[];
     runways: ICockpitRunwaysAndLookbooks[];
+    hasStocks: boolean;
   };
 }
 

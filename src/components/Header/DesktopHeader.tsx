@@ -25,9 +25,11 @@ const DesktopHeader: React.FC = () => {
   const router = useRouter();
   const { locale } = router;
 
-  const { collectionsData } = useContext(indexContext) as IIndexContext;
+  const { collectionsData, hasStocks } = useContext(
+    indexContext
+  ) as IIndexContext;
   const constantCollections = StoreListData[locale as 'ru' | 'en'];
-  const collections = collectionsData.concat(constantCollections);
+  const collections = collectionsData.concat(constantCollections).reverse();
 
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
@@ -105,7 +107,11 @@ const DesktopHeader: React.FC = () => {
               className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
             >
               <Sublist
-                data={collections.reverse()}
+                data={
+                  hasStocks
+                    ? collections
+                    : collections.filter(({ link }) => link !== '/sales')
+                }
                 closeMenu={() => setDesktopMenuOpen(false)}
               />
             </div>

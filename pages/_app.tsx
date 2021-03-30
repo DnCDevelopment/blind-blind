@@ -16,6 +16,7 @@ import { currencyContext } from '../src/context/currencyContext';
 
 import {
   ICockpitCollectionsRaw,
+  ICockpitGoodsRaw,
   ICockpitRunwaysAndLookbooksRaw,
 } from '../src/cockpitTypes';
 import { IAppProps } from '../src/pagesTypes';
@@ -29,7 +30,7 @@ import { ECurrency } from '../src/context/Types';
 const MyApp = ({
   Component,
   pageProps,
-  props: { collections, runways },
+  props: { collections, runways, hasStocks },
 }: AppProps & IAppProps): JSX.Element => {
   const curCartContext = useContext(cartContext);
 
@@ -118,6 +119,7 @@ const MyApp = ({
       value={{
         collectionsData: collections,
         runwaysData: runways,
+        hasStocks,
       }}
     >
       <currencyContext.Provider
@@ -154,9 +156,14 @@ MyApp.getInitialProps = async (
   const { locale, defaultLocale } = appContext.router;
 
   const cockpitDataCollections = await getCockpitCollection('Collections');
+  const cockpitGoods = await getCockpitCollection('Goods');
   const cockpitDataRunways = await getCockpitCollection(
     'Runways',
     'filter[inMenu]=true'
+  );
+
+  const stockGoods = cockpitGoods.entries.filter(
+    ({ stockPrice }: ICockpitGoodsRaw) => stockPrice
   );
 
   const runways: ICockpitRunwaysAndLookbooksRaw[] = cockpitDataRunways.entries.map(
@@ -180,7 +187,7 @@ MyApp.getInitialProps = async (
 
   return {
     ...appProps,
-    props: { collections, runways },
+    props: { collections, runways, hasStocks: !!stockGoods.length },
   };
 };
 

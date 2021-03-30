@@ -12,6 +12,7 @@ import {
 export interface IIndexContext {
   collectionsData: ICockpitCollections[];
   runwaysData: ICockpitRunwaysAndLookbooks[];
+  hasStocks: boolean;
 }
 
 export interface ICartContext {
