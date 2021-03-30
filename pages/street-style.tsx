@@ -1,14 +1,14 @@
 import { GetServerSideProps, NextPage } from 'next';
 
-import Error from '../_error';
-import Runway from '../../src/components/Runway/Runway';
-import Seo from '../../src/components/Seo/Seo';
+import Error from './_error';
+import Runway from '../src/components/Runway/Runway';
+import Seo from '../src/components/Seo/Seo';
 
-import { ICockpitRunwaysAndLookbooksRaw } from '../../src/cockpitTypes';
-import { IBlindStylePageProps } from '../../src/pagesTypes';
+import { ICockpitRunwaysAndLookbooksRaw } from '../src/cockpitTypes';
+import { IBlindStylePageProps } from '../src/pagesTypes';
 
-import { getCockpitCollection } from '../../src/utils/getCockpitData';
-import { DEFAULT_DESCRIPTION, SEO_ITEMS } from '../../src/constants/seoItems';
+import { getCockpitCollection } from '../src/utils/getCockpitData';
+import { DEFAULT_DESCRIPTION, SEO_ITEMS } from '../src/constants/seoItems';
 
 const BlindStylePage: NextPage<IBlindStylePageProps> = ({
   runwayProps,
@@ -48,9 +48,8 @@ const BlindStylePage: NextPage<IBlindStylePageProps> = ({
 export const getServerSideProps: GetServerSideProps = async ({
   locale,
   defaultLocale,
-  query,
 }) => {
-  const filter = `filter[link]=/${query.runway}&populate=1`;
+  const filter = `filter[link]=/street-style&populate=1`;
   const runwayData = await getCockpitCollection('Runways', filter);
   const curRunway: ICockpitRunwaysAndLookbooksRaw = runwayData.total
     ? runwayData.entries[0]
@@ -70,6 +69,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       runwayProps,
+      locale,
     },
   };
 };

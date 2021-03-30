@@ -12,14 +12,21 @@ import { ICockpitGoodsRaw, ICockpitSize } from '../../src/cockpitTypes';
 import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
 import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
+import { LANGUAGES } from '../../src/constants/languages';
 
 const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   goodsProps,
-  collection,
   subCollection,
   locale,
 }) => {
   if (!goodsProps) return <Error />;
+
+  const collectionLink =
+    LANGUAGES[locale as 'ru' | 'en'].path +
+    '/collections' +
+    goodsProps.collectionLink;
+  const goodLink =
+    LANGUAGES[locale as 'ru' | 'en'].path + '/goods' + goodsProps.link;
 
   const breadcrumbs = [
     {
@@ -27,15 +34,20 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
       link: SEO_ITEMS[locale].indexPage.link,
     },
     {
-      title: collection.title,
-      link: collection.link,
+      title: goodsProps.collectionTitle,
+      link: collectionLink,
     },
   ];
 
   if (subCollection) {
+    const subCollectionLink =
+      LANGUAGES[locale as 'ru' | 'en'].path +
+      '/collections' +
+      '/subcollections' +
+      subCollection.link;
     breadcrumbs.push({
       title: subCollection.title,
-      link: subCollection.link,
+      link: subCollectionLink,
     });
   }
 
@@ -48,11 +60,11 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
           ...breadcrumbs,
           {
             title: goodsProps.title as string,
-            link: goodsProps.link as string,
+            link: goodLink,
           },
         ]}
-        lang={locale as 'ru' | 'en'}
-        path={goodsProps.link as string}
+        lang={locale}
+        path={process.env.NEXT_PUBLIC_SITE_URL + goodLink}
       />
       <GoodsListTitle />
       <GoodsSingle {...goodsProps} />
@@ -90,25 +102,15 @@ export const getServerSideProps: GetServerSideProps = async ({
         otherPhotos: curGoods.otherImages,
         isExclusive: curGoods.isExclusive,
         collectionLink: curGoods.collection.link,
+        collectionTitle:
+          locale === defaultLocale
+            ? curGoods.collection.title
+            : curGoods.collection.title_en,
       }
     : null;
 
-  const collection = {
-    link:
-      locale === defaultLocale
-        ? curGoods.collection.link
-        : curGoods.collection.link_en,
-    title:
-      locale === defaultLocale
-        ? curGoods.collection.title
-        : curGoods.collection.title_en,
-  };
-
   const subCollection = {
-    link:
-      locale === defaultLocale
-        ? curGoods?.subCollection?.link
-        : curGoods?.subCollection?.link_en,
+    link: curGoods?.subCollection?.link,
     title:
       locale === defaultLocale
         ? curGoods?.subCollection?.title
@@ -119,7 +121,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       locale,
       goodsProps,
-      collection,
       subCollection: curGoods?.subCollection ? subCollection : null,
     },
   };

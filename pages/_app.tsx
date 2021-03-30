@@ -20,7 +20,7 @@ import {
 } from '../src/cockpitTypes';
 import { IAppProps } from '../src/pagesTypes';
 
-import { getCockpitCollections } from '../src/utils/getCockpitData';
+import { getCockpitCollection } from '../src/utils/getCockpitData';
 import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 
 import '../styles/main.scss';
@@ -153,21 +153,21 @@ MyApp.getInitialProps = async (
 
   const { locale, defaultLocale } = appContext.router;
 
-  const collectionNames = ['Collections', 'Runways'];
-  const [
-    cockpitDataCollections,
-    cockpitDataRunways,
-  ] = await getCockpitCollections(collectionNames);
+  const cockpitDataCollections = await getCockpitCollection('Collections');
+  const cockpitDataRunways = await getCockpitCollection(
+    'Runways',
+    'filter[inMenu]=true'
+  );
 
-  const runways = cockpitDataRunways.entries.map(
+  const runways: ICockpitRunwaysAndLookbooksRaw[] = cockpitDataRunways.entries.map(
     (el: ICockpitRunwaysAndLookbooksRaw) => {
       return {
         title: locale === defaultLocale ? el.title : el.title_en,
         link: '/blind-style' + el.link,
+        inMenu: el.inMenu,
       };
     }
   );
-
   const collections = cockpitDataCollections.entries.map(
     (el: ICockpitCollectionsRaw) => {
       return {

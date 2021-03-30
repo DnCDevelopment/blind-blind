@@ -6,7 +6,7 @@ export const LANGUAGES: {
 } = {
   ru: {
     name: 'рус',
-    path: '/',
+    path: '',
   },
   en: {
     name: 'eng',

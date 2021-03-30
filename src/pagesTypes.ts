@@ -56,10 +56,6 @@ export interface ISubCollectionPageProps {
 }
 
 export interface IGoodsPageProps {
-  collection: {
-    link: string;
-    title: string;
-  };
   goodsProps: IGoodsSingleProps;
   locale: 'ru' | 'en';
   subCollection: {
@@ -80,6 +76,7 @@ export interface IInfomationPageProps {
 
 export interface IBlindStylePageProps {
   runwayProps: ICockpitRunwaysAndLookbooks;
+  locale: 'ru' | 'en';
 }
 
 export interface ICelebritiesPageProps {

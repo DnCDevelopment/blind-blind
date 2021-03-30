@@ -15,6 +15,7 @@ import {
   SEO_ITEMS,
   DEFAULT_DESCRIPTION,
 } from '../../../src/constants/seoItems';
+import { LANGUAGES } from '../../../src/constants/languages';
 
 const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
   subCollectionProps,
@@ -26,6 +27,16 @@ const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
   }
 
   const { title, description, link } = subCollectionProps;
+
+  const collectionLink =
+    LANGUAGES[locale as 'ru' | 'en'].path +
+    '/collections' +
+    subCollectionProps.collection.link;
+  const subCollectionLink =
+    LANGUAGES[locale as 'ru' | 'en'].path +
+    '/collections' +
+    '/subcollections' +
+    link;
 
   return (
     <div className="subcollection-page">
@@ -39,15 +50,15 @@ const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
           },
           {
             title: subCollectionProps.collection.title,
-            link: subCollectionProps.collection.link,
+            link: collectionLink,
           },
           {
             title: title,
-            link: link,
+            link: subCollectionLink,
           },
         ]}
         lang={locale as 'ru' | 'en'}
-        path={link}
+        path={process.env.NEXT_PUBLIC_SITE_URL + link}
       />
       <GoodsListTitle title={title} />
       <GoodsList goods={goods} />

@@ -29,6 +29,7 @@ const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLink }) => {
               objectFit="cover"
               alt={title + ' photo'}
               loading="eager"
+              quality={100}
               src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
             />
           </div>

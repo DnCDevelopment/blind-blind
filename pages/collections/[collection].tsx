@@ -9,10 +9,12 @@ import Seo from '../../src/components/Seo/Seo';
 import SubCollections from '../../src/components/SubCollections/SubCollections';
 
 import { ICollectionPageProps } from '../../src/pagesTypes';
+import { ICockpitGoodsEntries } from '../../src/cockpitTypes';
 
 import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
 import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
+import { LANGUAGES } from '../../src/constants/languages';
 
 const CollectionPage: NextPage<ICollectionPageProps> = ({
   collection,
@@ -27,8 +29,9 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
     locale === defaultLocale
       ? collection.description
       : collection.description_en;
+
   const collectionLink =
-    locale === defaultLocale ? collection.link : collection.link_en;
+    LANGUAGES[locale as 'ru' | 'en'].path + '/collections' + collection.link;
   const collectionName =
     locale === defaultLocale ? collection.title : collection.title_en;
 
@@ -51,7 +54,7 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
             },
           ]}
           lang={locale as 'ru' | 'en'}
-          path={collectionLink}
+          path={process.env.NEXT_PUBLIC_SITE_URL + collectionLink}
         />
         <GoodsListTitle title={collectionName} />
         <SubCollections subCollections={subCollections} />
@@ -76,7 +79,7 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
           },
         ]}
         lang={locale as 'ru' | 'en'}
-        path={collectionLink}
+        path={process.env.NEXT_PUBLIC_SITE_URL + collectionLink}
       />
       <GoodsListTitle title={collectionName} />
       <div className="goods-container">
@@ -88,6 +91,8 @@ const CollectionPage: NextPage<ICollectionPageProps> = ({
 
 export const getServerSideProps: GetServerSideProps = async ({
   query: { collection },
+  locale,
+  defaultLocale,
 }) => {
   const collections = await getCockpitCollection(
     'Collections',
@@ -102,10 +107,15 @@ export const getServerSideProps: GetServerSideProps = async ({
       )
     : null;
 
-  const goods = await getCockpitCollection(
+  const cockpitGoodsData: ICockpitGoodsEntries = await getCockpitCollection(
     'Goods',
     `filter[collection._id]=${curCollection._id}`
   );
+
+  const goods = cockpitGoodsData.entries.map((good) => ({
+    ...good,
+    title: locale === defaultLocale ? good.title : good.title_en,
+  }));
 
   const curSubCollections = subCollections?.total
     ? subCollections.entries
@@ -115,7 +125,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       collection: curCollection,
       subCollections: curSubCollections,
-      goods,
+      goods: {
+        entries: goods,
+      },
     },
   };
 };

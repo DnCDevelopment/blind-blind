@@ -3,6 +3,7 @@
     @include pageTitle;
     font-size: var(--font-24);
     text-align: center;
+    cursor: pointer;
   }
 
   &__celebrities-container {

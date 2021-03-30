@@ -41,6 +41,7 @@ export interface IGoodsSingleProps extends IGoodsItemProps {
   description: string;
   isExclusive: boolean;
   collectionLink: string;
+  collectionTitle: string;
 }
 
 export interface IFormValues {

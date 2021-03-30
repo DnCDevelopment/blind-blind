@@ -19,7 +19,9 @@ const VoucherPage: NextPage<ILocaleProps> = ({ locale }) => (
         },
       ]}
       lang={locale}
-      path={SEO_ITEMS[locale].voucherPage.link}
+      path={
+        process.env.NEXT_PUBLIC_SITE_URL + SEO_ITEMS[locale].voucherPage.link
+      }
     />
     <Voucher />
   </div>

@@ -27,7 +27,9 @@ const SalesPage: NextPage<ISalesPageProps> = ({ locale, goods }) => {
           },
         ]}
         lang={locale}
-        path={SEO_ITEMS[locale].salesPage.link}
+        path={
+          process.env.NEXT_PUBLIC_SITE_URL + SEO_ITEMS[locale].salesPage.link
+        }
       />
       <GoodsListTitle />
       <div className="goods-container">

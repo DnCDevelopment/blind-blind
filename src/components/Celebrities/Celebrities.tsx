@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -17,12 +18,14 @@ const Celebrities: React.FC<ICelebritiesProps> = ({ celebrities }) => {
 
   return (
     <div className="celebrities container">
-      <h1 className="celebrities__title">
-        {TRANSLATE[locale as 'ru' | 'en'].celebrities}
-      </h1>
+      <Link href="/celebrities">
+        <h1 className="celebrities__title">
+          {TRANSLATE[locale as 'ru' | 'en'].celebrities}
+        </h1>
+      </Link>
       <div className="celebrities__celebrities-container">
         {celebrities.map(({ name, proffesion, photo }) => (
-          <div key={name} className="celebrity-item">
+          <div key={photo.path} className="celebrity-item">
             <div
               role="presentation"
               onClick={() => {

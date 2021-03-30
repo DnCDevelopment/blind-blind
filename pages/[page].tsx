@@ -30,7 +30,7 @@ const SinglePage: NextPage<IInfomationPageProps> = ({ pageProps, locale }) => {
           },
         ]}
         lang={locale as 'ru' | 'en'}
-        path={pageProps.link as string}
+        path={(process.env.NEXT_PUBLIC_SITE_URL + pageProps.link) as string}
       />
       <div
         className="inform-page-container"

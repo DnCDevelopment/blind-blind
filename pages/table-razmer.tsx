@@ -20,7 +20,10 @@ const SizesTablePage: NextPage<ILocaleProps> = ({ locale }) => {
           },
         ]}
         lang={locale}
-        path={SEO_ITEMS[locale].sizeTablePage.link}
+        path={
+          process.env.NEXT_PUBLIC_SITE_URL +
+          SEO_ITEMS[locale].sizeTablePage.link
+        }
       />
       <SizesTable />
     </div>

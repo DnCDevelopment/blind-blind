@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      celebrities,
+      celebrities: celebrities.reverse(),
       locale,
     },
   };

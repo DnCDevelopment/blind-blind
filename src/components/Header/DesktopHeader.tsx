@@ -105,7 +105,7 @@ const DesktopHeader: React.FC = () => {
               className={`options-sublist ${curMenu === 'store' ? 'open' : ''}`}
             >
               <Sublist
-                data={collections}
+                data={collections.reverse()}
                 closeMenu={() => setDesktopMenuOpen(false)}
               />
             </div>

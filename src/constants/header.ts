@@ -1,6 +1,10 @@
 export const AboutListData = {
   ru: [
     {
+      title: 'Street Style',
+      link: '/street-style',
+    },
+    {
       title: 'Философия',
       link: '/o-nas',
     },
@@ -15,6 +19,10 @@ export const AboutListData = {
     },
   ],
   en: [
+    {
+      title: 'Street Style',
+      link: '/street-style',
+    },
     {
       title: 'Phylosophy',
       link: '/o-nas',

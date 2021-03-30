@@ -48,12 +48,13 @@ export interface ICockpitRunwaysAndLookbooksRaw
   extends ICockpitRunwaysAndLookbooks {
   _id: string;
   title_en: string;
+  description_en: string;
   link_en: string;
   photos: IPhoto[];
-  inMenu: boolean;
   _by: string;
   _mby: string;
   _modified: number;
+  inMenu: boolean;
 }
 
 export interface ICockpitPages {

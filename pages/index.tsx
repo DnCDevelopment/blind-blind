@@ -21,27 +21,25 @@ const IndexPage: NextPage<IIndexPageProps> = ({
   goods,
   celebrities,
   locale,
-}) => {
-  return (
-    <main className="main-page">
-      <Seo
-        title={SEO_ITEMS[locale].indexPage.title}
-        description={SEO_ITEMS[locale].indexPage.title}
-        breadcrumbs={[
-          {
-            title: SEO_ITEMS[locale].indexPage.breadcrumbName,
-            link: SEO_ITEMS[locale].indexPage.link,
-          },
-        ]}
-        lang={locale}
-        path={SEO_ITEMS[locale].indexPage.link}
-      />
-      <MainCarousel carousel={carousel} />
-      <MainCollectionsSamples goods={goods} />
-      <Celebrities celebrities={celebrities} />
-    </main>
-  );
-};
+}) => (
+  <main className="main-page">
+    <Seo
+      title={SEO_ITEMS[locale].indexPage.title}
+      description={SEO_ITEMS[locale].indexPage.title}
+      breadcrumbs={[
+        {
+          title: SEO_ITEMS[locale].indexPage.breadcrumbName,
+          link: SEO_ITEMS[locale].indexPage.link,
+        },
+      ]}
+      lang={locale}
+      path={process.env.NEXT_PUBLIC_SITE_URL + SEO_ITEMS[locale].indexPage.link}
+    />
+    <MainCarousel carousel={carousel} />
+    <MainCollectionsSamples goods={goods} />
+    <Celebrities celebrities={celebrities} />
+  </main>
+);
 
 export const getServerSideProps: GetServerSideProps = async ({
   locale,

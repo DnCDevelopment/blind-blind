@@ -27,7 +27,9 @@ const ContactsPage: NextPage<IContactsPageProps> = ({
         },
       ]}
       lang={locale}
-      path={SEO_ITEMS[locale].contactsPage.link}
+      path={
+        process.env.NEXT_PUBLIC_SITE_URL + SEO_ITEMS[locale].contactsPage.link
+      }
     />
     <Contacts email={contacts.email} phone={contacts.phone} />
     <SalesPlaces places={salesPlaces} />

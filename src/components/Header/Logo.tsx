@@ -1,9 +1,13 @@
 import Link from 'next/link';
 
+import LogoSvg from '../../assets/svg/logo.svg';
+
 const Logo: React.FC = () => {
   return (
     <Link href="/">
-      <h1 className="logo">Blind-Blind</h1>
+      <a>
+        <LogoSvg width={130} />
+      </a>
     </Link>
   );
 };
