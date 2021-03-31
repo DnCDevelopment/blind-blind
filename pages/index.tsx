@@ -3,6 +3,7 @@ import { NextPage, GetServerSideProps } from 'next';
 import MainCarousel from '../src/components/MainCarousel/MainCarousel';
 import Seo from '../src/components/Seo/Seo';
 import MainCollectionsSamples from '../src/components/MainCollectionsSamples/MainCollectionsSamples';
+import MainStreetStyleSamples from '../src/components/MainStreetStyleSamples/MainStreetStyleSamples';
 import Celebrities from '../src/components/Celebrities/Celebrities';
 
 import { IIndexPageProps } from '../src/pagesTypes';
@@ -10,9 +11,13 @@ import {
   ICockpitCarousel,
   ICockpitCelebrityRaw,
   ICockpitGoodsRaw,
+  ICockpitRunwaysAndLookbooksRaw,
 } from '../src/cockpitTypes';
 
-import { getCockpitCollections } from '../src/utils/getCockpitData';
+import {
+  getCockpitCollection,
+  getCockpitCollections,
+} from '../src/utils/getCockpitData';
 
 import { SEO_ITEMS } from '../src/constants/seoItems';
 
@@ -20,6 +25,7 @@ const IndexPage: NextPage<IIndexPageProps> = ({
   carousel,
   goods,
   celebrities,
+  streetStyle,
   locale,
 }) => (
   <main className="main-page">
@@ -37,6 +43,7 @@ const IndexPage: NextPage<IIndexPageProps> = ({
     />
     <MainCarousel carousel={carousel} />
     <MainCollectionsSamples goods={goods} />
+    <MainStreetStyleSamples photos={streetStyle} />
     <Celebrities celebrities={celebrities} />
   </main>
 );
@@ -52,6 +59,13 @@ export const getServerSideProps: GetServerSideProps = async ({
     cockpitDataCelebrities,
   ] = await getCockpitCollections(collectionNames);
 
+  const filter = `filter[link]=/street-style&populate=1`;
+  const cockpitDataRunways = await getCockpitCollection('Runways', filter);
+
+  const curRunway: ICockpitRunwaysAndLookbooksRaw = cockpitDataRunways.total
+    ? cockpitDataRunways.entries[0]
+    : null;
+
   const carousel = cockpitDataCarousel.entries.map((el: ICockpitCarousel) => {
     return {
       title: el.title,
@@ -60,19 +74,22 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   });
 
-  const goods = cockpitDataGoods.entries.map((el: ICockpitGoodsRaw) => {
-    return {
-      title: locale === defaultLocale ? el.title : el.title_en,
-      link: el.link,
-      description:
-        locale === defaultLocale ? el.description : el.description_en,
-      previewImage: el.previewImage,
-      secondImage: el.secondImage,
-      collectionId: el.collection._id,
-      _modified: el._modified,
-      _id: el._id,
-    };
-  });
+  const goods = cockpitDataGoods.entries
+    .map((el: ICockpitGoodsRaw) => {
+      return {
+        title: locale === defaultLocale ? el.title : el.title_en,
+        link: el.link,
+        description:
+          locale === defaultLocale ? el.description : el.description_en,
+        previewImage: el.previewImage,
+        secondImage: el.secondImage,
+        collectionId: el.collection._id,
+        _modified: el._modified,
+        _id: el._id,
+      };
+    })
+    .reverse()
+    .slice(0, 3);
 
   const celebrities = cockpitDataCelebrities.entries
     .map((el: ICockpitCelebrityRaw) => {
@@ -85,7 +102,16 @@ export const getServerSideProps: GetServerSideProps = async ({
     .slice(0, 3);
 
   return {
-    props: { carousel, goods, celebrities, locale },
+    props: {
+      carousel,
+      goods,
+      celebrities,
+      streetStyle: curRunway.photos
+        .reverse()
+        .slice(0, 3)
+        .map((photo) => photo.path),
+      locale,
+    },
   };
 };
 

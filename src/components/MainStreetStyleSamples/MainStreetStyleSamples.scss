@@ -1,0 +1,45 @@
+.street-style {
+  &__title {
+    width: fit-content;
+    margin: 30px auto;
+    font-weight: var(--font-weight-400);
+    font-size: var(--font-20);
+    cursor: pointer;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .photo-container {
+      position: relative;
+      width: 350px;
+      height: 450px;
+      margin: 10px auto;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (min-width: 1080px) {
+  .street-style {
+    &__container {
+      flex-direction: row;
+
+      .photo-container {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .street-style {
+    &__container {
+      .photo-container {
+        width: 400px;
+      }
+    }
+  }
+}

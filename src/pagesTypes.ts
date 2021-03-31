@@ -31,6 +31,7 @@ export interface IAppProps {
 export interface IIndexPageProps {
   carousel: ICockpitCarousel[];
   goods: ICockpitGoods[];
+  streetStyle: string[];
   celebrities: ICockpitCelebrity[];
   locale: 'ru' | 'en';
 }

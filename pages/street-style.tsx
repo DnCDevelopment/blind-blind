@@ -61,7 +61,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         description: defaultLocale
           ? curRunway.description
           : curRunway.description_en,
-        photos: curRunway.photos,
+        photos: curRunway.photos.reverse(),
         videoLink: curRunway.videoLink ? curRunway.videoLink : null,
       }
     : null;
