@@ -21,7 +21,7 @@ const confimPayment: NextApiHandler = async (req, res) => {
   );
   if (status === 'success')
     await fetch(url, {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_COCKPIT_TOKEN}`,
