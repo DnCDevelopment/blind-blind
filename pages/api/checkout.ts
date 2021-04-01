@@ -45,10 +45,7 @@ const checkout: NextApiHandler = async (req, res) => {
       },
     }),
   });
-  const data = await response.json();
-  const { _id } = data;
-  console.log(data);
-
+  const { _id } = await response.json();
   if (paymentType === FORM[locale as 'ru' | 'en'].paymentOnline) {
     const data = {
       version: 3,
