@@ -28,7 +28,7 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
   const collections = collectionsData.concat(constantCollections);
   const aboutSublist = AboutListData[locale as 'en' | 'ru'];
 
-  aboutSublist[2].subsublist = runwaysData;
+  aboutSublist[3].subsublist = runwaysData;
 
   return (
     <div className="mobile-menu">

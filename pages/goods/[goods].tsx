@@ -96,7 +96,9 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes: (curGoods.sizes as ICockpitSize[]).map((size) => size.size),
+        sizes: (curGoods.sizes as ICockpitSize[])
+          .map((size) => size.size)
+          .filter((size) => size),
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods.secondImage.path,
         otherPhotos: curGoods.otherImages,
