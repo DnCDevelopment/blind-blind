@@ -30,7 +30,7 @@ const checkout: NextApiHandler = async (req, res) => {
 
   const url = `${process.env.NEXT_PUBLIC_COCKPIT_URL}api/collections/save/checkouts`;
   const response = await fetch(url, {
-    method: 'post',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_COCKPIT_TOKEN}`,

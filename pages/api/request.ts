@@ -9,7 +9,7 @@ const request: NextApiHandler = async (req, res) => {
 
   try {
     const response = await fetch(url, {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_COCKPIT_TOKEN}`,
