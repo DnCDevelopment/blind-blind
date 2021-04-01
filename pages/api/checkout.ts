@@ -6,6 +6,7 @@ const checkout: NextApiHandler = async (req, res) => {
   const {
     name,
     surname,
+    email,
     country,
     city,
     phone,
@@ -18,6 +19,7 @@ const checkout: NextApiHandler = async (req, res) => {
   const check =
     locale &&
     name &&
+    email &&
     surname &&
     country &&
     city &&
@@ -43,7 +45,10 @@ const checkout: NextApiHandler = async (req, res) => {
       },
     }),
   });
-  const { _id } = await response.json();
+  const data = await response.json();
+  const { _id } = data;
+  console.log(data);
+
   if (paymentType === FORM[locale as 'ru' | 'en'].paymentOnline) {
     const data = {
       version: 3,
