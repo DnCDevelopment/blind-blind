@@ -62,7 +62,7 @@ export const TRANSLATE = {
     copyright: 'Copyright © Blind-Blind 2021 Все права защищены',
     privacyPolicy: 'Политика конфиденциальности',
     publicContract: 'Публичный договор',
-    celebrities: 'Знаменитости',
+    celebrities: 'Сelebrities',
     notFoundTitle: '404 Страница не найдена',
     notFoundDescription: 'Запрошенная вами страница не существует.',
     continueShopping: ['Нажите', 'здесь', 'чтобы продолжить покупки.'],

@@ -20,9 +20,9 @@ export const SEO_ITEMS = {
       link: '/cart',
     },
     celebritiesPage: {
-      title: 'Знаменитости',
+      title: 'Сelebrities',
       description: DEFAULT_DESCRIPTION.ru,
-      breadcrumbName: 'Знаменитости',
+      breadcrumbName: 'Сelebrities',
       link: '/celebrities',
     },
     checkoutPage: {

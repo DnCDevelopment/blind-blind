@@ -20,12 +20,12 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
 
   const { locale } = useRouter();
 
-  const { collectionsData, runwaysData } = useContext(
+  const { collectionsData, runwaysData, hasStocks } = useContext(
     indexContext
   ) as IIndexContext;
 
   const constantCollections = StoreListData[locale as 'ru' | 'en'];
-  const collections = collectionsData.concat(constantCollections);
+  const collections = collectionsData.concat(constantCollections).reverse();
   const aboutSublist = AboutListData[locale as 'en' | 'ru'];
 
   aboutSublist[3].subsublist = runwaysData;
@@ -46,7 +46,14 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
         </p>
         {storeListOpen && (
           <div className="mobile-menu__sublist mobile-menu__store-list-data-container">
-            <Sublist data={collections} closeMenu={close} />
+            <Sublist
+              data={
+                hasStocks
+                  ? collections
+                  : collections.filter(({ link }) => link !== '/sales')
+              }
+              closeMenu={close}
+            />
           </div>
         )}
         <p role="presentation" onClick={() => setAboutListOpen(!aboutListOpen)}>

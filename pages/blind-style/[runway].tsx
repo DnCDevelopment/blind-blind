@@ -70,6 +70,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       runwayProps,
+      locale,
     },
   };
 };

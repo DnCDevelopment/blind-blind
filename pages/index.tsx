@@ -99,13 +99,14 @@ export const getServerSideProps: GetServerSideProps = async ({
         photo: el.photo,
       };
     })
+    .reverse()
     .slice(0, 3);
 
   return {
     props: {
       carousel,
       goods,
-      celebrities,
+      celebrities: celebrities,
       streetStyle: curRunway.photos
         .reverse()
         .slice(0, 3)
