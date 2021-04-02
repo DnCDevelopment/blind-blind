@@ -77,7 +77,6 @@ const Shipping: React.FC = () => {
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
     const currentLocale = locale;
-    const items = cart.map(({ id }) => id);
     const url = '/api/checkout';
     fetch(url, {
       method: 'POST',
@@ -96,7 +95,7 @@ const Shipping: React.FC = () => {
         country,
         city,
         phone,
-        items,
+        items: cart,
         currency,
       }),
     })

@@ -174,3 +174,8 @@ export interface ICockpitSalesPlaceRow extends ICockpitSalesPlace {
   city_en: string;
   address_en: string;
 }
+
+export interface IBotUser {
+  chatId: string;
+  nickname: string;
+}
