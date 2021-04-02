@@ -50,6 +50,46 @@ const Seo: React.FC<ISeoProps> = ({
       <meta property="og:type" content="website" />
       <meta property="og:url" content={path} />
       <link rel="canonical" href={path} />
+      <meta
+        name="facebook-domain-verify"
+        content="1al6a9ctqd0sz2aejcj7bxfq42qst0"
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1526060404237881');
+fbq('track', 'PageView');`,
+        }}
+      ></script>
+      <noscript>
+        <img
+          alt="pixel"
+          height="1"
+          width="1"
+          style={{ display: 'none' }}
+          src="https://www.facebook.com/tr?id=1526060404237881&ev=PageView&noscript=1"
+        />
+      </noscript>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=UA-56684939-1"
+      ></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-56684939-1');`,
+        }}
+      ></script>
       <script type="application/ld+json">
         {JSON.stringify(schemaOrgJSONLD)}
       </script>
