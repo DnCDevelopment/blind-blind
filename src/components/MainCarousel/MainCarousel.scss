@@ -1,6 +1,7 @@
 .main-page-carousel {
   z-index: 10;
-  height: 100vh;
+  height: 40vh;
+  margin-top: 120px;
   .carousel {
     display: flex;
     align-items: center;
@@ -10,7 +11,7 @@
   .carousel-list-item,
   &-item {
     width: 100vw;
-    height: 100vh;
+    height: 40vh;
   }
   .carousel-buttons {
     position: absolute;
@@ -46,8 +47,8 @@
     }
     &-title {
       position: absolute;
-      bottom: 50px;
-      left: 50px;
+      bottom: 20px;
+      left: 20px;
       z-index: 10;
       padding: 10px 20px;
       font-weight: var(--font-weight-400);
@@ -60,12 +61,26 @@
 
 @media only screen and (min-width: 1200px) {
   .main-page-carousel {
-    .carousel-buttons {
-      &-prev {
-        left: -100px;
+    height: 100vh;
+    margin-top: 0;
+    .carousel,
+    .carousel-list,
+    .carousel-list-item,
+    &-item {
+      height: 100vh;
+    }
+    .carousel {
+      &-buttons {
+        &-prev {
+          left: -100px;
+        }
+        &-next {
+          right: -100px;
+        }
       }
-      &-next {
-        right: -100px;
+      &-item-title {
+        right: 50px;
+        bottom: 50px;
       }
     }
     &:hover {
