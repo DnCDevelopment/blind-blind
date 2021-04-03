@@ -70,7 +70,7 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
           name: goodsProps.title,
           image: `/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${goodsProps.photo}&w=1800&q=75`,
           price: goodsProps.price,
-          collection: subCollection.title,
+          collection: goodsProps.collectionTitle,
         }}
       />
       <GoodsListTitle />
