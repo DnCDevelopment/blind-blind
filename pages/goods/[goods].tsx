@@ -65,6 +65,13 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
         ]}
         lang={locale}
         path={process.env.NEXT_PUBLIC_SITE_URL + goodLink}
+        product={{
+          id: goodsProps.id,
+          name: goodsProps.title,
+          image: `/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${goodsProps.photo}&w=1800&q=75`,
+          price: goodsProps.price,
+          collection: subCollection.title,
+        }}
       />
       <GoodsListTitle />
       <GoodsSingle {...goodsProps} />

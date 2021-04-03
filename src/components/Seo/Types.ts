@@ -9,4 +9,11 @@ export interface ISeoProps {
   lang: 'ru' | 'en';
   path: string;
   title: string;
+  product?: {
+    id: string;
+    name: string;
+    image: string;
+    price: string;
+    collection: string;
+  };
 }

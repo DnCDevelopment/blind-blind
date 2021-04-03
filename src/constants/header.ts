@@ -9,7 +9,7 @@ export const AboutListData = {
       link: '/o-nas',
     },
     {
-      title: 'Знаменитости',
+      title: 'Сelebrities',
       link: '/celebrities',
     },
     {

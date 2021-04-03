@@ -7,6 +7,7 @@ const Seo: React.FC<ISeoProps> = ({
   description,
   path,
   title,
+  product,
 }): JSX.Element => {
   const shemaContext = 'http://schema.org';
 
@@ -40,6 +41,36 @@ const Seo: React.FC<ISeoProps> = ({
       })),
     },
   ];
+
+  if (product) {
+    schemaOrgJSONLD.push({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      productID: product.id,
+      name: product.name,
+      description: description,
+      url: 'https://example.org/facebook',
+      image: 'https://example.org/facebook.jpg',
+      brand: 'Blind',
+      offers: [
+        {
+          '@type': 'Offer',
+          price: product.price,
+          priceCurrency: 'UAH',
+          itemCondition: 'https://schema.org/NewCondition',
+          availability: 'https://schema.org/InStock',
+        },
+      ],
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          propertyID: product.collection,
+          value: product.collection,
+        },
+      ],
+    });
+  }
+
   return (
     <Head>
       <title>{title}</title>
