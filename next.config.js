@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = withReactSvg({
   images: {
     deviceSizes: [1800],
-    domains: ['content.blind-blind.shop']
+    domains: ['content.blind-blind.com']
   },
   include: path.resolve(__dirname, 'src/assets/svg'),
   webpack(config) {

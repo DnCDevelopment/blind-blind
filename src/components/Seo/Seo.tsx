@@ -44,7 +44,7 @@ const Seo: React.FC<ISeoProps> = ({
 
   if (product) {
     schemaOrgJSONLD.push({
-      '@context': 'https://schema.org',
+      '@context': shemaContext,
       '@type': 'Product',
       productID: product.id,
       name: product.name,
