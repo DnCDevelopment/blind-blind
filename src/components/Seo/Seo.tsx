@@ -2,6 +2,9 @@ import Head from 'next/head';
 
 import { ISeoProps } from './Types';
 
+const facebookAnalyticsId = process.env.NEXT_PUBLIC_FBA_ID;
+const googleTagManagerId = process.env.NEXT_PUBLIC_GTM_ID;
+
 const Seo: React.FC<ISeoProps> = ({
   breadcrumbs,
   description,
@@ -64,7 +67,7 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1526060404237881');
+fbq('init', '${facebookAnalyticsId}');
 fbq('track', 'PageView');`,
         }}
       ></script>
@@ -74,12 +77,12 @@ fbq('track', 'PageView');`,
           height="1"
           width="1"
           style={{ display: 'none' }}
-          src="https://www.facebook.com/tr?id=1526060404237881&ev=PageView&noscript=1"
+          src={`https://www.facebook.com/tr?id=${facebookAnalyticsId}&ev=PageView&noscript=1`}
         />
       </noscript>
       <script
         async
-        src="https://www.googletagmanager.com/gtag/js?id=UA-56684939-1"
+        src={`https://www.googletagmanager.com/gtag/js?id=${googleTagManagerId}`}
       ></script>
       <script
         dangerouslySetInnerHTML={{
@@ -87,7 +90,7 @@ fbq('track', 'PageView');`,
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-56684939-1');`,
+  gtag('config', '${googleTagManagerId}');`,
         }}
       ></script>
       <script type="application/ld+json">
