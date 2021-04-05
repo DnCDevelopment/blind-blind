@@ -1,6 +1,9 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
-const addNewUser = async (req: NextApiRequest, res: NextApiResponse) => {
+const addNewUser: NextApiHandler = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   const isTelegramMessage =
     req.body &&
     req.body.message &&
@@ -57,6 +60,7 @@ const addNewUser = async (req: NextApiRequest, res: NextApiResponse) => {
         });
       }
     }
+    return res.status(200).send({});
   }
 };
 
