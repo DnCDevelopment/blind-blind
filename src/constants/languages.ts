@@ -16,6 +16,7 @@ export const LANGUAGES: {
 
 export const TRANSLATE = {
   ru: {
+    underOrder: 'Под заказ',
     store: 'Магазин',
     aboutUs: 'О нас',
     cart: 'Корзина',
@@ -70,6 +71,7 @@ export const TRANSLATE = {
     goodsNotFound: ['Ваш поиск', 'не дал никаких результатов.'],
   },
   en: {
+    underOrder: 'Under the order',
     store: 'Store',
     aboutUs: 'About',
     cart: 'Cart',

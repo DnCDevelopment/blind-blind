@@ -25,4 +25,8 @@ export const footerMenu = (locale: 'ru' | 'en') => [
     link: '/voucher',
     title: TRANSLATE[locale].giftCertificates,
   },
+  {
+    link: '/pod-zakaz',
+    title: TRANSLATE[locale].underOrder,
+  },
 ];
