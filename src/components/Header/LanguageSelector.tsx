@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -9,9 +9,24 @@ const LanguageSelector: React.FC = () => {
   const { locale, locales, pathname, asPath } = router;
 
   const [droplistOpen, setDroplistOpen] = useState<boolean>(false);
+  const selector = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!selector.current?.contains(e.target as Node)) {
+      setDroplistOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="dropdown-selector">
+    <div className="dropdown-selector" ref={selector}>
       <p role="presentation" onClick={() => setDroplistOpen(!droplistOpen)}>
         {LANGUAGES[locale as 'ru' | 'en'].name}
       </p>

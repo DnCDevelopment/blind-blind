@@ -57,6 +57,10 @@ a {
   max-width: 900px;
 }
 
+svg {
+  cursor: pointer;
+}
+
 .arrow-up {
   position: fixed;
   right: 20px;
@@ -91,10 +95,6 @@ select {
 
 select {
   appearance: none;
-}
-
-svg {
-  cursor: pointer;
 }
 
 .contacts-page-container {

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 
 import { currencyContext } from '../../context/currencyContext';
 
@@ -10,9 +10,24 @@ const CurrencySelector: React.FC = () => {
   ) as ICurrencyContext;
 
   const [droplistOpen, setDroplistOpen] = useState<boolean>(false);
+  const selector = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!selector.current?.contains(e.target as Node)) {
+      setDroplistOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="dropdown-selector">
+    <div className="dropdown-selector" ref={selector}>
       <p role="presentation" onClick={() => setDroplistOpen(!droplistOpen)}>
         {currency}
       </p>

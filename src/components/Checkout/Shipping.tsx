@@ -192,7 +192,7 @@ const Shipping: React.FC = () => {
           </div>
           <div className="divider container" />
           <div className="total-checkout">
-            <p className="title">Total</p>
+            <p className="title">{TRANSLATE[locale as 'ru' | 'en'].subTotal}</p>
             <p className="price">
               {currencyTotalCheckout} {currency}
             </p>
