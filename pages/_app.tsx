@@ -27,6 +27,8 @@ import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 import '../styles/main.scss';
 import { ECurrency } from '../src/context/Types';
 
+import ArrowSVG from '../src/assets/svg/arrow.svg';
+
 const MyApp = ({
   Component,
   pageProps,
@@ -42,6 +44,10 @@ const MyApp = ({
     ('UAH' as unknown) as ECurrency
   );
   const [currencyRate, setCurrencyRate] = useState(0);
+
+  const handleScrollTop = () =>
+    typeof window !== 'undefined' &&
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
     if ('details' in item) {
@@ -141,6 +147,9 @@ const MyApp = ({
           <main>
             <Component {...pageProps} />
           </main>
+          <button className="arrow-up" onClick={handleScrollTop}>
+            <ArrowSVG />
+          </button>
           <Footer />
         </cartContext.Provider>
       </currencyContext.Provider>

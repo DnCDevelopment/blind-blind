@@ -117,10 +117,46 @@ const Form: React.FC<IFormProps> = ({
     return InputField;
   }, [formik, placeholders, selectOptions]);
 
+  const inputPhone = useMemo(() => {
+    const InputField = (key: string) => (
+      <div className="input-box">
+        <input
+          type="text"
+          id={key}
+          name={key}
+          value={formik.values[key]}
+          placeholder={placeholders[key]}
+          onChange={(e) => {
+            if (e.target.value.length < 1) {
+              e.target.value = formik.values[key] = '+';
+            }
+            formik.handleChange(e);
+          }}
+          onBlur={(e) => {
+            if (e.target.value.trim() === '+') {
+              e.target.value = formik.values[key] = '';
+            }
+            formik.handleBlur(e);
+          }}
+          onFocus={(e) => {
+            formik.touched[key] = undefined;
+            if (!formik.values[key].startsWith('+'))
+              e.target.value = formik.values[key] = `+${formik.values[key]}`;
+          }}
+        />
+        {!!suffixes && suffixes[key] && (
+          <span className="input-suffix">{suffixes[key]}</span>
+        )}
+      </div>
+    );
+    return InputField;
+  }, [formik, placeholders, suffixes]);
+
   const InputTypes: { [key: string]: (key: string) => void } = {
     text: inputText,
     select: inputSelect,
     checkbox: inputCheckbox,
+    phone: inputPhone,
     maskedText: inputTextWithMask,
     textArea: inputTextArea,
   };
