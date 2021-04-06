@@ -39,7 +39,7 @@ const BlindStylePage: NextPage<IBlindStylePageProps> = ({
       <Runway
         title={title}
         photos={photos.map((photo) => photo.path)}
-        videoLink={videoLink}
+        videoLinks={videoLink?.map(({ value }) => value)}
       />
     </div>
   );
@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           ? curRunway.description
           : curRunway.description_en,
         photos: curRunway.photos.reverse(),
-        videoLink: curRunway.videoLink ? curRunway.videoLink : null,
+        videoLinks: curRunway.videoLink ? curRunway.videoLink : null,
       }
     : null;
 

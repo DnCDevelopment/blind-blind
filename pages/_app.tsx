@@ -39,6 +39,7 @@ const MyApp = ({
   const [cartState, setCartState] = useState(
     curCartContext ? curCartContext.cart : []
   );
+  const [isArrowVisible, changeArrowVisability] = useState(false);
 
   const [currency, setCurrency] = useState<ECurrency>(
     ('UAH' as unknown) as ECurrency
@@ -48,6 +49,20 @@ const MyApp = ({
   const handleScrollTop = () =>
     typeof window !== 'undefined' &&
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      typeof window !== 'undefined' &&
+        changeArrowVisability(() => window.scrollY > 0);
+    };
+
+    typeof window !== 'undefined' &&
+      window.addEventListener('scroll', scrollHandler, { passive: true });
+    return () => {
+      typeof window !== 'undefined' &&
+        window.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
 
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
     if ('details' in item) {
@@ -147,7 +162,10 @@ const MyApp = ({
           <main>
             <Component {...pageProps} />
           </main>
-          <button className="arrow-up" onClick={handleScrollTop}>
+          <button
+            className={`arrow-up ${isArrowVisible ? 'arrow-up-visible' : ''}`}
+            onClick={handleScrollTop}
+          >
             <ArrowSVG />
           </button>
           <Footer />

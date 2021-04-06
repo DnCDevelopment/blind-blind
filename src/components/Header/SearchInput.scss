@@ -1,6 +1,12 @@
 .search-input {
   margin: 15px 0;
+  color: var(--dark-grey-color);
   border-bottom: 1px solid var(--dark-grey-color);
+
+  &::placeholder {
+    color: var(--black-color);
+    opacity: 1;
+  }
 
   &-container {
     height: 100%;

@@ -1,12 +1,12 @@
 .collection-samples {
   &__title {
     width: 170px;
-    border: 1px solid var(--black-color);
     margin: 30px auto;
     padding: 10px 20px;
     font-weight: var(--font-weight-400);
     letter-spacing: 2px;
     text-align: center;
+    border: 1px solid var(--black-color);
     cursor: pointer;
   }
 

@@ -10,9 +10,11 @@ import CurrencySelector from './CurrencySelector';
 
 const MobileHeader: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+
   useEffect(() => {
     document.body.className = mobileMenuOpen ? 'hide-overflow' : '';
   }, [mobileMenuOpen]);
+
   return (
     <header className="mobile-header">
       <div

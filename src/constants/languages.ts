@@ -40,7 +40,7 @@ export const TRANSLATE = {
     remove: 'Убрать',
     subTotal: 'К оплате',
     agreement: 'Согласиться',
-    checkOut: 'Заказать в корзине',
+    checkOut: 'Заказать',
     checkOutAlert: 'Вы должны согласиться с условиями, чтобы оформить заказ.',
     shipping: 'Доставка',
     continue: 'Продолжить',

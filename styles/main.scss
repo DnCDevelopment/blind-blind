@@ -73,7 +73,14 @@ svg {
   border: none;
   border-radius: 100%;
   outline: none;
+  opacity: 0;
   -webkit-tap-highlight-color: var(--transparent);
+  transition: opacity 0.5s;
+  pointer-events: none;
+  &-visible {
+    opacity: 1;
+    pointer-events: all;
+  }
   svg {
     transform: rotate(90deg);
     fill: var(--white-color);
@@ -89,7 +96,7 @@ select {
   text-align: left;
   background: var(--transparent);
   border: none;
-  border-bottom: 1px var(--black) solid;
+  border-bottom: 1px solid var(--black);
   outline: none;
 }
 

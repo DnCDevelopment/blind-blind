@@ -12,7 +12,9 @@ interface IPhoto {
 
 export interface ICockpitRunwaysAndLookbooks extends ICockpitCollections {
   photos: IPhoto[];
-  videoLink?: string;
+  videoLink?: {
+    value: string;
+  }[];
 }
 
 export interface ICockpitGoods extends ICockpitCollections {

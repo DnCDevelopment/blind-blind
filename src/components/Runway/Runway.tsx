@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal';
 
 import { IRunwayProps } from './Types';
 
-const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLink }) => {
+const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLinks }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalPhoto, setModalPhoto] = useState<string>('');
 
@@ -35,15 +35,12 @@ const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLink }) => {
           </div>
         ))}
       </div>
-      {videoLink && (
-        <div className="video-container">
-          <iframe
-            className="video"
-            title={videoLink}
-            src={videoLink.replace('watch?v=', 'embed/')}
-          ></iframe>
-        </div>
-      )}
+      {!!videoLinks?.length &&
+        videoLinks.map((link) => (
+          <div key={link} className="video-container">
+            <iframe className="video" title={link} src={link} />
+          </div>
+        ))}
       {modalOpen &&
         createPortal(
           <Modal close={() => setModalOpen(false)}>

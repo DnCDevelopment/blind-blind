@@ -39,7 +39,7 @@ const BlindStylePage: NextPage<IBlindStylePageProps> = ({
       <Runway
         title={title}
         photos={photos.map((photo) => photo.path)}
-        videoLink={videoLink}
+        videoLinks={videoLink?.map(({ value }) => value)}
       />
     </div>
   );
