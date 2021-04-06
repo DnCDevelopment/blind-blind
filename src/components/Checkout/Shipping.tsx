@@ -186,7 +186,9 @@ const Shipping: React.FC = () => {
                 },
               }}
               types={{ code: 'text' }}
-              placeholders={{ code: 'Discount code' }}
+              placeholders={{
+                code: TRANSLATE[locale as 'ru' | 'en'].discountCode,
+              }}
               buttonTitle="→"
             />
           </div>

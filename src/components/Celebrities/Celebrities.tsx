@@ -19,9 +19,9 @@ const Celebrities: React.FC<ICelebritiesProps> = ({ celebrities }) => {
   return (
     <div className="celebrities container">
       <Link href="/celebrities">
-        <h1 className="celebrities__title">
+        <h3 className="collection-samples__title">
           {TRANSLATE[locale as 'ru' | 'en'].celebrities}
-        </h1>
+        </h3>
       </Link>
       <div className="celebrities__celebrities-container">
         {celebrities.map(({ name, proffesion, photo }) => (

@@ -16,6 +16,7 @@ export const LANGUAGES: {
 
 export const TRANSLATE = {
   ru: {
+    discountCode: 'Промокод',
     underOrder: 'Под заказ',
     store: 'Магазин',
     aboutUs: 'О нас',
@@ -39,7 +40,7 @@ export const TRANSLATE = {
     remove: 'Убрать',
     subTotal: 'К оплате',
     agreement: 'Согласиться',
-    checkOut: 'Оплатить',
+    checkOut: 'Заказать в корзине',
     checkOutAlert: 'Вы должны согласиться с условиями, чтобы оформить заказ.',
     shipping: 'Доставка',
     continue: 'Продолжить',
@@ -71,6 +72,7 @@ export const TRANSLATE = {
     goodsNotFound: ['Ваш поиск', 'не дал никаких результатов.'],
   },
   en: {
+    discountCode: 'Промокод',
     underOrder: 'Under the order',
     store: 'Store',
     aboutUs: 'About',
