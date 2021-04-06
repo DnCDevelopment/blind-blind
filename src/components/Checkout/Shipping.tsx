@@ -223,9 +223,6 @@ const Shipping: React.FC = () => {
             placeholders={FORMIK.shippingMain.placeholders(
               locale as 'ru' | 'en'
             )}
-            masks={{
-              phone: '999 999 99 99',
-            }}
             buttonTitle={TRANSLATE[locale as 'ru' | 'en'].continue}
             checkboxText={TRANSLATE[locale as 'ru' | 'en'].saveInfo}
           />

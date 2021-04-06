@@ -66,7 +66,6 @@ const Footer: React.FC = () => {
                 locale as 'ru' | 'en'
               )}
               buttonTitle={TRANSLATE[locale as 'ru' | 'en'].requestCallBack}
-              masks={{ phone: '999 999 99 99' }}
             />
             <div className="payments-image">
               <Image

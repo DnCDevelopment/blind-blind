@@ -57,6 +57,25 @@ a {
   max-width: 900px;
 }
 
+.arrow-up {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+  width: 100px;
+  height: 100px;
+  padding: 20px;
+  background-color: var(--transparent-black);
+  border: none;
+  border-radius: 100%;
+  outline: none;
+  -webkit-tap-highlight-color: var(--transparent);
+  svg {
+    transform: rotate(90deg);
+    fill: var(--white-color);
+  }
+}
+
 input,
 select {
   width: 100%;
