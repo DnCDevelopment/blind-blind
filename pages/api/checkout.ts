@@ -57,7 +57,7 @@ const sendToBot = (
     `Тип оплаты: ${paymentType}\n` +
     `Язык: ${locale}\n` +
     `Cумма: ${totalSum}${currency}\n` +
-    `Сертефикаты: ${
+    `Сертификаты: ${
       cart.certeficatePrice.length ? certeficatesMessage : ''
     }\n` +
     `Товары: ${cart.goods.length ? goodsMessage : ''}\n`;
