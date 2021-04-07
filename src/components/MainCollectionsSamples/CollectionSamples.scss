@@ -30,10 +30,9 @@
     &-photos {
       position: relative;
       width: 100%;
-      height: 500px;
       &__preview {
         display: block;
-        height: 100%;
+        width: 100%;
         margin: 0 auto;
         object-fit: contain;
       }
@@ -42,7 +41,7 @@
         position: absolute;
         top: 0;
         left: 50%;
-        height: 100%;
+        width: 100%;
         object-fit: contain;
         transform: translateX(-50%);
         opacity: 0;
@@ -66,6 +65,14 @@
   .collection-samples {
     &__goods {
       flex-direction: row;
+      &-photos {
+        height: 500px;
+        &__preview,
+        &__second {
+          width: unset;
+          height: 100%;
+        }
+      }
 
       &-item {
         width: calc(100% / 3);
