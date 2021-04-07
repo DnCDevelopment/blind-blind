@@ -25,7 +25,7 @@ const SubCollections: React.FC<ISubCollectionProps> = ({ subCollections }) => {
               <div className="subcollections-item__image">
                 <Image
                   layout="fill"
-                  objectFit="cover"
+                  objectFit="contain"
                   alt={title}
                   loading="eager"
                   src={process.env.NEXT_PUBLIC_COCKPIT_URL + image}
