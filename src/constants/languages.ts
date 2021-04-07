@@ -17,7 +17,7 @@ export const LANGUAGES: {
 export const TRANSLATE = {
   ru: {
     discountCode: 'Промокод',
-    underOrder: 'Под заказ',
+    underOrder: 'Информация об изготовлении изделия под заказ',
     store: 'Магазин',
     aboutUs: 'О нас',
     cart: 'Корзина',
@@ -73,7 +73,7 @@ export const TRANSLATE = {
   },
   en: {
     discountCode: 'Промокод',
-    underOrder: 'Under the order',
+    underOrder: 'Information on the manufacture of a product to order',
     store: 'Store',
     aboutUs: 'About',
     cart: 'Cart',

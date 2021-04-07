@@ -130,9 +130,9 @@ const MyApp = ({
   }, [cartState, currency]);
 
   useEffect(() => {
-    (async () => {
-      setCurrencyRate(await getCurrencyRate(currency.toString()));
-    })();
+    getCurrencyRate(currency.toString())
+      .then((res) => setCurrencyRate(res))
+      .catch((err) => console.error(err));
   }, [currency]);
 
   return (
@@ -182,7 +182,10 @@ MyApp.getInitialProps = async (
 
   const { locale, defaultLocale } = appContext.router;
 
-  const cockpitDataCollections = await getCockpitCollection('Collections');
+  const cockpitDataCollections = await getCockpitCollection(
+    'Collections',
+    'filter[inMenu]=true'
+  );
   const cockpitGoods = await getCockpitCollection('Goods');
   const cockpitDataRunways = await getCockpitCollection(
     'Runways',
@@ -207,6 +210,7 @@ MyApp.getInitialProps = async (
       return {
         title: locale === defaultLocale ? el.title : el.title_en,
         link: `/collections${el.link}`,
+        inMenu: el.inMenu,
         _id: el._id,
       };
     }
