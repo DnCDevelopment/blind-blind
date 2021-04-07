@@ -22,10 +22,8 @@ export const FORM = {
     receiverEmail: 'Почта получателя',
     yourName: 'Ваше имя',
     yourEmail: 'Ваша почта',
-    giftTheme: 'Тема подарочного сертификата',
-    giftThemes: ['День рождения', 'Общий', 'Рождество'],
     giftMessage: 'Сообщение (необязательно)',
-    giftAmount: 'Сумма (от 1 грн до 1000 грн)',
+    giftAmount: 'Введите любую сумму сертификата',
   },
   en: {
     cm: 'cm',
@@ -47,10 +45,8 @@ export const FORM = {
     receiverEmail: 'Receiver email',
     yourName: 'Your name',
     yourEmail: 'Your email',
-    giftTheme: 'Gift certificate theme',
-    giftThemes: ['Birthday', 'General', 'Christmas'],
     giftMessage: 'Message (optional)',
-    giftAmount: 'Amount (between 1 UAH and 1000 UAH)',
+    giftAmount: 'Enter any amount of the certificate',
   },
 };
 
@@ -178,7 +174,6 @@ export const FORMIK = {
       receiverEmail: '',
       yourName: '',
       yourEmail: '',
-      theme: '',
       message: '',
       price: '',
     },
@@ -196,23 +191,17 @@ export const FORMIK = {
         yourEmail: Yup.string().email().required(FORM[locale].required),
         price: Yup.number()
           .min(1, FORM[locale].tooSmall)
-          .max(1000, FORM[locale].tooLarge)
           .required(FORM[locale].required)
           .typeError(FORM[locale].wrongInput),
-        theme: Yup.string().required(FORM[locale].required),
       }),
     types: {
       receiverName: 'text',
       receiverEmail: 'text',
       yourName: 'text',
       yourEmail: 'text',
-      theme: 'select',
       message: 'textArea',
       price: 'text',
     },
-    selectOptions: (locale: 'ru' | 'en') => ({
-      theme: FORM[locale].giftThemes,
-    }),
     suffixes: {
       price: 'UAH',
     },
@@ -221,7 +210,6 @@ export const FORMIK = {
       receiverEmail: FORM[locale].receiverEmail,
       yourName: FORM[locale].yourName,
       yourEmail: FORM[locale].yourEmail,
-      theme: FORM[locale].giftTheme,
       message: FORM[locale].giftMessage,
       price: FORM[locale].giftAmount,
     }),

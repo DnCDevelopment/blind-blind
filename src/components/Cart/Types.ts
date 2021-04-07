@@ -23,6 +23,5 @@ export interface ICartVoucherItemProps {
   message?: string;
   amount: number;
   price: string;
-  theme: string;
   removeSelf?: () => void;
 }

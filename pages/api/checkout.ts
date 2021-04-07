@@ -13,8 +13,8 @@ import {
 interface ICart {
   certeficatePrice: string[];
   receiverEmail: string[];
-  theme: string[];
   receiverName: string[];
+  message: string[];
   items: { _id: string; link: string }[];
   sizes: string[];
   goods: { name: string; size: string }[];
@@ -39,7 +39,7 @@ const sendToBot = (
   const certeficatesMessage = cart.certeficatePrice.reduce(
     (acc, price, index) =>
       acc +
-      `Цена: ${price}${currency}, Почта получателя: ${cart.receiverEmail[index]}, Имя получателя: ${cart.receiverName[index]}; | `,
+      `Цена: ${price}${currency}, Почта получателя: ${cart.receiverEmail[index]}, Имя получателя: ${cart.receiverName[index]}, Сообщение: ${cart.message[index]} | `,
     ''
   );
 
@@ -113,8 +113,8 @@ const checkout: NextApiHandler = async (req, res) => {
           ...acc,
           certeficatePrice: [...acc.certeficatePrice, item.price],
           receiverEmail: [...acc.receiverEmail, item.receiverEmail],
-          theme: [...acc.theme, item.theme],
           receiverName: [...acc.receiverName, item.receiverName],
+          message: [...acc.message, item.message],
         };
       }
 
@@ -130,9 +130,9 @@ const checkout: NextApiHandler = async (req, res) => {
       sizes: [],
       certeficatePrice: [],
       receiverEmail: [],
-      theme: [],
       receiverName: [],
       goods: [],
+      message: [],
     }
   );
 
@@ -149,8 +149,8 @@ const checkout: NextApiHandler = async (req, res) => {
         sizes: cart.sizes,
         certeficatePrice: cart.certeficatePrice,
         receiverEmail: cart.receiverEmail,
-        theme: cart.theme,
         receiverName: cart.receiverName,
+        message: cart.message,
         isPaid: false,
       },
     }),

@@ -24,7 +24,6 @@ const Voucher: React.FC = () => {
     yourEmail,
     message,
     price,
-    theme,
   }: ICartVoucherItemProps) => {
     const id = 'voucher' + Math.random().toString(10).substr(2);
 
@@ -38,7 +37,6 @@ const Voucher: React.FC = () => {
         message,
         price,
         amount: 1,
-        theme,
       });
     else
       addToCart({
@@ -50,7 +48,6 @@ const Voucher: React.FC = () => {
         message,
         price,
         amount: 1,
-        theme,
       });
     router.push('/cart');
   };
@@ -76,7 +73,6 @@ const Voucher: React.FC = () => {
           }}
           types={FORMIK.voucher.types}
           placeholders={FORMIK.voucher.placeholders(locale as 'ru' | 'en')}
-          selectOptions={FORMIK.voucher.selectOptions(locale as 'ru' | 'en')}
           suffixes={FORMIK.voucher.suffixes}
           buttonTitle={TRANSLATE[locale as 'ru' | 'en'].addToCart}
         />
