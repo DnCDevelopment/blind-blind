@@ -52,15 +52,22 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
   defaultLocale,
 }) => {
-  const collectionNames = ['mainCarousel', 'Goods', 'Celebrities'];
+  const collectionNames = ['mainCarousel', 'Celebrities'];
   const [
     cockpitDataCarousel,
-    cockpitDataGoods,
     cockpitDataCelebrities,
   ] = await getCockpitCollections(collectionNames);
 
   const filter = `filter[link]=/street-style&populate=1`;
   const cockpitDataRunways = await getCockpitCollection('Runways', filter);
+  const collectionFiter = 'filter[onMain]=true&simple=true';
+  const collection = await getCockpitCollection('Collections', collectionFiter);
+  console.log(collection.length ? collection[0]._id : '');
+
+  const goodsFilter = `limit=3${
+    collection.length ? `&filter[collection._id]=${collection[0]._id}` : ''
+  }&sort[_created]=-1`;
+  const cockpitDataGoods = await getCockpitCollection('Goods', goodsFilter);
 
   const curRunway: ICockpitRunwaysAndLookbooksRaw = cockpitDataRunways.total
     ? cockpitDataRunways.entries[0]
@@ -74,22 +81,19 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   });
 
-  const goods = cockpitDataGoods.entries
-    .map((el: ICockpitGoodsRaw) => {
-      return {
-        title: locale === defaultLocale ? el.title : el.title_en,
-        link: el.link,
-        description:
-          locale === defaultLocale ? el.description : el.description_en,
-        previewImage: el.previewImage,
-        secondImage: el.secondImage,
-        collectionId: el.collection._id,
-        _modified: el._modified,
-        _id: el._id,
-      };
-    })
-    .reverse()
-    .slice(0, 3);
+  const goods = cockpitDataGoods.entries.map((el: ICockpitGoodsRaw) => {
+    return {
+      title: locale === defaultLocale ? el.title : el.title_en,
+      link: el.link,
+      description:
+        locale === defaultLocale ? el.description : el.description_en,
+      previewImage: el.previewImage,
+      secondImage: el.secondImage,
+      collectionId: el.collection._id,
+      _modified: el._modified,
+      _id: el._id,
+    };
+  });
 
   const celebrities = cockpitDataCelebrities.entries
     .map((el: ICockpitCelebrityRaw) => {
