@@ -27,7 +27,13 @@ const ThanksModal: React.FC<IThanksModalProps> = ({
         createPortal(
           <Modal close={() => handleShowModal(false)}>
             <div className="thanks-modal">
-              <div className="close" onClick={() => handleShowModal(false)}>
+              <div
+                className="close"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleShowModal(false);
+                }}
+              >
                 <Close />
               </div>
               <div className="thanks">
