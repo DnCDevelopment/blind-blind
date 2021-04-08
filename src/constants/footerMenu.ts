@@ -14,6 +14,10 @@ export const footerMenu = (locale: 'ru' | 'en') => [
     title: TRANSLATE[locale].deliveryInfo,
   },
   {
+    link: '/pod-zakaz',
+    title: TRANSLATE[locale].underOrder,
+  },
+  {
     link: '/usloviya-soglasheniya',
     title: TRANSLATE[locale].returnAndExchange,
   },
@@ -24,9 +28,5 @@ export const footerMenu = (locale: 'ru' | 'en') => [
   {
     link: '/voucher',
     title: TRANSLATE[locale].giftCertificates,
-  },
-  {
-    link: '/pod-zakaz',
-    title: TRANSLATE[locale].underOrder,
   },
 ];
