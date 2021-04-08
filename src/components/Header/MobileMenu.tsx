@@ -25,7 +25,7 @@ const MobileMenu: React.FC<IMobileMenuProps> = ({ close }) => {
   ) as IIndexContext;
 
   const constantCollections = StoreListData[locale as 'ru' | 'en'];
-  const collections = collectionsData.concat(constantCollections).reverse();
+  const collections = collectionsData.concat(constantCollections);
   const aboutSublist = AboutListData[locale as 'en' | 'ru'];
 
   aboutSublist[3].subsublist = runwaysData;

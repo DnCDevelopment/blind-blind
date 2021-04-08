@@ -184,7 +184,7 @@ MyApp.getInitialProps = async (
 
   const cockpitDataCollections = await getCockpitCollection(
     'Collections',
-    'filter[inMenu]=true'
+    'filter[inMenu]=true&sort[_o]=1'
   );
   const cockpitGoods = await getCockpitCollection('Goods');
   const cockpitDataRunways = await getCockpitCollection(
