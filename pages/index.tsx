@@ -60,14 +60,22 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const filter = `filter[link]=/street-style&populate=1`;
   const cockpitDataRunways = await getCockpitCollection('Runways', filter);
+
+  const getGoods = getCockpitCollection.bind(undefined, 'Goods');
   const collectionFiter = 'filter[onMain]=true&simple=true';
   const collection = await getCockpitCollection('Collections', collectionFiter);
-  console.log(collection.length ? collection[0]._id : '');
-
   const goodsFilter = `limit=3${
     collection.length ? `&filter[collection._id]=${collection[0]._id}` : ''
   }&sort[_created]=-1`;
-  const cockpitDataGoods = await getCockpitCollection('Goods', goodsFilter);
+  const cockpitDataGoods = await getGoods(goodsFilter);
+  if (cockpitDataGoods.total === 0) {
+    const goodsFilter = `populate=1&sort[collection._id]=-1&sort[_created]=-1&limit=3`;
+    let cockpitDataGoods = await getGoods(goodsFilter);
+    if (cockpitDataGoods.total === 0) {
+      const goodsFilter = 'limit=3&sort[_created]=-1';
+      cockpitDataGoods = await getGoods(goodsFilter);
+    }
+  }
 
   const curRunway: ICockpitRunwaysAndLookbooksRaw = cockpitDataRunways.total
     ? cockpitDataRunways.entries[0]
