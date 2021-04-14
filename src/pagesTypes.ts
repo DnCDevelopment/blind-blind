@@ -19,6 +19,7 @@ export interface ILocaleProps {
 
 export interface ISalesPageProps extends ILocaleProps {
   goods: ICockpitGoodsEntries;
+  categories: ICockpitGoodCategory[];
 }
 
 export interface IAppProps {
