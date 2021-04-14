@@ -36,6 +36,9 @@
     &__photos {
       .photo-container {
         width: 49.5%;
+        &:last-child:nth-child(odd) {
+          width: 100%;
+        }
       }
     }
   }
