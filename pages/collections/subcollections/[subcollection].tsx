@@ -6,7 +6,10 @@ import GoodsList from '../../../src/components/Goods/GoodsList';
 import GoodsListTitle from '../../../src/components/Goods/GoodsListTitle';
 import Seo from '../../../src/components/Seo/Seo';
 
-import { ICockpitSubCollectionRaw } from '../../../src/cockpitTypes';
+import {
+  ICockpitCategoriesEntries,
+  ICockpitSubCollectionRaw,
+} from '../../../src/cockpitTypes';
 import { ISubCollectionPageProps } from '../../../src/pagesTypes';
 
 import { getCockpitCollection } from '../../../src/utils/getCockpitData';
@@ -21,6 +24,7 @@ const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
   subCollectionProps,
   locale,
   goods,
+  categories,
 }) => {
   if (!subCollectionProps) {
     return <Error />;
@@ -61,7 +65,7 @@ const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
         path={process.env.NEXT_PUBLIC_SITE_URL + link}
       />
       <GoodsListTitle title={title} />
-      <GoodsList goods={goods} />
+      <GoodsList goods={goods} categories={categories} />
     </div>
   );
 };
@@ -104,15 +108,25 @@ export const getServerSideProps: GetServerSideProps = async ({
         },
       }
     : null;
+
+  const cockpitCategoriesData: ICockpitCategoriesEntries = await getCockpitCollection(
+    'Categories'
+  );
   const goods = await getCockpitCollection(
     'Goods',
     `filter[subCollection._id]=${curSubCollection._id}`
   );
 
+  const categories = cockpitCategoriesData.entries.map((category) => ({
+    ...category,
+    title: locale === defaultLocale ? category.title : category.title_en,
+  }));
+
   return {
     props: {
       subCollectionProps,
       locale,
+      categories,
       goods,
     },
   };

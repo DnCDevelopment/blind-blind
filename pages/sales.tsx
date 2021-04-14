@@ -8,9 +8,16 @@ import { ISalesPageProps } from '../src/pagesTypes';
 
 import { SEO_ITEMS } from '../src/constants/seoItems';
 import { getCockpitCollection } from '../src/utils/getCockpitData';
-import { ICockpitGoodsRaw } from '../src/cockpitTypes';
+import {
+  ICockpitCategoriesEntries,
+  ICockpitGoodsRaw,
+} from '../src/cockpitTypes';
 
-const SalesPage: NextPage<ISalesPageProps> = ({ locale, goods }) => {
+const SalesPage: NextPage<ISalesPageProps> = ({
+  locale,
+  goods,
+  categories,
+}) => {
   return (
     <div className="sales-page">
       <Seo
@@ -33,20 +40,31 @@ const SalesPage: NextPage<ISalesPageProps> = ({ locale, goods }) => {
       />
       <GoodsListTitle />
       <div className="goods-container">
-        <GoodsList goods={goods} />
+        <GoodsList categories={categories} goods={goods} />
       </div>
     </div>
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  locale,
+  defaultLocale,
+}) => {
   const goods = await getCockpitCollection(
     'Goods',
     'filter[stockPrice][$exists]=true'
   );
+  const cockpitCategoriesData: ICockpitCategoriesEntries = await getCockpitCollection(
+    'Categories'
+  );
+  const categories = cockpitCategoriesData.entries.map((category) => ({
+    ...category,
+    title: locale === defaultLocale ? category.title : category.title_en,
+  }));
   return {
     props: {
       locale,
+      categories,
       goods: {
         entries: goods.entries.filter(
           ({ stockPrice }: ICockpitGoodsRaw) => stockPrice
