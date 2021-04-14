@@ -35,7 +35,7 @@ const request: NextApiHandler = async (req, res) => {
 
     const { entries }: { entries: IBotUser[] } = await usersResponse.json();
 
-    entries.map(({ chatId }) => {
+    entries.forEach(({ chatId }) => {
       bot.sendMessage(chatId, `Телефон:${phone}`);
     });
 
