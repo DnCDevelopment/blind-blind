@@ -11,6 +11,7 @@ import {
   ICockpitGoodsEntries,
 } from './cockpitTypes';
 import { IGoodsSingleProps } from './components/Goods/Types';
+import { ICockpitGoodCategory } from './cockpitTypes';
 
 export interface ILocaleProps {
   locale: 'ru' | 'en';
@@ -39,6 +40,7 @@ export interface IIndexPageProps {
 export interface ICollectionPageProps {
   collection: ICockpitCollectionsRaw | null;
   goods: ICockpitGoodsEntries;
+  categories: ICockpitGoodCategory[];
   subCollections: ICockpitSubCollectionRaw[] | null;
 }
 
