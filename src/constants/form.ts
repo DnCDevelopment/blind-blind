@@ -161,7 +161,9 @@ export const FORMIK = {
     values: { phone: '' },
     validationSchema: (locale: 'ru' | 'en') =>
       Yup.object({
-        phone: Yup.number().typeError(FORM[locale].wrongInput),
+        phone: Yup.string()
+          .min(10, FORM[locale].wrongInput)
+          .typeError(FORM[locale].wrongInput),
       }),
     types: { phone: 'phone' },
     placeholders: (locale: 'ru' | 'en') => ({

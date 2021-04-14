@@ -130,7 +130,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
                   setSelectedCategories((prev) =>
                     prev.includes(_id)
                       ? prev.filter((id) => id != _id)
-                      : (prev.push(_id), prev)
+                      : [...prev, _id]
                   );
                 }}
               >
