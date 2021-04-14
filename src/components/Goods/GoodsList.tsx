@@ -7,23 +7,37 @@ import Dropdown from '../Form/Dropdown';
 import { ICockpitGoodsRaw } from '../../cockpitTypes';
 import { IGoodsListProps } from './Types';
 
+import SuccessSVG from '../../assets/svg/success.svg';
+import CrossSVG from '../../assets/svg/cross.svg';
+
 import { SORT_GOODS, SORT_TRANSLATE } from '../../constants/sortGoods';
 
 const GOODS_ON_PAGE = 12;
 const AVAILABLE_PAGES = 3;
 
-const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
+const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
   const [sortSelect, setSortSelect] = useState<keyof typeof SORT_TRANSLATE>(
     'default'
   );
   const router = useRouter();
   const { locale, query } = router;
 
+  const [isCategoriesOpen, setCategoriesOpen] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [visiblePages, setVisiblePages] = useState<Array<number>>([]);
   const [firstGoodsOnPageIndex, setFirstGoodsOnPageIndex] = useState(1);
 
-  const filteredGoods = goods?.entries;
+  const filteredGoods = goods?.entries.filter(
+    ({ categories }) =>
+      selectedCategories.length == 0 ||
+      (Array.isArray(categories) &&
+        categories.reduce<boolean>(
+          (prev, { _id }) => selectedCategories.includes(_id) || prev,
+          false
+        ))
+  );
 
   const sortedGoods = SORT_GOODS[sortSelect](
     filteredGoods as ICockpitGoodsRaw[]
@@ -59,6 +73,10 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
     setCurrentPage(page && page < maxPageNumber + 1 ? page : 1);
   }, [query.page, maxPageNumber]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategories]);
+
   const changePage = (pageNum: number) => {
     const newQuery = router.query;
     if (!pageNum) {
@@ -72,7 +90,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
       query: newQuery,
     });
 
-    window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const setSort = (item: string) => {
@@ -89,6 +107,50 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
   return (
     <div className="goods-list">
       <div className="input-select">
+        <div
+          role="presentation"
+          className="dropdown"
+          onClick={() => setCategoriesOpen((prev) => !prev)}
+        >
+          <div className="dropdown__value">
+            Категории товаров
+            <div className="dropdown-button" />
+          </div>
+          <div
+            className={`dropdown__list goods-list-categories__list ${
+              isCategoriesOpen ? 'open' : ''
+            }`}
+          >
+            {categories.map(({ _id, title }) => (
+              <div
+                key={_id}
+                className="goods-list-categories__list-item"
+                role="presentation"
+                onClick={() => {
+                  setSelectedCategories((prev) =>
+                    prev.includes(_id)
+                      ? prev.filter((id) => id != _id)
+                      : (prev.push(_id), prev)
+                  );
+                }}
+              >
+                <div className="goods-list-categories__list-item-label">
+                  <div
+                    className={`goods-list-categories__list-item-label-box ${
+                      selectedCategories.includes(_id)
+                        ? 'goods-list-categories__list-item-label-box-selected'
+                        : ''
+                    }`}
+                  >
+                    <SuccessSVG />
+                  </div>
+
+                  {title}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         <Dropdown
           value={SORT_TRANSLATE[sortSelect][locale as 'ru' | 'en']}
           values={Object.keys(SORT_TRANSLATE).map(
@@ -99,6 +161,23 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods }) => {
           )}
           setValue={setSort}
         />
+      </div>
+      <div className="goods-list__categories">
+        {categories
+          .filter(({ _id }) => selectedCategories.includes(_id))
+          .map(({ _id, title }) => (
+            <div
+              role="presentation"
+              key={_id}
+              className="goods-list__categories-title"
+              onClick={() =>
+                setSelectedCategories((prev) => prev.filter((id) => id != _id))
+              }
+            >
+              {title}
+              <CrossSVG />
+            </div>
+          ))}
       </div>
       <div className="goods-list__goods-container">
         {sortedGoods

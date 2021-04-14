@@ -1,4 +1,4 @@
-import { ICockpitGoodsEntries } from '../../cockpitTypes';
+import { ICockpitGoodsEntries, ICockpitGoodCategory } from '../../cockpitTypes';
 
 export interface IPriceLabelProps {
   price: string;
@@ -27,6 +27,7 @@ export interface IGoodsSearchItemProps {
 
 export interface IGoodsListProps {
   goods: ICockpitGoodsEntries;
+  categories: ICockpitGoodCategory[];
 }
 
 export interface IGoodsListTitleProps {
