@@ -3,3 +3,9 @@ export interface IRunwayProps {
   photos: string[];
   videoLinks: string[] | null | undefined;
 }
+
+export interface IRunwayImageProps {
+  title: string;
+  photo: string;
+  onClick: () => void;
+}

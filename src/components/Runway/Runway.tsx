@@ -1,38 +1,32 @@
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import Modal from '../Modal/Modal';
 
 import { IRunwayProps } from './Types';
+import RunwayImage from './RunwayImage';
 
 const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLinks }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalPhoto, setModalPhoto] = useState<string>('');
+
+  const onImageClick = useCallback((photo) => {
+    setModalPhoto(photo);
+    setModalOpen(true);
+  }, []);
 
   return (
     <div className="runway narrow-container">
       <h1 className="runway__title">{title}</h1>
       <div className="runway__photos">
         {photos.map((photo) => (
-          <div
+          <RunwayImage
             key={photo}
-            role="presentation"
-            onClick={() => {
-              setModalPhoto(photo);
-              setModalOpen(true);
-            }}
-            className="photo-container"
-          >
-            <Image
-              layout="fill"
-              objectFit="cover"
-              alt={title + ' photo'}
-              loading="eager"
-              quality={100}
-              src={process.env.NEXT_PUBLIC_COCKPIT_URL + photo}
-            />
-          </div>
+            photo={photo}
+            title={title}
+            onClick={() => onImageClick(photo)}
+          />
         ))}
       </div>
       {!!videoLinks?.length &&
