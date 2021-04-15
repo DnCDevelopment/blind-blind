@@ -3,6 +3,7 @@ import { IRunwayImageProps } from './Types';
 import useImage from '../../hooks/useImage';
 
 const RunwayImage: React.FC<IRunwayImageProps> = ({
+  title,
   photo,
   onClick,
 }): JSX.Element => {
@@ -24,7 +25,7 @@ const RunwayImage: React.FC<IRunwayImageProps> = ({
         className="photo-container-img"
         src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${photo}&w=1800&q=75`}
         loading="lazy"
-        alt=""
+        alt={title}
         onLoad={onLoad}
       />
     </div>

@@ -5,6 +5,7 @@ export interface IRunwayProps {
 }
 
 export interface IRunwayImageProps {
+  title: string;
   photo: string;
   onClick: () => void;
 }

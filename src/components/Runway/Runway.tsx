@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import Modal from '../Modal/Modal';
 
@@ -11,6 +11,11 @@ const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLinks }) => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [modalPhoto, setModalPhoto] = useState<string>('');
 
+  const onImageClick = useCallback((photo) => {
+    setModalPhoto(photo);
+    setModalOpen(true);
+  }, []);
+
   return (
     <div className="runway narrow-container">
       <h1 className="runway__title">{title}</h1>
@@ -19,10 +24,8 @@ const Runway: React.FC<IRunwayProps> = ({ title, photos, videoLinks }) => {
           <RunwayImage
             key={photo}
             photo={photo}
-            onClick={() => {
-              setModalPhoto(photo);
-              setModalOpen(true);
-            }}
+            title={title}
+            onClick={() => onImageClick(photo)}
           />
         ))}
       </div>
