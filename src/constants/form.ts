@@ -163,6 +163,7 @@ export const FORMIK = {
       Yup.object({
         phone: Yup.string()
           .min(11, FORM[locale].wrongInput)
+          .max(15, FORM[locale].wrongInput)
           .typeError(FORM[locale].wrongInput),
       }),
     types: { phone: 'phone' },
