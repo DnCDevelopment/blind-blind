@@ -13,6 +13,8 @@ import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
 import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
 import { LANGUAGES } from '../../src/constants/languages';
+import { IMoySkladGoodData } from '../../src/moySkladTypes';
+import getMoySkladData from '../../src/utils/getMoySkladData';
 
 const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   goodsProps,
@@ -90,6 +92,20 @@ export const getServerSideProps: GetServerSideProps = async ({
     ? goodsData.entries[0]
     : null;
 
+  const moySkladGoods = await getMoySkladData<IMoySkladGoodData>(
+    `remap/1.2/entity/variant?filter=code~=${query.goods}`
+  );
+
+  const sizes =
+    (moySkladGoods?.rows
+      .map((row) => {
+        const sizes = row.characteristics
+          .filter((c) => c.name === 'Размер')
+          .map((c) => c.value);
+        return sizes.length && sizes[0];
+      })
+      .filter((size) => size) as string[]) || false;
+
   const goodsProps = curGoods
     ? {
         id: curGoods._id,
@@ -103,9 +119,11 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes: (curGoods.sizes as ICockpitSize[])
-          .map((size) => size.size)
-          .filter((size) => size),
+        sizes:
+          sizes ||
+          (curGoods.sizes as ICockpitSize[])
+            .map((size) => size.size)
+            .filter((size) => size),
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods.secondImage.path,
         otherPhotos: curGoods.otherImages,
