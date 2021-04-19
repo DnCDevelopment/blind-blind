@@ -139,6 +139,14 @@ export const getServerSideProps: GetServerSideProps = async ({
         : curGoods?.subCollection?.title_en,
   };
 
+  if (!curGoods.isVisible)
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: true,
+      },
+    };
+
   return {
     props: {
       locale,

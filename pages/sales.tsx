@@ -67,7 +67,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       categories,
       goods: {
         entries: goods.entries.filter(
-          ({ stockPrice }: ICockpitGoodsRaw) => stockPrice
+          ({ stockPrice, isVisible }: ICockpitGoodsRaw) =>
+            stockPrice && isVisible !== false
         ),
       },
     },

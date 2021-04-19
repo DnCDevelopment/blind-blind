@@ -106,6 +106,7 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   price: string;
   stockPrice: string | null;
   isExclusive: boolean;
+  isVisible: boolean;
 }
 
 export interface ICockpitGoodsEntries {

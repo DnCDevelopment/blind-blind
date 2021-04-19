@@ -19,6 +19,7 @@ import {
   DEFAULT_DESCRIPTION,
 } from '../../../src/constants/seoItems';
 import { LANGUAGES } from '../../../src/constants/languages';
+import { ICockpitGoodsEntries } from '../../../src/cockpitTypes';
 
 const SubCollectionPage: NextPage<ISubCollectionPageProps> = ({
   subCollectionProps,
@@ -112,9 +113,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   const cockpitCategoriesData: ICockpitCategoriesEntries = await getCockpitCollection(
     'Categories'
   );
-  const goods = await getCockpitCollection(
+  const goodsData: ICockpitGoodsEntries = await getCockpitCollection(
     'Goods',
     `filter[subCollection._id]=${curSubCollection._id}`
+  );
+
+  const goods = goodsData.entries.filter(
+    ({ isVisible }) => isVisible !== false
   );
 
   const categories = cockpitCategoriesData.entries.map((category) => ({
@@ -127,7 +132,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       subCollectionProps,
       locale,
       categories,
-      goods,
+      goods: {
+        entries: goods,
+      },
     },
   };
 };

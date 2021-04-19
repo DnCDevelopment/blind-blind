@@ -120,10 +120,12 @@ export const getServerSideProps: GetServerSideProps = async ({
     'Categories'
   );
 
-  const goods = cockpitGoodsData.entries.map((good) => ({
-    ...good,
-    title: locale === defaultLocale ? good.title : good.title_en,
-  }));
+  const goods = cockpitGoodsData.entries
+    .map((good) => ({
+      ...good,
+      title: locale === defaultLocale ? good.title : good.title_en,
+    }))
+    .filter(({ isVisible }) => isVisible !== false);
 
   const categories = cockpitCategoriesData.entries.map((category) => ({
     ...category,
