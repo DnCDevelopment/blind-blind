@@ -7,7 +7,7 @@ import GoodsSingle from '../../src/components/Goods/GoodsSingle';
 import Seo from '../../src/components/Seo/Seo';
 
 import { IGoodsPageProps } from '../../src/pagesTypes';
-import { ICockpitGoodsRaw, ICockpitSize } from '../../src/cockpitTypes';
+import { ICockpitGoodsRaw } from '../../src/cockpitTypes';
 
 import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
@@ -96,15 +96,14 @@ export const getServerSideProps: GetServerSideProps = async ({
     `remap/1.2/entity/variant?filter=code~=${query.goods}`
   );
 
-  const sizes =
-    (moySkladGoods?.rows
-      .map((row) => {
-        const sizes = row.characteristics
-          .filter((c) => c.name === 'Размер')
-          .map((c) => c.value);
-        return sizes.length && sizes[0];
-      })
-      .filter((size) => size) as string[]) || false;
+  const sizes = moySkladGoods?.rows
+    .map((row) => {
+      const sizes = row.characteristics
+        .filter((c) => c.name === 'Размер')
+        .map((c) => c.value);
+      return sizes.length && sizes[0];
+    })
+    .filter((size) => size) as string[];
 
   const goodsProps = curGoods
     ? {
@@ -119,11 +118,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes:
-          sizes ||
-          (curGoods.sizes as ICockpitSize[])
-            .map((size) => size.size)
-            .filter((size) => size),
+        sizes: sizes,
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods.secondImage.path,
         otherPhotos: curGoods.otherImages,

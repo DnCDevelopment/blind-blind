@@ -205,6 +205,7 @@ MyApp.getInitialProps = async (
       };
     }
   );
+
   const collections = cockpitDataCollections.entries.map(
     (el: ICockpitCollectionsRaw) => {
       return {
