@@ -96,7 +96,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
               buttonTitle={TRANSLATE[locale as 'ru' | 'en'].addToCart}
             />
           </div>
-        ) : (
+        ) : sizes.length ? (
           <Form
             formikConfig={{
               initialValues: {
@@ -116,6 +116,14 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             }}
             buttonTitle={TRANSLATE[locale as 'ru' | 'en'].addToCart}
           />
+        ) : (
+          <div className="button-container">
+            <button className="button" disabled>
+              <p className="button__title">
+                {TRANSLATE[locale as 'ru' | 'en'].outOfStock}
+              </p>
+            </button>
+          </div>
         )}
         <div className="materials-container">
           {materials.map((material) => (

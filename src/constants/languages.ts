@@ -38,6 +38,7 @@ export const TRANSLATE = {
     price: 'Цена',
     total: 'В сумме',
     remove: 'Убрать',
+    outOfStock: 'Нет в наличии',
     subTotal: 'К оплате',
     agreement: 'Согласиться',
     checkOut: 'Заказать',
@@ -97,6 +98,7 @@ export const TRANSLATE = {
     subTotal: 'Subtotal',
     agreement: 'Agree',
     checkOut: 'Check out',
+    outOfStock: 'Out of stock',
     checkOutAlert:
       'You must agree with the terms and conditions of sales to check out.',
     shipping: 'Shipping',
