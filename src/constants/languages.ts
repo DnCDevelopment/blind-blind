@@ -96,7 +96,7 @@ export const TRANSLATE = {
     price: 'Price',
     total: 'Total',
     remove: 'Remove',
-    goodsCaterories: "good's categories",
+    goodsCaterories: "Good's categories",
     subTotal: 'Subtotal',
     agreement: 'Agree',
     checkOut: 'Check out',
