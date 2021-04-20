@@ -96,17 +96,17 @@ export const getServerSideProps: GetServerSideProps = async ({
     `remap/1.2/entity/variant?filter=code~=${query.goods}`
   );
 
+  const ids: string[] = [];
   const stockPromises = moySkladGoods?.rows.map(({ id }) => {
+    ids.push(id);
     return getMoySkladData<IMoySkladStockData>(
       `remap/1.2/report/stock/all?filter=variant=https://online.moysklad.ru/api/remap/1.2/entity/variant/${id}&stockMode=positiveOnly`
     );
   });
   const data = await Promise.all(stockPromises);
   const availableIds = data
-    .map((item) => {
-      return Array.isArray(item.rows) && item.rows.length
-        ? item.rows[0].meta.uuidHref.split('=')[1]
-        : false;
+    .map((item, idx) => {
+      return Array.isArray(item.rows) && item.rows.length ? ids[idx] : false;
     })
     .filter((id) => id);
 
@@ -154,7 +154,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         : curGoods?.subCollection?.title_en,
   };
 
-  if (!curGoods.isVisible)
+  if (curGoods.isVisible === false)
     return {
       redirect: {
         destination: '/404',
