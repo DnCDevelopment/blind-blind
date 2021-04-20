@@ -13,7 +13,7 @@ import { getCockpitCollection } from '../../src/utils/getCockpitData';
 
 import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
 import { LANGUAGES } from '../../src/constants/languages';
-import { IMoySkladGoodData } from '../../src/moySkladTypes';
+import { IMoySkladGoodData, IMoySkladStockData } from '../../src/moySkladTypes';
 import getMoySkladData from '../../src/utils/getMoySkladData';
 
 const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
@@ -96,7 +96,22 @@ export const getServerSideProps: GetServerSideProps = async ({
     `remap/1.2/entity/variant?filter=code~=${query.goods}`
   );
 
+  const stockPromises = moySkladGoods?.rows.map(({ id }) => {
+    return getMoySkladData<IMoySkladStockData>(
+      `remap/1.2/report/stock/all?filter=variant=https://online.moysklad.ru/api/remap/1.2/entity/variant/${id}&stockMode=positiveOnly`
+    );
+  });
+  const data = await Promise.all(stockPromises);
+  const availableIds = data
+    .map((item) => {
+      return Array.isArray(item.rows) && item.rows.length
+        ? item.rows[0].meta.uuidHref.split('=')[1]
+        : false;
+    })
+    .filter((id) => id);
+
   const sizes = moySkladGoods?.rows
+    .filter(({ id }) => availableIds.includes(id))
     .map((row) => {
       const sizes = row.characteristics
         .filter((c) => c.name === 'Размер')
