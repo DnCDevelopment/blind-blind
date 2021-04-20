@@ -133,7 +133,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes: sizes,
+        sizes: [...new Set(sizes)],
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods.secondImage.path,
         otherPhotos: curGoods.otherImages,
