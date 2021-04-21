@@ -35,11 +35,13 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
                   src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImage.path}&w=1800&q=50`}
                   onLoad={onLoad}
                 />
-                <img
-                  className="collection-samples__goods-photos__second"
-                  src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImage.path}&w=1800&q=50`}
-                  alt={title}
-                />
+                {secondImage && secondImage.path && (
+                  <img
+                    className="collection-samples__goods-photos__second"
+                    src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImage.path}&w=1800&q=50`}
+                    alt={title}
+                  />
+                )}
               </div>
               <p className="collection-samples__goods-title">{title}</p>
             </div>

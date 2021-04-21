@@ -135,7 +135,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         stockPrice: curGoods.stockPrice,
         sizes: [...new Set(sizes)],
         photo: curGoods.previewImage.path,
-        secondPhoto: curGoods.secondImage.path,
+        secondPhoto: curGoods?.secondImage?.path || null,
         otherPhotos: curGoods.otherImages,
         isExclusive: curGoods.isExclusive,
         collectionLink: curGoods.collection.link,

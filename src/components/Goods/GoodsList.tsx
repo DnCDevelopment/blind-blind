@@ -198,7 +198,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
                 title={title}
                 link={link}
                 photo={previewImage.path}
-                secondPhoto={secondImage.path}
+                secondPhoto={secondImage?.path || undefined}
                 price={price}
                 stockPrice={stockPrice}
               />

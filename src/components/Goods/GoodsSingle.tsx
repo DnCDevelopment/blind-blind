@@ -56,9 +56,11 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
         <div className="first-photo">
           <ZoomImage image={photo} alt={title} zoom={2} />
         </div>
-        <div className="second-photo">
-          <ZoomImage image={secondPhoto} alt={title} zoom={2} />
-        </div>
+        {secondPhoto && (
+          <div className="second-photo">
+            <ZoomImage image={secondPhoto} alt={title} zoom={2} />
+          </div>
+        )}
         {typeof otherPhotos !== 'string' &&
           otherPhotos.map(({ path }) => (
             <div key={path} className="other-photo">

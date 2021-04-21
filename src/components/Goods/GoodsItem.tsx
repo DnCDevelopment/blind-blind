@@ -30,11 +30,13 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
             alt={title}
             onLoad={onLoad}
           />
-          <img
-            className="second"
-            src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondPhoto}&w=1800&q=50`}
-            alt={title}
-          />
+          {secondPhoto && (
+            <img
+              className="second"
+              src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondPhoto}&w=1800&q=50`}
+              alt={title}
+            />
+          )}
         </div>
         <div className="goods-item__title">{title}</div>
         <PriceLabel price={price} stockPrice={stockPrice} />
