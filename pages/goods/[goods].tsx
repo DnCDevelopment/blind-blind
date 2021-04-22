@@ -106,13 +106,11 @@ export const getServerSideProps: GetServerSideProps = async ({
   const data = await Promise.all(stockPromises);
 
   const availableIdsObjects = data
-    .map((item, idx) => {
-      return Array.isArray(item.rows) &&
-        item.rows.length &&
-        item.rows[0].quantity >= 0
+    .map((item, idx) =>
+      Array.isArray(item.rows) && item.rows.length && item.rows[0].quantity >= 0
         ? { id: ids[idx], forOrder: item.rows[0].quantity === 0 }
-        : false;
-    })
+        : false
+    )
     .filter((id) => id) as { id: string; forOrder: boolean }[];
 
   const availableIds = availableIdsObjects.map(({ id }) => id);
