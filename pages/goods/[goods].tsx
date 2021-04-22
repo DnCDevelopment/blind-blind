@@ -100,15 +100,20 @@ export const getServerSideProps: GetServerSideProps = async ({
   const stockPromises = moySkladGoods?.rows.map(({ id }) => {
     ids.push(id);
     return getMoySkladData<IMoySkladStockData>(
-      `remap/1.2/report/stock/all?filter=variant=https://online.moysklad.ru/api/remap/1.2/entity/variant/${id}&stockMode=positiveOnly`
+      `remap/1.2/report/stock/all?filter=variant=https://online.moysklad.ru/api/remap/1.2/entity/variant/${id};quantityMode=all`
     );
   });
   const data = await Promise.all(stockPromises);
-  const availableIds = data
-    .map((item, idx) => {
-      return Array.isArray(item.rows) && item.rows.length ? ids[idx] : false;
-    })
-    .filter((id) => id);
+
+  const availableIdsObjects = data
+    .map((item, idx) =>
+      Array.isArray(item.rows) && item.rows.length && item.rows[0].quantity >= 0
+        ? { id: ids[idx], forOrder: item.rows[0].quantity === 0 }
+        : false
+    )
+    .filter((id) => id) as { id: string; forOrder: boolean }[];
+
+  const availableIds = availableIdsObjects.map(({ id }) => id);
 
   const sizes = moySkladGoods?.rows
     .filter(({ id }) => availableIds.includes(id))
@@ -116,9 +121,12 @@ export const getServerSideProps: GetServerSideProps = async ({
       const sizes = row.characteristics
         .filter((c) => c.name === 'Размер')
         .map((c) => c.value);
-      return sizes.length && sizes[0];
+      const forOrder = availableIdsObjects.find(({ id }) => id === row.id)
+        ?.forOrder;
+
+      return sizes.length && { value: sizes[0], forOrder: forOrder };
     })
-    .filter((size) => size) as string[];
+    .filter((size) => size);
 
   const goodsProps = curGoods
     ? {
@@ -133,7 +141,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes: [...new Set(sizes)],
+        sizes: sizes,
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods?.secondImage?.path || null,
         otherPhotos: curGoods.otherImages,
@@ -158,7 +166,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     return {
       redirect: {
         destination: '/404',
-        permanent: true,
+        permanent: false,
       },
     };
 
