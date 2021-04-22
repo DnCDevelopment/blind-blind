@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import InputMask from 'react-input-mask';
 
 import Button from '../Button/Button';
@@ -18,6 +18,10 @@ const Form: React.FC<IFormProps> = ({
   buttonTitle,
 }) => {
   const formik = useFormik(formikConfig);
+
+  useEffect(() => {
+    formik.setValues(formikConfig.initialValues);
+  }, [formikConfig]);
 
   const inputText = useMemo(() => {
     const InputField = (key: string) => (

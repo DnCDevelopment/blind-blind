@@ -102,7 +102,11 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
           <Form
             formikConfig={{
               initialValues: {
-                size: sizes[0],
+                size: sizes[0].forOrder
+                  ? `${sizes[0].value} ${
+                      TRANSLATE[locale as 'ru' | 'en'].sizeUnderOrder
+                    }`
+                  : sizes[0].value,
               },
               onSubmit: (values) => {
                 localStorage.setItem(id, JSON.stringify(values.size));
@@ -114,7 +118,13 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
             }}
             placeholders={{}}
             selectOptions={{
-              size: sizes,
+              size: sizes.map((size) =>
+                size.forOrder
+                  ? `${size.value} ${
+                      TRANSLATE[locale as 'ru' | 'en'].sizeUnderOrder
+                    }`
+                  : size.value
+              ),
             }}
             buttonTitle={TRANSLATE[locale as 'ru' | 'en'].addToCart}
           />
