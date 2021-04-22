@@ -106,12 +106,19 @@ export const getServerSideProps: GetServerSideProps = async ({
   const data = await Promise.all(stockPromises);
 
   const availableIdsObjects = data
-    .map((item, idx) =>
-      Array.isArray(item.rows) && item.rows.length && item.rows[0].quantity >= 0
+    .map((item, idx) => {
+      console.log(item);
+      return Array.isArray(item.rows) &&
+        item.rows.length &&
+        item.rows[0].quantity >= 0
         ? { id: ids[idx], forOrder: item.rows[0].quantity === 0 }
-        : false
-    )
-    .filter((id) => id) as { id: string; forOrder: boolean }[];
+        : false;
+    })
+    .filter((id) => id) as {
+    [key: string]: string | boolean;
+    id: string;
+    forOrder: boolean;
+  }[];
 
   const availableIds = availableIdsObjects.map(({ id }) => id);
 
@@ -126,7 +133,28 @@ export const getServerSideProps: GetServerSideProps = async ({
 
       return sizes.length && { value: sizes[0], forOrder: forOrder };
     })
-    .filter((size) => size);
+    .filter((size) => size) as {
+    [key: string]: string | boolean;
+    value: string;
+    forOrder: boolean;
+  }[];
+  const sizeOrder = ['XS', 'S', 'M', 'L', 'XL'];
+  const orderedSizes = sizes
+    .sort(
+      ({ value: aValue }, { value: bValue }) =>
+        sizeOrder.indexOf(bValue) - sizeOrder.indexOf(aValue)
+    )
+    .reverse();
+
+  const keys = new Set();
+  const uniqueSizes = orderedSizes.filter((record) => {
+    const cols = Object.keys(record).sort();
+    const key = cols.map((field) => record[field]).join('\x00');
+    const has = keys.has(key);
+    if (!has) keys.add(key);
+    return !has;
+  });
+  console.log(uniqueSizes);
 
   const goodsProps = curGoods
     ? {
@@ -141,7 +169,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
         price: curGoods.price,
         stockPrice: curGoods.stockPrice,
-        sizes: sizes,
+        sizes: uniqueSizes,
         photo: curGoods.previewImage.path,
         secondPhoto: curGoods?.secondImage?.path || null,
         otherPhotos: curGoods.otherImages,
