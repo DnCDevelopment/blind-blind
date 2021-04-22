@@ -107,7 +107,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const availableIdsObjects = data
     .map((item, idx) => {
-      console.log(item);
       return Array.isArray(item.rows) &&
         item.rows.length &&
         item.rows[0].quantity >= 0
@@ -154,7 +153,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     if (!has) keys.add(key);
     return !has;
   });
-  console.log(uniqueSizes);
 
   const goodsProps = curGoods
     ? {
