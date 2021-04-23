@@ -80,6 +80,8 @@ export const FORMIK = {
           .required(FORM[locale].required),
         phone: Yup.number()
           .required(FORM[locale].required)
+          .min(11, FORM[locale].wrongInput)
+          .max(15, FORM[locale].wrongInput)
           .typeError(FORM[locale].wrongInput),
         country: Yup.string().required(FORM[locale].required),
         city: Yup.string().required(FORM[locale].required),

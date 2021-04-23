@@ -75,7 +75,12 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
   }, [query.page, maxPageNumber]);
 
   useEffect(() => {
-    setCurrentPage(1);
+    if (selectedCategories.length) {
+      setCurrentPage(1);
+      const newQuery = router.query;
+      newQuery['page'] = '1';
+      router.push({ pathname: router.pathname, query: newQuery });
+    }
   }, [selectedCategories]);
 
   const changePage = (pageNum: number) => {
