@@ -47,6 +47,14 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
   const maxPageNumber = Math.ceil(sortedGoods?.length / GOODS_ON_PAGE);
 
   useEffect(() => {
+    const outsideClick = () => setCategoriesOpen(() => false);
+    document &&
+      document.addEventListener('click', outsideClick, { passive: true });
+    return () =>
+      document && document.removeEventListener('click', outsideClick);
+  }, []);
+
+  useEffect(() => {
     setFirstGoodsOnPageIndex((currentPage - 1) * GOODS_ON_PAGE);
     if (maxPageNumber <= 1) setVisiblePages([]);
     else if (currentPage + 1 + AVAILABLE_PAGES >= maxPageNumber)
@@ -116,7 +124,10 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
         <div
           role="presentation"
           className="dropdown"
-          onClick={() => setCategoriesOpen((prev) => !prev)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setCategoriesOpen((prev) => !prev);
+          }}
         >
           <div className="dropdown__value">
             {TRANSLATE[locale as 'ru' | 'en'].goodsCaterories}
