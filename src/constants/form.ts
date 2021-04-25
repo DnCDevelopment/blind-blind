@@ -78,7 +78,7 @@ export const FORMIK = {
         email: Yup.string()
           .email(FORM[locale].wrongInput)
           .required(FORM[locale].required),
-        phone: Yup.number()
+        phone: Yup.string()
           .required(FORM[locale].required)
           .min(11, FORM[locale].wrongInput)
           .max(15, FORM[locale].wrongInput)
