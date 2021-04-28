@@ -1,7 +1,10 @@
 .celebrities {
   &__title {
-    @include pageTitle;
+    width: 100%;
+    padding-top: 30px;
+    font-weight: var(--font-weight-900);
     font-size: var(--font-24);
+    font-family: var(--secondary-font);
     text-align: center;
     cursor: pointer;
   }
@@ -49,6 +52,9 @@
 
 @media screen and (min-width: 1080px) {
   .celebrities {
+    &__title {
+      padding-top: 60px;
+    }
     &__celebrities-container {
       .celebrity-item {
         width: 30%;

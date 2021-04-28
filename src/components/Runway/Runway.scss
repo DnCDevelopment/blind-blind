@@ -1,7 +1,9 @@
 .runway {
   &__title {
     @include pageTitle;
+    font-weight: var(--font-weight-900);
     font-size: var(--font-24);
+    font-family: var(--secondary-font);
     text-align: center;
   }
 
