@@ -65,7 +65,7 @@ const Shipping: React.FC = () => {
 
   const sendShippingEvent = useCallback(
     (event: 'InitiateCheckout' | 'Purchase') => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && USDRate && currencyRate) {
         fbq('track', event, {
           content_type: 'product',
           content_ids: cart.map((item) => {

@@ -29,7 +29,12 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   ) as ICurrencyContext;
 
   useEffect(() => {
-    if (goodsProps && typeof window !== 'undefined') {
+    if (
+      goodsProps &&
+      typeof window !== 'undefined' &&
+      USDRate &&
+      currencyRate
+    ) {
       const code = goodsProps.link?.replace('/', '') as string;
       const price = +goodsProps.price;
       fbq('track', 'ViewContent', {

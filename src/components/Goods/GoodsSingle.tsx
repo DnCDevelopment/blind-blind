@@ -52,7 +52,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
       amount: 1,
     });
 
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && USDRate && currencyRate) {
       const code = link?.replace('/', '') as string;
 
       fbq('track', 'AddToCart', {
