@@ -10,10 +10,11 @@ import ZoomImage from './ZoomImage';
 import { cartContext } from '../../context/cartContext';
 
 import { IGoodsSingleProps } from './Types';
-import { ICartContext } from '../../context/Types';
+import { ICartContext, ICurrencyContext } from '../../context/Types';
 
 import { TRANSLATE } from '../../constants/languages';
 import { FORMIK } from '../../constants/form';
+import { currencyContext } from '../../context/currencyContext';
 
 const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   id,
@@ -36,6 +37,9 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   const isServer = typeof window === 'undefined';
 
   const curCartContext = useContext(cartContext) as ICartContext;
+  const { currency, currencyRate, USDRate } = useContext(
+    currencyContext
+  ) as ICurrencyContext;
 
   const addToCart = (details: string | FormikValues) => {
     curCartContext.addItem({
@@ -47,6 +51,21 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
       details: details,
       amount: 1,
     });
+
+    if (typeof window !== 'undefined') {
+      const code = link?.replace('/', '') as string;
+
+      fbq('track', 'AddToCart', {
+        content_type: 'product',
+        content_ids: code,
+        currency: 'USD',
+        value:
+          currency.toString() === 'UAH'
+            ? +(stockPrice ? stockPrice : price) / USDRate
+            : +(stockPrice ? stockPrice : price) / currencyRate,
+      });
+    }
+
     router.push('/cart');
   };
 
