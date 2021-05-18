@@ -37,7 +37,9 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   const isServer = typeof window === 'undefined';
 
   const curCartContext = useContext(cartContext) as ICartContext;
-  const { USDRate } = useContext(currencyContext) as ICurrencyContext;
+  const { currency, currencyRate, USDRate } = useContext(
+    currencyContext
+  ) as ICurrencyContext;
 
   const addToCart = (details: string | FormikValues) => {
     curCartContext.addItem({
@@ -57,7 +59,10 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
         content_type: 'product',
         content_ids: code,
         currency: 'USD',
-        value: +(stockPrice ? stockPrice : price) / USDRate,
+        value:
+          currency.toString() === 'UAH'
+            ? +(stockPrice ? stockPrice : price) / USDRate
+            : +(stockPrice ? stockPrice : price) / currencyRate,
       });
     }
 

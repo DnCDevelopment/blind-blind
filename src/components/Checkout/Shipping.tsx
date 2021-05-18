@@ -63,7 +63,7 @@ const Shipping: React.FC = () => {
     [cart]
   );
 
-  const sendEventShippingEvent = useCallback(
+  const sendShippingEvent = useCallback(
     (event: 'InitiateCheckout' | 'Purchase') => {
       if (typeof window !== 'undefined') {
         fbq('track', event, {
@@ -72,17 +72,20 @@ const Shipping: React.FC = () => {
             const cartItem = item as ICartGoodsItemProps;
             return cartItem?.link.replace('/', '') || 'cerificate';
           }),
-          currency: 'USD',
-          value: calcTotalCheckout() / USDRate,
+          currency: currency.toString() === 'UAH' ? 'USD' : currency.toString(),
+          value:
+            currency.toString() === 'UAH'
+              ? calcTotalCheckout() / USDRate
+              : calcTotalCheckout() / currencyRate,
         });
       }
     },
-    [cart, USDRate, calcTotalCheckout]
+    [cart, USDRate, calcTotalCheckout, currency, currencyRate]
   );
 
   useEffect(() => {
-    sendEventShippingEvent('InitiateCheckout');
-  }, [sendEventShippingEvent]);
+    sendShippingEvent('InitiateCheckout');
+  }, [sendShippingEvent]);
 
   const confirmCheckout = (values: FormikValues) => {
     const {
@@ -99,7 +102,7 @@ const Shipping: React.FC = () => {
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
     const currentLocale = locale;
-    sendEventShippingEvent('Purchase');
+    sendShippingEvent('Purchase');
     const url = '/api/checkout';
     fetch(url, {
       method: 'POST',

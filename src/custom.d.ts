@@ -8,7 +8,7 @@ declare const fbq: (
   arg1: string,
   arg2: {
     value?: number;
-    currency?: 'USD' | 'RUB';
+    currency?: string;
     content_ids: string | string[];
     content_type: string;
   }

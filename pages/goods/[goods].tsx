@@ -24,21 +24,25 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   subCollection,
   locale,
 }) => {
-  const { USDRate } = useContext(currencyContext) as ICurrencyContext;
+  const { USDRate, currency, currencyRate } = useContext(
+    currencyContext
+  ) as ICurrencyContext;
 
   useEffect(() => {
     if (goodsProps && typeof window !== 'undefined') {
       const code = goodsProps.link?.replace('/', '') as string;
       const price = +goodsProps.price;
-
       fbq('track', 'ViewContent', {
         content_type: 'product',
         content_ids: code,
-        currency: 'USD',
-        value: price / USDRate,
+        currency: currency.toString() === 'UAH' ? 'USD' : currency.toString(),
+        value:
+          currency.toString() === 'UAH'
+            ? price / USDRate
+            : price / currencyRate,
       });
     }
-  }, [goodsProps, USDRate]);
+  }, [goodsProps, USDRate, currency, currencyRate]);
 
   if (!goodsProps) return <Error />;
 
