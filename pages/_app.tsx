@@ -41,6 +41,8 @@ const MyApp = ({
   );
   const [isArrowVisible, changeArrowVisability] = useState(false);
 
+  const [USDRate, changeUSDRate] = useState<number>(0);
+
   const [currency, setCurrency] = useState<ECurrency>(
     ('UAH' as unknown) as ECurrency
   );
@@ -123,6 +125,10 @@ const MyApp = ({
   }, []);
 
   useEffect(() => {
+    if (!USDRate) getCurrencyRate('USD').then((res) => changeUSDRate(res));
+  }, []);
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('cart', JSON.stringify(cartState));
       localStorage.setItem('currency', JSON.stringify(currency));
@@ -145,9 +151,10 @@ const MyApp = ({
     >
       <currencyContext.Provider
         value={{
-          currency: currency,
-          currencyRate: currencyRate,
-          setCurrency: setCurrency,
+          currency,
+          currencyRate,
+          setCurrency,
+          USDRate,
         }}
       >
         <cartContext.Provider

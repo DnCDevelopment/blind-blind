@@ -105,6 +105,10 @@ const Seo: React.FC<ISeoProps> = ({
         name="facebook-domain-verify"
         content="1al6a9ctqd0sz2aejcj7bxfq42qst0"
       />
+      <meta
+        name="facebook-domain-verification"
+        content="1al6a9ctqd0sz2aejcj7bxfq42qst0"
+      />
       <script
         dangerouslySetInnerHTML={{
           __html: `!function(f,b,e,v,n,t,s)

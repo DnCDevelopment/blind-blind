@@ -15,12 +15,31 @@ import { SEO_ITEMS, DEFAULT_DESCRIPTION } from '../../src/constants/seoItems';
 import { LANGUAGES } from '../../src/constants/languages';
 import { IMoySkladGoodData, IMoySkladStockData } from '../../src/moySkladTypes';
 import getMoySkladData from '../../src/utils/getMoySkladData';
+import { useEffect, useContext } from 'react';
+import { ICurrencyContext } from '../../src/context/Types';
+import { currencyContext } from '../../src/context/currencyContext';
 
 const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   goodsProps,
   subCollection,
   locale,
 }) => {
+  const { USDRate } = useContext(currencyContext) as ICurrencyContext;
+
+  useEffect(() => {
+    if (goodsProps && typeof window !== 'undefined') {
+      const code = goodsProps.link?.replace('/', '') as string;
+      const price = +goodsProps.price;
+
+      fbq('track', 'ViewContent', {
+        content_type: 'product',
+        content_ids: code,
+        currency: 'USD',
+        value: price / USDRate,
+      });
+    }
+  }, [goodsProps, USDRate]);
+
   if (!goodsProps) return <Error />;
 
   const collectionLink =

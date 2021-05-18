@@ -33,4 +33,5 @@ export interface ICurrencyContext {
   currency: ECurrency;
   currencyRate: number;
   setCurrency: Dispatch<SetStateAction<ECurrency>>;
+  USDRate: number;
 }

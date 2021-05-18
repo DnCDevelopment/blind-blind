@@ -15,6 +15,7 @@ import { FORM, FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
 
 import ShoppingCart from '../../assets/svg/shoppingCart.svg';
+import { ICartGoodsItemProps } from '../Cart/Types';
 
 const Shipping: React.FC = () => {
   const { locale, push } = useRouter();
@@ -27,7 +28,7 @@ const Shipping: React.FC = () => {
   const couponRef = useRef<string>();
 
   const { cart, clearCart } = useContext(cartContext) as ICartContext;
-  const { currency, currencyRate } = useContext(
+  const { currency, currencyRate, USDRate } = useContext(
     currencyContext
   ) as ICurrencyContext;
 
@@ -62,6 +63,27 @@ const Shipping: React.FC = () => {
     [cart]
   );
 
+  const sendEventShippingEvent = useCallback(
+    (event: 'InitiateCheckout' | 'Purchase') => {
+      if (typeof window !== 'undefined') {
+        fbq('track', event, {
+          content_type: 'product',
+          content_ids: cart.map((item) => {
+            const cartItem = item as ICartGoodsItemProps;
+            return cartItem?.link.replace('/', '') || 'cerificate';
+          }),
+          currency: 'USD',
+          value: calcTotalCheckout() / USDRate,
+        });
+      }
+    },
+    [cart, USDRate, calcTotalCheckout]
+  );
+
+  useEffect(() => {
+    sendEventShippingEvent('InitiateCheckout');
+  }, [sendEventShippingEvent]);
+
   const confirmCheckout = (values: FormikValues) => {
     const {
       firstName,
@@ -77,6 +99,7 @@ const Shipping: React.FC = () => {
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
     const currentLocale = locale;
+    sendEventShippingEvent('Purchase');
     const url = '/api/checkout';
     fetch(url, {
       method: 'POST',
