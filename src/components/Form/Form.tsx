@@ -33,7 +33,11 @@ const Form: React.FC<IFormProps> = ({
           value={formik.values[key]}
           placeholder={placeholders[key]}
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
+          onBlur={async (e) => {
+            e.target.value = e.target.value.trim();
+            formik.handleBlur(e);
+            formik.handleChange(e);
+          }}
           onFocus={() => (formik.touched[key] = undefined)}
         />
         {!!suffixes && suffixes[key] && (

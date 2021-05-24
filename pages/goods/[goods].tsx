@@ -150,8 +150,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       const sizes = row.characteristics
         .filter((c) => c.name === 'Размер')
         .map((c) => c.value);
-      const forOrder = availableIdsObjects.find(({ id }) => id === row.id)
-        ?.forOrder;
+      const forOrder = availableIdsObjects.find(
+        ({ id }) => id === row.id
+      )?.forOrder;
 
       return sizes.length && { value: sizes[0], forOrder: forOrder };
     })

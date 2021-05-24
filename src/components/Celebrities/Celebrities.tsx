@@ -19,7 +19,7 @@ const Celebrities: React.FC<ICelebritiesProps> = ({ celebrities }) => {
   return (
     <div className="celebrities container">
       <Link href="/celebrities">
-        <h3 className="celebrities__title">
+        <h3 className="collection-samples__title">
           {TRANSLATE[locale as 'ru' | 'en'].celebrities}
         </h3>
       </Link>

@@ -70,10 +70,10 @@ export const FORMIK = {
     validationSchema: (locale: 'ru' | 'en') =>
       Yup.object({
         firstName: Yup.string()
-          .matches(/^[a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
+          .matches(/^[ a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
           .required(FORM[locale].required),
         lastName: Yup.string()
-          .matches(/^[a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
+          .matches(/^[ a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
           .required(FORM[locale].required),
         email: Yup.string()
           .email(FORM[locale].wrongInput)

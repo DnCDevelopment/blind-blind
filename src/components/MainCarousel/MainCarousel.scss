@@ -18,10 +18,12 @@
     display: flex;
     width: 100vw;
     height: 50px;
+    pointer-events: none;
     &-prev {
       position: absolute;
       left: 0;
       transition: transform 200ms;
+      pointer-events: all;
       &,
       & svg {
         height: 100%;
@@ -32,6 +34,8 @@
       right: 0;
       transform: rotate(180deg);
       transition: transform 200ms;
+      pointer-events: all;
+
       &,
       & svg {
         height: 100%;
@@ -44,6 +48,7 @@
     &-image {
       width: 100%;
       height: 100%;
+      cursor: pointer;
     }
     &-title {
       position: absolute;

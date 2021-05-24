@@ -116,9 +116,8 @@ export const getServerSideProps: GetServerSideProps = async ({
     `filter[collection._id]=${curCollection._id}`
   );
 
-  const cockpitCategoriesData: ICockpitCategoriesEntries = await getCockpitCollection(
-    'Categories'
-  );
+  const cockpitCategoriesData: ICockpitCategoriesEntries =
+    await getCockpitCollection('Categories');
 
   const goods = cockpitGoodsData.entries
     .map((good) => ({

@@ -11,7 +11,8 @@ const ZoomImage: React.FC<IZoomImageProps> = ({ image, alt, zoom }) => {
 
   useEffect(() => {
     const changeImageTransformation = (e: MouseEvent): void => {
-      const imageContainerProps = imageContainerRef.current?.getBoundingClientRect() as DOMRect;
+      const imageContainerProps =
+        imageContainerRef.current?.getBoundingClientRect() as DOMRect;
 
       const imageElement = imageContainerRef.current?.getElementsByClassName(
         'image'
