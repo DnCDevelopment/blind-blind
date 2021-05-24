@@ -10,18 +10,17 @@ const MainCarouselItem: React.FC<ICockpitCarousel> = ({
 }) => {
   return (
     <div className="main-page-carousel-item">
-      <Image
-        className="main-page-carousel-item-image"
-        layout="fill"
-        objectFit="cover"
-        alt={title}
-        objectPosition="left"
-        loading="eager"
-        quality={100}
-        src={process.env.NEXT_PUBLIC_COCKPIT_URL + image.path}
-      />
       <Link href={link}>
-        <h3 className="main-page-carousel-item-title">{title}</h3>
+        <Image
+          className="main-page-carousel-item-image"
+          layout="fill"
+          objectFit="cover"
+          alt={title}
+          objectPosition="left"
+          loading="eager"
+          quality={100}
+          src={process.env.NEXT_PUBLIC_COCKPIT_URL + image.path}
+        />
       </Link>
     </div>
   );

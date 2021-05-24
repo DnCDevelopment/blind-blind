@@ -44,7 +44,7 @@ const MyApp = ({
   const [USDRate, changeUSDRate] = useState<number>(0);
 
   const [currency, setCurrency] = useState<ECurrency>(
-    ('UAH' as unknown) as ECurrency
+    'UAH' as unknown as ECurrency
   );
   const [currencyRate, setCurrencyRate] = useState(0);
 
@@ -203,15 +203,14 @@ MyApp.getInitialProps = async (
     ({ stockPrice }: ICockpitGoodsRaw) => stockPrice
   );
 
-  const runways: ICockpitRunwaysAndLookbooksRaw[] = cockpitDataRunways.entries.map(
-    (el: ICockpitRunwaysAndLookbooksRaw) => {
+  const runways: ICockpitRunwaysAndLookbooksRaw[] =
+    cockpitDataRunways.entries.map((el: ICockpitRunwaysAndLookbooksRaw) => {
       return {
         title: locale === defaultLocale ? el.title : el.title_en,
         link: '/blind-style' + el.link,
         inMenu: el.inMenu,
       };
-    }
-  );
+    });
 
   const collections = cockpitDataCollections.entries.map(
     (el: ICockpitCollectionsRaw) => {
