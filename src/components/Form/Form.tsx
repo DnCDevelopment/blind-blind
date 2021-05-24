@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import { FocusEventHandler } from 'react';
 import { useMemo, useEffect } from 'react';
 import InputMask from 'react-input-mask';
 
@@ -24,6 +25,12 @@ const Form: React.FC<IFormProps> = ({
   }, [formikConfig]);
 
   const inputText = useMemo(() => {
+    const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+      e.target.value = e.target.value.trim();
+      formik.handleBlur(e);
+      formik.handleChange(e);
+    };
+
     const InputField = (key: string) => (
       <div className="input-box">
         <input
@@ -33,11 +40,7 @@ const Form: React.FC<IFormProps> = ({
           value={formik.values[key]}
           placeholder={placeholders[key]}
           onChange={formik.handleChange}
-          onBlur={async (e) => {
-            e.target.value = e.target.value.trim();
-            formik.handleBlur(e);
-            formik.handleChange(e);
-          }}
+          onBlur={handleBlur}
           onFocus={() => (formik.touched[key] = undefined)}
         />
         {!!suffixes && suffixes[key] && (
