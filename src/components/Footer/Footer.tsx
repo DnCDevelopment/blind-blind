@@ -10,12 +10,13 @@ import ThanksModal from './ThanksModal';
 
 import { FORMIK } from '../../constants/form';
 import { TRANSLATE } from '../../constants/languages';
+import { pathsWithoutFooterForm } from '../../constants/footerMenu';
 
 const Footer: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(true);
 
-  const { locale } = useRouter();
+  const { locale, pathname } = useRouter();
 
   const handleShowModal = (success = false) => {
     setShowModal(!showModal);
@@ -32,41 +33,45 @@ const Footer: React.FC = () => {
             <SocialIcons />
           </div>
           <div className="request-callback">
-            <p className="request-callback__title">
-              {TRANSLATE[locale as 'ru' | 'en'].requestCallBackTitle}
-            </p>
-            <Form
-              formikConfig={{
-                initialValues: FORMIK.footerForm.values,
-                validationSchema: FORMIK.footerForm.validationSchema(
-                  locale as 'ru' | 'en'
-                ),
-                onSubmit: ({ phone }, { resetForm }) => {
-                  fetch('/api/request', {
-                    headers: {
-                      'Content-Type': 'application/json',
+            {!pathsWithoutFooterForm.includes(pathname) && (
+              <>
+                <p className="request-callback__title">
+                  {TRANSLATE[locale as 'ru' | 'en'].requestCallBackTitle}
+                </p>
+                <Form
+                  formikConfig={{
+                    initialValues: FORMIK.footerForm.values,
+                    validationSchema: FORMIK.footerForm.validationSchema(
+                      locale as 'ru' | 'en'
+                    ),
+                    onSubmit: ({ phone }, { resetForm }) => {
+                      fetch('/api/request', {
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        method: 'POST',
+                        body: JSON.stringify({
+                          phone,
+                        }),
+                      })
+                        .then((res) => {
+                          if (!res.ok) {
+                            throw Error(res.statusText);
+                          }
+                          handleShowModal(true);
+                          resetForm();
+                        })
+                        .catch(() => handleShowModal(false));
                     },
-                    method: 'POST',
-                    body: JSON.stringify({
-                      phone,
-                    }),
-                  })
-                    .then((res) => {
-                      if (!res.ok) {
-                        throw Error(res.statusText);
-                      }
-                      handleShowModal(true);
-                      resetForm();
-                    })
-                    .catch(() => handleShowModal(false));
-                },
-              }}
-              types={FORMIK.footerForm.types}
-              placeholders={FORMIK.footerForm.placeholders(
-                locale as 'ru' | 'en'
-              )}
-              buttonTitle={TRANSLATE[locale as 'ru' | 'en'].requestCallBack}
-            />
+                  }}
+                  types={FORMIK.footerForm.types}
+                  placeholders={FORMIK.footerForm.placeholders(
+                    locale as 'ru' | 'en'
+                  )}
+                  buttonTitle={TRANSLATE[locale as 'ru' | 'en'].requestCallBack}
+                />
+              </>
+            )}
             <div className="payments-image">
               <Image
                 layout="fill"
