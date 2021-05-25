@@ -1,5 +1,7 @@
 import { TRANSLATE } from '../constants/languages';
 
+export const pathsWithoutFooterForm = ['/cart', '/checkout'];
+
 export const footerMenu = (locale: 'ru' | 'en') => [
   {
     link: '/o-nas',
