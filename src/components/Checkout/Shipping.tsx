@@ -64,19 +64,26 @@ const Shipping: React.FC = () => {
   );
 
   const sendShippingEvent = useCallback(
-    (event: 'InitiateCheckout' | 'Purchase') => {
+    (event: 'InitiateCheckout' | 'Lead') => {
       if (typeof window !== 'undefined') {
+        const moneyData =
+          event === 'InitiateCheckout'
+            ? {
+                currency:
+                  currency.toString() === 'UAH' ? 'USD' : currency.toString(),
+                value:
+                  currency.toString() === 'UAH'
+                    ? calcTotalCheckout() / USDRate
+                    : calcTotalCheckout() / currencyRate,
+              }
+            : {};
         fbq('track', event, {
           content_type: 'product',
           content_ids: cart.map((item) => {
             const cartItem = item as ICartGoodsItemProps;
             return cartItem?.link.replace('/', '') || 'cerificate';
           }),
-          currency: currency.toString() === 'UAH' ? 'USD' : currency.toString(),
-          value:
-            currency.toString() === 'UAH'
-              ? calcTotalCheckout() / USDRate
-              : calcTotalCheckout() / currencyRate,
+          ...moneyData,
         });
       }
     },
@@ -102,7 +109,7 @@ const Shipping: React.FC = () => {
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
     const currentLocale = locale;
-    sendShippingEvent('Purchase');
+    sendShippingEvent('Lead');
     const url = '/api/checkout';
     fetch(url, {
       method: 'POST',
