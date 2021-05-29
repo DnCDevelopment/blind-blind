@@ -1,6 +1,6 @@
 import { TRANSLATE } from '../constants/languages';
 
-export const pathsWithoutFooterForm = ['/cart', '/checkout'];
+export const pathsWithoutFooterForm = ['/cart', '/checkout', '/thank-you'];
 
 export const footerMenu = (locale: 'ru' | 'en') => [
   {

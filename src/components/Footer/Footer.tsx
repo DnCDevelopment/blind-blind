@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(true);
 
-  const { locale, pathname } = useRouter();
+  const { locale, pathname, push } = useRouter();
 
   const handleShowModal = (success = false) => {
     setShowModal(!showModal);
@@ -60,6 +60,7 @@ const Footer: React.FC = () => {
                           }
                           handleShowModal(true);
                           resetForm();
+                          push('/thank-you');
                         })
                         .catch(() => handleShowModal(false));
                     },

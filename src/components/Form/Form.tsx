@@ -151,8 +151,9 @@ const Form: React.FC<IFormProps> = ({
           }}
           onFocus={(e) => {
             formik.touched[key] = undefined;
-            if (!formik.values[key].startsWith('+'))
-              e.target.value = formik.values[key] = `+${formik.values[key]}`;
+            if (!formik.values[key].startsWith('+')) {
+              e.target.value = `+${formik.values[key]}`;
+            }
           }}
         />
         {!!suffixes && suffixes[key] && (
