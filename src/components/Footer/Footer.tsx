@@ -58,8 +58,8 @@ const Footer: React.FC = () => {
                           if (!res.ok) {
                             throw Error(res.statusText);
                           }
-                          resetForm();
                           push('/thank-you');
+                          resetForm();
                         })
                         .catch(() => handleShowModal(false));
                     },
