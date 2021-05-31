@@ -6,7 +6,7 @@ declare module '*.svg' {
 declare const fbq: (
   arg0: string,
   arg1: string,
-  arg2: {
+  arg2?: {
     value?: number;
     currency?: string;
     content_ids: string | string[];
