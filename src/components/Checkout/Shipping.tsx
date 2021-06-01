@@ -102,7 +102,6 @@ const Shipping: React.FC = () => {
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
     const currentLocale = locale;
-    sendShippingEvent('Purchase');
     const url = '/api/checkout';
     fetch(url, {
       method: 'POST',
