@@ -1,6 +1,8 @@
 import App, { AppContext } from 'next/app';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { AppInitialProps } from 'next/dist/next-server/lib/utils';
+import NextNprogress from 'nextjs-progressbar';
+
 import { useContext, useEffect, useState } from 'react';
 
 import {
@@ -44,7 +46,7 @@ const MyApp = ({
   const [USDRate, changeUSDRate] = useState<number>(0);
 
   const [currency, setCurrency] = useState<ECurrency>(
-    'UAH' as unknown as ECurrency
+    ('UAH' as unknown) as ECurrency
   );
   const [currencyRate, setCurrencyRate] = useState(0);
 
@@ -167,6 +169,12 @@ const MyApp = ({
           }}
         >
           <Header />
+          <NextNprogress
+            color="#000"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={3}
+          ></NextNprogress>
           <main>
             <Component {...pageProps} />
           </main>
@@ -204,14 +212,15 @@ MyApp.getInitialProps = async (
     ({ stockPrice }: ICockpitGoodsRaw) => stockPrice
   );
 
-  const runways: ICockpitRunwaysAndLookbooksRaw[] =
-    cockpitDataRunways.entries.map((el: ICockpitRunwaysAndLookbooksRaw) => {
+  const runways: ICockpitRunwaysAndLookbooksRaw[] = cockpitDataRunways.entries.map(
+    (el: ICockpitRunwaysAndLookbooksRaw) => {
       return {
         title: locale === defaultLocale ? el.title : el.title_en,
         link: '/blind-style' + el.link,
         inMenu: el.inMenu,
       };
-    });
+    }
+  );
 
   const collections = cockpitDataCollections.entries.map(
     (el: ICockpitCollectionsRaw) => {
