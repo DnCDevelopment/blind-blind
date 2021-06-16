@@ -18,8 +18,9 @@ import { AboutListData, StoreListData } from '../../constants/header';
 const DesktopHeader: React.FC = () => {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<boolean>(false);
   const [curMenu, setCurMenu] = useState<'store' | 'about'>('store');
-  const [searchContainerOpen, setSearchContainerOpen] =
-    useState<boolean>(false);
+  const [searchContainerOpen, setSearchContainerOpen] = useState<boolean>(
+    false
+  );
 
   const router = useRouter();
   const { locale } = router;

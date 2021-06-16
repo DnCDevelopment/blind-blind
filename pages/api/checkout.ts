@@ -1,10 +1,11 @@
 import { NextApiHandler } from 'next';
 import { createHash } from 'crypto';
 import { Telegram } from 'telegraf';
-
 import { IBotUser } from '../../src/cockpitTypes';
 
 import { FORM } from '../../src/constants/form';
+import sendGrid from '../../backendHelpers/sendGrid';
+import getPromocode from '../../backendHelpers/getPromocode';
 import {
   ICartGoodsItemProps,
   ICartVoucherItemProps,
@@ -22,6 +23,66 @@ interface ICart {
 
 const bot = new Telegram(process.env.NEXT_PUBLIC_TELEGRAM_KEY as string);
 
+const getGoodsMessage = ({ goods }: ICart) =>
+  goods.reduce(
+    (acc, { name, size }) => acc + `Название: ${name}, Размер: ${size}; | `,
+    ''
+  );
+
+const sendEmail = async (
+  name: string,
+  surname: string,
+  email: string,
+  country: string,
+  city: string,
+  phone: string,
+  paymentType: string,
+  cart: ICart,
+  totalSum: string,
+  promoCode: string,
+  cookies: { [key: string]: string },
+  ip: string
+) => {
+  const [promoCodeValues] = await getPromocode(promoCode);
+
+  const emailBody = `
+    Товары: ${getGoodsMessage(cart)} \n
+    Сумма: ${totalSum} \n
+    Промокод: ${promoCode} \n
+    Скидка: ${promoCodeValues.discount}% \n
+    Тип оплаты: ${paymentType} \n
+    Cтрана доставки: ${country} \n
+    Город доставки: ${city} \n
+    Имя: ${name} \n
+    Фамилия: ${surname} \n
+    Телефон: ${phone.replace('+', '')} \n
+    Емеил: ${email} \n
+    Utm_data: ${cookies.utm_data || 'none'} \n
+    Utm_source: ${cookies.utm_source || 'none'} \n
+    Utm_medium: ${cookies.utm_medium || 'none'} \n
+    Utm_campaign: ${cookies.utm_campaign || 'none'} \n
+    Utm_term: ${cookies.utm_term || 'none'} \n
+    Utm_content: ${cookies.utm_content || 'none'} \n
+    User_ip: ${ip || 'none'} \n
+    Location: ${cookies.user_geo || 'none'} \n
+    REF URL: ${cookies.ref_url || 'organic'} \n
+    GA: ${cookies._ga || 'none'} \n
+  `;
+
+  const msg = {
+    to: process.env.EMAIL_TO as string,
+    from: process.env.EMAIL_FROM as string,
+    subject: 'Заказ',
+    text: emailBody,
+  };
+
+  sendGrid.send(msg).then(console.log, (error) => {
+    console.error(error);
+    if (error.response) {
+      console.error(error.response.body);
+    }
+  });
+};
 const sendToBot = (
   users: IBotUser[],
   name: string,
@@ -43,10 +104,7 @@ const sendToBot = (
     ''
   );
 
-  const goodsMessage = cart.goods.reduce(
-    (acc, { name, size }) => acc + `Название: ${name}, Размер: ${size}; | `,
-    ''
-  );
+  const goodsMessage = getGoodsMessage(cart);
   const message =
     `Имя: ${name}\n` +
     `Фамилия: ${surname}\n` +
@@ -68,6 +126,7 @@ const sendToBot = (
 };
 
 const checkout: NextApiHandler = async (req, res) => {
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
   const {
     name,
     surname,
@@ -80,6 +139,7 @@ const checkout: NextApiHandler = async (req, res) => {
     currency,
     items = [],
     totalSum,
+    coupon,
   } = req.body;
   const check =
     locale &&
@@ -169,6 +229,21 @@ const checkout: NextApiHandler = async (req, res) => {
     currency,
     cart,
     totalSum
+  );
+
+  await sendEmail(
+    name,
+    surname,
+    email,
+    country,
+    city,
+    phone,
+    paymentType,
+    cart,
+    totalSum,
+    coupon,
+    req.cookies,
+    ip as string
   );
 
   const { _id } = await response.json();

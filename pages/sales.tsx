@@ -54,8 +54,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     'Goods',
     'filter[stockPrice][$exists]=true'
   );
-  const cockpitCategoriesData: ICockpitCategoriesEntries =
-    await getCockpitCollection('Categories');
+  const cockpitCategoriesData: ICockpitCategoriesEntries = await getCockpitCollection(
+    'Categories'
+  );
   const categories = cockpitCategoriesData.entries.map((category) => ({
     ...category,
     title: locale === defaultLocale ? category.title : category.title_en,

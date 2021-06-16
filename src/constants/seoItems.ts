@@ -1,6 +1,8 @@
 export const DEFAULT_DESCRIPTION = {
-  ru: 'Роскошные женские платья, дизайнерские женские пиджаки, красивые блузы, стильные женские брюки. Вся одежда Blind высокого качества.',
-  en: "Luxurious women's dresses, designer women's blazers, beautiful blouses, stylish women's pants. All Blind clothes are of high quality.",
+  ru:
+    'Роскошные женские платья, дизайнерские женские пиджаки, красивые блузы, стильные женские брюки. Вся одежда Blind высокого качества.',
+  en:
+    "Luxurious women's dresses, designer women's blazers, beautiful blouses, stylish women's pants. All Blind clothes are of high quality.",
 };
 
 export const SEO_ITEMS = {

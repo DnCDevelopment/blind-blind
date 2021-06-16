@@ -17,8 +17,9 @@ const GOODS_ON_PAGE = 12;
 const AVAILABLE_PAGES = 3;
 
 const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
-  const [sortSelect, setSortSelect] =
-    useState<keyof typeof SORT_TRANSLATE>('default');
+  const [sortSelect, setSortSelect] = useState<keyof typeof SORT_TRANSLATE>(
+    'default'
+  );
   const router = useRouter();
   const { locale, query } = router;
 

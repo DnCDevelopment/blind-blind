@@ -40,7 +40,6 @@ const Shipping: React.FC = () => {
       .then((res) => res.json())
       .then((json) => {
         const { discount } = json;
-
         couponRef.current = enteredCode;
         if (discount) {
           setTotalCheckout(
@@ -62,6 +61,9 @@ const Shipping: React.FC = () => {
       ),
     [cart]
   );
+
+  const [totalCheckout, setTotalCheckout] = useState(calcTotalCheckout());
+  const [currencyTotalCheckout, setCurrencyTotalCheckout] = useState('0');
 
   const sendShippingEvent = useCallback(
     (event: 'InitiateCheckout' | 'Purchase') => {
@@ -138,9 +140,6 @@ const Shipping: React.FC = () => {
         push('/thank-you');
       });
   };
-
-  const [totalCheckout, setTotalCheckout] = useState(calcTotalCheckout());
-  const [currencyTotalCheckout, setCurrencyTotalCheckout] = useState('0');
 
   useEffect(() => {
     setTotalCheckout(calcTotalCheckout());

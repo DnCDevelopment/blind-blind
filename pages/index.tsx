@@ -53,8 +53,10 @@ export const getServerSideProps: GetServerSideProps = async ({
   defaultLocale,
 }) => {
   const collectionNames = ['mainCarousel', 'Celebrities'];
-  const [cockpitDataCarousel, cockpitDataCelebrities] =
-    await getCockpitCollections(collectionNames);
+  const [
+    cockpitDataCarousel,
+    cockpitDataCelebrities,
+  ] = await getCockpitCollections(collectionNames);
 
   const filter = `filter[link]=/street-style&populate=1`;
   const cockpitDataRunways = await getCockpitCollection('Runways', filter);

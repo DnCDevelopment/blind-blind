@@ -1,9 +1,8 @@
+import { useContext, useEffect, useState } from 'react';
 import App, { AppContext } from 'next/app';
 import { AppProps } from 'next/dist/next-server/lib/router/router';
 import { AppInitialProps } from 'next/dist/next-server/lib/utils';
 import NextNprogress from 'nextjs-progressbar';
-
-import { useContext, useEffect, useState } from 'react';
 
 import {
   ICartGoodsItemProps,
@@ -15,6 +14,7 @@ import Footer from '../src/components/Footer/Footer';
 import { cartContext } from '../src/context/cartContext';
 import { indexContext } from '../src/context/cockpitContext';
 import { currencyContext } from '../src/context/currencyContext';
+import { UTM_TAGS } from '../src/constants/utmTags';
 
 import {
   ICockpitCollectionsRaw,
@@ -55,6 +55,30 @@ const MyApp = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      UTM_TAGS.forEach((tag) => {
+        const value = urlParams.get(tag);
+        if (value) {
+          document.cookie = `${tag}=${value}; path=/;`;
+        }
+      });
+
+      navigator.geolocation.getCurrentPosition((position) => {
+        const {
+          coords: { latitude, longitude },
+        } = position;
+        fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+        )
+          .then((res) => res.json())
+          .then((result) => {
+            document.cookie = `user_geo=${result.countryName}, ${result.city}; path=/;`;
+          })
+          .catch(console.error);
+      });
+    }
+
     const scrollHandler = () => {
       typeof window !== 'undefined' &&
         changeArrowVisability(() => window.scrollY > 0);

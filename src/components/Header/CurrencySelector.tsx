@@ -41,7 +41,7 @@ const CurrencySelector: React.FC = () => {
                 key={curr}
                 onClick={() => {
                   setDroplistOpen(false);
-                  setCurrency(curr as unknown as ECurrency);
+                  setCurrency((curr as unknown) as ECurrency);
                 }}
               >
                 {curr}
