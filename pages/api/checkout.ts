@@ -48,8 +48,8 @@ const sendEmail = async (
   const emailBody = `
     Товары: ${getGoodsMessage(cart)} \n
     Сумма: ${totalSum} \n
-    Промокод: ${promoCode} \n
-    Скидка: ${promoCodeValues.discount}% \n
+    Промокод: ${promoCode || 'none'} \n
+    Скидка: ${promoCodeValues?.discount || 'none'}% \n
     Тип оплаты: ${paymentType} \n
     Cтрана доставки: ${country} \n
     Город доставки: ${city} \n
