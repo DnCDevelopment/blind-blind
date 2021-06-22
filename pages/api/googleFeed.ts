@@ -8,7 +8,7 @@ import getMoySkladData from '../../src/utils/getMoySkladData';
 import { IMoySkladGoodData } from '../../src/moySkladTypes';
 import xml from 'xml';
 
-const googleFeed: NextApiHandler = async (req, res) => {
+const googleFeed: NextApiHandler = async (_req, res) => {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const servePath = process.cwd() + '/public/xml/';
   const goodsResponse = await getCockpitCollection('Goods');
@@ -31,6 +31,7 @@ const googleFeed: NextApiHandler = async (req, res) => {
           previewImage: { path },
           price,
           stockPrice,
+          isExclusive,
         },
         idx
       ) => {
@@ -38,7 +39,11 @@ const googleFeed: NextApiHandler = async (req, res) => {
         const moyskladData = await getMoySkladData<IMoySkladGoodData>(
           `remap/1.2/entity/variant?filter=code~=${link.replace('/', '')}`
         );
-        const availability = !!moyskladData?.rows?.length || false;
+        const availability = isExclusive
+          ? 'backorder'
+          : !!moyskladData?.rows?.length || false
+          ? 'in_stock'
+          : 'out_of_stock';
 
         const item_ru = [
           { 'g:title': title },
