@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import {} from 'yup/lib/Condition';
 import { TRANSLATE } from './languages';
 
 export const FORM = {
@@ -18,12 +19,14 @@ export const FORM = {
     paymentMethod: 'Способ оплаты',
     paymentOnline: 'Оплата онлайн',
     paymentManager: 'Оплата через менеджера',
+    novaPoshta: '"Нова Пошта"',
     receiverName: 'Имя получателя',
     receiverEmail: 'Почта получателя',
     yourName: 'Ваше имя',
     yourEmail: 'Ваша почта',
     giftMessage: 'Сообщение (необязательно)',
     giftAmount: 'Введите любую сумму сертификата',
+    warehouse: 'Отделение',
   },
   en: {
     cm: 'cm',
@@ -41,12 +44,14 @@ export const FORM = {
     paymentMethod: 'Payment method',
     paymentOnline: 'Online payment',
     paymentManager: 'Payment with manager',
+    novaPoshta: '"Nova Poshta"',
     receiverName: 'Receiver name',
     receiverEmail: 'Receiver email',
     yourName: 'Your name',
     yourEmail: 'Your email',
     giftMessage: 'Message (optional)',
     giftAmount: 'Enter any amount of the certificate',
+    warehouse: 'Warehouse',
   },
 };
 
@@ -65,6 +70,7 @@ export const FORMIK = {
       country: '',
       city: '',
       paymentMethod: '',
+      warehouse: '',
       checkbox: false,
     },
     validationSchema: (locale: 'ru' | 'en') =>
@@ -86,6 +92,10 @@ export const FORMIK = {
         country: Yup.string().required(FORM[locale].required),
         city: Yup.string().required(FORM[locale].required),
         paymentMethod: Yup.string().required(FORM[locale].required),
+        warehouse: Yup.string().when('paymentMethod', {
+          is: FORM[locale].novaPoshta,
+          then: Yup.string().required(FORM[locale].required),
+        }),
       }),
     types: {
       firstName: 'text',
@@ -95,6 +105,7 @@ export const FORMIK = {
       country: 'text',
       city: 'text',
       paymentMethod: 'select',
+      warehouse: 'warehouse',
       checkbox: 'checkbox',
     },
     selectOptions: (locale: 'ru' | 'en') => ({
@@ -108,6 +119,7 @@ export const FORMIK = {
       country: FORM[locale].country,
       city: FORM[locale].city,
       paymentMethod: FORM[locale].paymentMethod,
+      warehouse: FORM[locale].warehouse,
     }),
   },
   goodsExclusive: {

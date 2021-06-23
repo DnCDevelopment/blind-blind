@@ -1,7 +1,10 @@
+import { FocusEventHandler, useMemo, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { FocusEventHandler } from 'react';
-import { useMemo, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import InputMask from 'react-input-mask';
+import Fuse from 'fuse.js';
+
+import warehouses from '../../../npWarehouses.json';
 
 import Button from '../Button/Button';
 import Dropdown from './Dropdown';
@@ -17,12 +20,60 @@ const Form: React.FC<IFormProps> = ({
   masks,
   checkboxText,
   buttonTitle,
+  optionField,
 }) => {
   const formik = useFormik(formikConfig);
+  const { locale } = useRouter();
 
   useEffect(() => {
     formik.setValues(formikConfig.initialValues);
   }, [formikConfig]);
+
+  const inputWarehouse = useMemo(() => {
+    const options = {
+      includeScore: true,
+      keys: ['settlement'],
+    };
+    const fuse = new Fuse(warehouses, options);
+    const currentWarehouses = fuse.search(formik.values['city'] || '');
+    if (locale === 'en' || !currentWarehouses.length) {
+      const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+        e.target.value = e.target.value.trim();
+        formik.handleBlur(e);
+        formik.handleChange(e);
+      };
+
+      const InputText = (key: string) => (
+        <div className="input-box">
+          <input
+            type="text"
+            id={key}
+            name={key}
+            value={formik.values[key]}
+            placeholder={placeholders[key]}
+            onChange={formik.handleChange}
+            onBlur={handleBlur}
+            onFocus={() => (formik.touched[key] = undefined)}
+          />
+          {!!suffixes && suffixes[key] && (
+            <span className="input-suffix">{suffixes[key]}</span>
+          )}
+        </div>
+      );
+      return InputText;
+    }
+    const InputField = (key: string) => (
+      <div className="input-select">
+        <Dropdown
+          value={formik.values[key]}
+          placeholder={placeholders[key]}
+          values={currentWarehouses.map(({ item: { address } }) => address)}
+          setValue={(item) => formik.setFieldValue(key, item)}
+        />
+      </div>
+    );
+    return InputField;
+  }, [formik, placeholders, locale]);
 
   const inputText = useMemo(() => {
     const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
@@ -164,6 +215,18 @@ const Form: React.FC<IFormProps> = ({
     return InputField;
   }, [formik, placeholders, suffixes]);
 
+  const renderField = (key: string, idx: number) => (
+    <div key={idx} className="form-row">
+      {types[key] === optionField?.fieldName}
+      {types[key] !== 'text' || !masks || (masks && !masks[key])
+        ? InputTypes[types[key]](key)
+        : InputTypes.maskedText(key)}
+      {formik.errors[key] && formik.touched[key] && (
+        <p className="error">{formik.errors[key]}</p>
+      )}
+    </div>
+  );
+
   const InputTypes: { [key: string]: (key: string) => void } = {
     text: inputText,
     select: inputSelect,
@@ -171,6 +234,7 @@ const Form: React.FC<IFormProps> = ({
     phone: inputPhone,
     maskedText: inputTextWithMask,
     textArea: inputTextArea,
+    warehouse: inputWarehouse,
   };
 
   return (
@@ -179,16 +243,14 @@ const Form: React.FC<IFormProps> = ({
         e.preventDefault();
       }}
     >
-      {Object.keys(formik.values).map((key, idx) => (
-        <div key={idx} className="form-row">
-          {types[key] !== 'text' || !masks || (masks && !masks[key])
-            ? InputTypes[types[key]](key)
-            : InputTypes.maskedText(key)}
-          {formik.errors[key] && formik.touched[key] && (
-            <p className="error">{formik.errors[key]}</p>
-          )}
-        </div>
-      ))}
+      {Object.keys(formik.values).map(
+        (key, idx) =>
+          ((key === optionField?.fieldName &&
+            formik.values[optionField.dependFieldName] ===
+              optionField.dependFieldValue) ||
+            key !== optionField?.fieldName) &&
+          renderField(key, idx)
+      )}
       <div className="button-container">
         <Button
           title={buttonTitle}

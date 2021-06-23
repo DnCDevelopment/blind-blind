@@ -27,7 +27,6 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           description,
           description_en,
           link,
-          link_en,
           previewImage: { path },
           price,
           stockPrice,
@@ -48,7 +47,7 @@ const googleFeed: NextApiHandler = async (_req, res) => {
         const item_ru = [
           { 'g:title': title },
           { 'g:description': description },
-          { 'g:link': encodeURI(`${baseUrl}goods${link}`) },
+          { 'g:link': encodeURI(`${baseUrl}/goods${link}`) },
           {
             'g:image_link': encodeURI(
               `${process.env.NEXT_PUBLIC_COCKPIT_URL}${path}`
@@ -62,7 +61,7 @@ const googleFeed: NextApiHandler = async (_req, res) => {
         const item_en = [
           { 'g:title': title_en },
           { 'g:description': description_en },
-          { 'g:link': encodeURI(`${baseUrl}goods${link_en}`) },
+          { 'g:link': encodeURI(`${baseUrl}/goods${link}`) },
           {
             'g:image_link': encodeURI(
               `${process.env.NEXT_PUBLIC_COCKPIT_URL}${path}`

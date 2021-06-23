@@ -36,7 +36,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
           <div className="dropdown-button" />
         </div>
         <div className={`dropdown__list ${isOpen ? 'open' : ''}`}>
-          {values.map((listItem) => (
+          {values?.map((listItem) => (
             <p
               key={listItem}
               role="presentation"
