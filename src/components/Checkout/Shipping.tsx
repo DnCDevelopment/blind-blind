@@ -98,6 +98,7 @@ const Shipping: React.FC = () => {
       email,
       phone,
       paymentMethod,
+      deliveryMethod,
       service,
       checkbox,
       warehouse,
@@ -125,6 +126,7 @@ const Shipping: React.FC = () => {
         phone,
         items: cart,
         currency,
+        deliveryMethod,
         warehouse,
       }),
     })
@@ -254,7 +256,7 @@ const Shipping: React.FC = () => {
             buttonTitle={TRANSLATE[locale as 'ru' | 'en'].continue}
             checkboxText={TRANSLATE[locale as 'ru' | 'en'].saveInfo}
             optionField={{
-              dependFieldName: 'paymentMethod',
+              dependFieldName: 'deliveryMethod',
               dependFieldValue: FORM[locale as 'ru' | 'en'].novaPoshta,
               fieldName: 'warehouse',
             }}

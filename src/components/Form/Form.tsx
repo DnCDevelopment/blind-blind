@@ -4,12 +4,14 @@ import { useRouter } from 'next/router';
 import InputMask from 'react-input-mask';
 import Fuse from 'fuse.js';
 
-import warehouses from '../../../npWarehouses.json';
-
 import Button from '../Button/Button';
 import Dropdown from './Dropdown';
 
 import { IFormProps } from './Types';
+
+import { FORM } from '../../constants/form';
+
+import warehouses from '../../../npWarehouses.json';
 
 const Form: React.FC<IFormProps> = ({
   formikConfig,
@@ -165,6 +167,23 @@ const Form: React.FC<IFormProps> = ({
     return InputField;
   }, [formik, checkboxText]);
 
+  const inputDelivery = useMemo(() => {
+    const InputField = (key: string) => (
+      <div className="input-select">
+        <Dropdown
+          value={formik.values[key]}
+          placeholder={placeholders[key]}
+          values={[
+            FORM[locale as 'ru' | 'en'].novaPoshta,
+            FORM[locale as 'ru' | 'en'].ukrPoshta,
+          ]}
+          setValue={(item) => formik.setFieldValue(key, item)}
+        />
+      </div>
+    );
+    return InputField;
+  }, [formik, placeholders, selectOptions]);
+
   const inputSelect = useMemo(() => {
     const InputField = (key: string) => (
       <div className="input-select">
@@ -217,7 +236,7 @@ const Form: React.FC<IFormProps> = ({
 
   const renderField = (key: string, idx: number) => (
     <div key={idx} className="form-row">
-      {types[key] === optionField?.fieldName}
+      {/* {types[key] === optionField?.fieldName} */}
       {types[key] !== 'text' || !masks || (masks && !masks[key])
         ? InputTypes[types[key]](key)
         : InputTypes.maskedText(key)}
@@ -235,6 +254,7 @@ const Form: React.FC<IFormProps> = ({
     maskedText: inputTextWithMask,
     textArea: inputTextArea,
     warehouse: inputWarehouse,
+    delivery: inputDelivery,
   };
 
   return (

@@ -37,6 +37,7 @@ const sendEmail = async (
   city: string,
   phone: string,
   paymentType: string,
+  deliveryType: string,
   warehouse: string,
   cart: ICart,
   totalSum: string,
@@ -56,6 +57,7 @@ const sendEmail = async (
     Тип оплаты: ${paymentType} \n
     Cтрана доставки: ${country} \n
     Город доставки: ${city} \n
+    Тип доставки: ${deliveryType} \n
     Отделение НП: ${warehouse || 'none'} \n
     Имя: ${name} \n
     Фамилия: ${surname} \n
@@ -96,6 +98,7 @@ const sendToBot = (
   city: string,
   phone: string,
   paymentType: string,
+  deliveryType: string,
   warehouse: string,
   locale: string,
   currency: string,
@@ -118,6 +121,7 @@ const sendToBot = (
     `Город: ${city}\n` +
     `Телефон: ${phone}\n` +
     `Тип оплаты: ${paymentType}\n` +
+    `Тип Доставки: ${deliveryType}\n` +
     `Отделение НП: ${warehouse}\n` +
     `Язык: ${locale}\n` +
     `Cумма: ${totalSum}${currency}\n` +
@@ -141,6 +145,7 @@ const checkout: NextApiHandler = async (req, res) => {
     city,
     phone,
     paymentType,
+    deliveryMethod,
     locale,
     currency,
     items = [],
@@ -157,6 +162,7 @@ const checkout: NextApiHandler = async (req, res) => {
     city &&
     phone &&
     paymentType &&
+    deliveryMethod &&
     items.length &&
     currency &&
     totalSum;
@@ -232,6 +238,7 @@ const checkout: NextApiHandler = async (req, res) => {
     city,
     phone,
     paymentType,
+    deliveryMethod,
     warehouse,
     locale,
     currency,
@@ -247,6 +254,7 @@ const checkout: NextApiHandler = async (req, res) => {
     city,
     phone,
     paymentType,
+    deliveryMethod,
     warehouse,
     cart,
     totalSum,
