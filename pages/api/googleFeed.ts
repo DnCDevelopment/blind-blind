@@ -8,6 +8,11 @@ import getMoySkladData from '../../src/utils/getMoySkladData';
 import { IMoySkladGoodData } from '../../src/moySkladTypes';
 import xml from 'xml';
 
+const priceFormat = new Intl.NumberFormat('ru-RU', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 const googleFeed: NextApiHandler = async (_req, res) => {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
   const servePath = process.cwd() + '/public/xml/';
@@ -57,7 +62,7 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           },
           { 'g:brand': 'BLIND' },
           { 'g:availability': availability },
-          { 'g:price': `${price} UAH` },
+          { 'g:price': `${priceFormat.format(+price)} UAH` },
         ];
 
         const item_en = [
@@ -71,7 +76,7 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           },
           { 'g:brand': 'BLIND' },
           { 'g:availability': availability },
-          { 'g:price': `${price} UAH` },
+          { 'g:price': `${priceFormat.format(+price)} UAH` },
         ];
 
         if (!isNaN(+(stockPrice?.trim() || NaN))) {
