@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import {} from 'yup/lib/Condition';
 import { TRANSLATE } from './languages';
 
 export const FORM = {
@@ -18,12 +19,16 @@ export const FORM = {
     paymentMethod: 'Способ оплаты',
     paymentOnline: 'Оплата онлайн',
     paymentManager: 'Оплата через менеджера',
+    novaPoshta: '"Нова Пошта"(по Украине)',
+    ukrPoshta: '"Укр Пошта"(за границу)',
+    delivery: 'Доставка',
     receiverName: 'Имя получателя',
     receiverEmail: 'Почта получателя',
     yourName: 'Ваше имя',
     yourEmail: 'Ваша почта',
     giftMessage: 'Сообщение (необязательно)',
     giftAmount: 'Введите любую сумму сертификата',
+    warehouse: 'Отделение',
   },
   en: {
     cm: 'cm',
@@ -40,13 +45,17 @@ export const FORM = {
     city: 'City',
     paymentMethod: 'Payment method',
     paymentOnline: 'Online payment',
+    delivery: 'Delivery',
     paymentManager: 'Payment with manager',
+    novaPoshta: '"Nova Poshta"(in Ukraine)',
+    ukrPoshta: '"Urk Poshta"(abroad)',
     receiverName: 'Receiver name',
     receiverEmail: 'Receiver email',
     yourName: 'Your name',
     yourEmail: 'Your email',
     giftMessage: 'Message (optional)',
     giftAmount: 'Enter any amount of the certificate',
+    warehouse: 'Warehouse',
   },
 };
 
@@ -65,6 +74,8 @@ export const FORMIK = {
       country: '',
       city: '',
       paymentMethod: '',
+      deliveryMethod: '',
+      warehouse: '',
       checkbox: false,
     },
     validationSchema: (locale: 'ru' | 'en') =>
@@ -86,6 +97,10 @@ export const FORMIK = {
         country: Yup.string().required(FORM[locale].required),
         city: Yup.string().required(FORM[locale].required),
         paymentMethod: Yup.string().required(FORM[locale].required),
+        warehouse: Yup.string().when('deliveryMethod', {
+          is: FORM[locale].novaPoshta,
+          then: Yup.string().required(FORM[locale].required),
+        }),
       }),
     types: {
       firstName: 'text',
@@ -95,6 +110,8 @@ export const FORMIK = {
       country: 'text',
       city: 'text',
       paymentMethod: 'select',
+      deliveryMethod: 'delivery',
+      warehouse: 'warehouse',
       checkbox: 'checkbox',
     },
     selectOptions: (locale: 'ru' | 'en') => ({
@@ -108,6 +125,8 @@ export const FORMIK = {
       country: FORM[locale].country,
       city: FORM[locale].city,
       paymentMethod: FORM[locale].paymentMethod,
+      deliveryMethod: FORM[locale].delivery,
+      warehouse: FORM[locale].warehouse,
     }),
   },
   goodsExclusive: {

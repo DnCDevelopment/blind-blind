@@ -98,8 +98,10 @@ const Shipping: React.FC = () => {
       email,
       phone,
       paymentMethod,
+      deliveryMethod,
       service,
       checkbox,
+      warehouse,
     } = values;
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
@@ -124,6 +126,8 @@ const Shipping: React.FC = () => {
         phone,
         items: cart,
         currency,
+        deliveryMethod,
+        warehouse,
       }),
     })
       .then((data) => data.json())
@@ -136,8 +140,8 @@ const Shipping: React.FC = () => {
             `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`,
             '__blank'
           );
-        clearCart();
         push('/thank-you');
+        clearCart();
       });
   };
 
@@ -148,7 +152,6 @@ const Shipping: React.FC = () => {
   useEffect(() => {
     setCurrencyTotalCheckout((totalCheckout / currencyRate).toFixed(2));
   }, [totalCheckout, currencyRate]);
-
   return (
     <div className="shipping container">
       <div className="shipping__order-summary">
@@ -234,6 +237,7 @@ const Shipping: React.FC = () => {
               initialValues:
                 !isServer && localStorage.getItem('shipping')
                   ? {
+                      ...FORMIK.shippingMain.values,
                       ...JSON.parse(localStorage.getItem('shipping') as string),
                     }
                   : FORMIK.shippingMain.values,
@@ -251,6 +255,11 @@ const Shipping: React.FC = () => {
             )}
             buttonTitle={TRANSLATE[locale as 'ru' | 'en'].continue}
             checkboxText={TRANSLATE[locale as 'ru' | 'en'].saveInfo}
+            optionField={{
+              dependFieldName: 'deliveryMethod',
+              dependFieldValue: FORM[locale as 'ru' | 'en'].novaPoshta,
+              fieldName: 'warehouse',
+            }}
           />
           <Link href="/cart">
             <div

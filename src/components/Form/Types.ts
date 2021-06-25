@@ -9,6 +9,11 @@ export interface IFormProps {
   masks?: { [key: string]: string };
   checkboxText?: string;
   buttonTitle: string;
+  optionField?: {
+    dependFieldName: string;
+    dependFieldValue: string;
+    fieldName: string;
+  };
 }
 
 export interface IDropdownProps {

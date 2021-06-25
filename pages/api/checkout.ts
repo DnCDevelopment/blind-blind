@@ -37,6 +37,8 @@ const sendEmail = async (
   city: string,
   phone: string,
   paymentType: string,
+  deliveryType: string,
+  warehouse: string,
   cart: ICart,
   totalSum: string,
   promoCode: string,
@@ -49,10 +51,14 @@ const sendEmail = async (
     Товары: ${getGoodsMessage(cart)} \n
     Сумма: ${totalSum} \n
     Промокод: ${promoCode || 'none'} \n
-    Скидка: ${promoCodeValues?.discount || 'none'}% \n
+    Скидка: ${
+      promoCodeValues?.discount ? promoCodeValues?.discount + '%' : 'none'
+    } \n
     Тип оплаты: ${paymentType} \n
     Cтрана доставки: ${country} \n
     Город доставки: ${city} \n
+    Тип доставки: ${deliveryType} \n
+    Отделение НП: ${warehouse || 'none'} \n
     Имя: ${name} \n
     Фамилия: ${surname} \n
     Телефон: ${phone.replace('+', '')} \n
@@ -92,6 +98,8 @@ const sendToBot = (
   city: string,
   phone: string,
   paymentType: string,
+  deliveryType: string,
+  warehouse: string,
   locale: string,
   currency: string,
   cart: ICart,
@@ -113,6 +121,8 @@ const sendToBot = (
     `Город: ${city}\n` +
     `Телефон: ${phone}\n` +
     `Тип оплаты: ${paymentType}\n` +
+    `Тип Доставки: ${deliveryType}\n` +
+    `Отделение НП: ${warehouse}\n` +
     `Язык: ${locale}\n` +
     `Cумма: ${totalSum}${currency}\n` +
     `Сертификаты: ${
@@ -135,11 +145,13 @@ const checkout: NextApiHandler = async (req, res) => {
     city,
     phone,
     paymentType,
+    deliveryMethod,
     locale,
     currency,
     items = [],
     totalSum,
     coupon,
+    warehouse,
   } = req.body;
   const check =
     locale &&
@@ -150,6 +162,7 @@ const checkout: NextApiHandler = async (req, res) => {
     city &&
     phone &&
     paymentType &&
+    deliveryMethod &&
     items.length &&
     currency &&
     totalSum;
@@ -225,6 +238,8 @@ const checkout: NextApiHandler = async (req, res) => {
     city,
     phone,
     paymentType,
+    deliveryMethod,
+    warehouse,
     locale,
     currency,
     cart,
@@ -239,6 +254,8 @@ const checkout: NextApiHandler = async (req, res) => {
     city,
     phone,
     paymentType,
+    deliveryMethod,
+    warehouse,
     cart,
     totalSum,
     coupon,
