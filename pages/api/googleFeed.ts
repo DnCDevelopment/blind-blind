@@ -8,9 +8,11 @@ import getMoySkladData from '../../src/utils/getMoySkladData';
 import { IMoySkladGoodData } from '../../src/moySkladTypes';
 import xml from 'xml';
 
-const priceFormat = new Intl.NumberFormat('ru-RU', {
+const priceFormat = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
+  style: 'decimal',
+  useGrouping: false,
 });
 
 const googleFeed: NextApiHandler = async (_req, res) => {
