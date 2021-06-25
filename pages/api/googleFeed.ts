@@ -22,6 +22,7 @@ const googleFeed: NextApiHandler = async (_req, res) => {
     goods.map(
       async (
         {
+          _id,
           title,
           title_en,
           description,
@@ -45,6 +46,7 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           : 'out_of_stock';
 
         const item_ru = [
+          { 'g:id': _id },
           { 'g:title': title },
           { 'g:description': description },
           { 'g:link': encodeURI(`${baseUrl}/goods${link}`) },
