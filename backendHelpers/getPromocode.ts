@@ -2,8 +2,6 @@ import { ICockpitPromocode } from '../src/cockpitTypes';
 import { getCockpitCollection } from '../src/utils/getCockpitData';
 
 const getPromocode = async (promocode: string) => {
-  const cockpitPromocodesall = await getCockpitCollection('Promocodes');
-  console.log(cockpitPromocodesall);
   const cockpitPromocodes = await getCockpitCollection(
     'Promocodes',
     'filter[code]=' + promocode

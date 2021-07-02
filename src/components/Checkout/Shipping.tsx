@@ -130,10 +130,22 @@ const Shipping: React.FC = () => {
         items: cart,
         currency,
         deliveryMethod,
-        warehouse,
-        street,
-        house,
-        flat,
+        warehouse:
+          deliveryMethod === FORM[locale as 'ru' | 'en'].novaPoshta
+            ? warehouse
+            : '',
+        street:
+          deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
+            ? street
+            : '',
+        house:
+          deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
+            ? house
+            : '',
+        flat:
+          deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
+            ? flat
+            : '',
       }),
     })
       .then((data) => data.json())

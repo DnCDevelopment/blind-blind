@@ -235,16 +235,18 @@ const Form: React.FC<IFormProps> = ({
     return InputField;
   }, [formik, placeholders, suffixes]);
 
-  const renderField = (key: string, idx: number) => (
-    <div key={idx} className="form-row">
-      {types[key] !== 'text' || !masks || (masks && !masks[key])
-        ? InputTypes[types[key]](key)
-        : InputTypes.maskedText(key)}
-      {formik.errors[key] && formik.touched[key] && (
-        <p className="error">{formik.errors[key]}</p>
-      )}
-    </div>
-  );
+  const renderField = (key: string, idx: number) => {
+    return (
+      <div key={idx} className="form-row">
+        {types[key] !== 'text' || !masks || (masks && !masks[key])
+          ? InputTypes[types[key]](key)
+          : InputTypes.maskedText(key)}
+        {formik.errors[key] && formik.touched[key] && (
+          <p className="error">{formik.errors[key]}</p>
+        )}
+      </div>
+    );
+  };
 
   const InputTypes: { [key: string]: (key: string) => void } = {
     text: inputText,
