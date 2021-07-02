@@ -102,6 +102,9 @@ const Shipping: React.FC = () => {
       service,
       checkbox,
       warehouse,
+      street,
+      house,
+      flat,
     } = values;
     if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
     else localStorage.removeItem('shipping');
@@ -128,6 +131,9 @@ const Shipping: React.FC = () => {
         currency,
         deliveryMethod,
         warehouse,
+        street,
+        house,
+        flat,
       }),
     })
       .then((data) => data.json())
@@ -255,11 +261,28 @@ const Shipping: React.FC = () => {
             )}
             buttonTitle={TRANSLATE[locale as 'ru' | 'en'].continue}
             checkboxText={TRANSLATE[locale as 'ru' | 'en'].saveInfo}
-            optionField={{
-              dependFieldName: 'deliveryMethod',
-              dependFieldValue: FORM[locale as 'ru' | 'en'].novaPoshta,
-              fieldName: 'warehouse',
-            }}
+            optionFields={[
+              {
+                dependFieldName: 'deliveryMethod',
+                dependFieldValue: FORM[locale as 'ru' | 'en'].novaPoshta,
+                fieldName: 'warehouse',
+              },
+              {
+                dependFieldName: 'deliveryMethod',
+                dependFieldValue: FORM[locale as 'ru' | 'en'].courierNovaPoshta,
+                fieldName: 'street',
+              },
+              {
+                dependFieldName: 'deliveryMethod',
+                dependFieldValue: FORM[locale as 'ru' | 'en'].courierNovaPoshta,
+                fieldName: 'house',
+              },
+              {
+                dependFieldName: 'deliveryMethod',
+                dependFieldValue: FORM[locale as 'ru' | 'en'].courierNovaPoshta,
+                fieldName: 'flat',
+              },
+            ]}
           />
           <Link href="/cart">
             <div

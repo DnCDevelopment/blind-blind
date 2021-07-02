@@ -39,6 +39,9 @@ const sendEmail = async (
   paymentType: string,
   deliveryType: string,
   warehouse: string,
+  street: string,
+  house: string,
+  flat: string,
   cart: ICart,
   totalSum: string,
   promoCode: string,
@@ -59,6 +62,9 @@ const sendEmail = async (
     Город доставки: ${city} \n
     Тип доставки: ${deliveryType} \n
     Отделение НП: ${warehouse || 'none'} \n
+    Улица: ${street || 'none'} \n,
+    Дом: ${house || 'none'} \n,
+    Квартира: ${flat || 'none'} \n,
     Имя: ${name} \n
     Фамилия: ${surname} \n
     Телефон: ${phone.replace('+', '')} \n
@@ -100,6 +106,9 @@ const sendToBot = (
   paymentType: string,
   deliveryType: string,
   warehouse: string,
+  street: string,
+  house: string,
+  flat: string,
   locale: string,
   currency: string,
   cart: ICart,
@@ -123,6 +132,9 @@ const sendToBot = (
     `Тип оплаты: ${paymentType}\n` +
     `Тип Доставки: ${deliveryType}\n` +
     `Отделение НП: ${warehouse}\n` +
+    `Улица: ${street}\n` +
+    `Дом: ${house}\n` +
+    `Квартира: ${flat}\n` +
     `Язык: ${locale}\n` +
     `Cумма: ${totalSum}${currency}\n` +
     `Сертификаты: ${
@@ -152,6 +164,9 @@ const checkout: NextApiHandler = async (req, res) => {
     totalSum,
     coupon,
     warehouse,
+    street,
+    house,
+    flat,
   } = req.body;
   const check =
     locale &&
@@ -240,6 +255,9 @@ const checkout: NextApiHandler = async (req, res) => {
     paymentType,
     deliveryMethod,
     warehouse,
+    street,
+    house,
+    flat,
     locale,
     currency,
     cart,
@@ -256,6 +274,9 @@ const checkout: NextApiHandler = async (req, res) => {
     paymentType,
     deliveryMethod,
     warehouse,
+    street,
+    house,
+    flat,
     cart,
     totalSum,
     coupon,

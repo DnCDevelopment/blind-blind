@@ -22,7 +22,7 @@ const Form: React.FC<IFormProps> = ({
   masks,
   checkboxText,
   buttonTitle,
-  optionField,
+  optionFields,
 }) => {
   const formik = useFormik(formikConfig);
   const { locale } = useRouter();
@@ -176,6 +176,7 @@ const Form: React.FC<IFormProps> = ({
           values={[
             FORM[locale as 'ru' | 'en'].novaPoshta,
             FORM[locale as 'ru' | 'en'].ukrPoshta,
+            FORM[locale as 'ru' | 'en'].courierNovaPoshta,
           ]}
           setValue={(item) => formik.setFieldValue(key, item)}
         />
@@ -236,7 +237,6 @@ const Form: React.FC<IFormProps> = ({
 
   const renderField = (key: string, idx: number) => (
     <div key={idx} className="form-row">
-      {/* {types[key] === optionField?.fieldName} */}
       {types[key] !== 'text' || !masks || (masks && !masks[key])
         ? InputTypes[types[key]](key)
         : InputTypes.maskedText(key)}
@@ -257,20 +257,25 @@ const Form: React.FC<IFormProps> = ({
     delivery: inputDelivery,
   };
 
+  const findOptionField = (key: string) =>
+    optionFields?.find(({ fieldName }) => key === fieldName);
+
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
       }}
     >
-      {Object.keys(formik.values).map(
-        (key, idx) =>
-          ((key === optionField?.fieldName &&
-            formik.values[optionField.dependFieldName] ===
-              optionField.dependFieldValue) ||
-            key !== optionField?.fieldName) &&
-          renderField(key, idx)
-      )}
+      {Object.keys(formik.values).map((key, idx) => {
+        const optionField = findOptionField(key);
+        if (
+          optionField?.dependFieldValue ===
+            formik.values[optionField?.dependFieldName as string] ||
+          !optionField
+        ) {
+          return renderField(key, idx);
+        }
+      })}
       <div className="button-container">
         <Button
           title={buttonTitle}
