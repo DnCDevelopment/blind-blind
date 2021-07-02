@@ -62,9 +62,9 @@ const sendEmail = async (
     Город доставки: ${city} \n
     Тип доставки: ${deliveryType} \n
     Отделение НП: ${warehouse || 'none'} \n
-    Улица: ${street || 'none'} \n,
-    Дом: ${house || 'none'} \n,
-    Квартира: ${flat || 'none'} \n,
+    Улица: ${street || 'none'} \n
+    Дом: ${house || 'none'} \n
+    Квартира: ${flat || 'none'} \n
     Имя: ${name} \n
     Фамилия: ${surname} \n
     Телефон: ${phone.replace('+', '')} \n
