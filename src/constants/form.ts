@@ -12,7 +12,7 @@ export const FORM = {
     lettersRequired: 'некорректный ввод',
     firstName: 'Имя',
     lastName: 'Фамилия',
-    email: 'Почта',
+    email: 'Электронная почта',
     phone: '+380000000',
     country: 'Страна',
     city: 'Город',
