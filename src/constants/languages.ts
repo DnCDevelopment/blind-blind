@@ -75,7 +75,7 @@ export const TRANSLATE = {
     goodsNotFound: ['Ваш поиск', 'не дал никаких результатов.'],
   },
   en: {
-    discountCode: 'Промокод',
+    discountCode: 'Promocode',
     underOrder: 'Information on the manufacture of a product to order',
     sizeUnderOrder: '(under the order)',
     store: 'Store',
