@@ -154,9 +154,8 @@ const Shipping: React.FC = () => {
           typeof window !== 'undefined' &&
           paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
         )
-          window.open(
-            `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`,
-            '__blank'
+          window.location.replace(
+            `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`
           );
         push('/thank-you');
         clearCart();
