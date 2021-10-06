@@ -115,7 +115,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
   const goodsData: ICockpitGoodsEntries = await getCockpitCollection(
     'Goods',
-    `filter[subCollection._id]=${curSubCollection._id}`
+    `filter[subCollection._id]=${curSubCollection._id}&sort[order]=-1`
   );
 
   const goods = goodsData.entries.filter(

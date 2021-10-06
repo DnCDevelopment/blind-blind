@@ -113,7 +113,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const cockpitGoodsData: ICockpitGoodsEntries = await getCockpitCollection(
     'Goods',
-    `filter[collection._id]=${curCollection._id}`
+    `filter[collection._id]=${curCollection._id}&sort[order]=-1`
   );
 
   const cockpitCategoriesData: ICockpitCategoriesEntries = await getCockpitCollection(
@@ -126,6 +126,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       title: locale === defaultLocale ? good.title : good.title_en,
     }))
     .filter(({ isVisible }) => isVisible !== false);
+  // .sort((a, b) => (a.order > b.order ? 1 : -1));
 
   const categories = cockpitCategoriesData.entries.map((category) => ({
     ...category,

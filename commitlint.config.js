@@ -29,7 +29,7 @@ module.exports = {
         'style',
         'test',
         'update',
-        'add',
+        'added',
       ],
     ],
   },
