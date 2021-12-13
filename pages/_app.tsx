@@ -162,9 +162,14 @@ const MyApp = ({
   }, [cartState, currency]);
 
   useEffect(() => {
-    if (currency.toString() === 'RUB') return setCurrencyRate(() => 1 / 3);
     getCurrencyRate(currency.toString())
-      .then((res) => setCurrencyRate(res))
+      .then((res) => {
+        if (currency.toString() === 'RUB') {
+          setCurrencyRate(() => 1 / 3);
+        } else {
+          setCurrencyRate(res);
+        }
+      })
       .catch((err) => console.error(err));
   }, [currency]);
 
