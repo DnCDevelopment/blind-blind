@@ -31,6 +31,8 @@ import { ECurrency } from '../src/context/Types';
 
 import ArrowSVG from '../src/assets/svg/arrow.svg';
 
+import '../styles/intlTelInput.css';
+
 const MyApp = ({
   Component,
   pageProps,
