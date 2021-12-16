@@ -29,10 +29,17 @@ const Form: React.FC<IFormProps> = ({
   const { locale } = useRouter();
   const phoneRef = useRef<HTMLInputElement>(null);
   const [mask, setMask] = useState();
-  const [phoneCode, setPhoneCode] = useState<string>();
 
   useEffect(() => {
-    setMask(intlTelInput(phoneRef.current!, { separateDialCode: true }));
+    if (formik.values.phone !== undefined) {
+      setMask(
+        intlTelInput(phoneRef.current!, {
+          separateDialCode: true,
+          initialCountry: 'ua',
+          preferredCountries: ['ua', 'ru', 'kz', 'us', 'il', 'ae', 'by'],
+        })
+      );
+    }
   }, [phoneRef]);
   useEffect(() => {
     formik.setValues(formikConfig.initialValues);
@@ -217,8 +224,8 @@ const Form: React.FC<IFormProps> = ({
             ref={phoneRef}
             value={formik.values[key]}
             onChange={(e) => {
-              if (e.target.value.length < 13) {
-                setPhoneCode(`${mask.selectedCountryData.dialCode}`);
+              if (e.target.value.length < 12 && e.target.value.match(/^\d+$/)) {
+                formik.handleChange(e);
               }
             }}
           />
@@ -277,7 +284,12 @@ const Form: React.FC<IFormProps> = ({
       <div className="button-container">
         <Button
           title={buttonTitle}
-          callback={() => formik.handleSubmit()}
+          callback={() => {
+            if (formik.values.phone !== undefined) {
+              formik.values.phone = `+${mask.selectedCountryData.dialCode}${formik.values.phone}`;
+            }
+            formik.handleSubmit();
+          }}
           type="button"
         />
       </div>
