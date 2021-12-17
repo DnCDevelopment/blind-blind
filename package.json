@@ -17,7 +17,6 @@
 		"@types/xml": "^1.0.5",
 		"formik": "^2.2.6",
 		"fuse.js": "^6.4.6",
-		"imask": "^6.2.2",
 		"intl-tel-input": "^17.0.15",
 		"next": "^10.0.2",
 		"next-fonts": "^1.5.1",
