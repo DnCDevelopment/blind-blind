@@ -1,7 +1,8 @@
-import { FocusEventHandler, useMemo, useEffect } from 'react';
+import { FocusEventHandler, useMemo, useEffect, useState, useRef } from 'react';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
 import InputMask from 'react-input-mask';
+import intlTelInput from 'intl-tel-input';
 import Fuse from 'fuse.js';
 
 import Button from '../Button/Button';
@@ -26,7 +27,20 @@ const Form: React.FC<IFormProps> = ({
 }) => {
   const formik = useFormik(formikConfig);
   const { locale } = useRouter();
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const [mask, setMask] = useState();
 
+  useEffect(() => {
+    if (formik.values.phone !== undefined) {
+      setMask(
+        intlTelInput(phoneRef.current!, {
+          separateDialCode: true,
+          initialCountry: 'ua',
+          preferredCountries: ['ua', 'ru', 'kz', 'us', 'il', 'ae', 'by'],
+        })
+      );
+    }
+  }, [phoneRef]);
   useEffect(() => {
     formik.setValues(formikConfig.initialValues);
   }, [formikConfig]);
@@ -202,31 +216,20 @@ const Form: React.FC<IFormProps> = ({
   const inputPhone = useMemo(() => {
     const InputField = (key: string) => (
       <div className="input-box">
-        <input
-          type="text"
-          id={key}
-          name={key}
-          value={formik.values[key]}
-          placeholder={placeholders[key]}
-          onChange={(e) => {
-            if (e.target.value.length < 1) {
-              e.target.value = formik.values[key] = '+';
-            }
-            formik.handleChange(e);
-          }}
-          onBlur={(e) => {
-            if (e.target.value.trim() === '+') {
-              e.target.value = formik.values[key] = '';
-            }
-            formik.handleBlur(e);
-          }}
-          onFocus={(e) => {
-            formik.touched[key] = undefined;
-            if (!formik.values[key].startsWith('+')) {
-              e.target.value = `+${formik.values[key]}`;
-            }
-          }}
-        />
+        <div className="phone-mask-container">
+          <input
+            type="text"
+            id={key}
+            name={key}
+            ref={phoneRef}
+            value={formik.values[key]}
+            onChange={(e) => {
+              if (e.target.value.length < 12 && e.target.value.match(/^\d+$/)) {
+                formik.handleChange(e);
+              }
+            }}
+          />
+        </div>
         {!!suffixes && suffixes[key] && (
           <span className="input-suffix">{suffixes[key]}</span>
         )}
@@ -281,7 +284,12 @@ const Form: React.FC<IFormProps> = ({
       <div className="button-container">
         <Button
           title={buttonTitle}
-          callback={() => formik.handleSubmit()}
+          callback={() => {
+            if (formik.values.phone !== undefined) {
+              formik.values.phone = `+${mask.selectedCountryData.dialCode}${formik.values.phone}`;
+            }
+            formik.handleSubmit();
+          }}
           type="button"
         />
       </div>
