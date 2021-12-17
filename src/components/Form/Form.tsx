@@ -28,7 +28,7 @@ const Form: React.FC<IFormProps> = ({
   const formik = useFormik(formikConfig);
   const { locale } = useRouter();
   const phoneRef = useRef<HTMLInputElement>(null);
-  const [mask, setMask] = useState();
+  const [mask, setMask] = useState<intlTelInput.Plugin>();
 
   useEffect(() => {
     if (formik.values.phone !== undefined) {
@@ -286,7 +286,9 @@ const Form: React.FC<IFormProps> = ({
           title={buttonTitle}
           callback={() => {
             if (formik.values.phone !== undefined) {
-              formik.values.phone = `+${mask.selectedCountryData.dialCode}${formik.values.phone}`;
+              formik.values.phone = `+${
+                (mask as any).selectedCountryData.dialCode
+              }${formik.values.phone}`;
             }
             formik.handleSubmit();
           }}
