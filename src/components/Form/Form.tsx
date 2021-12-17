@@ -287,7 +287,7 @@ const Form: React.FC<IFormProps> = ({
           callback={() => {
             if (formik.values.phone !== undefined) {
               formik.values.phone = `+${
-                (mask as any).selectedCountryData.dialCode
+                mask!.getSelectedCountryData().dialCode
               }${formik.values.phone}`;
             }
             formik.handleSubmit();
