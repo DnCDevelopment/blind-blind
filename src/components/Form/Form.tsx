@@ -224,7 +224,7 @@ const Form: React.FC<IFormProps> = ({
             ref={phoneRef}
             value={formik.values[key]}
             onChange={(e) => {
-              if (e.target.value.length < 12 && e.target.value.match(/^\d+$/)) {
+              if (e.target.value.length < 11 && e.target.value.match(/^\d+$/)) {
                 formik.handleChange(e);
               }
             }}
@@ -285,12 +285,13 @@ const Form: React.FC<IFormProps> = ({
         <Button
           title={buttonTitle}
           callback={() => {
-            if (formik.values.phone !== undefined) {
+            if (formik.values.phone === undefined) return formik.handleSubmit();
+            if (formik.values.phone.length > 8) {
               formik.values.phone = `+${
                 mask!.getSelectedCountryData().dialCode
               }${formik.values.phone}`;
+              formik.handleSubmit();
             }
-            formik.handleSubmit();
           }}
           type="button"
         />
