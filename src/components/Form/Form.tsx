@@ -239,6 +239,28 @@ const Form: React.FC<IFormProps> = ({
     return InputField;
   }, [formik, placeholders, suffixes]);
 
+  const inputDate = useMemo(() => {
+    const InputField = (key: string) => (
+      <div className="input-date">
+        <input
+          type="text"
+          id={key}
+          name={key}
+          value={formik.values[key]}
+          placeholder={placeholders[key]}
+          onChange={formik.handleChange}
+          onFocus={(e) => {
+            e.currentTarget.type = 'date';
+          }}
+          onBlur={(e) => {
+            e.currentTarget.type = 'text';
+          }}
+        />
+      </div>
+    );
+    return InputField;
+  }, [formik, placeholders, selectOptions]);
+
   const renderField = (key: string, idx: number) => {
     return (
       <div key={idx} className="form-row">
@@ -261,6 +283,7 @@ const Form: React.FC<IFormProps> = ({
     textArea: inputTextArea,
     warehouse: inputWarehouse,
     delivery: inputDelivery,
+    date: inputDate,
   };
 
   const findOptionField = (key: string) =>
@@ -282,17 +305,20 @@ const Form: React.FC<IFormProps> = ({
           return renderField(key, idx);
         }
       })}
-      <div className="button-container">
+      <div className={'button-container'}>
         <Button
           title={buttonTitle}
           callback={() => {
             if (formik.values.phone === undefined) return formik.handleSubmit();
-            if (formik.values.phone.length > 8) {
+            if (
+              formik.values.phone.length > 8 &&
+              formik.values.phone.length < 11
+            ) {
               formik.values.phone = `+${
                 mask!.getSelectedCountryData().dialCode
               }${formik.values.phone}`;
-              formik.handleSubmit();
             }
+            if (formik.values.phone.length < 15) formik.handleSubmit();
           }}
           type="button"
         />

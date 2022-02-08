@@ -10,6 +10,7 @@ import {
 } from '../src/components/Cart/Types';
 import Header from '../src/components/Header/Header';
 import Footer from '../src/components/Footer/Footer';
+import ModalWindowStart from '../src/components/ModalWindowStart/ModalWindowStart';
 
 import { cartContext } from '../src/context/cartContext';
 import { indexContext } from '../src/context/cockpitContext';
@@ -200,6 +201,7 @@ const MyApp = ({
           }}
         >
           <Header />
+          <ModalWindowStart />
           <NextNprogress
             color="#000"
             startPosition={0.3}

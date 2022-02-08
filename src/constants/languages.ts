@@ -73,6 +73,8 @@ export const TRANSLATE = {
     continueShopping: ['Нажите', 'здесь', 'чтобы продолжить покупки.'],
     thanksForOrderTitle: 'Спасибо за ваш заказ',
     goodsNotFound: ['Ваш поиск', 'не дал никаких результатов.'],
+    modalWindowStartText: 'Подписывайтесь и получайте уникальные предложения',
+    subscribe: 'Подписаться',
   },
   en: {
     discountCode: 'Promocode',
@@ -133,5 +135,7 @@ export const TRANSLATE = {
     continueShopping: ['Click', 'here', 'to continue shopping.'],
     thanksForOrderTitle: 'Thank you for your order.',
     goodsNotFound: ['Your search for', 'did not yield any results.'],
+    modalWindowStartText: 'Subscribe and receive unique offers',
+    subscribe: 'Subscribe',
   },
 };

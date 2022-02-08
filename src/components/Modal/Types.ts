@@ -1,3 +1,3 @@
 export interface IModalProps {
-  close: () => void;
+  close?: () => void;
 }
