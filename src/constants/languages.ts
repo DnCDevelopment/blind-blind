@@ -51,7 +51,7 @@ export const TRANSLATE = {
     returnToCart: 'Вернуться к корзине',
     showOrderSummary: 'Показать детали заказа',
     hideOrderSummary: 'Скрыть детали заказа',
-    sizeTable: 'Таблицы размеров',
+    sizeTable: 'Таблица размеров',
     deliveryInfo: 'Информация о доставке',
     returnAndExchange: 'Возврат и обмен',
     contacts: 'Контакты',

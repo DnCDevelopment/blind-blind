@@ -6,6 +6,7 @@ import { FormikValues } from 'formik';
 import Form from '../Form/Form';
 import PriceLabel from './PriceLabel';
 import ZoomImage from './ZoomImage';
+import SizeTableIcon from '../../assets/svg/size-table.svg';
 
 import { cartContext } from '../../context/cartContext';
 
@@ -164,6 +165,14 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
           ))}
         </div>
         <p className="description">{description}</p>
+        <div className="size-button-container">
+          <Link href={'/table-razmer'}>
+            <div className="size-button">
+              {TRANSLATE[locale as 'ru' | 'en'].sizeTable}
+            </div>
+          </Link>
+          <SizeTableIcon />
+        </div>
         <Link href={'/collections' + collectionLink}>
           <div className="back-to-collection">
             <div className="arrow" />
