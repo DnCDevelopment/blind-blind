@@ -24,7 +24,7 @@ const ModalWindowStart: React.FC = () => {
       const startTimeout = () => {
         return setTimeout(() => {
           handleShowModal();
-        }, 1000);
+        }, 10000);
       };
       const timeout = startTimeout();
 

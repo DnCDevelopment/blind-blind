@@ -8,3 +8,19 @@ export interface IOrderSummaryListItemProps {
   photo?: string;
   receiverName?: string;
 }
+
+type deliveryChangeHandler = (deliveryMethod: string) => void;
+
+export interface IShippingProps {
+  deliveryCost: number;
+  setCost: deliveryChangeHandler;
+}
+export interface IShippingMainFormProps {
+  confirmCheckout: (values: FormikValues) => void;
+  deliveryChangeHandler: deliveryChangeHandler;
+}
+
+export interface IOrderSummaryListProps {
+  currencyTotalCheckout: string;
+  checkDiscountCode: (enteredCode: string) => void;
+}

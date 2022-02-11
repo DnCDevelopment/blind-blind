@@ -24,11 +24,22 @@ const Form: React.FC<IFormProps> = ({
   checkboxText,
   buttonTitle,
   optionFields,
+  deliveryChangeHandler,
 }) => {
   const formik = useFormik(formikConfig);
   const { locale } = useRouter();
   const phoneRef = useRef<HTMLInputElement>(null);
   const [mask, setMask] = useState<intlTelInput.Plugin>();
+
+  // useEffect(() => {
+  //   if (deliveryChangeHandler)
+  //     deliveryChangeHandler(formik.values.deliveryMethod);
+
+  //   console.log(formik.values);
+  // });
+  // useEffect(() => {
+  //   console.log(formik.values);
+  // });
 
   useEffect(() => {
     if (formik.values.phone !== undefined) {
@@ -192,7 +203,10 @@ const Form: React.FC<IFormProps> = ({
             FORM[locale as 'ru' | 'en'].ukrPoshta,
             FORM[locale as 'ru' | 'en'].courierNovaPoshta,
           ]}
-          setValue={(item) => formik.setFieldValue(key, item)}
+          setValue={(item) => {
+            formik.setFieldValue(key, item);
+            if (deliveryChangeHandler) deliveryChangeHandler(item);
+          }}
         />
       </div>
     );

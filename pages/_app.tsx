@@ -84,7 +84,7 @@ const MyApp = ({
 
     const scrollHandler = () => {
       typeof window !== 'undefined' &&
-        changeArrowVisability(() => window.scrollY > 0);
+        changeArrowVisability(() => window.scrollY > 500);
     };
 
     typeof window !== 'undefined' &&

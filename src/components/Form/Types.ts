@@ -14,6 +14,8 @@ export interface IFormProps {
     dependFieldValue: string;
     fieldName: string;
   }[];
+  deliveryChangeHandler?: (deliveryMethod: string) => void;
+  // innerRef?: Ref<FormikProps<FormikValues>> | undefined;
 }
 
 export interface IDropdownProps {

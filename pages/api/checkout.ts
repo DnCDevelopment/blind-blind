@@ -38,6 +38,7 @@ const sendEmail = async (
   phone: string,
   paymentType: string,
   deliveryType: string,
+  deliveryCost: string,
   warehouse: string,
   street: string,
   house: string,
@@ -61,6 +62,7 @@ const sendEmail = async (
     Cтрана доставки: ${country} \n
     Город доставки: ${city} \n
     Тип доставки: ${deliveryType} \n
+    Стоимость Доставки: ${deliveryCost} \n
     Отделение НП: ${warehouse || 'none'} \n
     Улица: ${street || 'none'} \n
     Дом: ${house || 'none'} \n
@@ -112,7 +114,8 @@ const sendToBot = (
   locale: string,
   currency: string,
   cart: ICart,
-  totalSum: string
+  totalSum: string,
+  deliveryCost: string
 ) => {
   const certeficatesMessage = cart.certeficatePrice.reduce(
     (acc, price, index) =>
@@ -131,6 +134,7 @@ const sendToBot = (
     `Телефон: ${phone}\n` +
     `Тип оплаты: ${paymentType}\n` +
     `Тип Доставки: ${deliveryType}\n` +
+    `Стоимость Доставки: ${deliveryCost}\n` +
     `Отделение НП: ${warehouse}\n` +
     `Улица: ${street}\n` +
     `Дом: ${house}\n` +
@@ -167,6 +171,7 @@ const checkout: NextApiHandler = async (req, res) => {
     street,
     house,
     flat,
+    deliveryCost,
   } = req.body;
   const check =
     locale &&
@@ -180,6 +185,7 @@ const checkout: NextApiHandler = async (req, res) => {
     deliveryMethod &&
     items.length &&
     currency &&
+    deliveryCost &&
     totalSum;
   if (!check) return res.status(400).send({ message: 'Bad Request' });
 
@@ -261,7 +267,8 @@ const checkout: NextApiHandler = async (req, res) => {
     locale,
     currency,
     cart,
-    totalSum
+    totalSum,
+    deliveryCost
   );
 
   await sendEmail(
@@ -273,6 +280,7 @@ const checkout: NextApiHandler = async (req, res) => {
     phone,
     paymentType,
     deliveryMethod,
+    deliveryCost,
     warehouse,
     street,
     house,
