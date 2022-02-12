@@ -15,22 +15,26 @@ const ModalWindowStart: React.FC = () => {
   const { locale } = useRouter();
   const handleShowModal = () => {
     setModalOpen(!modalOpen);
-    setWasModalOpened(true);
+    localStorage.setItem('wasModalOpened', 'true');
     document.body.classList.toggle('hide-overflow');
   };
+
+  useEffect(() => {
+    if (localStorage.getItem('wasModalOpened')) setWasModalOpened(true);
+  }, []);
 
   useEffect(() => {
     if (!wasModalOpened) {
       const startTimeout = () => {
         return setTimeout(() => {
           handleShowModal();
-        }, 10000);
+        }, 1000);
       };
       const timeout = startTimeout();
 
       return () => clearTimeout(timeout);
     }
-  });
+  }, [wasModalOpened]);
 
   return (
     <>
