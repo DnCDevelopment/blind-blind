@@ -17,8 +17,8 @@
 }
 
 .iti input,
-.iti input[type=text],
-.iti input[type=tel] {
+.iti input[type='text'],
+.iti input[type='tel'] {
   position: relative;
   z-index: 0;
   margin-top: 0 !important;
@@ -69,7 +69,7 @@
   text-align: left;
   list-style: none;
   background-color: white;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
   -webkit-overflow-scrolling: touch;
 }
@@ -93,7 +93,7 @@
 .iti__divider {
   margin-bottom: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
 }
 
 .iti__country {
@@ -121,11 +121,11 @@
 }
 
 .iti--allow-dropdown input,
-.iti--allow-dropdown input[type=text],
-.iti--allow-dropdown input[type=tel],
+.iti--allow-dropdown input[type='text'],
+.iti--allow-dropdown input[type='tel'],
 .iti--separate-dial-code input,
-.iti--separate-dial-code input[type=text],
-.iti--separate-dial-code input[type=tel] {
+.iti--separate-dial-code input[type='text'],
+.iti--separate-dial-code input[type='tel'] {
   margin-left: 0;
   padding-right: 6px;
   padding-left: 52px;
@@ -145,13 +145,19 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-.iti--allow-dropdown input[disabled]+.iti__flag-container:hover,
-.iti--allow-dropdown input[readonly]+.iti__flag-container:hover {
+.iti--allow-dropdown input[disabled] + .iti__flag-container:hover,
+.iti--allow-dropdown input[readonly] + .iti__flag-container:hover {
   cursor: default;
 }
 
-.iti--allow-dropdown input[disabled]+.iti__flag-container:hover .iti__selected-flag,
-.iti--allow-dropdown input[readonly]+.iti__flag-container:hover .iti__selected-flag {
+.iti--allow-dropdown
+  input[disabled]
+  + .iti__flag-container:hover
+  .iti__selected-flag,
+.iti--allow-dropdown
+  input[readonly]
+  + .iti__flag-container:hover
+  .iti__selected-flag {
   background-color: transparent;
 }
 
@@ -217,8 +223,7 @@
   width: 15px;
 }
 
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {
     background-size: 5652px 15px;
   }
@@ -1516,17 +1521,16 @@
 
 .iti__flag {
   height: 15px;
-  background-color: #DBDBDB;
-  background-image: url("./img/flags.png");
+  background-color: var(--light-grey-color);
+  background-image: url('./img/flags.png');
   background-repeat: no-repeat;
   background-position: 20px 0;
   box-shadow: 0px 0px 1px 0px #888;
 }
 
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {
-    background-image: url("./img/flags@2x.png");
+    background-image: url('./img/flags@2x.png');
   }
 }
 

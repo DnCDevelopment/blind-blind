@@ -22,5 +22,5 @@ export interface IDropdownProps {
   value: string;
   placeholder?: string;
   values: string[];
-  setValue: (item: string) => void;
+  setValue: (item: string, key?: string) => void;
 }

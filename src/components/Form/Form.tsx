@@ -31,16 +31,6 @@ const Form: React.FC<IFormProps> = ({
   const phoneRef = useRef<HTMLInputElement>(null);
   const [mask, setMask] = useState<intlTelInput.Plugin>();
 
-  // useEffect(() => {
-  //   if (deliveryChangeHandler)
-  //     deliveryChangeHandler(formik.values.deliveryMethod);
-
-  //   console.log(formik.values);
-  // });
-  // useEffect(() => {
-  //   console.log(formik.values);
-  // });
-
   useEffect(() => {
     if (formik.values.phone !== undefined) {
       setMask(
@@ -193,6 +183,10 @@ const Form: React.FC<IFormProps> = ({
   }, [formik, checkboxText]);
 
   const inputDelivery = useMemo(() => {
+    const deliverySetValue = (item: string, key?: string) => {
+      formik.setFieldValue(item, key);
+      if (deliveryChangeHandler) deliveryChangeHandler(item);
+    };
     const InputField = (key: string) => (
       <div className="input-select">
         <Dropdown
@@ -203,10 +197,7 @@ const Form: React.FC<IFormProps> = ({
             FORM[locale as 'ru' | 'en'].ukrPoshta,
             FORM[locale as 'ru' | 'en'].courierNovaPoshta,
           ]}
-          setValue={(item) => {
-            formik.setFieldValue(key, item);
-            if (deliveryChangeHandler) deliveryChangeHandler(item);
-          }}
+          setValue={deliverySetValue}
         />
       </div>
     );

@@ -3,7 +3,7 @@ import { Telegram } from 'telegraf';
 import { IBotUser } from '../../src/cockpitTypes';
 
 const bot = new Telegram(process.env.NEXT_PUBLIC_TELEGRAM_KEY as string);
-const sendToBot = (
+const sendToBot = async (
   users: IBotUser[],
   firstName: string,
   email: string,
@@ -15,9 +15,9 @@ const sendToBot = (
     `Почта: ${email}\n` +
     `Телефон: ${phone}\n` +
     `Дата Рождения: ${dob}\n`;
-  users.forEach(({ chatId }) => {
-    bot.sendMessage(+chatId, message);
-  });
+  const messages = users.map(({ chatId }) => bot.sendMessage(+chatId, message));
+
+  await Promise.allSettled(messages).catch((res) => console.log(res));
 };
 
 const subscription: NextApiHandler = async (req, res) => {
