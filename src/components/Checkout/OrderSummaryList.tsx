@@ -57,7 +57,14 @@ const OrderSummaryList: React.FC<IOrderSummaryListProps> = ({
         }`}
       >
         {cart.map((props, idx) =>
-          'title' in props ? (
+          'receiverName' in props ? (
+            <OrderSummaryListItem
+              key={idx}
+              price={props.price}
+              amount={props.amount}
+              receiverName={props.receiverName}
+            />
+          ) : (
             <OrderSummaryListItem
               key={idx}
               price={props.price}
@@ -65,13 +72,6 @@ const OrderSummaryList: React.FC<IOrderSummaryListProps> = ({
               title={props.title}
               photo={props.photo}
               details={props.details}
-            />
-          ) : (
-            <OrderSummaryListItem
-              key={idx}
-              price={props.price}
-              amount={props.amount}
-              receiverName={props.receiverName}
             />
           )
         )}

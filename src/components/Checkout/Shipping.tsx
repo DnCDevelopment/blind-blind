@@ -113,9 +113,6 @@ const Shipping: React.FC = () => {
   const deliveryChangeHandler = (item: string) => {
     setDeliveryType(item);
   };
-  useEffect(() => {
-    console.log(deliveryCost);
-  });
 
   useEffect(() => {
     sendShippingEvent('InitiateCheckout');
@@ -127,6 +124,7 @@ const Shipping: React.FC = () => {
 
   useEffect(() => {
     console.log(totalCheckout);
+    console.log(cart);
 
     setCurrencyTotalCheckout(
       ((totalCheckout + deliveryCost) / currencyRate).toFixed(2)
@@ -174,8 +172,29 @@ const Shipping: React.FC = () => {
           })
         );
       else localStorage.removeItem('shipping');
+      const transaction_id = 'purchase' + Math.random().toString(10).substr(2);
+      gtag('event', 'purchase', {
+        transaction_id,
+        affiliation: 'Blind',
+        value: currencyTotalCheckout,
+        currency,
+        tax: 0,
+        shipping: deliveryCost,
+        items: cart.map((item, index) => {
+          return {
+            id: item.id,
+            name: item.title,
+            list_name: 'Goods',
+            brand: 'BLIND',
+            category: item.collectionTitle,
+            variant: item.details,
+            list_position: index + 1,
+            quantity: item.amount,
+            price: item.price,
+          };
+        }),
+      });
       const currentLocale = locale;
-
       const url = 'api/checkout';
       fetch(url, {
         method: 'POST',

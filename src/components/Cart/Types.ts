@@ -11,17 +11,15 @@ export interface ICartGoodsItemProps extends ICartGoodsItemDetailsProps {
   photo: string;
   price: string;
   amount: number;
+  collectionTitle: string;
   removeSelf?: () => void;
 }
 
-export interface ICartVoucherItemProps {
-  id?: string;
+export interface ICartVoucherItemProps extends ICartGoodsItemProps {
   receiverName: string;
   receiverEmail: string;
   yourName: string;
   yourEmail: string;
   message?: string;
-  amount: number;
-  price: string;
   removeSelf?: () => void;
 }

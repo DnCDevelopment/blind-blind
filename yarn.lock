@@ -507,6 +507,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/gtag.js@^0.0.8":
+  "integrity" "sha512-xKDygydxruSUNkVbZWjiEbMijz9+xZCLb2yiTiQT88pm5EhIAUhaCo05IZF1HcQc90u4W7cp+7OZNpcJxpyL5g=="
+  "resolved" "https://registry.npmjs.org/@types/gtag.js/-/gtag.js-0.0.8.tgz"
+  "version" "0.0.8"
+
 "@types/intl-tel-input@^17.0.4":
   "integrity" "sha512-AIX0Azxs7fAkeI2wjAsMNE4Lfoa+/NqazWDPM4k4Vm8lhcId0BNMjzC/BACEGE0nAScc71+pznlKnTxBfW5HHA=="
   "resolved" "https://registry.npmjs.org/@types/intl-tel-input/-/intl-tel-input-17.0.4.tgz"

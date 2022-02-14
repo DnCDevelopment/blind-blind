@@ -17,7 +17,7 @@ const sendToBot = async (
     `Дата Рождения: ${dob}\n`;
   const messages = users.map(({ chatId }) => bot.sendMessage(+chatId, message));
 
-  await Promise.allSettled(messages).catch((res) => console.log(res));
+  await Promise.allSettled(messages).catch((err) => console.log(err));
 };
 
 const subscription: NextApiHandler = async (req, res) => {

@@ -24,31 +24,29 @@ const Voucher: React.FC = () => {
     yourEmail,
     message,
     price,
+    link,
+    photo,
+    details,
   }: ICartVoucherItemProps) => {
     const id = 'voucher' + Math.random().toString(10).substr(2);
-
+    const voucherCart = {
+      id,
+      receiverName,
+      receiverEmail,
+      yourName,
+      yourEmail,
+      message,
+      price,
+      amount: 1,
+      collectionTitle: 'vouchers',
+      title: `voucher-${price}`,
+      link,
+      photo,
+      details,
+    };
     if (!curCartContext.cart.filter((item) => item.id === id).length)
-      curCartContext.addItem({
-        id,
-        receiverName,
-        receiverEmail,
-        yourName,
-        yourEmail,
-        message,
-        price,
-        amount: 1,
-      });
-    else
-      addToCart({
-        id,
-        receiverName,
-        receiverEmail,
-        yourName,
-        yourEmail,
-        message,
-        price,
-        amount: 1,
-      });
+      curCartContext.addItem(voucherCart);
+    else addToCart(voucherCart);
     router.push('/cart');
   };
 

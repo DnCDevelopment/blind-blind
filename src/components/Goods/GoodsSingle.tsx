@@ -31,6 +31,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
   materials,
   isExclusive,
   collectionLink,
+  collectionTitle,
 }) => {
   const router = useRouter();
   const { locale } = router;
@@ -51,6 +52,7 @@ const GoodsSingle: React.FC<IGoodsSingleProps> = ({
       photo,
       details: details,
       amount: 1,
+      collectionTitle,
     });
 
     if (typeof window !== 'undefined') {

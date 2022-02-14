@@ -183,10 +183,10 @@ const Form: React.FC<IFormProps> = ({
   }, [formik, checkboxText]);
 
   const inputDelivery = useMemo(() => {
-    const deliverySetValue = (item: string, key?: string) => {
-      formik.setFieldValue(item, key);
+    function deliverySetValue(item: string, key: string) {
+      formik.setFieldValue(key, item);
       if (deliveryChangeHandler) deliveryChangeHandler(item);
-    };
+    }
     const InputField = (key: string) => (
       <div className="input-select">
         <Dropdown
@@ -197,7 +197,7 @@ const Form: React.FC<IFormProps> = ({
             FORM[locale as 'ru' | 'en'].ukrPoshta,
             FORM[locale as 'ru' | 'en'].courierNovaPoshta,
           ]}
-          setValue={deliverySetValue}
+          setValue={(item) => deliverySetValue(item, key)}
         />
       </div>
     );

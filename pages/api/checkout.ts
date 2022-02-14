@@ -97,7 +97,7 @@ const sendEmail = async (
     }
   });
 };
-const sendToBot = (
+const sendToBot = async (
   users: IBotUser[],
   name: string,
   surname: string,
@@ -145,10 +145,9 @@ const sendToBot = (
       cart.certeficatePrice.length ? certeficatesMessage : ''
     }\n` +
     `Товары: ${cart.goods.length ? goodsMessage : ''}\n`;
+  const messages = users.map(({ chatId }) => bot.sendMessage(+chatId, message));
 
-  users.forEach(({ chatId }) => {
-    bot.sendMessage(+chatId, message);
-  });
+  await Promise.allSettled(messages).catch((err) => console.log(err));
 };
 
 const checkout: NextApiHandler = async (req, res) => {
