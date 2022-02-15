@@ -2,9 +2,16 @@
   &__title {
     width: fit-content;
     margin: 30px auto;
+    padding-left: 8px;
     font-weight: var(--font-weight-400);
-    font-size: var(--font-20);
+    font-size: var(--font-28);
+    text-transform: uppercase;
+    border-left: 0.5px solid var(--black-color);
     cursor: pointer;
+    span {
+      font-weight: var(--font-weight-700);
+      font-size: var(--font-28);
+    }
   }
 
   &__container {

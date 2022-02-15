@@ -10,12 +10,12 @@ import {
 } from '../src/components/Cart/Types';
 import Header from '../src/components/Header/Header';
 import Footer from '../src/components/Footer/Footer';
+import ModalWindowStart from '../src/components/ModalWindowStart/ModalWindowStart';
+import ArrowUp from '../src/components/ArrowUp/ArrowUp';
 
 import { cartContext } from '../src/context/cartContext';
 import { indexContext } from '../src/context/cockpitContext';
 import { currencyContext } from '../src/context/currencyContext';
-import { UTM_TAGS } from '../src/constants/utmTags';
-
 import {
   ICockpitCollectionsRaw,
   ICockpitGoodsRaw,
@@ -29,8 +29,6 @@ import { getCurrencyRate } from '../src/utils/getCurrencyRate';
 import '../styles/main.scss';
 import { ECurrency } from '../src/context/Types';
 
-import ArrowSVG from '../src/assets/svg/arrow.svg';
-
 import '../styles/intlTelInput.css';
 
 const MyApp = ({
@@ -43,7 +41,6 @@ const MyApp = ({
   const [cartState, setCartState] = useState(
     curCartContext ? curCartContext.cart : []
   );
-  const [isArrowVisible, changeArrowVisability] = useState(false);
 
   const [USDRate, changeUSDRate] = useState<number>(0);
 
@@ -52,54 +49,12 @@ const MyApp = ({
   );
   const [currencyRate, setCurrencyRate] = useState(0);
 
-  const handleScrollTop = () =>
-    typeof window !== 'undefined' &&
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      UTM_TAGS.forEach((tag) => {
-        const value = urlParams.get(tag);
-        if (value) {
-          document.cookie = `${tag}=${value}; path=/;`;
-        }
-      });
-
-      navigator.geolocation.getCurrentPosition((position) => {
-        const {
-          coords: { latitude, longitude },
-        } = position;
-        fetch(
-          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-        )
-          .then((res) => res.json())
-          .then((result) => {
-            document.cookie = `user_geo=${result.countryName}, ${result.city}; path=/;`;
-          })
-          .catch(console.error);
-      });
-    }
-
-    const scrollHandler = () => {
-      typeof window !== 'undefined' &&
-        changeArrowVisability(() => window.scrollY > 0);
-    };
-
-    typeof window !== 'undefined' &&
-      window.addEventListener('scroll', scrollHandler, { passive: true });
-    return () => {
-      typeof window !== 'undefined' &&
-        window.removeEventListener('scroll', scrollHandler);
-    };
-  }, []);
-
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
-    if ('details' in item) {
+    if (!('receiverName' in item)) {
       const existingItem = cartState.filter(
         (el) =>
           el.id === item.id &&
-          'details' in el &&
+          !('receiverName' in el) &&
           JSON.stringify(el.details) === JSON.stringify(item.details)
       );
 
@@ -123,7 +78,7 @@ const MyApp = ({
   const removeItemFromCart = (
     item: ICartGoodsItemProps | ICartVoucherItemProps
   ) => {
-    if ('details' in item)
+    if (!('receiverName' in item))
       setCartState([
         ...cartState.filter(
           (el) =>
@@ -200,6 +155,7 @@ const MyApp = ({
           }}
         >
           <Header />
+          <ModalWindowStart />
           <NextNprogress
             color="#000"
             startPosition={0.3}
@@ -209,12 +165,7 @@ const MyApp = ({
           <main>
             <Component {...pageProps} />
           </main>
-          <button
-            className={`arrow-up ${isArrowVisible ? 'arrow-up-visible' : ''}`}
-            onClick={handleScrollTop}
-          >
-            <ArrowSVG />
-          </button>
+          <ArrowUp />
           <Footer />
         </cartContext.Provider>
       </currencyContext.Provider>

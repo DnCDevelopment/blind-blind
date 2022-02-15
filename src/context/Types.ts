@@ -35,3 +35,9 @@ export interface ICurrencyContext {
   setCurrency: Dispatch<SetStateAction<ECurrency>>;
   USDRate: number;
 }
+
+export interface ICheckoutContext {
+  deliveryType: string;
+  deliveryCost: number;
+  currencyTotalCheckout: string;
+}

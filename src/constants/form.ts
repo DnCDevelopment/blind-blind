@@ -13,7 +13,7 @@ export const FORM = {
     firstName: 'Имя',
     lastName: 'Фамилия',
     email: 'Электронная почта',
-    phone: '+380000000',
+    phone: '000000000',
     country: 'Страна',
     city: 'Город',
     street: 'Улица',
@@ -33,6 +33,7 @@ export const FORM = {
     giftMessage: 'Сообщение (необязательно)',
     giftAmount: 'Введите любую сумму сертификата',
     warehouse: 'Отделение',
+    dob: 'Дата рождения',
   },
   en: {
     cm: 'cm',
@@ -44,7 +45,7 @@ export const FORM = {
     firstName: 'First name',
     lastName: 'Last name',
     email: 'Email',
-    phone: '+380000000',
+    phone: '000000000',
     country: 'Country',
     city: 'City',
     street: 'Street',
@@ -64,6 +65,7 @@ export const FORM = {
     giftMessage: 'Message (optional)',
     giftAmount: 'Enter any amount of the certificate',
     warehouse: 'Warehouse',
+    dob: 'Date of birth',
   },
 };
 
@@ -216,6 +218,41 @@ export const FORMIK = {
     types: { phone: 'phone' },
     placeholders: (locale: 'ru' | 'en') => ({
       phone: FORM[locale].phone,
+    }),
+  },
+  modalStartForm: {
+    values: {
+      firstName: '',
+      email: '',
+      phone: '',
+      dob: '',
+    },
+    validationSchema: (locale: 'ru' | 'en') =>
+      Yup.object({
+        firstName: Yup.string()
+          .matches(/^[ a-zA-Zа-яА-Я]+$/, FORM[locale].lettersRequired)
+          .typeError(FORM[locale].wrongInput)
+          .required(FORM[locale].required),
+        email: Yup.string().email().required(FORM[locale].required),
+        phone: Yup.string()
+          .required(FORM[locale].required)
+          .min(11, FORM[locale].wrongInput)
+          .max(15, FORM[locale].wrongInput)
+          .typeError(FORM[locale].wrongInput),
+        dob: Yup.date()
+          .required(FORM[locale].required)
+          .test('dob', FORM[locale].wrongInput, (value) => {
+            return value
+              ? new Date().getFullYear() - value?.getFullYear() >= 10
+              : false;
+          }),
+      }),
+    types: { firstName: 'text', email: 'text', phone: 'phone', dob: 'date' },
+    placeholders: (locale: 'ru' | 'en') => ({
+      firstName: FORM[locale].firstName,
+      email: FORM[locale].email,
+      phone: FORM[locale].phone,
+      dob: FORM[locale].dob,
     }),
   },
   voucher: {

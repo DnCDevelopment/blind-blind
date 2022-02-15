@@ -1,0 +1,25 @@
+.arrow-up {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+  width: 60px;
+  height: 60px;
+  padding: 20px;
+  background-color: var(--transparent-black);
+  border: none;
+  border-radius: 100%;
+  outline: none;
+  opacity: 0;
+  -webkit-tap-highlight-color: var(--transparent);
+  transition: opacity 0.5s;
+  pointer-events: none;
+  &-visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+  svg {
+    transform: rotate(90deg);
+    fill: var(--white-color);
+  }
+}
