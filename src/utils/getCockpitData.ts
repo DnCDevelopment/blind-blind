@@ -1,5 +1,5 @@
-const url = process.env.NEXT_PUBLIC_COCKPIT_URL;
-const token = process.env.NEXT_PUBLIC_COCKPIT_TOKEN;
+const url = process.env.NEXT_PUBLIC_COCKPIT_URL as string;
+const token = process.env.NEXT_PUBLIC_COCKPIT_TOKEN as string;
 
 export const getCockpitCollection = async (
   collectionName: string,
@@ -11,7 +11,6 @@ export const getCockpitCollection = async (
       headers: { Authorization: `Bearer ${token}` },
     }
   );
-
   const cockpitData = await requestResult.json();
 
   return cockpitData;

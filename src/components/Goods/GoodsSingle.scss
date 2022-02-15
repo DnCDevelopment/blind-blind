@@ -51,6 +51,17 @@
     .button-container {
       margin: 40px auto;
     }
+    .size-button-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      .size-button {
+        padding-bottom: 5px;
+        border-bottom: 1px solid var(--black-color);
+        cursor: pointer;
+      }
+    }
 
     .materials-container {
       margin-top: 30px;
@@ -125,6 +136,9 @@
 
       .back-to-collection {
         margin-left: 0;
+      }
+      .size-button-container {
+        justify-content: flex-start;
       }
     }
   }

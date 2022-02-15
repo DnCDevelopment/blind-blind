@@ -1,33 +1,48 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { FormikValues } from 'formik';
 
-import Form from '../Form/Form';
-import OrderSummaryListItem from './OrderSummaryListItem';
+import OrderSummaryList from './OrderSummaryList';
+import ShippingMainForm from './ShippingMainForm';
 
 import { cartContext } from '../../context/cartContext';
 import { currencyContext } from '../../context/currencyContext';
 
 import { ICartContext, ICurrencyContext } from '../../context/Types';
 
-import { FORM, FORMIK } from '../../constants/form';
-import { TRANSLATE } from '../../constants/languages';
+import { FORM } from '../../constants/form';
 
-import ShoppingCart from '../../assets/svg/shoppingCart.svg';
 import { ICartGoodsItemProps } from '../Cart/Types';
 
 const Shipping: React.FC = () => {
   const { locale, push } = useRouter();
 
-  const isServer = typeof window === 'undefined';
-
-  const [orderSummaryListHeight, setOrderSummaryListHeight] = useState(false);
-
-  const orderListRef = useRef<HTMLDivElement>(null);
-  const couponRef = useRef<string>();
-
   const { cart, clearCart } = useContext(cartContext) as ICartContext;
+
+  const calcTotalCheckout = useCallback(
+    () =>
+      cart.reduce((counter, cartItem) => {
+        return (
+          counter + (cartItem.amount * Number.parseFloat(cartItem.price) || 0)
+        );
+      }, 0),
+    [cart]
+  );
+
+  const [totalCheckout, setTotalCheckout] = useState(calcTotalCheckout());
+  const [currencyTotalCheckout, setCurrencyTotalCheckout] = useState('0');
+  const [deliveryType, setDeliveryType] = useState('');
+  const [deliveryCost, setDeliveryCost] = useState(0);
+  const couponRef = useRef<string>();
+  const [formikValues, setFormikValues] = useState<FormikValues>();
+
   const { currency, currencyRate, USDRate } = useContext(
     currencyContext
   ) as ICurrencyContext;
@@ -52,19 +67,6 @@ const Shipping: React.FC = () => {
       });
   };
 
-  const calcTotalCheckout = useCallback(
-    () =>
-      cart.reduce(
-        (counter, cartItem) =>
-          counter + (cartItem.amount * Number.parseFloat(cartItem.price) || 0),
-        0
-      ),
-    [cart]
-  );
-
-  const [totalCheckout, setTotalCheckout] = useState(calcTotalCheckout());
-  const [currencyTotalCheckout, setCurrencyTotalCheckout] = useState('0');
-
   const sendShippingEvent = useCallback(
     (event: 'InitiateCheckout' | 'Purchase') => {
       if (typeof window !== 'undefined') {
@@ -85,230 +87,191 @@ const Shipping: React.FC = () => {
     [cart, USDRate, calcTotalCheckout, currency, currencyRate]
   );
 
+  const calcDeliveryCost = useCallback(
+    (deliveryType: string) => {
+      if (deliveryType === FORM[locale as 'ru' | 'en'].ukrPoshta) {
+        if (deliveryCost === 0) setDeliveryCost(400 + cart.length * 200);
+      } else {
+        setDeliveryCost(0);
+      }
+    },
+    [cart, deliveryCost, locale, setDeliveryCost]
+  );
+
+  useEffect(() => {
+    calcDeliveryCost(deliveryType);
+  }, [
+    deliveryType,
+    cart,
+    deliveryCost,
+    locale,
+    setDeliveryCost,
+    calcDeliveryCost,
+    totalCheckout,
+  ]);
+
+  const deliveryChangeHandler = (item: string) => {
+    setDeliveryType(item);
+  };
+
   useEffect(() => {
     sendShippingEvent('InitiateCheckout');
   }, [sendShippingEvent]);
-
-  const confirmCheckout = (values: FormikValues) => {
-    const {
-      firstName,
-      lastName,
-      country,
-      city,
-      email,
-      phone,
-      paymentMethod,
-      deliveryMethod,
-      service,
-      checkbox,
-      warehouse,
-      street,
-      house,
-      flat,
-    } = values;
-    if (checkbox) localStorage.setItem('shipping', JSON.stringify(values));
-    else localStorage.removeItem('shipping');
-    const currentLocale = locale;
-    const url = '/api/checkout';
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: firstName,
-        surname: lastName,
-        deliveryService: service,
-        paymentType: paymentMethod,
-        totalSum: +currencyTotalCheckout,
-        coupon: couponRef.current,
-        locale: currentLocale,
-        email,
-        country,
-        city,
-        phone,
-        items: cart,
-        currency,
-        deliveryMethod,
-        warehouse:
-          deliveryMethod === FORM[locale as 'ru' | 'en'].novaPoshta
-            ? warehouse
-            : '',
-        street:
-          deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
-            ? street
-            : '',
-        house:
-          deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
-            ? house
-            : '',
-        flat:
-          deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
-            ? flat
-            : '',
-      }),
-    })
-      .then((data) => data.json())
-      .then(({ signature, data }) => {
-        if (
-          typeof window !== 'undefined' &&
-          paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
-        )
-          window.location.replace(
-            `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`
-          );
-        push('/thank-you');
-        clearCart();
-      });
-  };
 
   useEffect(() => {
     setTotalCheckout(calcTotalCheckout());
   }, [calcTotalCheckout]);
 
   useEffect(() => {
-    setCurrencyTotalCheckout((totalCheckout / currencyRate).toFixed(2));
-  }, [totalCheckout, currencyRate]);
+    console.log(totalCheckout);
+    console.log(cart);
+
+    setCurrencyTotalCheckout(
+      ((totalCheckout + deliveryCost) / currencyRate).toFixed(2)
+    );
+  }, [totalCheckout, currencyRate, deliveryCost]);
+  useEffect(() => {
+    if (formikValues) confirmCheckout(formikValues);
+  });
+
+  const confirmCheckout = useCallback(
+    (values: FormikValues) => {
+      calcTotalCheckout();
+      const {
+        firstName,
+        lastName,
+        country,
+        city,
+        email,
+        phone,
+        paymentMethod,
+        deliveryMethod,
+        service,
+        checkbox,
+        warehouse,
+        street,
+        house,
+        flat,
+      } = values;
+      if (checkbox)
+        localStorage.setItem(
+          'shipping',
+          JSON.stringify({
+            firstName,
+            lastName,
+            country,
+            city,
+            email,
+            phone,
+            paymentMethod,
+            service,
+            warehouse,
+            street,
+            house,
+            flat,
+          })
+        );
+      else localStorage.removeItem('shipping');
+      const transaction_id = 'purchase' + Math.random().toString(10).substr(2);
+      gtag('event', 'purchase', {
+        transaction_id,
+        affiliation: 'Blind',
+        value: currencyTotalCheckout,
+        currency,
+        tax: 0,
+        shipping: deliveryCost,
+        items: cart.map((item, index) => {
+          return {
+            id: item.id,
+            name: item.title,
+            list_name: 'Goods',
+            brand: 'BLIND',
+            category: item.collectionTitle,
+            variant: item.details,
+            list_position: index + 1,
+            quantity: item.amount,
+            price: item.price,
+          };
+        }),
+      });
+      const currentLocale = locale;
+      const url = 'api/checkout';
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: firstName,
+          surname: lastName,
+          deliveryService: service,
+          paymentType: paymentMethod,
+          totalSum: +currencyTotalCheckout,
+          coupon: couponRef.current,
+          locale: currentLocale,
+          email,
+          country,
+          city,
+          phone,
+          items: cart,
+          currency,
+          deliveryMethod,
+          deliveryCost,
+          warehouse:
+            deliveryMethod === FORM[locale as 'ru' | 'en'].novaPoshta
+              ? warehouse
+              : '',
+          street:
+            deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
+              ? street
+              : '',
+          house:
+            deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
+              ? house
+              : '',
+          flat:
+            deliveryMethod === FORM[locale as 'ru' | 'en'].courierNovaPoshta
+              ? flat
+              : '',
+        }),
+      })
+        .then((data) => data.json())
+        .then(({ signature, data }) => {
+          if (
+            typeof window !== 'undefined' &&
+            paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
+          )
+            window.location.replace(
+              `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`
+            );
+          push('/thank-you');
+          clearCart();
+        });
+    },
+    [cart, totalCheckout, calcTotalCheckout, currencyTotalCheckout]
+  );
+
+  const confirmCheckoutWrapper = useCallback((values: FormikValues) => {
+    setFormikValues(values);
+  }, []);
+
+  const form = useMemo(
+    () => (
+      <ShippingMainForm
+        deliveryChangeHandler={deliveryChangeHandler}
+        confirmCheckout={confirmCheckoutWrapper}
+      />
+    ),
+    [confirmCheckoutWrapper]
+  );
+
   return (
     <div className="shipping container">
-      <div className="shipping__order-summary">
-        <div
-          className="order-summary-toggle container"
-          role="presentation"
-          onClick={() => {
-            setOrderSummaryListHeight(!orderSummaryListHeight);
-          }}
-        >
-          <ShoppingCart />
-          {orderSummaryListHeight ? (
-            <>
-              <p>{TRANSLATE[locale as 'ru' | 'en'].hideOrderSummary}</p>
-              <div className="chevron-up"></div>
-            </>
-          ) : (
-            <>
-              <p>{TRANSLATE[locale as 'ru' | 'en'].showOrderSummary}</p>
-              <div className="chevron-down"></div>
-            </>
-          )}
-          <div className="total-sum">
-            {currencyTotalCheckout} {currency}
-          </div>
-        </div>
-        <div
-          ref={orderListRef}
-          className={`order-summary-list container ${
-            orderSummaryListHeight && 'open'
-          }`}
-        >
-          {cart.map((props, idx) =>
-            'title' in props ? (
-              <OrderSummaryListItem
-                key={idx}
-                price={props.price}
-                amount={props.amount}
-                title={props.title}
-                photo={props.photo}
-                details={props.details}
-              />
-            ) : (
-              <OrderSummaryListItem
-                key={idx}
-                price={props.price}
-                amount={props.amount}
-                receiverName={props.receiverName}
-              />
-            )
-          )}
-          <div className="divider container" />
-          <div className="discount">
-            <Form
-              formikConfig={{
-                initialValues: FORMIK.shippingDiscount.values,
-                onSubmit: (values) => {
-                  checkDiscountCode(values.code);
-                },
-              }}
-              types={{ code: 'text' }}
-              placeholders={{
-                code: TRANSLATE[locale as 'ru' | 'en'].discountCode,
-              }}
-              buttonTitle="→"
-            />
-          </div>
-          <div className="divider container" />
-          <div className="total-checkout">
-            <p className="title">{TRANSLATE[locale as 'ru' | 'en'].subTotal}</p>
-            <p className="price">
-              {currencyTotalCheckout} {currency}
-            </p>
-          </div>
-          <div className="divider container" />
-        </div>
-      </div>
-      <div className="shipping__info">
-        <h2 className="title">{TRANSLATE[locale as 'ru' | 'en'].shipping}</h2>
-        <div className="shipping__form">
-          <Form
-            formikConfig={{
-              initialValues:
-                !isServer && localStorage.getItem('shipping')
-                  ? {
-                      ...FORMIK.shippingMain.values,
-                      ...JSON.parse(localStorage.getItem('shipping') as string),
-                    }
-                  : FORMIK.shippingMain.values,
-              validationSchema: FORMIK.shippingMain.validationSchema(
-                locale as 'ru' | 'en'
-              ),
-              onSubmit: confirmCheckout,
-            }}
-            types={FORMIK.shippingMain.types}
-            selectOptions={FORMIK.shippingMain.selectOptions(
-              locale as 'ru' | 'en'
-            )}
-            placeholders={FORMIK.shippingMain.placeholders(
-              locale as 'ru' | 'en'
-            )}
-            buttonTitle={TRANSLATE[locale as 'ru' | 'en'].continue}
-            checkboxText={TRANSLATE[locale as 'ru' | 'en'].saveInfo}
-            optionFields={[
-              {
-                dependFieldName: 'deliveryMethod',
-                dependFieldValue: FORM[locale as 'ru' | 'en'].novaPoshta,
-                fieldName: 'warehouse',
-              },
-              {
-                dependFieldName: 'deliveryMethod',
-                dependFieldValue: FORM[locale as 'ru' | 'en'].courierNovaPoshta,
-                fieldName: 'street',
-              },
-              {
-                dependFieldName: 'deliveryMethod',
-                dependFieldValue: FORM[locale as 'ru' | 'en'].courierNovaPoshta,
-                fieldName: 'house',
-              },
-              {
-                dependFieldName: 'deliveryMethod',
-                dependFieldValue: FORM[locale as 'ru' | 'en'].courierNovaPoshta,
-                fieldName: 'flat',
-              },
-            ]}
-          />
-          <Link href="/cart">
-            <div
-              role="presentation"
-              className="back-to-cart"
-              onClick={() => {
-                return;
-              }}
-            >
-              <div className="arrow" />
-              <p>{TRANSLATE[locale as 'ru' | 'en'].returnToCart}</p>
-            </div>
-          </Link>
-        </div>
-      </div>
+      <OrderSummaryList
+        currencyTotalCheckout={currencyTotalCheckout}
+        checkDiscountCode={checkDiscountCode}
+      />
+      {form}
     </div>
   );
 };

@@ -15,7 +15,9 @@ const MainStreetStyleSamples: React.FC<MainStreetStyleSamplesProps> = ({
   return (
     <div className="street-style__wrapper">
       <Link href="/street-style">
-        <h3 className="collection-samples__title">Street Style</h3>
+        <h3 className="street-style__title">
+          <span>BLIND</span> in the city
+        </h3>
       </Link>
       <div className="street-style__container container">
         {photos.map((photo) => (

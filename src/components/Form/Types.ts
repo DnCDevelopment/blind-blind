@@ -14,11 +14,12 @@ export interface IFormProps {
     dependFieldValue: string;
     fieldName: string;
   }[];
+  deliveryChangeHandler?: (deliveryMethod: string) => void;
 }
 
 export interface IDropdownProps {
   value: string;
   placeholder?: string;
   values: string[];
-  setValue: (item: string) => void;
+  setValue: (item: string, key?: string) => void;
 }
