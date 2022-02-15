@@ -55,14 +55,14 @@ const MainCart: React.FC = () => {
           </thead>
           <tbody>
             {cart.map((item, idx) =>
-              'details' in item ? (
-                <CartGoodsItem
+              'receiverName' in item ? (
+                <CartVoucherItem
                   key={idx}
                   {...item}
                   removeSelf={() => removeItem(item)}
                 />
               ) : (
-                <CartVoucherItem
+                <CartGoodsItem
                   key={idx}
                   {...item}
                   removeSelf={() => removeItem(item)}

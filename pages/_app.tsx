@@ -50,11 +50,11 @@ const MyApp = ({
   const [currencyRate, setCurrencyRate] = useState(0);
 
   const addItemToCart = (item: ICartGoodsItemProps | ICartVoucherItemProps) => {
-    if ('details' in item) {
+    if (!('receiverName' in item)) {
       const existingItem = cartState.filter(
         (el) =>
           el.id === item.id &&
-          'details' in el &&
+          !('receiverName' in el) &&
           JSON.stringify(el.details) === JSON.stringify(item.details)
       );
 
@@ -78,7 +78,7 @@ const MyApp = ({
   const removeItemFromCart = (
     item: ICartGoodsItemProps | ICartVoucherItemProps
   ) => {
-    if ('details' in item)
+    if (!('receiverName' in item))
       setCartState([
         ...cartState.filter(
           (el) =>
