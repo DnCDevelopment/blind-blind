@@ -304,6 +304,7 @@ const checkout: NextApiHandler = async (req, res) => {
       result_url: `${process.env.NEXT_PUBLIC_HOME_URL}thank-you`,
       server_url: `${process.env.NEXT_PUBLIC_HOME_URL}api/confirmPayment`,
     };
+    console.log(data);
 
     const encodedData = Buffer.from(JSON.stringify(data)).toString('base64');
     const signature = createHash('sha1')

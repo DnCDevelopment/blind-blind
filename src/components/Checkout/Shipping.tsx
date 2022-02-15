@@ -132,7 +132,7 @@ const Shipping: React.FC = () => {
   }, [totalCheckout, currencyRate, deliveryCost]);
   useEffect(() => {
     if (formikValues) confirmCheckout(formikValues);
-  });
+  }, [formikValues]);
 
   const confirmCheckout = useCallback(
     (values: FormikValues) => {
@@ -165,6 +165,7 @@ const Shipping: React.FC = () => {
             phone,
             paymentMethod,
             service,
+            checkbox,
             warehouse,
             street,
             house,
@@ -237,6 +238,9 @@ const Shipping: React.FC = () => {
       })
         .then((data) => data.json())
         .then(({ signature, data }) => {
+          console.log(signature);
+          console.log(data);
+
           if (
             typeof window !== 'undefined' &&
             paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
@@ -248,7 +252,7 @@ const Shipping: React.FC = () => {
           clearCart();
         });
     },
-    [cart, totalCheckout, calcTotalCheckout, currencyTotalCheckout]
+    [cart, calcTotalCheckout, currencyTotalCheckout]
   );
 
   const confirmCheckoutWrapper = useCallback((values: FormikValues) => {

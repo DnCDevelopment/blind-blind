@@ -230,7 +230,10 @@ const Form: React.FC<IFormProps> = ({
             value={formik.values[key]}
             placeholder={placeholders[key]}
             onChange={(e) => {
-              if (e.target.value.length < 11 && e.target.value.match(/^\d+$/)) {
+              if (
+                (e.target.value.length < 11 && e.target.value.match(/^\d+$/)) ||
+                (e.target.value.match(/[+]\d+$/) && e.target.value.length < 15)
+              ) {
                 formik.handleChange(e);
               }
             }}
