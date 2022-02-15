@@ -90,13 +90,18 @@ const Shipping: React.FC = () => {
   const calcDeliveryCost = useCallback(
     (deliveryType: string) => {
       if (deliveryType === FORM[locale as 'ru' | 'en'].ukrPoshta) {
-        if (deliveryCost === 0) setDeliveryCost(400 + cart.length * 200);
+        if (deliveryCost === 0)
+          setDeliveryCost(
+            cart.reduce((cost, { amount }) => (cost += amount * 200), 400)
+          );
       } else {
         setDeliveryCost(0);
       }
     },
     [cart, deliveryCost, locale, setDeliveryCost]
   );
+
+  // 400 + cart.length * 200
 
   useEffect(() => {
     calcDeliveryCost(deliveryType);
