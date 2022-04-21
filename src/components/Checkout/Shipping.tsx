@@ -101,8 +101,6 @@ const Shipping: React.FC = () => {
     [cart, deliveryCost, locale, setDeliveryCost]
   );
 
-  // 400 + cart.length * 200
-
   useEffect(() => {
     calcDeliveryCost(deliveryType);
   }, [
@@ -128,9 +126,6 @@ const Shipping: React.FC = () => {
   }, [calcTotalCheckout]);
 
   useEffect(() => {
-    console.log(totalCheckout);
-    console.log(cart);
-
     setCurrencyTotalCheckout(
       ((totalCheckout + deliveryCost) / currencyRate).toFixed(2)
     );
@@ -201,7 +196,7 @@ const Shipping: React.FC = () => {
         }),
       });
       const currentLocale = locale;
-      const url = 'api/checkout';
+      const url = '/api/checkout';
       fetch(url, {
         method: 'POST',
         headers: {

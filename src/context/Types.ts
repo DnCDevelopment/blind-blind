@@ -24,7 +24,6 @@ export interface ICartContext {
 
 export enum ECurrency {
   UAH,
-  RUB,
   EUR,
   USD,
 }

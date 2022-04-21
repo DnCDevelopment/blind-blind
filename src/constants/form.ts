@@ -34,6 +34,7 @@ export const FORM = {
     giftAmount: 'Введите любую сумму сертификата',
     warehouse: 'Отделение',
     dob: 'Дата рождения',
+    russia: 'Извините, мы не доставляем наши товары в Россию',
   },
   en: {
     cm: 'cm',
@@ -66,6 +67,7 @@ export const FORM = {
     giftAmount: 'Enter any amount of the certificate',
     warehouse: 'Warehouse',
     dob: 'Date of birth',
+    russia: "Sorry, we don't deliver our goods in Russia",
   },
 };
 
@@ -107,7 +109,12 @@ export const FORMIK = {
           .min(11, FORM[locale].wrongInput)
           .max(15, FORM[locale].wrongInput)
           .typeError(FORM[locale].wrongInput),
-        country: Yup.string().required(FORM[locale].required),
+        country: Yup.string()
+          .matches(
+            /^(?!russia|россия|рф|rf|российская\sфедерация).*$/giu,
+            FORM[locale].russia
+          )
+          .required(FORM[locale].required),
         city: Yup.string().required(FORM[locale].required),
         paymentMethod: Yup.string().required(FORM[locale].required),
         warehouse: Yup.string().when('deliveryMethod', {
