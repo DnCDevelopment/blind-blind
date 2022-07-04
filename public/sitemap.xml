@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://blind-blind.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.277Z</lastmod></url>
-<url><loc>https://blind-blind.com/cart</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.277Z</lastmod></url>
-<url><loc>https://blind-blind.com/celebrities</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.277Z</lastmod></url>
-<url><loc>https://blind-blind.com/checkout</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.277Z</lastmod></url>
-<url><loc>https://blind-blind.com/contacts</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.278Z</lastmod></url>
-<url><loc>https://blind-blind.com/sales</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.278Z</lastmod></url>
-<url><loc>https://blind-blind.com/sizes-table</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.278Z</lastmod></url>
-<url><loc>https://blind-blind.com/voucher</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2021-03-01T19:26:15.278Z</lastmod></url>
+<url><loc>https://blind-blind.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/cart</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/celebrities</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/checkout</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/contacts</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/sales</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/street-style</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/table-razmer</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
+<url><loc>https://blind-blind.com/voucher</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-07-04T10:19:38.926Z</lastmod></url>
 </urlset>
