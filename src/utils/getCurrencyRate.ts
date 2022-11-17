@@ -7,7 +7,7 @@ export const getCurrencyRate = async (currency: string) => {
       const appropriateCurrency = currencies.filter(
         ({ cc }: { cc: string }) => cc == currency
       );
-      return appropriateCurrency.length ? appropriateCurrency[0].rate + 4 : 1;
+      return appropriateCurrency.length ? appropriateCurrency[0].rate - 4 : 1;
     })
     .catch((e) => console.error(e));
 

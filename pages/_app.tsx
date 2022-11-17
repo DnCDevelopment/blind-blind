@@ -108,7 +108,7 @@ const MyApp = ({
   }, []);
 
   useEffect(() => {
-    if (!USDRate) getCurrencyRate('USD').then((res) => changeUSDRate(res));
+    if (!USDRate) getCurrencyRate('USD').then((res) => changeUSDRate(+res));
   }, []);
 
   useEffect(() => {
@@ -124,7 +124,7 @@ const MyApp = ({
         if (currency.toString() === 'RUB') {
           setCurrencyRate(() => 1 / 3);
         } else {
-          setCurrencyRate(res);
+          setCurrencyRate(+res);
         }
       })
       .catch((err) => console.error(err));
