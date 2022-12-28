@@ -35,7 +35,9 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           description,
           description_en,
           link,
-          previewImage: { path },
+          previewImage: { path: previewImagePath },
+          secondImage: { path: secondImagePath },
+          collection,
           price,
           stockPrice,
           isExclusive,
@@ -59,7 +61,12 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           { 'g:link': encodeURI(`${baseUrl}/goods${link}`) },
           {
             'g:image_link': encodeURI(
-              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${path}`
+              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImagePath}`
+            ),
+          },
+          {
+            'g:additional_image_link': encodeURI(
+              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImagePath}`
             ),
           },
           { 'g:brand': 'BLIND' },
@@ -73,14 +80,26 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           { 'g:link': encodeURI(`${baseUrl}/goods${link}`) },
           {
             'g:image_link': encodeURI(
-              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${path}`
+              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImagePath}`
+            ),
+          },
+          {
+            'g:additional_image_link': encodeURI(
+              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImagePath}`
             ),
           },
           { 'g:brand': 'BLIND' },
           { 'g:availability': availability },
           { 'g:price': `${priceFormat.format(+price)} UAH` },
         ];
-
+        if (collection) {
+          Object.defineProperty(item_ru, 'g:product_type', {
+            value: `${collection}`,
+          });
+          Object.defineProperty(item_en, 'g:product_type', {
+            value: `${collection}`,
+          });
+        }
         if (!isNaN(+(stockPrice?.trim() || NaN))) {
           Object.defineProperty(item_ru, 'g:sale_price', {
             value: `${stockPrice} UAH`,

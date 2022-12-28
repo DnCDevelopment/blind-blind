@@ -30,11 +30,11 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
 
   useEffect(() => {
     if (goodsProps && typeof window !== 'undefined') {
-      const code = goodsProps.link?.replace('/', '') as string;
+      // const code = goodsProps.link?.replace('/', '') as string;
       const price = +goodsProps.price;
       fbq('track', 'ViewContent', {
         content_type: 'product',
-        content_ids: code,
+        content_ids: goodsProps.id,
         currency: currency.toString() === 'UAH' ? 'USD' : currency.toString(),
         value:
           currency.toString() === 'UAH'

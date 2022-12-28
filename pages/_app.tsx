@@ -154,6 +154,16 @@ const MyApp = ({
             clearCart: clearCart,
           }}
         >
+          <noscript
+            dangerouslySetInnerHTML={{
+              __html: `<iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-5XP658M"
+              height="0"
+              width="0"
+              style="display:none;visibility:hidden"
+            ></iframe>`,
+            }}
+          ></noscript>
           <Header />
           <ModalWindowStart />
           <NextNprogress
