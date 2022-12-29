@@ -89,9 +89,7 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   collection: {
     _id: string;
     link: string;
-    link_en: string;
-    title: string;
-    title_en: string;
+    display: string;
   };
   subCollection: {
     _id: string;

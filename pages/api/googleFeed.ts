@@ -54,7 +54,7 @@ const googleFeed: NextApiHandler = async (_req, res) => {
           ? 'in_stock'
           : 'out_of_stock';
 
-        const item_ru = [
+        const item_ru: any = [
           { 'g:id': _id },
           { 'g:title': title },
           { 'g:description': description },
@@ -64,17 +64,12 @@ const googleFeed: NextApiHandler = async (_req, res) => {
               `${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImagePath}`
             ),
           },
-          {
-            'g:additional_image_link': encodeURI(
-              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImagePath}`
-            ),
-          },
           { 'g:brand': 'BLIND' },
           { 'g:availability': availability },
           { 'g:price': `${priceFormat.format(+price)} UAH` },
         ];
 
-        const item_en = [
+        const item_en: any = [
           { 'g:title': title_en },
           { 'g:description': description_en },
           { 'g:link': encodeURI(`${baseUrl}/goods${link}`) },
@@ -83,21 +78,24 @@ const googleFeed: NextApiHandler = async (_req, res) => {
               `${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImagePath}`
             ),
           },
-          {
-            'g:additional_image_link': encodeURI(
-              `${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImagePath}`
-            ),
-          },
           { 'g:brand': 'BLIND' },
           { 'g:availability': availability },
           { 'g:price': `${priceFormat.format(+price)} UAH` },
         ];
-        if (collection) {
-          Object.defineProperty(item_ru, 'g:product_type', {
-            value: `${collection}`,
+        if (secondImagePath !== undefined) {
+          item_ru.push({
+            'g:additional_image_link': `${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImagePath}`,
           });
-          Object.defineProperty(item_en, 'g:product_type', {
-            value: `${collection}`,
+          item_en.push({
+            'g:additional_image_link': `${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImagePath}`,
+          });
+        }
+        if (collection !== undefined && collection.display !== undefined) {
+          item_ru.push({
+            'g:product_type': `${collection.display}`,
+          });
+          item_en.push({
+            'g:product_type': `${collection.display}`,
           });
         }
         if (!isNaN(+(stockPrice?.trim() || NaN))) {

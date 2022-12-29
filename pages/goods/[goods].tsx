@@ -196,10 +196,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         otherPhotos: curGoods.otherImages,
         isExclusive: curGoods.isExclusive,
         collectionLink: curGoods.collection.link,
-        collectionTitle:
-          locale === defaultLocale
-            ? curGoods.collection.title
-            : curGoods.collection.title_en,
+        collectionTitle: curGoods.collection.display,
       }
     : null;
 
