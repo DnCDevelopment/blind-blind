@@ -41,23 +41,23 @@ export const SORT_GOODS = {
 
 export const SORT_TRANSLATE = {
   default: {
-    ru: 'По умолчанию',
+    ru: 'За замовчуванням',
     en: 'Default',
   },
   nameAbs: {
-    ru: 'Наименования А -> Я',
+    ru: 'Найменування А -> Я',
     en: 'Name A -> Z',
   },
   nameDesc: {
-    ru: 'Наименования Я -> А',
+    ru: 'Найменування Я -> А',
     en: 'Name Z -> A',
   },
   priceAbs: {
-    ru: 'Цена (по возрастанию)',
+    ru: 'Ціна (за зростанням)',
     en: 'Price Low -> High',
   },
   priceDesc: {
-    ru: 'Цена (по убыванию)',
+    ru: 'Ціна (за зменшенням)',
     en: 'Price High -> Low',
   },
 };

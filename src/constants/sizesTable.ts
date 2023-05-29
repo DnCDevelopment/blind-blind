@@ -1,10 +1,10 @@
 export const SIZES_TABLE = {
   title: {
-    ru: 'Таблица размеров',
+    ru: 'Таблиця розмірів',
     en: 'Sizes table',
   },
   head: {
-    ru: ['Размер', 'Объем груди', 'Объем талии', 'Объем бедер'],
+    ru: ['Розмір', 'Обсяг грудей', 'Обсяг талії', 'Обсяг стегон'],
     en: ['Size', 'Breast volume', 'Waist', 'Thighs'],
   },
   rows: [
@@ -16,7 +16,7 @@ export const SIZES_TABLE = {
     ['XL', '102-106', '82-86', '106-109'],
   ],
   additional: {
-    ru: '*В размерах XL и выше + 50% к стоимости',
+    ru: '*У розмірах XL і вище + 50% до вартості',
     en: '*In sizes XL and above + 50% to the cost',
   },
 };

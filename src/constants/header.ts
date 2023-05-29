@@ -5,7 +5,7 @@ export const AboutListData = {
       link: '/street-style',
     },
     {
-      title: 'Философия',
+      title: 'Філософія',
       link: '/o-nas',
     },
     {

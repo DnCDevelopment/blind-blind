@@ -1,6 +1,6 @@
 export const DEFAULT_DESCRIPTION = {
   ru:
-    'Роскошные женские платья, дизайнерские женские пиджаки, красивые блузы, стильные женские брюки. Вся одежда Blind высокого качества.',
+    'Розкішні жіночі сукні, дизайнерські жіночі піджаки, красиві блузи, стильні жіночі штани. Весь одяг Blind високої якості.',
   en:
     "Luxurious women's dresses, designer women's blazers, beautiful blouses, stylish women's pants. All Blind clothes are of high quality.",
 };
@@ -14,9 +14,9 @@ export const SEO_ITEMS = {
       link: '/blind-style',
     },
     cartPage: {
-      title: 'Корзина',
-      description: 'Корзина',
-      breadcrumbName: 'Корзина',
+      title: 'Кошик',
+      description: 'Кошик',
+      breadcrumbName: 'Кошик',
       link: '/cart',
     },
     celebritiesPage: {
@@ -26,39 +26,39 @@ export const SEO_ITEMS = {
       link: '/celebrities',
     },
     checkoutPage: {
-      title: 'Оформление заказа',
-      description: 'Оформление заказа',
-      breadcrumbName: 'Оформление заказа',
+      title: 'Оформлення замовлення',
+      description: 'Оформлення замовлення',
+      breadcrumbName: 'Оформлення замовлення',
       link: '/checkout',
     },
     contactsPage: {
-      title: 'Контакты',
+      title: 'Контакти',
       description: DEFAULT_DESCRIPTION.ru,
-      breadcrumbName: 'Контакты',
+      breadcrumbName: 'Контакти',
       link: '/contacts',
     },
     indexPage: {
-      title: 'Женская одежда BLIND fashion atelier',
+      title: 'Жіночий одяг BLIND fashion atelier',
       description: DEFAULT_DESCRIPTION.ru,
-      breadcrumbName: 'Главная',
+      breadcrumbName: 'Головна',
       link: '/',
     },
     salesPage: {
-      title: 'Скидки',
+      title: 'Знижки',
       description: DEFAULT_DESCRIPTION.ru,
-      breadcrumbName: 'Скидки',
+      breadcrumbName: 'Знижки',
       link: '/sales',
     },
     sizeTablePage: {
-      title: 'Таблица размеров',
+      title: 'Таблиця розмірів',
       description: DEFAULT_DESCRIPTION.ru,
-      breadcrumbName: 'Таблица размеров',
+      breadcrumbName: 'Таблиця розмірів',
       link: '/sizes-table',
     },
     voucherPage: {
-      title: 'Подарочный сертификат',
+      title: 'Подарунковий сертифікат',
       description: DEFAULT_DESCRIPTION.ru,
-      breadcrumbName: 'Подарочный сертификат',
+      breadcrumbName: 'Подарунковий сертифікат',
       link: '/voucher',
     },
   },
