@@ -15,7 +15,7 @@ export const SIZES_TABLE = {
     ['XL', '102-106', '82-86', '106-109'],
   ],
   additional: {
-    ru: '*У розмірах XL і вище + 50% до вартості',
+    ru: '*У розмірах XL і вище + 50% до вартості ',
     en: '*In sizes XL and above + 50% to the cost',
   },
 };
