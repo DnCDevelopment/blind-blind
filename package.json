@@ -119,11 +119,5 @@
 			"at-rule-no-unknown": null,
 			"scss/at-rule-no-unknown": true
 		}
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm run lint && npm run format && npm run lint-css",
-			"commit-msg": "commitlint --format -E HUSKY_GIT_PARAMS"
-		}
 	}
 }
