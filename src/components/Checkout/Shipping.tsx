@@ -254,7 +254,10 @@ const Shipping: React.FC = () => {
     },
     [cart, calcTotalCheckout, currencyTotalCheckout]
   );
-
+  /*.then(() => {
+          push('/thank-you');
+          clearCart();
+        }); */
   const confirmCheckoutWrapper = useCallback((values: FormikValues) => {
     setFormikValues(values);
   }, []);
