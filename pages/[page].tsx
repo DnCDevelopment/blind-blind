@@ -51,15 +51,15 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const pageProps = curPage
     ? {
-        title: locale === defaultLocale ? curPage.title : curPage.title_en,
-        link: curPage.link,
-        content:
-          locale === defaultLocale ? curPage.content : curPage.content_en,
-        seoDescription:
-          locale === defaultLocale
-            ? curPage.seoDescription
-            : curPage.seoDescription_en,
-      }
+      title: locale === defaultLocale ? curPage.title : curPage.title_en,
+      link: curPage.link,
+      content:
+        locale === defaultLocale ? curPage.content : curPage.content_en,
+      seoDescription:
+        locale === defaultLocale
+          ? curPage.seoDescription
+          : curPage.seoDescription_en,
+    }
     : null;
 
   return {

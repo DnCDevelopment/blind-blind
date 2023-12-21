@@ -60,7 +60,7 @@ const Shipping: React.FC = () => {
           setTotalCheckout(
             discount.inPercent
               ? calcTotalCheckout() *
-                  (1 - Number.parseFloat(discount.discount) / 100)
+              (1 - Number.parseFloat(discount.discount) / 100)
               : calcTotalCheckout() - Number.parseFloat(discount.discount)
           );
         } else setTotalCheckout(calcTotalCheckout());
@@ -244,20 +244,19 @@ const Shipping: React.FC = () => {
           if (
             typeof window !== 'undefined' &&
             paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
-          )
+          ) {
             window.location.replace(
               `https://www.liqpay.ua/api/3/checkout?data=${data}&signature=${signature}`
             );
-          push('/thank-you');
-          clearCart();
+            clearCart();
+          } else {
+            push('/thank-you');
+            clearCart();
+          }
         });
     },
     [cart, calcTotalCheckout, currencyTotalCheckout]
   );
-  /*.then(() => {
-          push('/thank-you');
-          clearCart();
-        }); */
   const confirmCheckoutWrapper = useCallback((values: FormikValues) => {
     setFormikValues(values);
   }, []);
