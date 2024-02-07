@@ -104,7 +104,7 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
+export const getServerSideProps = async ({
   locale,
   defaultLocale,
   query,
