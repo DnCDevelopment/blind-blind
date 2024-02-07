@@ -242,7 +242,6 @@ const Shipping: React.FC = () => {
           console.log(data);
 
           if (
-            typeof window !== 'undefined' &&
             paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
           ) {
             window.location.replace(
