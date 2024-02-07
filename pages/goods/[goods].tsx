@@ -104,7 +104,8 @@ const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   );
 };
 
-export const getServerSideProps = async ({
+// export const getServerSideProps: GetServerSideProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
   locale,
   defaultLocale,
   query,
@@ -137,10 +138,10 @@ export const getServerSideProps = async ({
         : false;
     })
     .filter((id) => id) as {
-    [key: string]: string | boolean;
-    id: string;
-    forOrder: boolean;
-  }[];
+      [key: string]: string | boolean;
+      id: string;
+      forOrder: boolean;
+    }[];
 
   const availableIds = availableIdsObjects.map(({ id }) => id);
 
@@ -156,10 +157,10 @@ export const getServerSideProps = async ({
       return sizes.length && { value: sizes[0], forOrder: forOrder };
     })
     .filter((size) => size) as {
-    [key: string]: string | boolean;
-    value: string;
-    forOrder: boolean;
-  }[];
+      [key: string]: string | boolean;
+      value: string;
+      forOrder: boolean;
+    }[];
   const sizeOrder = ['XS', 'S', 'M', 'L', 'XL'];
   const orderedSizes = sizes
     .sort(
@@ -179,25 +180,25 @@ export const getServerSideProps = async ({
 
   const goodsProps = curGoods
     ? {
-        id: curGoods._id,
-        title: locale === defaultLocale ? curGoods.title : curGoods.title_en,
-        link: curGoods.link,
-        description:
-          locale === defaultLocale
-            ? curGoods.description
-            : curGoods.description_en,
-        materials:
-          locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
-        price: curGoods.price,
-        stockPrice: curGoods.stockPrice,
-        sizes: uniqueSizes,
-        photo: curGoods.previewImage.path,
-        secondPhoto: curGoods?.secondImage?.path || null,
-        otherPhotos: curGoods.otherImages,
-        isExclusive: curGoods.isExclusive,
-        collectionLink: curGoods.collection.link,
-        collectionTitle: curGoods.collection.display,
-      }
+      id: curGoods._id,
+      title: locale === defaultLocale ? curGoods.title : curGoods.title_en,
+      link: curGoods.link,
+      description:
+        locale === defaultLocale
+          ? curGoods.description
+          : curGoods.description_en,
+      materials:
+        locale === defaultLocale ? curGoods.consist : curGoods.consist_en,
+      price: curGoods.price,
+      stockPrice: curGoods.stockPrice,
+      sizes: uniqueSizes,
+      photo: curGoods.previewImage.path,
+      secondPhoto: curGoods?.secondImage?.path || null,
+      otherPhotos: curGoods.otherImages,
+      isExclusive: curGoods.isExclusive,
+      collectionLink: curGoods.collection.link,
+      collectionTitle: curGoods.collection.display,
+    }
     : null;
 
   const subCollection = {
@@ -215,7 +216,7 @@ export const getServerSideProps = async ({
         permanent: false,
       },
     };
-
+  console.log(data)
   return {
     props: {
       locale,
