@@ -90,12 +90,12 @@ const googleFeed: NextApiHandler = async (_req, res) => {
             'g:additional_image_link': `${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImagePath}`,
           });
         }
-        if (collection !== undefined && collection.display !== undefined) {
+        if (collection !== undefined && collection.title !== undefined) {
           item_ru.push({
-            'g:product_type': `${collection.display}`,
+            'g:product_type': `${collection.title}`,
           });
           item_en.push({
-            'g:product_type': `${collection.display}`,
+            'g:product_type': `${collection.title}`,
           });
         }
         if (!isNaN(+(stockPrice?.trim() || NaN))) {

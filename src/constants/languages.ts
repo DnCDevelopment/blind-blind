@@ -59,10 +59,10 @@ export const TRANSLATE = {
     giftCertificateTitle: 'Подарунковий сертифікат',
     giftCertificateDescription:
       'Цей подарунковий сертифікат буде надіслано одержувачу по E-Mail після оплати замовлення.',
-    giftCertificateCartAbout: 'Сертифікат на ім\'я ',
+    giftCertificateCartAbout: "Сертифікат на ім'я ",
     pressInformationPage: 'Інформаційна сторінка для преси',
     requestCallBackTitle:
-      'Залиште заявку і менеджер зв\'яжеться з Вами найближчим часом',
+      "Залиште заявку і менеджер зв'яжеться з Вами найближчим часом",
     requestCallBack: 'Залишити',
     copyright: 'Copyright © Blind-Blind 2021 Усі права захищені',
     privacyPolicy: 'Політика конфіденційності',

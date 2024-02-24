@@ -86,11 +86,7 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
     | ICockpitSize[];
 
   categories: ICockpitGoodCategory[];
-  collection: {
-    _id: string;
-    link: string;
-    display: string;
-  };
+  collection: ICockpitCollectionsRaw;
   subCollection: {
     _id: string;
     link: string;

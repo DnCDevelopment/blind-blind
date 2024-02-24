@@ -38,7 +38,7 @@ const Form: React.FC<IFormProps> = ({
           separateDialCode: true,
           initialCountry: 'ua',
           preferredCountries: ['ua', 'ru', 'kz', 'us', 'il', 'ae', 'by'],
-          excludeCountries: ['ru', 'by']
+          excludeCountries: ['ru', 'by'],
         })
       );
     }

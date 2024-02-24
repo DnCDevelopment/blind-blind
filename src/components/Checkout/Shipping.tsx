@@ -60,7 +60,7 @@ const Shipping: React.FC = () => {
           setTotalCheckout(
             discount.inPercent
               ? calcTotalCheckout() *
-              (1 - Number.parseFloat(discount.discount) / 100)
+                  (1 - Number.parseFloat(discount.discount) / 100)
               : calcTotalCheckout() - Number.parseFloat(discount.discount)
           );
         } else setTotalCheckout(calcTotalCheckout());
@@ -238,9 +238,6 @@ const Shipping: React.FC = () => {
       })
         .then((data) => data.json())
         .then(({ signature, data }) => {
-          console.log(signature);
-          console.log(data);
-
           if (
             typeof window !== 'undefined' &&
             paymentMethod === FORM[currentLocale as 'ru' | 'en'].paymentOnline
