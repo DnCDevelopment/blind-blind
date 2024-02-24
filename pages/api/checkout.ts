@@ -4,8 +4,8 @@ import { Telegram } from 'telegraf';
 import { IBotUser } from '../../src/cockpitTypes';
 
 import { FORM } from '../../src/constants/form';
-// import sendGrid from '../../backendHelpers/sendGrid';
-// import getPromocode from '../../backendHelpers/getPromocode';
+import sendGrid from '../../backendHelpers/sendGrid';
+import getPromocode from '../../backendHelpers/getPromocode';
 import {
   ICartGoodsItemProps,
   ICartVoucherItemProps,
@@ -29,86 +29,74 @@ const getGoodsMessage = ({ goods }: ICart) =>
     ''
   );
 
-// const sendEmail = async (
-//   name: string,
-//   surname: string,
-//   email: string,
-//   country: string,
-//   city: string,
-//   phone: string,
-//   paymentType: string,
-//   deliveryType: string,
-//   deliveryCost: string,
-//   warehouse: string,
-//   street: string,
-//   house: string,
-//   flat: string,
-//   cart: ICart,
-//   totalSum: string,
-//   promoCode: string,
-//   cookies: { [key: string]: string },
-//   ip: string
-// ) => {
-//   const [promoCodeValues] = await getPromocode(promoCode);
+const sendEmail = async (
+  name: string,
+  surname: string,
+  email: string,
+  country: string,
+  city: string,
+  phone: string,
+  paymentType: string,
+  deliveryType: string,
+  deliveryCost: string,
+  warehouse: string,
+  street: string,
+  house: string,
+  flat: string,
+  cart: ICart,
+  totalSum: string,
+  promoCode: string,
+  cookies: { [key: string]: string },
+  ip: string
+) => {
+  const [promoCodeValues] = await getPromocode(promoCode);
 
-//   const emailBody = `
-//     Товары: ${getGoodsMessage(cart)} \n
-//     Сумма: ${totalSum} \n
-//     Промокод: ${promoCode || 'none'} \n
-//     Скидка: ${
-//       promoCodeValues?.discount ? promoCodeValues?.discount + '%' : 'none'
-//     } \n
-//     Тип оплаты: ${paymentType} \n
-//     Cтрана доставки: ${country} \n
-//     Город доставки: ${city} \n
-//     Тип доставки: ${deliveryType} \n
-//     Стоимость Доставки: ${deliveryCost} \n
-//     Отделение НП: ${warehouse || 'none'} \n
-//     Улица: ${street || 'none'} \n
-//     Дом: ${house || 'none'} \n
-//     Квартира: ${flat || 'none'} \n
-//     Имя: ${name} \n
-//     Фамилия: ${surname} \n
-//     Телефон: ${phone.replace('+', '')} \n
-//     Емеил: ${email} \n
-//     Utm_data: ${cookies.utm_data || 'none'} \n
-//     Utm_source: ${cookies.utm_source || 'none'} \n
-//     Utm_medium: ${cookies.utm_medium || 'none'} \n
-//     Utm_campaign: ${cookies.utm_campaign || 'none'} \n
-//     Utm_term: ${cookies.utm_term || 'none'} \n
-//     Utm_content: ${cookies.utm_content || 'none'} \n
-//     User_ip: ${ip || 'none'} \n
-//     Location: ${cookies.user_geo || 'none'} \n
-//     REF URL: ${cookies.ref_url || 'organic'} \n
-//     GA: ${cookies._ga || 'none'} \n
-//   `;
+  const emailBody = `
+    Товары: ${getGoodsMessage(cart)} \n
+    Сумма: ${totalSum} \n
+    Промокод: ${promoCode || 'none'} \n
+    Скидка: ${
+      promoCodeValues?.discount ? promoCodeValues?.discount + '%' : 'none'
+    } \n
+    Тип оплаты: ${paymentType} \n
+    Cтрана доставки: ${country} \n
+    Город доставки: ${city} \n
+    Тип доставки: ${deliveryType} \n
+    Стоимость Доставки: ${deliveryCost} \n
+    Отделение НП: ${warehouse || 'none'} \n
+    Улица: ${street || 'none'} \n
+    Дом: ${house || 'none'} \n
+    Квартира: ${flat || 'none'} \n
+    Имя: ${name} \n
+    Фамилия: ${surname} \n
+    Телефон: ${phone.replace('+', '')} \n
+    Емеил: ${email} \n
+    Utm_data: ${cookies.utm_data || 'none'} \n
+    Utm_source: ${cookies.utm_source || 'none'} \n
+    Utm_medium: ${cookies.utm_medium || 'none'} \n
+    Utm_campaign: ${cookies.utm_campaign || 'none'} \n
+    Utm_term: ${cookies.utm_term || 'none'} \n
+    Utm_content: ${cookies.utm_content || 'none'} \n
+    User_ip: ${ip || 'none'} \n
+    Location: ${cookies.user_geo || 'none'} \n
+    REF URL: ${cookies.ref_url || 'organic'} \n
+    GA: ${cookies._ga || 'none'} \n
+  `;
 
-//   const msg = {
-//     to: process.env.EMAIL_TO as string,
-//     from: process.env.EMAIL_FROM as string,
-//     subject: 'Заказ',
-//     text: emailBody,
-//   };
+  const msg = {
+    to: process.env.EMAIL_TO as string,
+    from: process.env.EMAIL_FROM as string,
+    subject: 'Заказ',
+    text: emailBody,
+  };
 
-//   //   sendGrid.send(msg).then(console.log, (error) => {
-//   //     console.error(error);
-//   //     if (error.response) {
-//   //       console.error(error.response.body);
-//   //     }
-//   //   });
-//   // };
-//   try {
-//     sendGrid.send(msg).then((res) => {
-//       console.log(res);
-
-//       // if (res.response) {
-//       //   console.error(error.response.body);
-//       // }
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+  sendGrid.send(msg).then(console.log, (error) => {
+    console.error(error);
+    if (error.response) {
+      console.error(error.response.body);
+    }
+  });
+};
 
 const sendToBot = async (
   users: IBotUser[],
@@ -171,8 +159,8 @@ const sendToBot = async (
 
 const checkout: NextApiHandler = async (req, res) => {
   try {
-    // const ip =
-    //   req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
+    const ip =
+      req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
     const {
       name,
       surname,
@@ -186,7 +174,7 @@ const checkout: NextApiHandler = async (req, res) => {
       currency,
       items = [],
       totalSum,
-      // coupon,
+      coupon,
       warehouse,
       street,
       house,
@@ -292,26 +280,26 @@ const checkout: NextApiHandler = async (req, res) => {
       deliveryCost
     );
 
-    // await sendEmail(
-    //   name,
-    //   surname,
-    //   email,
-    //   country,
-    //   city,
-    //   phone,
-    //   paymentType,
-    //   deliveryMethod,
-    //   deliveryCost,
-    //   warehouse,
-    //   street,
-    //   house,
-    //   flat,
-    //   cart,
-    //   totalSum,
-    //   coupon,
-    //   req.cookies,
-    //   ip as string
-    // );
+    await sendEmail(
+      name,
+      surname,
+      email,
+      country,
+      city,
+      phone,
+      paymentType,
+      deliveryMethod,
+      deliveryCost,
+      warehouse,
+      street,
+      house,
+      flat,
+      cart,
+      totalSum,
+      coupon,
+      req.cookies,
+      ip as string
+    );
 
     const { _id } = await response.json();
     if (paymentType === FORM[locale as 'ru' | 'en'].paymentOnline) {
