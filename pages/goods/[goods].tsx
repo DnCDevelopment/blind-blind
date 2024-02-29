@@ -123,7 +123,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const stockPromises = moySkladGoods?.rows.map(({ id }) => {
     ids.push(id);
     return getMoySkladData<IMoySkladStockData>(
-      `remap/1.2/report/stock/all?filter=variant=https://online.moysklad.ru/api/remap/1.2/entity/variant/${id};quantityMode=all`
+      `remap/1.2/report/stock/all?filter=variant=${process.env.NEXT_PUBLIC_MOYSKLAD_API}remap/1.2/entity/variant/${id};quantityMode=all`
     );
   });
   const data = await Promise.all(stockPromises);
