@@ -29,7 +29,8 @@ const DesktopHeader: React.FC = () => {
     indexContext
   ) as IIndexContext;
   const constantCollections = StoreListData[locale as 'ru' | 'en'];
-  const collections = collectionsData.concat(constantCollections);
+  // const collections = collectionsData.concat(constantCollections);
+  const collections = [...constantCollections, ...collectionsData];
 
   const menuRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);

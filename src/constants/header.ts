@@ -42,14 +42,14 @@ export const AboutListData = {
 export const StoreListData = {
   ru: [
     {
-      title: 'Скидки',
+      title: 'Sale',
       link: '/sales',
       _id: '1',
     },
   ],
   en: [
     {
-      title: 'Stocks',
+      title: 'Sale',
       link: '/sales',
       _id: '1',
     },

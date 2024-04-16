@@ -38,8 +38,8 @@ export const SEO_ITEMS = {
       link: '/contacts',
     },
     indexPage: {
-      title: 'Жіночий одяг BLIND fashion atelier',
-      description: DEFAULT_DESCRIPTION.ru,
+      title: 'Жіночий одяг BLIND - Інтернет-магазин українського бренду',
+      description: 'Жіночий одяг BLIND - Інтернет-магазин українського бренду',
       breadcrumbName: 'Головна',
       link: '/',
     },
