@@ -12,7 +12,7 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
   return (
     <div className="collection-samples">
       <Link href={link}>
-        <h3 className="collection-samples__title">{title}</h3>
+        <h3 className="collection-samples__title-main">{title}</h3>
       </Link>
       <div className="collection-samples__goods container">
         {samples.map(({ _id, previewImage, title, secondImage, link }) => (
