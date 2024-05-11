@@ -10,8 +10,9 @@
         cursor: pointer;
         &-main {
             @extend .collection-samples__title;
-            color: var(--red-color);
-            border-color: var(--red-color);
+            color: var(--white-color);
+            border: var(--light-red-color);
+            background-color: var(--light-red-color);
         }
     }
     &__goods {
