@@ -18,7 +18,7 @@ const MainCarouselItem: React.FC<ICockpitCarousel> = ({
             objectFit="cover"
             alt={title}
             objectPosition="left"
-            loading="eager"
+            priority
             quality={100}
             src={process.env.NEXT_PUBLIC_COCKPIT_URL + image.path}
           />

@@ -247,15 +247,9 @@ export const FORMIK = {
           .min(11, FORM[locale].wrongInput)
           .max(15, FORM[locale].wrongInput)
           .typeError(FORM[locale].wrongInput),
-        dob: Yup.date()
-          .required(FORM[locale].required)
-          .test('dob', FORM[locale].wrongInput, (value) => {
-            return value
-              ? new Date().getFullYear() - value?.getFullYear() >= 10
-              : false;
-          }),
+        dob: Yup.string().required(FORM[locale].required),
       }),
-    types: { firstName: 'text', email: 'text', phone: 'phone', dob: 'date' },
+    types: { firstName: 'text', email: 'text', phone: 'phone', dob: 'text' },
     placeholders: (locale: 'ru' | 'en') => ({
       firstName: FORM[locale].firstName,
       email: FORM[locale].email,

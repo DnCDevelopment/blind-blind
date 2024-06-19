@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import useImage from '../../hooks/useImage';
+import Image from 'next/image';
 
 import { IZoomImageProps } from './Types';
 
 const ZoomImage: React.FC<IZoomImageProps> = ({ image, alt, zoom }) => {
   const [zoomed, setZoomed] = useState<boolean>(false);
-  const { img, isLoad, onLoad } = useImage();
+  const { isLoad, onLoad } = useImage();
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
 
@@ -84,12 +85,14 @@ const ZoomImage: React.FC<IZoomImageProps> = ({ image, alt, zoom }) => {
       <div
         className={`zoom-image__preview ${isLoad ? 'not-load' : 'load'}`}
       ></div>
-      <img
+      <Image
         className="image"
-        ref={img}
-        src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${image}&w=1800&q=75`}
+        layout="fill"
+        src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${image}&w=1800&q=65`}
         alt={alt}
         onLoad={onLoad}
+        priority
+        quality={65}
       />
     </div>
   );

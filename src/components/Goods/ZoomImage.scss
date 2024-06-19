@@ -1,19 +1,21 @@
 .zoom-image {
-  width: 100%;
-
-  &__preview {
     width: 100%;
-    overflow: hidden;
-    background: var(--grey-color);
-  }
-
-  .image {
-    top: 0;
-    right: 0;
-    width: 100%;
-    object-fit: contain;
-    @media screen and (max-width: 767px) {
-      transform: none !important;
+    &__preview {
+        width: 100%;
+        overflow: hidden;
+        background: var(--grey-color);
     }
-  }
+    div {
+        position: static !important;
+    }
+    .image {
+        position: static !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain;
+        margin-top: 10px !important;
+        @media screen and (max-width: 767px) {
+            transform: none !important;
+        }
+    }
 }
