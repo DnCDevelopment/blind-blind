@@ -1,110 +1,106 @@
 @import './variables/variables';
 @import './fonts/fonts';
 @import './mixins/mixins';
-
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-size: var(--font-16);
-  font-family: var(--primary-font);
+    box-sizing: border-box;
+    margin: 0;
+    font-size: var(--font-16);
+    font-family: var(--primary-font);
 }
 
 html,
 body {
-  overflow-x: hidden;
-  &.hide-overflow {
-    top: 0;
-    bottom: 0;
-    height: 100vh;
-    overflow-y: hidden;
-  }
+    overflow-x: hidden;
+    &.hide-overflow {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+        overflow-y: hidden !important;
+    }
 }
 
-body > div {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  main {
-    flex: 1;
-  }
+body>div {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    main {
+        flex: 1;
+    }
 }
 
 a {
-  color: var(--black);
-  text-decoration: none;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
+    color: var(--black);
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .container,
 .narrow-container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 15px;
-
-  @media screen and (min-width: 768px) {
-    padding: 0 60px;
-  }
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+    @media screen and (min-width: 768px) {
+        padding: 0 60px;
+    }
 }
 
 .narrow-container {
-  max-width: 900px;
+    max-width: 900px;
 }
 
 svg {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 input,
 select {
-  width: 100%;
-  height: auto;
-  padding: 5px 0;
-  line-height: 1.8em;
-  text-align: left;
-  background: var(--transparent);
-  border: none;
-  border-bottom: 1px solid var(--black);
-  outline: none;
+    width: 100%;
+    height: auto;
+    padding: 5px 0;
+    line-height: 1.8em;
+    text-align: left;
+    background: var(--transparent);
+    border: none;
+    border-bottom: 1px solid var(--black);
+    outline: none;
 }
 
 select {
-  appearance: none;
+    appearance: none;
 }
 
 .contacts-page-container {
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 100px 15px 25px 15px;
+    max-width: 380px;
+    margin: 0 auto;
+    padding: 100px 15px 25px 15px;
 }
 
 .inform-page-container {
-  padding: 100px 15px 25px 15px;
-
-  p {
-    margin: 20px 0;
-  }
+    padding: 100px 15px 25px 15px;
+    p {
+        margin: 20px 0;
+    }
 }
 
 @media screen and (min-width: 768px) {
-  .inform-page-container,
-  .contacts-page-container {
-    max-width: 768px;
-    margin: 0 auto;
-    padding: 150px 50px 25px 50px;
-  }
+    .inform-page-container,
+    .contacts-page-container {
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 150px 50px 25px 50px;
+    }
 }
 
 @media screen and (min-width: 1024px) {
-  .contacts-page-container {
-    max-width: 1024px;
-  }
+    .contacts-page-container {
+        max-width: 1024px;
+    }
 }
 
 @import '../src/components/Header/Header.scss';

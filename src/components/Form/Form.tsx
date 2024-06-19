@@ -252,17 +252,17 @@ const Form: React.FC<IFormProps> = ({
     const InputField = (key: string) => (
       <div className="input-date">
         <input
-          type="text"
+          type="date"
           id={key}
           name={key}
           value={formik.values[key]}
           placeholder={placeholders[key]}
-          onChange={formik.handleChange}
-          onFocus={(e) => {
-            e.currentTarget.type = 'date';
-          }}
-          onBlur={(e) => {
-            e.currentTarget.type = 'text';
+          onChange={(e) => {
+            if (e.target.value.length) {
+              e.target.placeholder = '';
+              e.target.classList.add('focused');
+            }
+            formik.handleChange(e);
           }}
         />
       </div>
