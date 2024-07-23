@@ -75,6 +75,9 @@ export const TRANSLATE = {
     goodsNotFound: ['Ваш пошук', 'не дав жодних результатів.'],
     modalWindowStartText: 'Підписуйтесь та отримуйте унікальні пропозиції',
     subscribe: 'Підписатися',
+    privacyPolicyCart: 'Політики конфіденційності',
+    orderPoliics:
+      'Натискаючи на кнопку оформити замовлення, ви підтверджуєте свою згоду на обробку персональних даних відповідно до ',
   },
   en: {
     discountCode: 'Promocode',
@@ -137,5 +140,8 @@ export const TRANSLATE = {
     goodsNotFound: ['Your search for', 'did not yield any results.'],
     modalWindowStartText: 'Subscribe and receive unique offers',
     subscribe: 'Subscribe',
+    privacyPolicyCart: 'Privacy policy',
+    orderPoliics:
+      'By clicking on the order button, you confirm your consent to the processing of personal data in accordance with ',
   },
 };

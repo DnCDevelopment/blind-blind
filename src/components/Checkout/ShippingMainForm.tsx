@@ -77,6 +77,12 @@ const ShippingMainForm: React.FC<IShippingMainFormProps> = ({
           </div>
         </Link>
       </div>
+      <p className="shipping__policy">
+        {TRANSLATE[locale as 'ru' | 'en'].orderPoliics}{' '}
+        <Link href="/politika-bezopasnosti">
+          {TRANSLATE[locale as 'ru' | 'en'].privacyPolicyCart}
+        </Link>{' '}
+      </p>
     </div>
   );
 };

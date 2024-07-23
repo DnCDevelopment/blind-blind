@@ -3,20 +3,23 @@
   flex-direction: column;
   height: 100%;
   padding-top: 80px;
-
   &__info {
     .title {
       font-weight: var(--font-weight-500);
       font-size: var(--font-24);
     }
   }
-
+  &__policy {
+    margin-bottom: 20px;
+    a {
+      text-decoration: underline;
+    }
+  }
   &__order-summary {
     width: calc(100vw);
     margin-bottom: 20px;
     margin-left: calc((100% - 100vw) / 2);
     background: var(--light-yellow-color);
-
     .order-summary-toggle {
       display: flex;
       align-items: center;
@@ -24,11 +27,9 @@
       padding-bottom: 20px;
       border: 2px solid var(--grey-color);
       cursor: pointer;
-
       svg {
         margin-right: 10px;
       }
-
       .chevron {
         &-down,
         &-up {
@@ -40,45 +41,37 @@
           border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }
-
         &-up {
           transform: rotate(-135deg) translate(-10px);
         }
       }
-
       .total-sum {
         align-self: flex-start;
         font-weight: var(--font-weight-500);
         font-size: var(--font-24);
       }
     }
-
     .order-summary-list {
       max-height: 0;
       overflow: hidden;
       background: var(--light-yellow-color);
       border: 2px solid var(--grey-color);
       transition: max-height 0.5s;
-
       &.open {
         max-height: 100vh;
       }
-
       .divider {
         height: 2px;
         margin: 20px 0;
         background: var(--grey-color);
       }
-
       .total-checkout {
         display: flex;
         align-items: center;
         justify-content: space-between;
-
         .title {
           font-size: var(--font-24);
         }
-
         .price {
           font-weight: var(--font-weight-700);
           font-size: var(--font-28);
@@ -86,7 +79,6 @@
       }
     }
   }
-
   .back-to-cart {
     display: flex;
     align-items: center;
@@ -94,9 +86,8 @@
     height: 45px;
     margin: auto;
     margin-top: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     cursor: pointer;
-
     .arrow {
       width: 7px;
       height: 7px;
@@ -111,7 +102,6 @@
 @media screen and (min-width: 768px) {
   .shipping {
     padding-top: 160px;
-
     &__info {
       .back-to-cart {
         margin-top: -45px;
@@ -125,24 +115,20 @@
   .shipping {
     flex-direction: row-reverse;
     justify-content: space-between;
-
     &__order-summary {
       width: 50%;
       height: 100%;
       margin-bottom: 0;
       margin-left: 0;
-
       .order-summary-toggle {
         display: none;
       }
-
       .order-summary-list {
         width: 50vw;
         max-height: 100vh;
         padding: 0 60px;
       }
     }
-
     &__info {
       width: 46%;
     }
