@@ -31,6 +31,9 @@ const SizesTable: React.FC = () => {
       <p className="sizes-table__additional-info">
         {SIZES_TABLE.additional[locale as 'ru' | 'en']}
       </p>
+      <p className="sizes-table__additional-note">
+        {SIZES_TABLE.additionalNote[locale as 'ru' | 'en']}
+      </p>
     </div>
   );
 };

@@ -17,7 +17,14 @@ export const SIZES_TABLE = {
   ],
 
   additional: {
-    ru: '*У розмірах XL і вище + 50% до вартості',
-    en: '*In sizes XL and above + 50% to the cost',
+    ru: 'У розмірі XXL до вартості додається 50%.',
+    en: 'For size XXL, the price increases by 50%.',
+  },
+
+  additionalNote: {
+    ru:
+      'Розміри виробів можуть незначно відрізнятися через особливості лекала та властивості тканини, тому для точнішого вибору розміру рекомендуємо звернутися до менеджера.',
+    en:
+      'Sizes may slightly vary due to pattern specifics and fabric properties, so for a more accurate size selection, we recommend consulting a manager.',
   },
 };
