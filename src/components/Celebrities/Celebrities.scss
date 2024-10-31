@@ -1,69 +1,63 @@
 .celebrities {
-  &__title {
-    width: 100%;
-    padding-top: 30px;
-    font-weight: var(--font-weight-900);
-    font-size: var(--font-24);
-    font-family: var(--secondary-font);
-    text-align: center;
-    cursor: pointer;
-  }
-  &-page {
-    padding-top: 100px;
-  }
-
-  &__celebrities-container {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 40px;
-
-    .celebrity-item {
-      width: 100%;
-      margin-bottom: 20px;
-
-      .photo-container {
-        position: relative;
-        max-width: 250px;
-        height: 400px;
-        margin: 0 auto;
-        cursor: pointer;
-      }
-
-      .name,
-      .proffesion {
+    &__title {
+        width: 100%;
+        padding-top: 30px;
+        font-weight: var(--font-weight-900);
+        font-size: var(--font-24);
+        font-family: var(--secondary-font);
         text-align: center;
-      }
-
-      .name {
-        font-size: var(--font-20);
-      }
+        cursor: pointer;
     }
-  }
+    &-page {
+        padding-top: 100px;
+    }
+    &__celebrities-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        .celebrity-item {
+            width: 100%;
+            margin-bottom: 20px;
+            .photo-container {
+                position: relative;
+                max-width: 250px;
+                height: 400px;
+                margin: 0 auto;
+                cursor: pointer;
+            }
+            .name,
+            .proffesion {
+                text-align: center;
+            }
+            .name {
+                font-size: var(--font-16);
+            }
+        }
+    }
 }
 
 .main-page {
-  .celebrities {
-    &__title {
-      padding-top: 30px;
-      font-weight: var(--font-weight-400);
+    .celebrities {
+        &__title {
+            padding-top: 30px;
+            font-weight: var(--font-weight-400);
+        }
     }
-  }
 }
 
 @media screen and (min-width: 1080px) {
-  .celebrities {
-    &__title {
-      padding-top: 60px;
-    }
-    &__celebrities-container {
-      .celebrity-item {
-        width: 30%;
-        margin-right: 5%;
-
-        &:nth-child(3n + 3) {
-          margin-right: 0;
+    .celebrities {
+        &__title {
+            padding-top: 60px;
         }
-      }
+        &__celebrities-container {
+            .celebrity-item {
+                width: 30%;
+                margin-right: 5%;
+                &:nth-child(3n + 3) {
+                    margin-right: 0;
+                }
+            }
+        }
     }
-  }
 }
