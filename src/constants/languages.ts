@@ -64,7 +64,7 @@ export const TRANSLATE = {
     requestCallBackTitle:
       "Залиште заявку і менеджер зв'яжеться з Вами найближчим часом",
     requestCallBack: 'Залишити',
-    copyright: 'Copyright © Blind-Blind 2021 Усі права захищені',
+    copyright: 'Copyright © Blind-Blind 2024 Усі права захищені',
     privacyPolicy: 'Політика конфіденційності',
     publicContract: 'Публічний договір',
     celebrities: 'Сelebrities',
@@ -129,7 +129,7 @@ export const TRANSLATE = {
     requestCallBackTitle:
       'Leave a request and the manager will contact you shortly',
     requestCallBack: 'Request',
-    copyright: 'Copyright © Blind-Blind 2021 All rights reserved',
+    copyright: 'Copyright © Blind-Blind 2024 All rights reserved',
     privacyPolicy: 'Privacy policy',
     publicContract: 'Public contract',
     celebrities: 'Сelebrities',
