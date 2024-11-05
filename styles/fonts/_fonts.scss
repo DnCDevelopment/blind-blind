@@ -1,21 +1,39 @@
 // stylelint-disable
+// @font-face {
+//     font-weight: 400;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     src: local('Raleway-Light'), url('/fonts/Montserrat-Light.woff2') format('woff2');
+// }
+// @font-face {
+//     font-weight: 500;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     src: local('Raleway-Normal'), url('/fonts/Montserrat-Medium.woff2') format('woff2');
+// }
+// @font-face {
+//     font-weight: 700;
+//     font-family: 'Montserrat';
+//     font-style: normal;
+//     src: local('Raleway-Bold'), url('/fonts/Montserrat-Bold.woff2') format('woff2');
+// }
 @font-face {
     font-weight: 400;
-    font-family: 'Montserrat';
+    font-family: 'Mulish';
     font-style: normal;
-    src: local('Raleway-Light'), url('/fonts/Montserrat-Light.woff2') format('woff2');
+    src: local('Mulish-Light'), url('/fonts/Mulish-Light.woff2') format('woff2');
 }
 
 @font-face {
     font-weight: 500;
-    font-family: 'Montserrat';
+    font-family: 'Mulish';
     font-style: normal;
-    src: local('Raleway-Normal'), url('/fonts/Montserrat-Medium.woff2') format('woff2');
+    src: local('Mulish-Normal'), url('/fonts/Mulish-Medium.woff2') format('woff2');
 }
 
 @font-face {
     font-weight: 700;
-    font-family: 'Montserrat';
+    font-family: 'Mulish';
     font-style: normal;
-    src: local('Raleway-Bold'), url('/fonts/Montserrat-Bold.woff2') format('woff2');
+    src: local('Mulish-Bold'), url('/fonts/Mulish-Bold.woff2') format('woff2');
 }
