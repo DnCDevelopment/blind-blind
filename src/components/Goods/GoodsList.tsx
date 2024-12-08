@@ -208,6 +208,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
               link,
               previewImage,
               secondImage,
+              isOutOfStock,
             }) => (
               <GoodsItem
                 key={_id}
@@ -217,6 +218,7 @@ const GoodsList: React.FC<IGoodsListProps> = ({ goods, categories }) => {
                 secondPhoto={secondImage?.path || undefined}
                 price={price}
                 stockPrice={stockPrice}
+                isOutOfStock={isOutOfStock}
               />
             )
           )}

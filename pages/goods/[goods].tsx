@@ -18,6 +18,7 @@ import getMoySkladData from '../../src/utils/getMoySkladData';
 import { useEffect, useContext } from 'react';
 import { ICurrencyContext } from '../../src/context/Types';
 import { currencyContext } from '../../src/context/currencyContext';
+import { updateGoodsInStock } from '../../src/utils/updateGoodsInStock';
 
 const SingleGoodsPage: NextPage<IGoodsPageProps> = ({
   goodsProps,
@@ -176,6 +177,11 @@ export const getServerSideProps: GetServerSideProps = async ({
     if (!has) keys.add(key);
     return !has;
   });
+  if (!uniqueSizes.length) {
+    await updateGoodsInStock(curGoods._id as string, true);
+  } else if (curGoods.isOutOfStock) {
+    await updateGoodsInStock(curGoods._id as string, false);
+  }
 
   const goodsProps = curGoods
     ? {

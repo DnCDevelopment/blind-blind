@@ -125,8 +125,8 @@ export const getServerSideProps: GetServerSideProps = async ({
       ...good,
       title: locale === defaultLocale ? good.title : good.title_en,
     }))
-    .filter(({ isVisible }) => isVisible !== false);
-  // .sort((a, b) => (a.order > b.order ? 1 : -1));
+    .filter(({ isVisible }) => isVisible !== false)
+    .sort((a, b) => (a.isOutOfStock || !b.isOutOfStock ? 1 : -1));
 
   const categories = cockpitCategoriesData.entries.map((category) => ({
     ...category,

@@ -102,6 +102,7 @@ export interface ICockpitGoodsRaw extends ICockpitGoods {
   isExclusive: boolean;
   isVisible: boolean;
   order: string;
+  isOutOfStock: boolean;
 }
 
 export interface ICockpitGoodsEntries {

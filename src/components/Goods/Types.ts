@@ -16,6 +16,7 @@ export interface IGoodsItemProps extends IPriceLabelProps {
   link?: string;
   photo: string;
   secondPhoto?: string;
+  isOutOfStock?: boolean;
 }
 
 export interface IGoodsSearchItemProps {
