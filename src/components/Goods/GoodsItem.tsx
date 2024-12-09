@@ -1,9 +1,9 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import PriceLabel from './PriceLabel';
 
 import { IGoodsItemProps } from './Types';
-import useImage from '../../hooks/useImage';
 import { TRANSLATE } from '../../constants/languages';
 import { useRouter } from 'next/router';
 
@@ -17,29 +17,32 @@ const GoodsItem: React.FC<IGoodsItemProps> = ({
   isOutOfStock,
 }) => {
   const { locale } = useRouter();
-  const { img, isLoad, onLoad } = useImage();
 
   return (
     <Link href={`/goods${link}`}>
       <div className={`goods-item ${isOutOfStock && 'not-in-stock'}`}>
-        <div
-          className={`goods-item-fallback__image ${
-            isLoad ? 'not-load' : 'load'
-          }`}
-        />
-        <div className={`goods-item__image ${isLoad ? 'load' : 'not-load'} `}>
-          <img
-            ref={img}
-            src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${photo}&w=1800&q=50`}
+        <div className={`goods-item__image`}>
+          <Image
+            layout="fill"
+            objectFit="contain"
+            className="collection-samples__goods-photos__preview"
             alt={title}
-            onLoad={onLoad}
+            loading="eager"
+            quality={30}
+            src={`${process.env.NEXT_PUBLIC_COCKPIT_URL}${photo}`}
           />
+
           {secondPhoto && (
-            <img
-              className="second"
-              src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondPhoto}&w=1800&q=50`}
-              alt={title}
-            />
+            <div className="second">
+              <Image
+                layout="fill"
+                objectFit="contain"
+                alt={title}
+                loading="eager"
+                quality={20}
+                src={`${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondPhoto}`}
+              />
+            </div>
           )}
         </div>
         <div className="goods-item__title">{title}</div>

@@ -1,16 +1,15 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { useRouter } from 'next/router';
 import { TRANSLATE } from '../../constants/languages';
 import { ICollectionSamplesProps } from './Types';
-import useImage from '../../hooks/useImage';
 
 const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
   title,
   link,
   samples,
 }) => {
-  const { img, isLoad, onLoad } = useImage();
   const { locale } = useRouter();
   return (
     <div className="collection-samples">
@@ -21,29 +20,27 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
         {samples.map(({ _id, previewImage, title, secondImage, link }) => (
           <Link key={_id} href={`/goods${link}`}>
             <div className="collection-samples__goods-item">
-              <div
-                className={`collection-samples__goods-fallback-photos ${
-                  isLoad ? 'not-load' : 'load'
-                }`}
-              />
-              <div
-                className={`collection-samples__goods-photos ${
-                  isLoad ? 'load' : 'not-load'
-                }`}
-              >
-                <img
-                  ref={img}
+              <div className={`collection-samples__goods-photos `}>
+                <Image
+                  layout="fill"
+                  objectFit="contain"
                   className="collection-samples__goods-photos__preview"
                   alt={title}
-                  src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImage.path}&w=1800&q=50`}
-                  onLoad={onLoad}
+                  loading="eager"
+                  quality={40}
+                  src={`${process.env.NEXT_PUBLIC_COCKPIT_URL}${previewImage.path}`}
                 />
                 {secondImage && secondImage.path && (
-                  <img
-                    className="collection-samples__goods-photos__second"
-                    src={`/_next/image?url=${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImage.path}&w=1800&q=50`}
-                    alt={title}
-                  />
+                  <div className="collection-samples__goods-photos__second">
+                    <Image
+                      layout="fill"
+                      objectFit="contain"
+                      alt={title}
+                      priority
+                      quality={40}
+                      src={`${process.env.NEXT_PUBLIC_COCKPIT_URL}${secondImage.path}`}
+                    />
+                  </div>
                 )}
               </div>
               <p className="collection-samples__goods-title">{title}</p>
