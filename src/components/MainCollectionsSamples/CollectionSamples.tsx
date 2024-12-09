@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import { useRouter } from 'next/router';
+import { TRANSLATE } from '../../constants/languages';
 import { ICollectionSamplesProps } from './Types';
 import useImage from '../../hooks/useImage';
 
@@ -9,6 +11,7 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
   samples,
 }) => {
   const { img, isLoad, onLoad } = useImage();
+  const { locale } = useRouter();
   return (
     <div className="collection-samples">
       <Link href={link}>
@@ -47,6 +50,14 @@ const CollectionSamples: React.FC<ICollectionSamplesProps> = ({
             </div>
           </Link>
         ))}
+      </div>
+      <div className="collection-samples__button-wrapper">
+        <Link href={link}>
+          <h3 className="collection-samples__button">
+            {TRANSLATE[locale as 'ru' | 'en'].goToCollection}
+            <div className="arrow" />
+          </h3>
+        </Link>
       </div>
     </div>
   );

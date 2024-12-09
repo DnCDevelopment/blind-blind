@@ -78,6 +78,7 @@ export const TRANSLATE = {
     privacyPolicyCart: 'Політики конфіденційності',
     orderPoliics:
       'Натискаючи на кнопку оформити замовлення, ви підтверджуєте свою згоду на обробку персональних даних відповідно до ',
+    goToCollection: 'Перейти до колекції',
   },
   en: {
     discountCode: 'Promocode',
@@ -143,5 +144,6 @@ export const TRANSLATE = {
     privacyPolicyCart: 'Privacy policy',
     orderPoliics:
       'By clicking on the order button, you confirm your consent to the processing of personal data in accordance with ',
+    goToCollection: 'Move to collection',
   },
 };
