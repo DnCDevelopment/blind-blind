@@ -8,6 +8,9 @@ module.exports = withReactSvg({
     formats: ['image/avif', 'image/webp'],
   },
   include: path.resolve(__dirname, 'src/assets/svg'),
+  future: {
+    webpack5: true,
+  },
   webpack(config) {
     return config;
   },

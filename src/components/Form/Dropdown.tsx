@@ -15,7 +15,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
       document.addEventListener('click', outsideClick, { passive: true });
     return () =>
       document && document.removeEventListener('click', outsideClick);
-  }, []);
+  }, [isOpen]);
 
   return (
     <>
@@ -25,7 +25,7 @@ const Dropdown: React.FC<IDropdownProps> = ({
           role="presentation"
           onClick={(e) => {
             e.stopPropagation();
-            setIsOpen(!isOpen);
+            setIsOpen(true);
           }}
         >
           {value ? (
