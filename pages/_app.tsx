@@ -156,12 +156,18 @@ const MyApp = ({
         >
           <noscript
             dangerouslySetInnerHTML={{
-              __html: `<iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-5XP658M"
-              height="0"
-              width="0"
+            //   __html: `<iframe
+            //   src="https://www.googletagmanager.com/ns.html?id=GTM-5XP658M"
+            //   height="0"
+            //   width="0"
+            //   style="display:none;visibility:hidden"
+            // ></iframe>`,
+              __html: `<iframe 
+              src="https://www.googletagmanager.com/ns.html?id=GTM-PFQSTLP"
+              height="0" 
+              width="0" 
               style="display:none;visibility:hidden"
-            ></iframe>`,
+              ></iframe>`,
             }}
           ></noscript>
           <Header />
